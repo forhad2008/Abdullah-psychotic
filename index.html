@@ -47,6 +47,26 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* --- WELCOME INTRO OVERLAY --- */
+#welcome-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #050505 url('bg0.webp') center/cover no-repeat;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#welcome-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -489,10 +509,9 @@ header.scrolled {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: url('Bg1.webp') center/cover no-repeat; /* ডার্ক ওভারলে তুলে দেওয়া হয়েছে */
+  background: url('Bg1.webp') center/cover no-repeat;
   padding: 0 20px;
-                   }
-  
+}
 
 .hero-content {
   max-width: 800px;
@@ -878,6 +897,8 @@ footer {
 
 <body>
 
+<div id="welcome-screen"></div>
+
 <header id="navbar">
   <div class="nav-left">
     <div class="menu-toggle" id="menu-btn">
@@ -1096,6 +1117,18 @@ footer {
 
 <script>
   /* ----------------------------------------------------
+     0. WELCOME SCREEN CONTROLLER (4 Seconds Timer)
+  ---------------------------------------------------- */
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      const welcomeScreen = document.getElementById('welcome-screen');
+      if (welcomeScreen) {
+        welcomeScreen.classList.add('fade-out');
+      }
+    }, 4000); // 4000 milliseconds = 4 seconds
+  });
+
+  /* ----------------------------------------------------
      1. PRODUCT DATA CONFIGURATION
   ---------------------------------------------------- */
   const products = [
@@ -1103,7 +1136,7 @@ footer {
       id: 1,
       name: "Abdullah Psychotic Branded Logo T-Shirt",
       image: "t1.webp",
-      url: "t1.webp", // You can replace with your product page link, e.g., "product1.html"
+      url: "t1.webp",
       price: 999,
       badge: "New"
     },
