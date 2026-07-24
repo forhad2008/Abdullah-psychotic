@@ -60,78 +60,82 @@ a {
 /* Header & Navigation */
 header {
   position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 94%;
-  max-width: 1300px;
-  height: 80px;
-  background: rgba(12, 12, 12, 0.85);
-  backdrop-filter: blur(25px);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 35px;
+  padding: 0 5%;
   z-index: 999;
   transition: all 0.4s ease;
 }
 
 header.scrolled {
-  top: 10px;
-  background: rgba(8, 8, 8, 0.95);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  background: rgba(5, 5, 5, 0.95);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--border-color);
+  height: 75px;
 }
 
-.logo {
-  font-size: 26px;
-  font-family: 'Cinzel', serif;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-
-.logo span {
-  color: var(--primary-color);
-}
-
-nav {
+.nav-left {
   display: flex;
-  gap: 30px;
+  align-items: center;
 }
 
-nav a {
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 1px;
+.menu-toggle {
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.3s ease;
 }
 
-nav a:hover, nav a.active {
+.menu-toggle:hover {
   color: var(--primary-color);
 }
 
-.icons {
+.logo-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-img {
+  height: 55px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
+
+.nav-right {
   display: flex;
   align-items: center;
   gap: 20px;
-  font-size: 18px;
 }
 
-.icons i {
-  cursor: pointer;
+.cart-icon-wrapper {
   position: relative;
+  cursor: pointer;
+  font-size: 22px;
+  color: #fff;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.icons i:hover {
+.cart-icon-wrapper:hover {
   color: var(--primary-color);
   transform: translateY(-2px);
 }
 
 .cart-badge {
   position: absolute;
-  top: -8px;
+  top: -6px;
   right: -10px;
-  background: var(--primary-color);
+  background: #3b82f6;
   color: #fff;
   font-size: 10px;
   font-weight: 700;
@@ -143,10 +147,72 @@ nav a:hover, nav a.active {
   justify-content: center;
 }
 
-.menu-toggle {
-  display: none;
+/* Slide-out Full Navigation Menu */
+.nav-drawer {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 300px;
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.98);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--border-color);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 30px;
+  transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.nav-drawer.active {
+  left: 0;
+}
+
+.close-drawer {
+  align-self: flex-end;
   font-size: 22px;
   cursor: pointer;
+  margin-bottom: 40px;
+  color: var(--text-muted);
+}
+
+.close-drawer:hover {
+  color: #fff;
+}
+
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.drawer-links a {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+.drawer-links a:hover {
+  color: var(--primary-color);
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  z-index: 998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.menu-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Hero Section */
@@ -236,7 +302,7 @@ section {
   font-size: 15px;
 }
 
-/* Products Section */
+/* Dynamic Product Grid Styles */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -333,7 +399,7 @@ section {
   border-color: var(--primary-color);
 }
 
-/* Contact & Info Section */
+/* Contact Section */
 .contact-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -492,7 +558,6 @@ footer {
   color: var(--text-muted);
 }
 
-/* Mobile Responsive */
 @media (max-width: 992px) {
   .contact-container {
     grid-template-columns: 1fr;
@@ -503,32 +568,14 @@ footer {
 }
 
 @media (max-width: 768px) {
-  header {
-    padding: 0 20px;
-  }
-  nav {
-    position: absolute;
-    top: 90px;
-    left: 0;
-    width: 100%;
-    background: #0a0a0a;
-    flex-direction: column;
-    padding: 20px;
-    border-radius: 16px;
-    border: 1px solid var(--border-color);
-    display: none;
-  }
-  nav.active {
-    display: flex;
-  }
-  .menu-toggle {
-    display: block;
-  }
   .hero h1 {
     font-size: 40px;
   }
   .footer-top {
     grid-template-columns: 1fr;
+  }
+  .logo-img {
+    height: 45px;
   }
 }
 </style>
@@ -537,27 +584,37 @@ footer {
 <body>
 
 <header id="navbar">
-  <div class="logo">Abdullah <span>Psychotic</span></div>
-  
-  <nav id="nav-menu">
-    <a href="#home" class="active">HOME</a>
+  <div class="nav-left">
+    <div class="menu-toggle" id="menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+
+  <div class="logo-container">
+    <a href="#home">
+      <img src="logo.png" alt="Abdullah Psychotic" class="logo-img">
+    </a>
+  </div>
+
+  <div class="nav-right">
+    <div class="cart-icon-wrapper">
+      <i class="fas fa-shopping-bag"></i>
+      <span class="cart-badge" id="cart-count">0</span>
+    </div>
+  </div>
+</header>
+
+<div class="menu-overlay" id="menu-overlay"></div>
+<div class="nav-drawer" id="nav-drawer">
+  <div class="close-drawer" id="close-btn"><i class="fas fa-times"></i></div>
+  <nav class="drawer-links">
+    <a href="#home">HOME</a>
     <a href="#shop">SHOP</a>
     <a href="#collection">COLLECTION</a>
     <a href="#about">ABOUT</a>
     <a href="#contact">CONTACT</a>
   </nav>
-
-  <div class="icons">
-    <i class="fas fa-search" title="Search"></i>
-    <i class="far fa-user" title="Account"></i>
-    <i class="fas fa-shopping-bag" title="Cart">
-      <span class="cart-badge">0</span>
-    </i>
-    <div class="menu-toggle" id="menu-btn">
-      <i class="fas fa-bars"></i>
-    </div>
-  </div>
-</header>
+</div>
 
 <section id="home" class="hero">
   <div class="hero-content">
@@ -571,48 +628,7 @@ footer {
   <h2 class="section-title">Featured Drop</h2>
   <p class="section-subtitle">Handcrafted streetwear built for high-end distinction.</p>
 
-  <div class="grid">
-    <div class="card">
-      <div class="card-img-wrapper">
-        <span class="card-badge">New</span>
-        <img src="t1.webp" alt="Branded Logo T-Shirt" loading="lazy">
-      </div>
-      <div class="card-content">
-        <h3>Abdullah Psychotic Branded Logo T-Shirt</h3>
-        <div class="card-bottom">
-          <div class="price">৳999</div>
-          <button class="add-cart-btn"><i class="fas fa-plus"></i> Add</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-img-wrapper">
-        <img src="s1.webp" alt="Premium AP Shoes" loading="lazy">
-      </div>
-      <div class="card-content">
-        <h3>Premium A.P Logo Sneakers</h3>
-        <div class="card-bottom">
-          <div class="price">৳2,999</div>
-          <button class="add-cart-btn"><i class="fas fa-plus"></i> Add</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-img-wrapper">
-        <span class="card-badge">Exclusive</span>
-        <img src="s2.webp" alt="Ocean Whale Shoes" loading="lazy">
-      </div>
-      <div class="card-content">
-        <h3>A.P Ocean Whale Edition Premium Shoes</h3>
-        <div class="card-bottom">
-          <div class="price">৳3,599</div>
-          <button class="add-cart-btn"><i class="fas fa-plus"></i> Add</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="grid" id="product-grid"></div>
 </section>
 
 <section id="contact">
@@ -668,7 +684,7 @@ footer {
   <div style="padding: 0 7%;">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="logo">Abdullah <span>Psychotic</span></div>
+        <img src="logo.png" alt="Abdullah Psychotic" style="height:40px;">
         <p>Defining contemporary street style with luxurious craftsmanship, bold cuts, and uncompromising quality.</p>
         <div class="social-links">
           <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -715,15 +731,106 @@ footer {
 </footer>
 
 <script>
-  // Mobile Menu Toggle
-  const menuBtn = document.getElementById('menu-btn');
-  const navMenu = document.getElementById('nav-menu');
+  /* ----------------------------------------------------
+     1. CONTROL YOUR PRODUCTS DATA HERE
+     Edit image, title, price, and optional badge easily!
+  ---------------------------------------------------- */
+  const products = [
+    {
+      id: 1,
+      name: "Abdullah Psychotic Branded Logo T-Shirt",
+      image: "t1.webp",
+      price: 999,
+      badge: "New"
+    },
+    {
+      id: 2,
+      name: "Premium A.P Logo Sneakers",
+      image: "s1.webp",
+      price: 2999,
+      badge: ""
+    },
+    {
+      id: 3,
+      name: "A.P Ocean Whale Edition Premium Shoes",
+      image: "s2.webp",
+      price: 3599,
+      badge: "Exclusive"
+    }
+  ];
 
-  menuBtn.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+  /* ----------------------------------------------------
+     2. RENDER PRODUCTS AUTOMATICALLY TO HTML
+  ---------------------------------------------------- */
+  function renderProducts() {
+    const productGrid = document.getElementById('product-grid');
+    productGrid.innerHTML = '';
+
+    products.forEach(product => {
+      const badgeHTML = product.badge 
+        ? `<span class="card-badge">${product.badge}</span>` 
+        : '';
+
+      const productHTML = `
+        <div class="card" data-id="${product.id}">
+          <div class="card-img-wrapper">
+            ${badgeHTML}
+            <img src="${product.image}" alt="${product.name}" loading="lazy">
+          </div>
+          <div class="card-content">
+            <h3>${product.name}</h3>
+            <div class="card-bottom">
+              <div class="price">৳${product.price}</div>
+              <button class="add-cart-btn" onclick="addToCart(${product.id})">
+                <i class="fas fa-plus"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      productGrid.insertAdjacentHTML('beforeend', productHTML);
+    });
+  }
+
+  // Execute rendering when page loads
+  renderProducts();
+
+  /* ----------------------------------------------------
+     3. SHOPPING CART LOGIC
+  ---------------------------------------------------- */
+  let cartCount = 0;
+  function addToCart(productId) {
+    cartCount++;
+    document.getElementById('cart-count').textContent = cartCount;
+  }
+
+  /* ----------------------------------------------------
+     4. NAVIGATION DRAWER LOGIC
+  ---------------------------------------------------- */
+  const menuBtn = document.getElementById('menu-btn');
+  const closeBtn = document.getElementById('close-btn');
+  const navDrawer = document.getElementById('nav-drawer');
+  const menuOverlay = document.getElementById('menu-overlay');
+
+  function openMenu() {
+    navDrawer.classList.add('active');
+    menuOverlay.classList.add('active');
+  }
+
+  function closeMenu() {
+    navDrawer.classList.remove('active');
+    menuOverlay.classList.remove('active');
+  }
+
+  menuBtn.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('click', closeMenu);
+
+  document.querySelectorAll('.drawer-links a').forEach(link => {
+    link.addEventListener('click', closeMenu);
   });
 
-  // Sticky Header Effect
+  // Sticky navbar shadow on scroll
   window.addEventListener("scroll", () => {
     const header = document.getElementById("navbar");
     if (window.scrollY > 50) {
@@ -731,18 +838,6 @@ footer {
     } else {
       header.classList.remove("scrolled");
     }
-  });
-
-  // Simple Cart Increment Demo
-  let cartCount = 0;
-  const cartBadge = document.querySelector('.cart-badge');
-  const addButtons = document.querySelectorAll('.add-cart-btn');
-
-  addButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      cartCount++;
-      cartBadge.textContent = cartCount;
-    });
   });
 </script>
 
