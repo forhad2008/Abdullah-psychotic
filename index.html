@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
@@ -17,8 +17,14 @@
   --bg-dark: #050505;
   --card-bg: #0d0d0d;
   --text-main: #ffffff;
-  --text-muted: #a0a0a0;
-  --border-color: rgba(255, 255, 255, 0.08);
+  --text-muted: #b8b8b8;
+  --border-color: rgba(255, 255, 255, 0.12);
+  
+  /* Old Money Typography Variables */
+  --font-heading: 'Playfair Display', 'Cinzel', serif;
+  --font-subheading: 'Cinzel', serif;
+  --font-body: 'Cormorant Garamond', serif;
+  --font-accent: 'Montserrat', sans-serif;
 }
 
 * {
@@ -32,10 +38,13 @@ html {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
+  font-size: 18px;
+  letter-spacing: 0.3px;
   background-color: var(--bg-dark);
   color: var(--text-main);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::-webkit-scrollbar {
@@ -84,7 +93,7 @@ header.scrolled {
 }
 
 .menu-toggle {
-  font-size: 24px;
+  font-size: 22px;
   cursor: pointer;
   color: #fff;
   transition: color 0.3s ease;
@@ -120,7 +129,7 @@ header.scrolled {
 .cart-icon-wrapper {
   position: relative;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 20px;
   color: #fff;
   transition: transform 0.3s ease, color 0.3s ease;
 }
@@ -131,13 +140,14 @@ header.scrolled {
 }
 
 .cart-badge {
+  font-family: var(--font-accent);
   position: absolute;
   top: -6px;
   right: -10px;
   background: var(--primary-color);
   color: #fff;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 600;
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -186,9 +196,10 @@ header.scrolled {
 }
 
 .drawer-links a {
-  font-size: 16px;
+  font-family: var(--font-subheading);
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   color: #fff;
 }
 
@@ -245,12 +256,13 @@ header.scrolled {
 }
 
 .cart-header h3 {
-  font-family: 'Cinzel', serif;
-  font-size: 20px;
+  font-family: var(--font-subheading);
+  font-size: 18px;
+  letter-spacing: 2px;
 }
 
 .close-cart {
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
   color: var(--text-muted);
 }
@@ -272,7 +284,8 @@ header.scrolled {
   text-align: center;
   color: var(--text-muted);
   margin-top: 50px;
-  font-size: 14px;
+  font-size: 16px;
+  font-style: italic;
 }
 
 .cart-item {
@@ -280,7 +293,7 @@ header.scrolled {
   gap: 15px;
   background: var(--card-bg);
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid var(--border-color);
   align-items: center;
 }
@@ -289,7 +302,7 @@ header.scrolled {
   width: 65px;
   height: 65px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .cart-item-details {
@@ -297,15 +310,17 @@ header.scrolled {
 }
 
 .cart-item-title {
-  font-size: 13px;
-  font-weight: 500;
-  margin-bottom: 5px;
-  line-height: 1.3;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  line-height: 1.2;
 }
 
 .cart-item-price {
+  font-family: var(--font-accent);
   color: var(--primary-color);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
 }
 
@@ -328,6 +343,7 @@ header.scrolled {
   align-items: center;
   justify-content: center;
   font-size: 12px;
+  font-family: var(--font-accent);
 }
 
 .qty-btn:hover {
@@ -353,9 +369,11 @@ header.scrolled {
 .cart-total-row {
   display: flex;
   justify-content: space-between;
+  font-family: var(--font-subheading);
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 20px;
+  letter-spacing: 1px;
 }
 
 .checkout-btn {
@@ -364,9 +382,11 @@ header.scrolled {
   color: #fff;
   border: none;
   padding: 14px;
-  border-radius: 8px;
+  border-radius: 4px;
+  font-family: var(--font-accent);
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
@@ -385,7 +405,7 @@ header.scrolled {
   max-width: 550px;
   background: #0d0d0d;
   border: 1px solid var(--border-color);
-  border-radius: 20px;
+  border-radius: 12px;
   padding: 35px;
   z-index: 1002;
   opacity: 0;
@@ -407,8 +427,9 @@ header.scrolled {
 }
 
 .modal-header h3 {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-heading);
   font-size: 24px;
+  letter-spacing: 1px;
 }
 
 .checkout-form {
@@ -420,10 +441,10 @@ header.scrolled {
 .checkout-summary {
   background: #050505;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid var(--border-color);
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .checkout-summary-row {
@@ -443,10 +464,12 @@ header.scrolled {
   background: #050505;
   border: 1px solid var(--border-color);
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 6px;
   text-align: center;
   cursor: pointer;
-  font-size: 12px;
+  font-family: var(--font-accent);
+  font-size: 11px;
+  letter-spacing: 0.5px;
 }
 
 .payment-option input {
@@ -465,7 +488,7 @@ header.scrolled {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(rgba(0,0,0,0.05), rgba(5,5,5,0.1)),
+  background: linear-gradient(rgba(0,0,0,0.1), rgba(5,5,5,0.3)),
               url('Bg1.webp') center/cover no-repeat;
   padding: 0 20px;
 }
@@ -475,31 +498,38 @@ header.scrolled {
 }
 
 .hero h1 {
-  font-size: 64px;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 3px;
-  line-height: 1.1;
+  font-size: 68px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1.15;
   margin-bottom: 15px;
 }
 
 .hero h1 span {
   color: var(--primary-color);
+  font-style: italic;
+  font-weight: 400;
 }
 
 .hero p {
-  font-size: 18px;
+  font-size: 20px;
+  font-family: var(--font-body);
   color: var(--text-muted);
-  margin-bottom: 30px;
-  letter-spacing: 1px;
+  margin-bottom: 35px;
+  letter-spacing: 1.5px;
+  font-weight: 500;
 }
 
 .btn {
   display: inline-block;
-  padding: 15px 40px;
-  border: 2px solid var(--primary-color);
+  padding: 16px 42px;
+  border: 1px solid var(--primary-color);
   color: var(--text-main);
+  font-family: var(--font-accent);
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -522,7 +552,7 @@ header.scrolled {
 }
 
 .btn:hover {
-  box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
 }
 
 /* Sections General */
@@ -532,17 +562,19 @@ section {
 
 .section-title {
   text-align: center;
-  font-size: 40px;
-  font-family: 'Cinzel', serif;
-  margin-bottom: 15px;
-  letter-spacing: 2px;
+  font-size: 44px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: 1.5px;
 }
 
 .section-subtitle {
   text-align: center;
   color: var(--text-muted);
   margin-bottom: 60px;
-  font-size: 15px;
+  font-size: 17px;
+  font-style: italic;
 }
 
 /* Dynamic Product Grid Styles */
@@ -554,7 +586,7 @@ section {
 
 .card {
   background: var(--card-bg);
-  border-radius: 16px;
+  border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--border-color);
   display: flex;
@@ -592,15 +624,17 @@ section {
   left: 15px;
   background: var(--primary-color);
   color: #fff;
-  font-size: 11px;
+  font-family: var(--font-accent);
+  font-size: 10px;
   font-weight: 600;
+  letter-spacing: 1px;
   padding: 4px 10px;
-  border-radius: 4px;
+  border-radius: 2px;
   text-transform: uppercase;
 }
 
 .card-content {
-  padding: 20px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -608,10 +642,11 @@ section {
 }
 
 .card h3 {
-  font-size: 16px;
-  font-weight: 500;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
   margin-bottom: 10px;
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .card-bottom {
@@ -622,17 +657,21 @@ section {
 }
 
 .price {
+  font-family: var(--font-accent);
   color: var(--primary-color);
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .add-cart-btn {
   background: transparent;
   border: 1px solid var(--border-color);
   color: #fff;
-  padding: 8px 12px;
-  border-radius: 8px;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-family: var(--font-accent);
+  font-size: 11px;
+  letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -649,19 +688,19 @@ section {
   gap: 50px;
   background: var(--card-bg);
   padding: 50px;
-  border-radius: 20px;
+  border-radius: 12px;
   border: 1px solid var(--border-color);
 }
 
 .contact-info h3 {
-  font-family: 'Cinzel', serif;
-  font-size: 28px;
+  font-family: var(--font-heading);
+  font-size: 30px;
   margin-bottom: 15px;
 }
 
 .contact-info p {
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: 17px;
   line-height: 1.6;
   margin-bottom: 30px;
 }
@@ -697,9 +736,10 @@ section {
   padding: 14px;
   background: #050505;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 6px;
   color: #fff;
-  font-family: inherit;
+  font-family: var(--font-body);
+  font-size: 17px;
   outline: none;
 }
 
@@ -713,10 +753,12 @@ section {
   color: #fff;
   border: none;
   padding: 14px;
-  border-radius: 8px;
+  border-radius: 4px;
+  font-family: var(--font-accent);
+  font-size: 11px;
   font-weight: 600;
   cursor: pointer;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   transition: background 0.3s ease;
 }
 
@@ -740,17 +782,18 @@ footer {
 
 .footer-brand p {
   color: var(--text-muted);
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.6;
   margin-top: 15px;
   max-width: 300px;
 }
 
 .footer-links h4 {
-  font-size: 16px;
+  font-family: var(--font-subheading);
+  font-size: 14px;
   font-weight: 600;
   margin-bottom: 20px;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 .footer-links ul {
@@ -763,7 +806,7 @@ footer {
 
 .footer-links ul li a {
   color: var(--text-muted);
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .footer-links ul li a:hover {
@@ -797,7 +840,9 @@ footer {
   padding: 25px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   text-align: center;
-  font-size: 12px;
+  font-family: var(--font-accent);
+  font-size: 11px;
+  letter-spacing: 1px;
   color: var(--text-muted);
 }
 
@@ -812,7 +857,7 @@ footer {
 
 @media (max-width: 768px) {
   .hero h1 {
-    font-size: 40px;
+    font-size: 42px;
   }
   .footer-top {
     grid-template-columns: 1fr;
@@ -867,7 +912,7 @@ footer {
   </div>
 
   <div class="cart-items" id="cart-items-container">
-    </div>
+  </div>
 
   <div class="cart-footer">
     <div class="cart-total-row">
@@ -893,7 +938,7 @@ footer {
       <span>Delivery Fee:</span>
       <strong>৳100</strong>
     </div>
-    <div class="checkout-summary-row" style="margin-bottom: 0; font-size: 16px; color: var(--primary-color);">
+    <div class="checkout-summary-row" style="margin-bottom: 0; font-size: 18px; color: var(--primary-color);">
       <span>Final Amount:</span>
       <strong id="modal-final-total">৳0</strong>
     </div>
@@ -911,7 +956,7 @@ footer {
     </div>
     
     <div>
-      <label style="font-size: 12px; color: var(--text-muted);">Payment Method:</label>
+      <label style="font-family: var(--font-accent); font-size: 11px; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase;">Payment Method:</label>
       <div class="payment-options">
         <label class="payment-option selected" id="opt-cod">
           <input type="radio" name="payment" value="COD" checked> Cash on Delivery
@@ -955,24 +1000,24 @@ footer {
       <div class="info-item">
         <i class="fas fa-envelope"></i>
         <div>
-          <strong style="display:block;">Email Us</strong>
-          <span style="color:var(--text-muted); font-size:13px;">support@abdullahpsychotic.com</span>
+          <strong style="display:block; font-family: var(--font-heading); font-size:18px;">Email Us</strong>
+          <span style="color:var(--text-muted); font-size:15px;">support@abdullahpsychotic.com</span>
         </div>
       </div>
 
       <div class="info-item">
         <i class="fas fa-phone"></i>
         <div>
-          <strong style="display:block;">Call Us</strong>
-          <span style="color:var(--text-muted); font-size:13px;">+880 1700-000000</span>
+          <strong style="display:block; font-family: var(--font-heading); font-size:18px;">Call Us</strong>
+          <span style="color:var(--text-muted); font-size:15px;">+880 1700-000000</span>
         </div>
       </div>
 
       <div class="info-item">
         <i class="fas fa-location-dot"></i>
         <div>
-          <strong style="display:block;">Flagship Location</strong>
-          <span style="color:var(--text-muted); font-size:13px;">Dhaka, Bangladesh</span>
+          <strong style="display:block; font-family: var(--font-heading); font-size:18px;">Flagship Location</strong>
+          <span style="color:var(--text-muted); font-size:15px;">Dhaka, Bangladesh</span>
         </div>
       </div>
     </div>
