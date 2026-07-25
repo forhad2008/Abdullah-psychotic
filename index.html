@@ -626,32 +626,32 @@ section {
   letter-spacing: 1px;
 }
 
-.horizontal-scroll-container {
+
+  .horizontal-scroll-container {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  
+  /* প্রক্সিমিটি (Proximity) ব্যবহার করলে স্ক্রোল অতিমাত্রায় মসৃণ বা পিছলে যাবে না */
+  scroll-snap-type: x proximity; 
+  overscroll-behavior-x: contain;
+  
+  /* অতিরিক্ত গতি (Inertia) কমানোর জন্য */
+  -webkit-overflow-scrolling: auto; 
+  
   padding-bottom: 15px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.horizontal-scroll-container::-webkit-scrollbar {
-  height: 4px;
-}
-
-.horizontal-scroll-container::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 10px;
-}
-
-.horizontal-scroll-container::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
 }
 
 .horizontal-scroll-container .card {
   flex: 0 0 280px;
-  scroll-snap-align: start;
+  
+  /* কার্ড যেন স্ক্রিনের মাঝে স্বাভাবিকভাবে এসে থামে */
+  scroll-snap-align: center; 
+  
+  /* এক সোয়াইপে যেন একাধিক কার্ড লাফিয়ে পার না হয়ে যায় */
+  scroll-snap-stop: always;  
 }
+  
 
 /* Dynamic Product Grid Styles */
 .card {
