@@ -1275,16 +1275,34 @@ footer {
 
 <script>
   /* ----------------------------------------------------
-     0. WELCOME SCREEN CONTROLLER (4 Seconds Timer)
-  ---------------------------------------------------- */
-  window.addEventListener('DOMContentLoaded', () => {
+   0. WELCOME SCREEN CONTROLLER (Show Once Per Session)
+---------------------------------------------------- */
+window.addEventListener('DOMContentLoaded', () => {
+  const welcomeScreen = document.getElementById('welcome-screen');
+
+  if (!welcomeScreen) return;
+
+  // Check if the user has already seen the welcome screen in this session
+  const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
+
+  if (hasSeenWelcome) {
+    // If already seen, hide it instantly without delay
+    welcomeScreen.style.display = 'none';
+  } else {
+    // If first time opening, show for 4 seconds then fade out
     setTimeout(() => {
-      const welcomeScreen = document.getElementById('welcome-screen');
-      if (welcomeScreen) {
-        welcomeScreen.classList.add('fade-out');
-      }
-    }, 4000);
-  });
+      welcomeScreen.classList.add('fade-out');
+
+      // Save flag to sessionStorage so refresh skips it
+      sessionStorage.setItem('hasSeenWelcome', 'true');
+
+      // Remove from DOM after fade animation completes
+      setTimeout(() => {
+        welcomeScreen.style.display = 'none';
+      }, 800); 
+    }, 3500);
+  }
+});
 
   /* ----------------------------------------------------
    1. PRODUCT DATA CONFIGURATION (BY CATEGORY)
