@@ -75,6 +75,7 @@ body.no-scroll {
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-thumb {
   background: var(--primary-color);
@@ -610,13 +611,49 @@ section {
   font-style: italic;
 }
 
-/* Dynamic Product Grid Styles */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
+/* --- CATEGORY SECTION & HORIZONTAL TOUCH-SCROLL STYLES --- */
+.category-section {
+  margin-bottom: 50px;
 }
 
+.category-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  color: var(--text-main);
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.horizontal-scroll-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 15px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.horizontal-scroll-container .card {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+}
+
+/* Dynamic Product Grid Styles */
 .card {
   background: var(--card-bg);
   border-radius: 10px;
@@ -624,6 +661,7 @@ section {
   border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
@@ -885,6 +923,18 @@ footer {
   color: var(--text-muted);
 }
 
+@media (min-width: 992px) {
+  .horizontal-scroll-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    overflow-x: visible;
+  }
+  
+  .horizontal-scroll-container .card {
+    flex: unset;
+  }
+}
+
 @media (max-width: 992px) {
   .contact-container {
     grid-template-columns: 1fr;
@@ -940,8 +990,6 @@ footer {
   <nav class="drawer-links">
     <a href="#home" onclick="closeAll()">HOME</a>
     <a href="#shop" onclick="closeAll()">SHOP</a>
-    <a href="#collection" onclick="closeAll()">COLLECTION</a>
-    <a href="#about" onclick="closeAll()">ABOUT</a>
     <a href="#contact" onclick="closeAll()">CONTACT</a>
   </nav>
 </div>
@@ -952,8 +1000,7 @@ footer {
     <i class="fas fa-times close-cart" id="close-cart-btn"></i>
   </div>
 
-  <div class="cart-items" id="cart-items-container">
-  </div>
+  <div class="cart-items" id="cart-items-container"></div>
 
   <div class="cart-footer">
     <div class="cart-total-row">
@@ -1024,9 +1071,23 @@ footer {
 </section>
 
 <section id="shop" class="products">
-  <h2 class="section-title">Featured Drop</h2>
+  <h2 class="section-title">Featured Drops</h2>
   <p class="section-subtitle">Handcrafted streetwear built for high-end distinction.</p>
-  <div class="grid" id="product-grid"></div>
+
+  <div class="category-section">
+    <h3 class="category-title">Apparel & Tops</h3>
+    <div class="horizontal-scroll-container" id="grid-apparel"></div>
+  </div>
+
+  <div class="category-section">
+    <h3 class="category-title">Footwear Collection</h3>
+    <div class="horizontal-scroll-container" id="grid-footwear"></div>
+  </div>
+
+  <div class="category-section">
+    <h3 class="category-title">Accessories & Gear</h3>
+    <div class="horizontal-scroll-container" id="grid-accessories"></div>
+  </div>
 </section>
 
 <section id="contact">
@@ -1138,15 +1199,17 @@ footer {
       if (welcomeScreen) {
         welcomeScreen.classList.add('fade-out');
       }
-    }, 4000); // 4000 milliseconds = 4 seconds
+    }, 4000);
   });
 
   /* ----------------------------------------------------
-     1. PRODUCT DATA CONFIGURATION
+     1. PRODUCT DATA CONFIGURATION (BY CATEGORY)
   ---------------------------------------------------- */
   const products = [
+    // Apparel Category
     {
       id: 1,
+      category: "apparel",
       name: "Abdullah Psychotic Branded Logo T-Shirt",
       image: "t1.webp",
       url: "t1.webp",
@@ -1154,7 +1217,28 @@ footer {
       badge: "New"
     },
     {
+      id: 6,
+      category: "apparel",
+      name: "A.P Oversized Graphic Tee - Black",
+      image: "t2.webp",
+      url: "t2.webp",
+      price: 1199,
+      badge: "Drop"
+    },
+    {
+      id: 7,
+      category: "apparel",
+      name: "A.P Acid Wash Heavyweight T-Shirt",
+      image: "t3.webp",
+      url: "t3.webp",
+      price: 1299,
+      badge: "Limited"
+    },
+
+    // Footwear Category
+    {
       id: 2,
+      category: "footwear",
       name: "Premium A.P Logo Sneakers",
       image: "s1.webp",
       url: "s1.webp",
@@ -1163,15 +1247,19 @@ footer {
     },
     {
       id: 3,
+      category: "footwear",
       name: "A.P Ocean Whale Edition Premium Shoes",
       image: "s2.webp",
       url: "s2.webp",
       price: 3599,
       badge: "Exclusive"
     },
+
+    // Accessories Category
     {
       id: 4,
-      name: "A.P Ocean whale iconic watch",
+      category: "accessories",
+      name: "A.P Ocean Whale Iconic Watch",
       image: "W1.webp",
       url: "W1.webp",
       price: 15699,
@@ -1179,47 +1267,63 @@ footer {
     },
     {
       id: 5,
-      name: "Abdullah Psychotic logo design iconic black mug",
+      category: "accessories",
+      name: "Abdullah Psychotic Logo Design Black Mug",
       image: "mug.webp",
       url: "mug.webp",
       price: 249,
       badge: "Exclusive"
-    },
+    }
   ];
 
   /* Cart State Storage */
   let cart = [];
 
   /* ----------------------------------------------------
-     2. RENDER PRODUCTS
+     2. RENDER PRODUCTS BY CATEGORY
   ---------------------------------------------------- */
-  function renderProducts() {
-    const productGrid = document.getElementById('product-grid');
-    productGrid.innerHTML = '';
+  function createCardHTML(product) {
+    const badgeHTML = product.badge 
+      ? `<span class="card-badge">${product.badge}</span>` 
+      : '';
 
-    products.forEach(product => {
-      const badgeHTML = product.badge 
-        ? `<span class="card-badge">${product.badge}</span>` 
-        : '';
-
-      const productHTML = `
-        <div class="card" data-id="${product.id}">
-          <a href="${product.url}" target="_blank" class="card-img-wrapper">
-            ${badgeHTML}
-            <img src="${product.image}" alt="${product.name}" loading="lazy">
-          </a>
-          <div class="card-content">
-            <h3><a href="${product.url}" target="_blank">${product.name}</a></h3>
-            <div class="card-bottom">
-              <div class="price">৳${product.price}</div>
-              <button class="add-cart-btn" onclick="addToCart(${product.id})">
-                <i class="fas fa-plus"></i> Add
-              </button>
-            </div>
+    return `
+      <div class="card" data-id="${product.id}">
+        <a href="${product.url}" target="_blank" class="card-img-wrapper">
+          ${badgeHTML}
+          <img src="${product.image}" alt="${product.name}" loading="lazy">
+        </a>
+        <div class="card-content">
+          <h3><a href="${product.url}" target="_blank">${product.name}</a></h3>
+          <div class="card-bottom">
+            <div class="price">৳${product.price}</div>
+            <button class="add-cart-btn" onclick="addToCart(${product.id})">
+              <i class="fas fa-plus"></i> Add
+            </button>
           </div>
         </div>
-      `;
-      productGrid.insertAdjacentHTML('beforeend', productHTML);
+      </div>
+    `;
+  }
+
+  function renderProducts() {
+    const apparelContainer = document.getElementById('grid-apparel');
+    const footwearContainer = document.getElementById('grid-footwear');
+    const accessoriesContainer = document.getElementById('grid-accessories');
+
+    if (apparelContainer) apparelContainer.innerHTML = '';
+    if (footwearContainer) footwearContainer.innerHTML = '';
+    if (accessoriesContainer) accessoriesContainer.innerHTML = '';
+
+    products.forEach(product => {
+      const cardHTML = createCardHTML(product);
+      if (product.category === 'apparel' && apparelContainer) {
+        apparelContainer.insertAdjacentHTML('beforeend', cardHTML);
+      } else if (product.category === 'footwear' && footwearContainer) {
+        footwearContainer.insertAdjacentHTML('beforeend', cardHTML);
+      } else if (product.category === 'accessories' && accessoriesContainer) {
+        accessoriesContainer.insertAdjacentHTML('beforeend', cardHTML);
+      }
     });
   }
 
@@ -1260,15 +1364,12 @@ footer {
     const cartCountBadge = document.getElementById('cart-count');
     const subtotalEl = document.getElementById('cart-subtotal');
 
-    // Total Items Badge
     const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
     cartCountBadge.textContent = totalItems;
 
-    // Subtotal Calculation
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
     subtotalEl.textContent = `৳${subtotal.toLocaleString()}`;
 
-    // Render Drawer Items
     if (cart.length === 0) {
       cartContainer.innerHTML = `<div class="empty-cart-msg">Your shopping bag is empty.</div>`;
       return;
@@ -1326,10 +1427,9 @@ footer {
     }
     closeAll();
     
-    // Update Checkout Modal Data
     const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-    const finalTotal = subtotal + 100; // Adding 100 BDT delivery fee
+    const finalTotal = subtotal + 100;
 
     document.getElementById('modal-total-items').textContent = totalItems;
     document.getElementById('modal-final-total').textContent = `৳${finalTotal.toLocaleString()}`;
@@ -1347,12 +1447,10 @@ footer {
     document.body.classList.remove('no-scroll');
   }
 
-  /* Prevent body scrolling on touch devices while interacting on overlay */
   overlay.addEventListener('touchmove', function(e) {
     e.preventDefault();
   }, { passive: false });
 
-  /* Event Listeners */
   document.getElementById('menu-btn').addEventListener('click', openDrawer);
   document.getElementById('close-drawer-btn').addEventListener('click', closeAll);
   document.getElementById('cart-icon-btn').addEventListener('click', openCart);
@@ -1361,7 +1459,6 @@ footer {
   document.getElementById('close-modal-btn').addEventListener('click', closeAll);
   overlay.addEventListener('click', closeAll);
 
-  /* Payment Selection Formatting */
   document.querySelectorAll('.payment-option').forEach(option => {
     option.addEventListener('click', function() {
       document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
@@ -1370,7 +1467,6 @@ footer {
     });
   });
 
-  /* Submit Checkout Form */
   document.getElementById('checkout-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const name = document.getElementById('cust-name').value;
@@ -1384,7 +1480,6 @@ footer {
     this.reset();
   });
 
-  /* Sticky Header Shadow */
   window.addEventListener("scroll", () => {
     const header = document.getElementById("navbar");
     if (window.scrollY > 50) {
@@ -1394,7 +1489,6 @@ footer {
     }
   });
 
-  // Init
   renderProducts();
   updateCartUI();
 </script>
