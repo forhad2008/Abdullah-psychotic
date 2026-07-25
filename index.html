@@ -758,6 +758,35 @@ section {
   border-color: var(--primary-color);
 }
 
+
+  /* Styling for Luxury Section */
+.category-section.luxury-highlight {
+  background: linear-gradient(145deg, rgba(20, 20, 20, 0.8) 0%, rgba(5, 5, 5, 0.95) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.3); /* Subtle Gold border */
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 50px;
+}
+
+.category-title.luxury-title {
+  color: #d4af37; /* Gold accent */
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.luxury-card {
+  border-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+.luxury-card .price {
+  color: #d4af37 !important;
+}
+
+.luxury-badge {
+  background: linear-gradient(45deg, #d4af37, #aa7c11) !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+}
+  
 /* Contact Section */
 .contact-container {
   display: grid;
@@ -1070,25 +1099,35 @@ footer {
   </div>
 </section>
 
-<section id="shop" class="products">
-  <h2 class="section-title">Featured Drops</h2>
-  <p class="section-subtitle">Handcrafted streetwear built for high-end distinction.</p>
+  <section id="shop" class="products">
+  <h2 class="section-title">Exclusive Collections</h2>
+  <p class="section-subtitle">Curated drops crafted for distinction, comfort, and creative expression.</p>
 
   <div class="category-section">
-    <h3 class="category-title">Apparel & Tops</h3>
+    <h3 class="category-title"><i class="fas fa-tshirt"></i> Apparel & Streetwear</h3>
     <div class="horizontal-scroll-container" id="grid-apparel"></div>
   </div>
 
   <div class="category-section">
-    <h3 class="category-title">Footwear Collection</h3>
+    <h3 class="category-title"><i class="fas fa-shoe-prints"></i> Footwear Collection</h3>
     <div class="horizontal-scroll-container" id="grid-footwear"></div>
   </div>
 
-  <div class="category-section">
-    <h3 class="category-title">Accessories & Gear</h3>
-    <div class="horizontal-scroll-container" id="grid-accessories"></div>
+  <div class="category-section luxury-highlight">
+    <h3 class="category-title luxury-title"><i class="fas fa-clock"></i> Luxury Horology & Timepieces</h3>
+    <div class="horizontal-scroll-container" id="grid-watches"></div>
   </div>
-</section>
+
+  <div class="category-section">
+    <h3 class="category-title"><i class="fas fa-bed"></i> Lifestyle & Living</h3>
+    <div class="horizontal-scroll-container" id="grid-lifestyle"></div>
+  </div>
+
+  <div class="category-section">
+    <h3 class="category-title"><i class="fas fa-lightbulb"></i> Creative Objects & Goods</h3>
+    <div class="horizontal-scroll-container" id="grid-creative"></div>
+  </div>
+  </section>
 
 <section id="contact">
   <h2 class="section-title">Get In Touch</h2>
@@ -1203,129 +1242,137 @@ footer {
   });
 
   /* ----------------------------------------------------
-     1. PRODUCT DATA CONFIGURATION (BY CATEGORY)
-  ---------------------------------------------------- */
-  const products = [
-    // Apparel Category
-    {
-      id: 1,
-      category: "apparel",
-      name: "Abdullah Psychotic Branded Logo T-Shirt",
-      image: "t1.webp",
-      url: "t1.webp",
-      price: 999,
-      badge: "New"
-    },
-    {
-      id: 6,
-      category: "apparel",
-      name: "A.P Oversized Graphic Tee - Black",
-      image: "t2.webp",
-      url: "t2.webp",
-      price: 1199,
-      badge: "Drop"
-    },
-    {
-      id: 7,
-      category: "apparel",
-      name: "A.P Acid Wash Heavyweight T-Shirt",
-      image: "t3.webp",
-      url: "t3.webp",
-      price: 1299,
-      badge: "Limited"
-    },
+   1. PRODUCT DATA CONFIGURATION (BY CATEGORY)
+---------------------------------------------------- */
+const products = [
+  // Apparel
+  {
+    id: 1,
+    category: "apparel",
+    name: "Abdullah Psychotic Branded Logo T-Shirt",
+    image: "t1.webp",
+    url: "t1.webp",
+    price: 999,
+    badge: "New"
+  },
+  {
+    id: 6,
+    category: "apparel",
+    name: "A.P Oversized Graphic Tee - Black",
+    image: "t2.webp",
+    url: "t2.webp",
+    price: 1199,
+    badge: "Drop"
+  },
 
-    // Footwear Category
-    {
-      id: 2,
-      category: "footwear",
-      name: "Premium A.P Logo Sneakers",
-      image: "s1.webp",
-      url: "s1.webp",
-      price: 2999,
-      badge: ""
-    },
-    {
-      id: 3,
-      category: "footwear",
-      name: "A.P Ocean Whale Edition Premium Shoes",
-      image: "s2.webp",
-      url: "s2.webp",
-      price: 3599,
-      badge: "Exclusive"
-    },
+  // Footwear
+  {
+    id: 2,
+    category: "footwear",
+    name: "Premium A.P Logo Sneakers",
+    image: "s1.webp",
+    url: "s1.webp",
+    price: 2999,
+    badge: ""
+  },
+  {
+    id: 3,
+    category: "footwear",
+    name: "A.P Ocean Whale Edition Premium Shoes",
+    image: "s2.webp",
+    url: "s2.webp",
+    price: 3599,
+    badge: "Exclusive"
+  },
 
-    // Accessories Category
-    {
-      id: 4,
-      category: "accessories",
-      name: "A.P Ocean Whale Iconic Watch",
-      image: "W1.webp",
-      url: "W1.webp",
-      price: 15699,
-      badge: "Exclusive"
-    },
-    {
-      id: 5,
-      category: "accessories",
-      name: "Abdullah Psychotic Logo Design Black Mug",
-      image: "mug.webp",
-      url: "mug.webp",
-      price: 249,
-      badge: "Exclusive"
-    }
-  ];
+  // Luxury Watches
+  {
+    id: 4,
+    category: "watches",
+    name: "A.P Ocean Whale Iconic Timepiece",
+    image: "W1.webp",
+    url: "W1.webp",
+    price: 15699,
+    badge: "Luxury Wear"
+  },
 
-  /* Cart State Storage */
-  let cart = [];
+  // Lifestyle (Bedsheets, Linens, Home Essentials)
+  {
+    id: 8,
+    category: "lifestyle",
+    name: "A.P Royal Black Satin Bedsheet Set",
+    image: "bed1.webp",
+    url: "bed1.webp",
+    price: 4500,
+    badge: "Lifestyle"
+  },
 
-  /* ----------------------------------------------------
-     2. RENDER PRODUCTS BY CATEGORY
-  ---------------------------------------------------- */
-  function createCardHTML(product) {
-    const badgeHTML = product.badge 
-      ? `<span class="card-badge">${product.badge}</span>` 
-      : '';
+  // Creative Objects (Mugs, Accessories, Collectibles)
+  {
+    id: 5,
+    category: "creative",
+    name: "A.P Logo Design Iconic Black Creative Mug",
+    image: "mug.webp",
+    url: "mug.webp",
+    price: 249,
+    badge: "Creative Object"
+  }
+];
 
-    return `
-      <div class="card" data-id="${product.id}">
-        <a href="${product.url}" target="_blank" class="card-img-wrapper">
-          ${badgeHTML}
-          <img src="${product.image}" alt="${product.name}" loading="lazy">
-        </a>
-        <div class="card-content">
-          <h3><a href="${product.url}" target="_blank">${product.name}</a></h3>
-          <div class="card-bottom">
-            <div class="price">৳${product.price}</div>
-            <button class="add-cart-btn" onclick="addToCart(${product.id})">
-              <i class="fas fa-plus"></i> Add
-            </button>
-          </div>
+/* ----------------------------------------------------
+   2. RENDER PRODUCTS BY CATEGORY
+---------------------------------------------------- */
+function createCardHTML(product) {
+  const isLuxury = product.category === 'watches';
+  const cardClass = isLuxury ? 'card luxury-card' : 'card';
+  const badgeClass = isLuxury ? 'card-badge luxury-badge' : 'card-badge';
+
+  const badgeHTML = product.badge 
+    ? `<span class="${badgeClass}">${product.badge}</span>` 
+    : '';
+
+  return `
+    <div class="${cardClass}" data-id="${product.id}">
+      <a href="${product.url}" target="_blank" class="card-img-wrapper">
+        ${badgeHTML}
+        <img src="${product.image}" alt="${product.name}" loading="lazy">
+      </a>
+      <div class="card-content">
+        <h3><a href="${product.url}" target="_blank">${product.name}</a></h3>
+        <div class="card-bottom">
+          <div class="price">৳${product.price}</div>
+          <button class="add-cart-btn" onclick="addToCart(${product.id})">
+            <i class="fas fa-plus"></i> Add
+          </button>
         </div>
       </div>
-    `;
-  }
+    </div>
+  `;
+}
 
-  function renderProducts() {
-    const apparelContainer = document.getElementById('grid-apparel');
-    const footwearContainer = document.getElementById('grid-footwear');
-    const accessoriesContainer = document.getElementById('grid-accessories');
+function renderProducts() {
+  const containers = {
+    apparel: document.getElementById('grid-apparel'),
+    footwear: document.getElementById('grid-footwear'),
+    watches: document.getElementById('grid-watches'),
+    lifestyle: document.getElementById('grid-lifestyle'),
+    creative: document.getElementById('grid-creative')
+  };
 
-    if (apparelContainer) apparelContainer.innerHTML = '';
-    if (footwearContainer) footwearContainer.innerHTML = '';
-    if (accessoriesContainer) accessoriesContainer.innerHTML = '';
+  // Clear existing elements
+  Object.values(containers).forEach(container => {
+    if (container) container.innerHTML = '';
+  });
 
-    products.forEach(product => {
-      const cardHTML = createCardHTML(product);
-      if (product.category === 'apparel' && apparelContainer) {
-        apparelContainer.insertAdjacentHTML('beforeend', cardHTML);
-      } else if (product.category === 'footwear' && footwearContainer) {
-        footwearContainer.insertAdjacentHTML('beforeend', cardHTML);
-      } else if (product.category === 'accessories' && accessoriesContainer) {
-        accessoriesContainer.insertAdjacentHTML('beforeend', cardHTML);
+  // Render items into their respective containers
+  products.forEach(product => {
+    const cardHTML = createCardHTML(product);
+    const targetContainer = containers[product.category];
+    if (targetContainer) {
+      targetContainer.insertAdjacentHTML('beforeend', cardHTML);
+    }
+  });
       }
-    });
-  }
 
   /* ----------------------------------------------------
      3. CART SYSTEM LOGIC
