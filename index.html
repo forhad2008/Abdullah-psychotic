@@ -47,6 +47,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Prevents background page scrolling when modal or drawers are active */
+body.no-scroll {
+  overflow: hidden;
+  touch-action: none;
+}
+
 /* --- WELCOME INTRO OVERLAY --- */
 #welcome-screen {
   position: fixed;
@@ -239,6 +245,7 @@ header.scrolled {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
+  touch-action: none;
 }
 
 .overlay.active {
@@ -261,6 +268,7 @@ header.scrolled {
   flex-direction: column;
   padding: 25px;
   transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+  touch-action: pan-y;
 }
 
 .cart-drawer.active {
@@ -273,6 +281,7 @@ header.scrolled {
   justify-content: space-between;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
 }
 
 .cart-header h3 {
@@ -291,6 +300,7 @@ header.scrolled {
   color: #fff;
 }
 
+/* Scrolling Container Settings */
 .cart-items {
   flex-grow: 1;
   overflow-y: auto;
@@ -298,6 +308,8 @@ header.scrolled {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .empty-cart-msg {
@@ -384,6 +396,7 @@ header.scrolled {
 .cart-footer {
   padding-top: 20px;
   border-top: 1px solid var(--border-color);
+  flex-shrink: 0;
 }
 
 .cart-total-row {
@@ -431,6 +444,7 @@ header.scrolled {
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s ease;
+  overscroll-behavior: contain;
 }
 
 .modal.active {
@@ -502,7 +516,6 @@ header.scrolled {
 }
 
 /* Hero Section */
-
 .hero {
   height: 100vh;
   display: flex;
@@ -925,11 +938,11 @@ footer {
 <div class="nav-drawer" id="nav-drawer">
   <div class="close-drawer" id="close-drawer-btn"><i class="fas fa-times"></i></div>
   <nav class="drawer-links">
-    <a href="#home">HOME</a>
-    <a href="#shop">SHOP</a>
-    <a href="#collection">COLLECTION</a>
-    <a href="#about">ABOUT</a>
-    <a href="#contact">CONTACT</a>
+    <a href="#home" onclick="closeAll()">HOME</a>
+    <a href="#shop" onclick="closeAll()">SHOP</a>
+    <a href="#collection" onclick="closeAll()">COLLECTION</a>
+    <a href="#about" onclick="closeAll()">ABOUT</a>
+    <a href="#contact" onclick="closeAll()">CONTACT</a>
   </nav>
 </div>
 
@@ -1164,15 +1177,14 @@ footer {
       price: 15699,
       badge: "Exclusive"
     },
-
-  {
-    id: 5,
+    {
+      id: 5,
       name: "Abdullah Psychotic logo design iconic black mug",
       image: "mug.webp",
       url: "mug.webp",
       price: 249,
       badge: "Exclusive"
-  },
+    },
   ];
 
   /* Cart State Storage */
@@ -1297,12 +1309,14 @@ footer {
     closeAll();
     cartDrawer.classList.add('active');
     overlay.classList.add('active');
+    document.body.classList.add('no-scroll');
   }
 
   function openDrawer() {
     closeAll();
     navDrawer.classList.add('active');
     overlay.classList.add('active');
+    document.body.classList.add('no-scroll');
   }
 
   function openCheckout() {
@@ -1322,6 +1336,7 @@ footer {
 
     checkoutModal.classList.add('active');
     overlay.classList.add('active');
+    document.body.classList.add('no-scroll');
   }
 
   function closeAll() {
@@ -1329,7 +1344,13 @@ footer {
     cartDrawer.classList.remove('active');
     checkoutModal.classList.remove('active');
     overlay.classList.remove('active');
+    document.body.classList.remove('no-scroll');
   }
+
+  /* Prevent body scrolling on touch devices while interacting on overlay */
+  overlay.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+  }, { passive: false });
 
   /* Event Listeners */
   document.getElementById('menu-btn').addEventListener('click', openDrawer);
