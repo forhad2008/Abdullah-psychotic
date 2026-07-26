@@ -1854,38 +1854,6 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
 });
 
 
-/* ----------------------------------------------------
-   TOUCH SCROLL SPEED CONTROLLER (50% DAMPENING)
----------------------------------------------------- */
-function applyDampenedTouchScroll() {
-  const containers = document.querySelectorAll('.horizontal-scroll-container');
-
-  containers.forEach(container => {
-    let startX = 0;
-    let scrollLeft = 0;
-    let isTouching = false;
-    const speedFactor = 1; // 100% speed reduction for controlled touch response
-
-    container.addEventListener('touchstart', (e) => {
-      isTouching = true;
-      startX = e.touches[0].pageX - container.offsetLeft;
-      scrollLeft = container.scrollLeft;
-    }, { passive: true });
-
-    container.addEventListener('touchmove', (e) => {
-      if (!isTouching) return;
-      
-      const x = e.touches[0].pageX - container.offsetLeft;
-      const walk = (x - startX) * speedFactor; // Applies the 50% resistance
-      container.scrollLeft = scrollLeft - walk;
-    }, { passive: true });
-
-    container.addEventListener('touchend', () => {
-      isTouching = false;
-    });
-  });
-}
-
 // Initialize the touch dampener after rendering products
 renderProducts();
 updateCartUI();
