@@ -1550,7 +1550,7 @@ function createCardHTML(product) {
       <div class="card-content">
         <h3><a href="${product.url}" target="_blank">${product.name}</a></h3>
         <div class="card-bottom">
-          <div class="price">${product.price}</div>
+          <div class="price">$${product.price}</div>
           <button class="add-cart-btn" onclick="addToCart(${product.id})">
             <i class="fas fa-plus"></i> Add
           </button>
@@ -1629,7 +1629,7 @@ function updateCartUI() {
   cartCountBadge.textContent = totalItems;
 
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-  subtotalEl.textContent = `৳${subtotal.toLocaleString()}`;
+  subtotalEl.textContent = `$${subtotal.toLocaleString()}`;
 
   if (cart.length === 0) {
     cartContainer.innerHTML = `<div class="empty-cart-msg">Your shopping bag is empty.</div>`;
@@ -1645,7 +1645,7 @@ function updateCartUI() {
         </a>
         <div class="cart-item-details">
           <div class="cart-item-title"><a href="${item.url}" target="_blank">${item.name}</a></div>
-          <div class="cart-item-price">৳${item.price}</div>
+          <div class="cart-item-price">$${item.price}</div>
           <div class="cart-qty-controls">
             <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
             <span style="font-size:12px; font-weight:600;">${item.qty}</span>
