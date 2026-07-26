@@ -1861,26 +1861,6 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
 });
 
   
-  document.querySelectorAll('.horizontal-scroll-container').forEach(container => {
-
-    let startX = 0;
-    let startScroll = 0;
-
-    container.addEventListener('touchstart', e => {
-        startX = e.touches[0].pageX;
-        startScroll = container.scrollLeft;
-    }, { passive: true });
-
-    container.addEventListener('touchmove', e => {
-
-        const x = e.touches[0].pageX;
-        const walk = (startX - x) * 0.5;   // Scroll speed
-
-        container.scrollLeft = startScroll + walk;
-
-    }, { passive: true });
-
-});
 // Initializing page setup
 renderProducts();
 updateCartUI();
