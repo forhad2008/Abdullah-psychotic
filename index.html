@@ -629,35 +629,27 @@ section {
   letter-spacing: 1px;
 }
 
-  .horizontal-scroll-container {
+.horizontal-scroll-container {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  scroll-behavior: auto; /* Disabled smooth behavior temporarily while dragging for instant response */
-  overscroll-behavior-x: contain;
-  padding-bottom: 15px;
-  -webkit-overflow-scrolling: auto; /* Turns off native high-speed flicking */
-  touch-action: pan-y; /* Keeps vertical page scrolling smooth while taking control of horizontal drag */
-  }
   
-.horizontal-scroll-container::-webkit-scrollbar {
-  height: 4px;
-}
-
-.horizontal-scroll-container::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 10px;
-}
-
-.horizontal-scroll-container::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  /* --- NATURAL NATIVE SMOOTH SCROLLING --- */
+  scroll-behavior: smooth;
+  
+  /* Enforces native smooth momentum on iOS and Android */
+  -webkit-overflow-scrolling: touch; 
+  
+  /* Prevents horizontal swipes from causing page bounces/pull-to-refresh */
+  overscroll-behavior-x: contain; 
+  
+  padding-bottom: 15px;
 }
 
 .horizontal-scroll-container .card {
   flex: 0 0 280px;
-  /* Aligns each card smoothly to the start of the scroll view */
+  /* Stops cards from getting stuck halfway, aligning cleanly */
   scroll-snap-align: start; 
-  scroll-snap-stop: normal; 
 }
 
 /* Dynamic Product Grid Styles */
