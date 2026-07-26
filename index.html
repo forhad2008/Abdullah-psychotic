@@ -1872,7 +1872,7 @@ function applyDampenedTouchScroll() {
     let startX = 0;
     let scrollLeft = 0;
     let isTouching = false;
-    const speedFactor = 0.5; // 50% speed reduction for controlled touch response
+    const speedFactor = 1; // 100% speed reduction for controlled touch response
 
     container.addEventListener('touchstart', (e) => {
       isTouching = true;
