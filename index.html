@@ -1179,13 +1179,19 @@ footer {
   <div class="category-section">
     <h3 class="category-title"><i class="fas fa-tshirt"></i> Hoodies</h3>
     <div class="horizontal-scroll-container" id="grid-hoodies"></div>
- 
   </div>
-  
+
   <div class="category-section">
     <h3 class="category-title"><i class="fas fa-hat-cowboy"></i> Caps</h3>
-   
     <div class="horizontal-scroll-container" id="grid-caps"></div>
+  </div>
+
+  <!-- New Bags Section -->
+  <div class="category-section">
+    <h3 class="category-title">
+      <i class="fas fa-shopping-bag"></i> Bags & Leather Goods
+    </h3>
+    <div class="horizontal-scroll-container" id="grid-bags"></div>
   </div>
 </section>
 
@@ -1329,7 +1335,7 @@ const products = [
     name: "Abdullah Psychotic Branded Logo T-Shirt",
     image: "t1.webp",
     url: "t1.webp",
-    price: 999,
+    price: 499,
     badge: "New"
   },
   {
@@ -1338,7 +1344,7 @@ const products = [
     name: "A.P Oversized Dragon edition premium t-shirt",
     image: "t4.webp",
     url: "t4.webp",
-    price: 1199,
+    price: 459,
     badge: "Drop"
   },
   {
@@ -1347,7 +1353,7 @@ const products = [
     name: "A.P Oversized Tiger edition premium t-shirt",
     image: "t3.webp",
     url: "t3.webp",
-    price: 1199,
+    price: 449,
     badge: "Drop"
   },
   {
@@ -1356,7 +1362,7 @@ const products = [
     name: "A.P Oversized Penguin edition premium t-shirt",
     image: "t2.webp",
     url: "t2.webp",
-    price: 1199,
+    price: 449,
     badge: "Drop"
   },
   {
@@ -1365,7 +1371,7 @@ const products = [
     name: "Premium A.P Logo Sneakers",
     image: "s1.webp",
     url: "s1.webp",
-    price: 2999,
+    price: 499,
     badge: ""
   },
   {
@@ -1374,7 +1380,7 @@ const products = [
     name: "A.P Ocean Whale Edition Premium Shoes",
     image: "s2.webp",
     url: "s2.webp",
-    price: 3599,
+    price: 799,
     badge: "Exclusive"
   },
 
@@ -1383,7 +1389,7 @@ const products = [
     name: "A.P Tiger's Edition Premium Shoes",
     image: "s3.webp",
     url: "s3.webp",
-    price: 3499,
+    price: 599,
     badge: "Exclusive"
   },
 
@@ -1392,7 +1398,7 @@ const products = [
     name: "A.P Sukuna's Edition Iconic Luxury Shoes",
     image: "s4.webp",
     url: "s4.webp",
-    price: 15799,
+    price: 799,
     badge: "Exclusive"
   },
   {
@@ -1401,7 +1407,7 @@ const products = [
     name: "A.P Ocean Whale Iconic Timepiece",
     image: "W1.webp",
     url: "W1.webp",
-    price: 15799,
+    price: 7899,
     badge: "Luxury Wear"
   },
   {
@@ -1410,7 +1416,7 @@ const products = [
     name: "A.P Logo Design Black Bedsheet",
     image: "bed1.webp",
     url: "bed1.webp",
-    price: 4299,
+    price: 1849,
     badge: "Lifestyle"
   },
   {
@@ -1419,7 +1425,7 @@ const products = [
     name: "A.P Logoed Royal Black Satin Bedsheet",
     image: "bed2.webp",
     url: "bed2.webp",
-    price: 4499,
+    price: 1899,
     badge: "Lifestyle"
   },
   {
@@ -1428,7 +1434,7 @@ const products = [
     name: "A.P Logo Design Iconic Black Creative Mug",
     image: "mug.webp",
     url: "mug.webp",
-    price: 749,
+    price: 79,
     badge: "Creative Object"
   },
   {
@@ -1437,7 +1443,7 @@ const products = [
     name: "A.P Logo Design Iconic Golden-Black Mug",
     image: "mug2.webp",
     url: "mug2.webp",
-    price: 1499,
+    price: 99,
     badge: "Creative Object"
   },
   /*hoodies*/
@@ -1448,7 +1454,7 @@ const products = [
     name: "A.P Logo Design Iconic Black Color Hoodie",
     image: "ho1.webp",
     url: "ho1.webp",
-    price: 2499,
+    price: 449,
     badge: "Premium Winter-wear "
     },
 
@@ -1458,7 +1464,7 @@ const products = [
     name: "A.P Logo Design Iconic Red Color Hoodie",
     image: "ho2.webp",
     url: "ho2.webp",
-    price: 2549,
+    price: 449,
     badge: "Premium Winter-wear "
     },
 
@@ -1470,7 +1476,7 @@ const products = [
     name: "A.P Logo Design Iconic Black cap",
     image: "cap1.webp",
     url: "cap1.webp",
-    price: 1499,
+    price: 239,
     badge: "Premium Extra-wear-wear "
     },
 
@@ -1479,7 +1485,7 @@ const products = [
     name: "A.P Logo Design Iconic red cap",
     image: "cap2.webp",
     url: "cap2.webp",
-    price: 1549,
+    price: 229,
     badge: "Premium Extra-wear-wear "
     },
 
@@ -1488,7 +1494,7 @@ const products = [
     name: "Abdullah Psychotic – Hell Rider stylish cap",
     image: "cap3.webp",
     url: "cap3.webp",
-    price: 2549,
+    price: 349,
     badge: "Premium Extra-wear-wear "
     },
 
@@ -1497,7 +1503,7 @@ const products = [
     name: "Abdullah Psychotic modern cap",
     image: "cap4.webp",
     url: "cap4.webp",
-    price: 2549,
+    price: 249,
     badge: "Premium Extra-wear-wear "
     },
 
@@ -1506,9 +1512,21 @@ const products = [
     name: "Abdullah Psychotic – Luxury cap",
     image: "cap5.webp",
     url: "cap5.webp",
-    price: 2549,
+    price: 259,
     badge: "Premium Extra-wear-wear "
     },
+
+  /*bag*/
+  {id : 21,
+    category: "bags",
+    name: "Abdullah Psychotic – Luxury school bag",
+    image: "bag1.webp",
+    url: "bag1.webp",
+    price: 549,
+    badge: "Premium bags"
+    },
+
+      
 ];
 
 /* ----------------------------------------------------
@@ -1532,7 +1550,7 @@ function createCardHTML(product) {
       <div class="card-content">
         <h3><a href="${product.url}" target="_blank">${product.name}</a></h3>
         <div class="card-bottom">
-          <div class="price">৳${product.price}</div>
+          <div class="price">${product.price}</div>
           <button class="add-cart-btn" onclick="addToCart(${product.id})">
             <i class="fas fa-plus"></i> Add
           </button>
@@ -1550,7 +1568,8 @@ function renderProducts() {
     lifestyle: document.getElementById('grid-lifestyle'),
     creative: document.getElementById('grid-creative'),
     hoodies: document.getElementById('grid-hoodies'),
-    caps: document.getElementById('grid-caps')
+    caps: document.getElementById('grid-caps'),
+    bags: document.getElementById('grid-bags')
   };
 
   Object.values(containers).forEach(container => {
