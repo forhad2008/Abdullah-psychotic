@@ -633,17 +633,11 @@ section {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  
-  /* --- NATURAL TOUCH SCROLLING IMPROVEMENTS --- */
-  /* Mandatory snapping aligns items neatly and stops the erratic over-scrolling */
-  scroll-snap-type: x mandatory; 
-  scroll-behavior: smooth;
-  
-  /* Retains gentle momentum scrolling while keeping card bounds in check */
-  -webkit-overflow-scrolling: touch; 
+  scroll-behavior: auto; /* Disabled smooth behavior temporarily while dragging for instant response */
   overscroll-behavior-x: contain;
-  
   padding-bottom: 15px;
+  -webkit-overflow-scrolling: auto; /* Turns off native high-speed flicking */
+  touch-action: pan-y; /* Keeps vertical page scrolling smooth while taking control of horizontal drag */
   }
   
 .horizontal-scroll-container::-webkit-scrollbar {
@@ -1867,6 +1861,43 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   });
 });
 
+
+/* ----------------------------------------------------
+   TOUCH SCROLL SPEED CONTROLLER (50% DAMPENING)
+---------------------------------------------------- */
+function applyDampenedTouchScroll() {
+  const containers = document.querySelectorAll('.horizontal-scroll-container');
+
+  containers.forEach(container => {
+    let startX = 0;
+    let scrollLeft = 0;
+    let isTouching = false;
+    const speedFactor = 0.5; // 50% speed reduction for controlled touch response
+
+    container.addEventListener('touchstart', (e) => {
+      isTouching = true;
+      startX = e.touches[0].pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+    }, { passive: true });
+
+    container.addEventListener('touchmove', (e) => {
+      if (!isTouching) return;
+      
+      const x = e.touches[0].pageX - container.offsetLeft;
+      const walk = (x - startX) * speedFactor; // Applies the 50% resistance
+      container.scrollLeft = scrollLeft - walk;
+    }, { passive: true });
+
+    container.addEventListener('touchend', () => {
+      isTouching = false;
+    });
+  });
+}
+
+// Initialize the touch dampener after rendering products
+renderProducts();
+updateCartUI();
+applyDampenedTouchScroll();
   
 // Initializing page setup
 renderProducts();
