@@ -27,6 +27,7 @@
   --font-accent: 'Montserrat', sans-serif;
 }
 
+
 * {
   margin: 0;
   padding: 0;
@@ -1195,6 +1196,14 @@ footer {
     </h3>
     <div class="horizontal-scroll-container" id="grid-bags"></div>
   </div>
+
+<!-- Perfumes Section -->
+  <div class="category-section">
+    <h3 class="category-title">
+      <i class="fas fa-spray-can"></i> Branded Perfumes
+    </h3>
+    <div class="horizontal-scroll-container" id="grid-perfume"></div>
+  </div>
 </section>
 
 <section id="contact">
@@ -1663,7 +1672,36 @@ const products = [
     price: 2349,
     badge: "Luxury fashion bag"
     },
-      
+
+
+  /*perfume*/
+  {id : 35,
+    category: "perfume",
+    name: "Abdullah Psychotic – Luxury red designed perfume",
+    image: "per1.webp",
+    url: "per1.webp",
+    price: 2599,
+    badge: "Luxury perfume"
+    },
+
+
+  {id : 36,
+    category: "perfume",
+    name: "Abdullah Psychotic – Luxury black designed logo perfume (Upper class)",
+    image: "per2.webp",
+    url: "per2.webp",
+    price: 2700,
+    badge: "Luxury perfume"
+    },
+
+  {id : 37,
+    category: "perfume",
+    name: "Abdullah Psychotic – Luxury black designed logo perfume",
+    image: "per3.webp",
+    url: "per3.webp",
+    price: 2650,
+    badge: "Luxury perfume"
+    },
 ];
 
 /* ----------------------------------------------------
@@ -1706,7 +1744,8 @@ function renderProducts() {
     creative: document.getElementById('grid-creative'),
     hoodies: document.getElementById('grid-hoodies'),
     caps: document.getElementById('grid-caps'),
-    bags: document.getElementById('grid-bags')
+    bags: document.getElementById('grid-bags'),
+    perfume: document.getElementById('grid-perfume')
   };
 
   Object.values(containers).forEach(container => {
