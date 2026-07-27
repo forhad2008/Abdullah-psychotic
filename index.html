@@ -520,16 +520,23 @@ header.scrolled {
 }
 
 /* Hero Section */
-.hero {
+
+  .hero {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: url('bg04.webp') center/cover no-repeat;
+  background: 
+    linear-gradient(
+      135deg, 
+      rgba(15, 15, 15, 0.93) 0%, 
+      rgba(43, 33, 14, 0.85) 100%
+    ),
+    url('bg04.webp') center/cover no-repeat;
   padding: 0 20px;
-}
-
+  }
+  
 .hero-content {
   max-width: 800px;
 }
