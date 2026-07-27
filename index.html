@@ -7,13 +7,12 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <style>
 
-    :root {
+:root {
   /* Richer, deeper luxury crimson instead of neon red */
   --primary-color: #C1121F; 
   --primary-hover: #780000;
@@ -32,6 +31,7 @@
   --font-subheading: 'Cinzel', serif;
   --font-body: 'Montserrat', sans-serif;
   --font-accent: 'Montserrat', sans-serif;
+  --font-signature: 'Great Vibes', cursive; /* ADD THIS LINE */
 }
 
 * {
@@ -577,14 +577,14 @@ header.scrolled {
   }
 }
 
-.hero h1 {
-  font-size: 68px;
-  font-family: var(--font-heading);
-  font-weight: 600;
+    .hero h1 {
+  font-size: 96px; /* Increased for the script font */
+  font-family: var(--font-signature);
+  font-weight: 400; /* Script fonts look best without bolding */
   letter-spacing: 2px;
   line-height: 1.15;
   margin-bottom: 15px;
-}
+    }
 
 .hero h1 span {
   color: var(--primary-color);
@@ -1070,11 +1070,12 @@ footer {
 
 @media (max-width: 768px) {
   .hero h1 {
-    font-size: 42px;
+    font-size: 60px; /* Adjusted up for readability on mobile */
   }
   .hero p {
     font-size: 14px;
   }
+
   .footer-top {
     grid-template-columns: 1fr;
   }
