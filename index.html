@@ -66,11 +66,12 @@ body.no-scroll {
 /* --- WELCOME INTRO OVERLAY --- */
 #welcome-screen {
   position: fixed;
-  top: 10%;
+  top: 0;
   left: 0;
   width: 100vw;
-  height: 105vh;
-  background: #050505 url('prim.jpg') center/cover no-repeat;
+  height: 100vh;
+  /* Updated line below: changed '10%' to '-10%' */
+  background: #050505 url('prim.jpg') center -10% / cover no-repeat;
   z-index: 99999;
   display: flex;
   align-items: center;
