@@ -521,21 +521,60 @@ header.scrolled {
 }
 
 /* Hero Section */
-
-  .hero {
-  height: 75vh;
+.hero {
+  /* Using min-height is generally better for mobile responsiveness */
+  min-height: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-    background: linear-gradient(180deg, rgba(5,5,5,0.4) 0%, rgba(5,5,5,0.85) 85%), url('bg01.webp') center/cover no-repeat;
-
   padding: 0 20px;
-  }
   
+  /* 
+    Enhanced Gradient:
+    - Top: Darker to make the header/logo pop.
+    - Middle: Slightly more transparent to reveal the room/products.
+    - Bottom: Heavy dark fade with a very subtle red tint (rgba(20, 0, 0, 0.95)) 
+      to match the red LED glow seen in your design.
+  */
+  background: linear-gradient(
+      180deg, 
+      rgba(0, 0, 0, 0.8) 0%, 
+      rgba(0, 0, 0, 0.5) 40%, 
+      rgba(20, 0, 0, 0.95) 100%
+    ), 
+    url('bg01.webp') center/cover no-repeat;
+  
+  /* Optional: Adds a premium, subtle parallax effect on desktop */
+  background-attachment: fixed;
+  
+  /* Ensures the gradient blends smoothly with the image */
+  background-blend-mode: multiply; 
+}
+
 .hero-content {
   max-width: 800px;
+  width: 100%;
+  
+  /* Adds a subtle drop shadow to the container to lift text off the background */
+  filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.5));
+  
+  /* Smooth fade-in animation for a premium feel (requires keyframes below) */
+  animation: fadeIn 1.2s ease-out forwards;
 }
+
+/* Optional Animation for the content */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 .hero h1 {
   font-size: 68px;
