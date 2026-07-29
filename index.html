@@ -68,12 +68,16 @@ body.no-scroll {
   left: 0;
   width: 100vw;
   height: 100vh;
-  /* Changed center -25% to center -10% to shift the background 10% up */
   background: #050505 url('prim.jpg') center -20% / cover no-repeat;
   z-index: 99999;
   display: flex;
   align-items: center;
   transition: opacity 0.7s ease, visibility 0.5s ease;
+
+  /* Add these */
+  overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: none;
 }
 
 #welcome-screen.fade-out {
@@ -1306,40 +1310,73 @@ footer {
 </footer>
 
 <script>
+
   /* ----------------------------------------------------
   0. WELCOME SCREEN CONTROLLER (Show Once Per Session)
 ---------------------------------------------------- */
 window.addEventListener('DOMContentLoaded', () => {
+
   const welcomeScreen = document.getElementById('welcome-screen');
-  const heroContent = document.querySelector('.hero-content'); 
+  const heroContent = document.querySelector('.hero-content');
 
   if (!welcomeScreen) return;
+
+  // Lock scrolling while welcome screen is visible
+  document.body.classList.add('no-scroll');
+
+  // Block all touch and wheel scrolling
+  const blockScroll = (e) => {
+    e.preventDefault();
+  };
+
+  ['touchstart', 'touchmove', 'wheel'].forEach(event => {
+    welcomeScreen.addEventListener(event, blockScroll, {
+      passive: false
+    });
+  });
 
   const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
 
   if (hasSeenWelcome) {
-    // If returning visitor, show immediately
+
+    // Returning visitor
     welcomeScreen.style.display = 'none';
-    if (heroContent) heroContent.classList.add('animate-hero');
+    document.body.classList.remove('no-scroll');
+
+    if (heroContent) {
+      heroContent.classList.add('animate-hero');
+    }
+
   } else {
-    // First-time visitor sequence
+
+    // First visit
     setTimeout(() => {
-      // 1. Start the fade-out after 3 seconds
+
+      // Fade out welcome screen
       welcomeScreen.classList.add('fade-out');
       sessionStorage.setItem('hasSeenWelcome', 'true');
-      
+
       setTimeout(() => {
-        // 2. After 800ms, the fade is done. Remove it from the screen.
+
+        // Remove welcome screen
         welcomeScreen.style.display = 'none';
-        
-        // 3. NEW: Wait another 1.2 seconds (1200ms), then reveal the hero content
+
+        // Unlock scrolling
+        document.body.classList.remove('no-scroll');
+
+        // Show hero after 0.7 second
         setTimeout(() => {
-          if (heroContent) heroContent.classList.add('animate-hero');
-        }, 1200);
-        
-      }, 800); 
-    }, 3000);
+          if (heroContent) {
+            heroContent.classList.add('animate-hero');
+          }
+        }, 700);
+
+      }, 700); // Matches CSS fade duration
+
+    }, 3000); // Welcome screen visible for 3 seconds
+
   }
+
 });
   
 /* ----------------------------------------------------
