@@ -68,11 +68,11 @@ body.no-scroll {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #050505 url('prim.jpg') center -25% / cover no-repeat;
+  /* Changed center -25% to center -10% to shift the background 10% up */
+  background: #050505 url('prim.jpg') center -20% / cover no-repeat;
   z-index: 99999;
   display: flex;
   align-items: center;
-  
   transition: opacity 0.7s ease, visibility 0.5s ease;
 }
 
@@ -548,12 +548,19 @@ header.scrolled {
   background-blend-mode: multiply; 
 }
 
-.hero-content {
+  .hero-content {
   max-width: 800px;
   width: 100%;
   filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.5));
+  opacity: 0; /* Keep it invisible until the animation starts */
+  /* We removed the animation from here so it doesn't auto-play */
+}
+
+/* New class that JavaScript will add to trigger the reveal */
+.hero-content.animate-hero {
   animation: fadeIn 4.2s ease-out forwards;
 }
+
 
 @keyframes fadeIn {
   0% {
@@ -1299,29 +1306,39 @@ footer {
 </footer>
 
 <script>
+
 /* ----------------------------------------------------
   0. WELCOME SCREEN CONTROLLER (Show Once Per Session)
 ---------------------------------------------------- */
 window.addEventListener('DOMContentLoaded', () => {
   const welcomeScreen = document.getElementById('welcome-screen');
+  const heroContent = document.querySelector('.hero-content'); // Grab the hero section
 
   if (!welcomeScreen) return;
 
   const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
 
   if (hasSeenWelcome) {
+    // If the user has already seen the welcome screen, hide it and animate the hero immediately
     welcomeScreen.style.display = 'none';
+    if (heroContent) heroContent.classList.add('animate-hero');
   } else {
+    // First-time visitor logic
     setTimeout(() => {
       welcomeScreen.classList.add('fade-out');
       sessionStorage.setItem('hasSeenWelcome', 'true');
+      
       setTimeout(() => {
         welcomeScreen.style.display = 'none';
-      }, 800); 
+        
+        // Trigger the hero animation ONLY AFTER the welcome screen has fully vanished
+        if (heroContent) heroContent.classList.add('animate-hero');
+        
+      }, 800); // 800ms matches the fade-out transition duration
     }, 3000);
   }
 });
-
+  
 /* ----------------------------------------------------
   1. PRODUCT DATA & GLOBAL STATE CONFIGURATION
 ---------------------------------------------------- */
