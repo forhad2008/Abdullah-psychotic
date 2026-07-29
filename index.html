@@ -1306,36 +1306,39 @@ footer {
 </footer>
 
 <script>
-
-/* ----------------------------------------------------
+  /* ----------------------------------------------------
   0. WELCOME SCREEN CONTROLLER (Show Once Per Session)
 ---------------------------------------------------- */
 window.addEventListener('DOMContentLoaded', () => {
   const welcomeScreen = document.getElementById('welcome-screen');
-  const heroContent = document.querySelector('.hero-content'); // Grab the hero section
+  const heroContent = document.querySelector('.hero-content'); 
 
   if (!welcomeScreen) return;
 
   const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
 
   if (hasSeenWelcome) {
-    // If the user has already seen the welcome screen, hide it and animate the hero immediately
+    // If returning visitor, show immediately
     welcomeScreen.style.display = 'none';
     if (heroContent) heroContent.classList.add('animate-hero');
   } else {
-    // First-time visitor logic
+    // First-time visitor sequence
     setTimeout(() => {
+      // 1. Start the fade-out after 3 seconds
       welcomeScreen.classList.add('fade-out');
       sessionStorage.setItem('hasSeenWelcome', 'true');
       
       setTimeout(() => {
+        // 2. After 800ms, the fade is done. Remove it from the screen.
         welcomeScreen.style.display = 'none';
         
-        // Trigger the hero animation ONLY AFTER the welcome screen has fully vanished
-        if (heroContent) heroContent.classList.add('animate-hero');
+        // 3. NEW: Wait another 1.2 seconds (1200ms), then reveal the hero content
+        setTimeout(() => {
+          if (heroContent) heroContent.classList.add('animate-hero');
+        }, 1200);
         
-      }, 800); // 800ms matches the fade-out transition duration
-    }, 2500);
+      }, 800); 
+    }, 3000);
   }
 });
   
