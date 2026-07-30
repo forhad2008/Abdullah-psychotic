@@ -2056,7 +2056,7 @@ const musicBtn = document.getElementById("music-btn");
 const musicIcon = musicBtn.querySelector("i");
 
 // Set volume to 50%
-bgMusic.volume = 0.5;
+bgMusic.volume = 0.7;
 
 // Keep the music icon
 musicIcon.className = "fas fa-music";
@@ -2066,7 +2066,9 @@ const savedState = localStorage.getItem("ap_music");
 
 if (savedState === "playing") {
     document.addEventListener("click", function firstPlay() {
-        bgMusic.play().catch(() => {});
+      bgMusic.volume = 0.7;
+bgMusic.play().catch(() => {});
+      
         musicBtn.classList.add("playing");
         document.removeEventListener("click", firstPlay);
     }, { once: true });
