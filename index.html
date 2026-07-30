@@ -1419,11 +1419,11 @@ window.addEventListener('DOMContentLoaded', () => {
           if (heroContent) {
             heroContent.classList.add('animate-hero');
           }
-        }, 400);
+        }, 300);
 
       }, 700); // Matches CSS fade duration
 
-    }, 1200); // Welcome screen visible for 3 seconds
+    }, 1000); // Welcome screen visible for 3 seconds
 
   }
 
@@ -2070,7 +2070,7 @@ const musicBtn = document.getElementById("music-btn");
 const musicIcon = musicBtn.querySelector("i");
 
 // Set volume to 50%
-bgMusic.volume = 0.7;
+bgMusic.volume = 0.5;
 
 // Keep the music icon
 musicIcon.className = "fas fa-music";
@@ -2080,7 +2080,7 @@ const savedState = localStorage.getItem("ap_music");
 
 if (savedState === "playing") {
     document.addEventListener("click", function firstPlay() {
-      bgMusic.volume = 0.7;
+      bgMusic.volume = 0.5;
 bgMusic.play().catch(() => {});
       
         musicBtn.classList.add("playing");
@@ -2091,7 +2091,7 @@ bgMusic.play().catch(() => {});
 musicBtn.addEventListener("click", () => {
 
     if (bgMusic.paused) {
-bgMusic.volume = 0.7;
+bgMusic.volume = 0.5;
         bgMusic.play().catch(() => {});
         musicBtn.classList.add("playing");
         localStorage.setItem("ap_music", "playing");
