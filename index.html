@@ -72,7 +72,7 @@ body.no-scroll {
   z-index: 99999;
   display: flex;
   align-items: center;
-  transition: opacity 0.3s ease, visibility 0.5s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 
   /* Add these */
   overflow: hidden;
@@ -2069,8 +2069,8 @@ const bgMusic = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("music-btn");
 const musicIcon = musicBtn.querySelector("i");
 
-// Set volume to 50%
-bgMusic.volume = 0.5;
+// Set volume to 70%
+bgMusic.volume = 0.7;
 
 // Keep the music icon
 musicIcon.className = "fas fa-music";
@@ -2080,7 +2080,7 @@ const savedState = localStorage.getItem("ap_music");
 
 if (savedState === "playing") {
     document.addEventListener("click", function firstPlay() {
-      bgMusic.volume = 0.5;
+      bgMusic.volume = 0.7;
 bgMusic.play().catch(() => {});
       
         musicBtn.classList.add("playing");
@@ -2091,7 +2091,7 @@ bgMusic.play().catch(() => {});
 musicBtn.addEventListener("click", () => {
 
     if (bgMusic.paused) {
-bgMusic.volume = 0.5;
+bgMusic.volume = 0.7;
         bgMusic.play().catch(() => {});
         musicBtn.classList.add("playing");
         localStorage.setItem("ap_music", "playing");
