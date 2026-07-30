@@ -1052,7 +1052,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 
-transition: .3s;
+    transition: right .4s ease, transform .3s ease, background .3s ease;
 }
 
 #music-btn:hover{
@@ -1423,7 +1423,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
       }, 700); // Matches CSS fade duration
 
-    }, 3000); // Welcome screen visible for 3 seconds
+    }, 1200); // Welcome screen visible for 3 seconds
 
   }
 
@@ -1933,6 +1933,9 @@ function openCart() {
   cartDrawer.classList.add('active');
   overlay.classList.add('active');
   document.body.classList.add('no-scroll');
+
+  // Move music button after cart
+  musicBtn.style.right = "405px"; // 380px cart + 25px gap
 }
 
 function openDrawer() {
@@ -1967,6 +1970,9 @@ function closeAll() {
   checkoutModal.classList.remove('active');
   overlay.classList.remove('active');
   document.body.classList.remove('no-scroll');
+
+  // Return music button
+  musicBtn.style.right = "25px";
 }
 
 overlay.addEventListener('touchmove', function(e) {
