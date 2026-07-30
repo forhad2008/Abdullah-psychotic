@@ -68,7 +68,7 @@ body.no-scroll {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #050505 url('') center -20% / cover no-repeat;
+  background: #050505 url('prim.jpg') center -20% / cover no-repeat;
   z-index: 99999;
   display: flex;
   align-items: center;
@@ -1052,7 +1052,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 
-transition: right .4s ease, transform .3s ease, background .3s ease;
+transition: .3s;
 }
 
 #music-btn:hover{
@@ -1359,11 +1359,13 @@ transition: right .4s ease, transform .3s ease, background .3s ease;
   </div>
 </footer>
 
-  <script>
-/* ----------------------------------------------------
+<script>
+
+  /* ----------------------------------------------------
   0. WELCOME SCREEN CONTROLLER (Show Once Per Session)
 ---------------------------------------------------- */
 window.addEventListener('DOMContentLoaded', () => {
+
   const welcomeScreen = document.getElementById('welcome-screen');
   const heroContent = document.querySelector('.hero-content');
 
@@ -1386,6 +1388,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
 
   if (hasSeenWelcome) {
+
     // Returning visitor
     welcomeScreen.style.display = 'none';
     document.body.classList.remove('no-scroll');
@@ -1393,14 +1396,18 @@ window.addEventListener('DOMContentLoaded', () => {
     if (heroContent) {
       heroContent.classList.add('animate-hero');
     }
+
   } else {
+
     // First visit
     setTimeout(() => {
+
       // Fade out welcome screen
       welcomeScreen.classList.add('fade-out');
       sessionStorage.setItem('hasSeenWelcome', 'true');
 
       setTimeout(() => {
+
         // Remove welcome screen
         welcomeScreen.style.display = 'none';
 
@@ -1417,9 +1424,11 @@ window.addEventListener('DOMContentLoaded', () => {
       }, 700); // Matches CSS fade duration
 
     }, 3000); // Welcome screen visible for 3 seconds
-  }
-});
 
+  }
+
+});
+  
 /* ----------------------------------------------------
   1. PRODUCT DATA & GLOBAL STATE CONFIGURATION
 ---------------------------------------------------- */
@@ -1430,46 +1439,354 @@ function saveCartToStorage() {
 }
 
 const products = [
-  { id: 1, category: "apparel", name: "Abdullah Psychotic Branded Logo T-Shirt", image: "t1.webp", url: "t1.webp", price: 499, badge: "Graphic t-shirt" },
-  { id: 39, category: "apparel", name: "Abdullah Psychotic Branded Dragon Edition Logo Trouser", image: "pent.webp", url: "pent.webp", price: 599, badge: "Premium Graphic Trouser" },
-  { id: 6, category: "apparel", name: "A.P Oversized Dragon edition premium t-shirt", image: "t4.webp", url: "t4.webp", price: 459, badge: "Graphic t-shirt" },
-  { id: 7, category: "apparel", name: "A.P Oversized Tiger edition premium t-shirt", image: "t3.webp", url: "t3.webp", price: 449, badge: "Graphic t-shirt" },
-  { id: 9, category: "apparel", name: "A.P Oversized Penguin edition premium t-shirt", image: "t2.webp", url: "t2.webp", price: 449, badge: "Graphic t-shirt" },
-  { id: 28, category: "apparel", name: "A.P Oversized logo design premium red & black t-shirt(chinese style)", image: "t5.webp", url: "t5.webp", price: 489, badge: "Premium Graphic t-shirt" },
-  { id: 29, category: "apparel", name: "A.P Oversized logo design premium t-shirt", image: "t6.webp", url: "t6.webp", price: 489, badge: "Premium Graphic t-shirt" },
-  { id: 30, category: "apparel", name: "A.P Oversized logo design premium t-shirt", image: "t7.webp", url: "t7.webp", price: 489, badge: "Premium Graphic t-shirt" },
-  { id: 31, category: "apparel", name: "A.P Oversized logo design premium t-shirt", image: "t7.webp", url: "t7.webp", price: 489, badge: "Premium Graphic t-shirt" },
-  { id: 32, category: "apparel", name: "A.P Oversized logo design premium t-shirt", image: "t8.webp", url: "t8.webp", price: 489, badge: "Premium Graphic t-shirt" },
-  { id: 33, category: "apparel", name: "A.P Oversized logo design premium t-shirt", image: "t9.webp", url: "t9.webp", price: 489, badge: "Premium Graphic t-shirt" },
-  { id: 2, category: "footwear", name: "Premium A.P Logo Sneakers", image: "s1.webp", url: "s1.webp", price: 499, badge: "Classic Sneakers" },
-  { id: 3, category: "footwear", name: "A.P Ocean Whale Edition Premium Shoes", image: "s2.webp", url: "s2.webp", price: 799, badge: "Premium shoes" },
-  { id: 12, category: "footwear", name: "A.P Tiger's Edition Premium Shoes", image: "s3.webp", url: "s3.webp", price: 599, badge: "Exclusive shoes" },
-  { id: 13, category: "footwear", name: "A.P Sukuna's Edition Iconic Luxury Shoes", image: "s4.webp", url: "s4.webp", price: 799, badge: "Luxury shoes" },
-  { id: 4, category: "watches", name: "A.P Ocean Whale Iconic Timepiece", image: "W1.webp", url: "W1.webp", price: 7899, badge: "Luxury Wear" },
-  { id: 40, category: "watches", name: "A.P Logo Design Iconic Timepiece", image: "w2.webp", url: "w2.webp", price: 9899, badge: "Luxury Wear" },
-  { id: 8, category: "lifestyle", name: "A.P Logo Design Black Bedsheet", image: "bed1.webp", url: "bed1.webp", price: 1849, badge: "Modern bedsheets" },
-  { id: 10, category: "lifestyle", name: "A.P Logoed Royal Black Satin Bedsheet", image: "bed2.webp", url: "bed2.webp", price: 1899, badge: "Modern bedsheets" },
-  { id: 5, category: "creative", name: "A.P Logo Design Iconic Black Creative Mug", image: "mug.webp", url: "mug.webp", price: 79, badge: "Creative Object" },
-  { id: 11, category: "creative", name: "A.P Logo Design Iconic Golden-Black Mug", image: "mug2.webp", url: "mug2.webp", price: 99, badge: "Creative Object" },
-  { id: 14, category: "hoodies", name: "A.P Logo Design Iconic Black Color Hoodie", image: "ho1.webp", url: "ho1.webp", price: 769, badge: "Premium Winter Hoodie" },
-  { id: 15, category: "hoodies", name: "A.P Logo Design Iconic Red Color Hoodie", image: "ho2.webp", url: "ho2.webp", price: 769, badge: "Premium Winter Hoodie" },
-  { id: 26, category: "hoodies", name: "A.P Logo Design white black Hoodie", image: "ho3.webp", url: "ho3.webp", price: 749, badge: "Premium Winter Hoodie" },
-  { id: 27, category: "hoodies", name: "A.P Logo Arted Premium Red & Black Hoodie", image: "ho4.webp", url: "ho4.webp", price: 789, badge: "Premium Winter Hoodie" },
-  { id: 34, category: "hoodies", name: "A.P Premium black & white stylish designed Hoodie", image: "ho5.webp", url: "ho5.webp", price: 799, badge: "Premium Winter Hoodie" },
-  { id: 16, category: "caps", name: "A.P Logo Design Classic Black cap", image: "cap1.webp", url: "cap1.webp", price: 239, badge: "Classic cap" },
-  { id: 17, category: "caps", name: "A.P Logo Design Classic red cap", image: "cap2.webp", url: "cap2.webp", price: 229, badge: "Classic cap" },
-  { id: 19, category: "caps", name: "Abdullah Psychotic modern cap", image: "cap4.webp", url: "cap4.webp", price: 249, badge: "Modern cap" },
-  { id: 20, category: "caps", name: "Abdullah Psychotic – Luxury cap", image: "cap5.webp", url: "cap5.webp", price: 359, badge: "Luxury cap" },
-  { id: 35, category: "caps", name: "Abdullah Psychotic – Exclusive cap", image: "cap6.webp", url: "cap6.webp", price: 399, badge: "Exclusive cap" },
-  { id: 24, category: "caps", name: "Abdullah Psychotic – classic logo hat", image: "hat2.webp", url: "hat2.webp", price: 2999, badge: "Premium Classic Hat" },
-  { id: 18, category: "caps", name: "Abdullah Psychotic – Hell Rider stylish iconic hat", image: "cap3.webp", url: "cap3.webp", price: 3299, badge: "Premium Iconic Hat" },
-  { id: 25, category: "caps", name: "Abdullah Psychotic – Luxury dragon edition hat", image: "hat3.webp", url: "hat3.webp", price: 3499, badge: "Premium Exclusive Hat" },
-  { id: 21, category: "bags", name: "Abdullah Psychotic – Luxury school bag", image: "bag1.webp", url: "bag1.webp", price: 549, badge: "Premium school bag" },
-  { id: 22, category: "bags", name: "Abdullah Psychotic – Luxury modern bag", image: "bag2.webp", url: "bag2.webp", price: 2249, badge: "Premium fashion bag" },
-  { id: 23, category: "bags", name: "Abdullah Psychotic – Luxury bag(Upper class)", image: "bag3.webp", url: "bag3.webp", price: 2349, badge: "Luxury fashion bag" },
-  { id: 36, category: "perfume", name: "Abdullah Psychotic – Luxury red designed perfume", image: "per1.webp", url: "per1.webp", price: 2599, badge: "Luxury perfume" },
-  { id: 37, category: "perfume", name: "Abdullah Psychotic – Luxury black designed logo perfume (Upper class)", image: "per2.webp", url: "per2.webp", price: 2700, badge: "Luxury perfume" },
-  { id: 38, category: "perfume", name: "Abdullah Psychotic – Luxury black designed logo perfume", image: "per3.webp", url: "per3.webp", price: 2650, badge: "Luxury perfume" }
+  {
+    id: 1,
+    category: "apparel",
+    name: "Abdullah Psychotic Branded Logo T-Shirt",
+    image: "t1.webp",
+    url: "t1.webp",
+    price: 499,
+    badge: "Graphic t-shirt"
+  },
+  {
+    id: 39,
+    category: "apparel",
+    name: "Abdullah Psychotic Branded Dragon Edition Logo Trouser",
+    image: "pent.webp",
+    url: "pent.webp",
+    price: 599,
+    badge: "Premium Graphic Trouser"
+  },
+  {
+    id: 6,
+    category: "apparel",
+    name: "A.P Oversized Dragon edition premium t-shirt",
+    image: "t4.webp",
+    url: "t4.webp",
+    price: 459,
+    badge: "Graphic t-shirt"
+  },
+  {
+    id: 7,
+    category: "apparel",
+    name: "A.P Oversized Tiger edition premium t-shirt",
+    image: "t3.webp",
+    url: "t3.webp",
+    price: 449,
+    badge: "Graphic t-shirt"
+  },
+  {
+    id: 9,
+    category: "apparel",
+    name: "A.P Oversized Penguin edition premium t-shirt",
+    image: "t2.webp",
+    url: "t2.webp",
+    price: 449,
+    badge: "Graphic t-shirt"
+  },
+  {
+    id: 28,
+    category: "apparel",
+    name: "A.P Oversized logo design premium red & black t-shirt(chinese style)",
+    image: "t5.webp",
+    url: "t5.webp",
+    price: 489,
+    badge: "Premium Graphic t-shirt"
+  },
+  {
+    id: 29,
+    category: "apparel",
+    name: "A.P Oversized logo design premium t-shirt",
+    image: "t6.webp",
+    url: "t6.webp",
+    price: 489,
+    badge: "Premium Graphic t-shirt"
+  },
+  {
+    id: 30,
+    category: "apparel",
+    name: "A.P Oversized logo design premium t-shirt",
+    image: "t7.webp",
+    url: "t7.webp",
+    price: 489,
+    badge: "Premium Graphic t-shirt"
+  },
+  {
+    id: 31,
+    category: "apparel",
+    name: "A.P Oversized logo design premium t-shirt",
+    image: "t7.webp",
+    url: "t7.webp",
+    price: 489,
+    badge: "Premium Graphic t-shirt"
+  },
+  {
+    id: 32,
+    category: "apparel",
+    name: "A.P Oversized logo design premium t-shirt",
+    image: "t8.webp",
+    url: "t8.webp",
+    price: 489,
+    badge: "Premium Graphic t-shirt"
+  },
+  {
+    id: 33,
+    category: "apparel",
+    name: "A.P Oversized logo design premium t-shirt",
+    image: "t9.webp",
+    url: "t9.webp",
+    price: 489,
+    badge: "Premium Graphic t-shirt"
+  },
+  {
+    id: 2,
+    category: "footwear",
+    name: "Premium A.P Logo Sneakers",
+    image: "s1.webp",
+    url: "s1.webp",
+    price: 499,
+    badge: "Classic Sneakers"
+  },
+  {
+    id: 3,
+    category: "footwear",
+    name: "A.P Ocean Whale Edition Premium Shoes",
+    image: "s2.webp",
+    url: "s2.webp",
+    price: 799,
+    badge: "Premium shoes"
+  },
+  {id: 12,
+    category: "footwear",
+    name: "A.P Tiger's Edition Premium Shoes",
+    image: "s3.webp",
+    url: "s3.webp",
+    price: 599,
+    badge: "Exclusive shoes"
+  },
+  {id: 13,
+    category: "footwear",
+    name: "A.P Sukuna's Edition Iconic Luxury Shoes",
+    image: "s4.webp",
+    url: "s4.webp",
+    price: 799,
+    badge: "Luxury shoes"
+  },
+  {
+    id: 4,
+    category: "watches",
+    name: "A.P Ocean Whale Iconic Timepiece",
+    image: "W1.webp",
+    url: "W1.webp",
+    price: 7899,
+    badge: "Luxury Wear"
+  },
+
+{
+    id: 40,
+    category: "watches",
+    name: "A.P Logo Design Iconic Timepiece",
+    image: "w2.webp",
+    url: "w2.webp",
+    price: 9899,
+    badge: "Luxury Wear"
+  },
+  
+  {
+    id: 8,
+    category: "lifestyle",
+    name: "A.P Logo Design Black Bedsheet",
+    image: "bed1.webp",
+    url: "bed1.webp",
+    price: 1849,
+    badge: "Modern bedsheets"
+  },
+  {
+    id: 10,
+    category: "lifestyle",
+    name: "A.P Logoed Royal Black Satin Bedsheet",
+    image: "bed2.webp",
+    url: "bed2.webp",
+    price: 1899,
+    badge: "Modern bedsheets"
+  },
+  {
+    id: 5,
+    category: "creative",
+    name: "A.P Logo Design Iconic Black Creative Mug",
+    image: "mug.webp",
+    url: "mug.webp",
+    price: 79,
+    badge: "Creative Object"
+  },
+  {
+    id: 11,
+    category: "creative",
+    name: "A.P Logo Design Iconic Golden-Black Mug",
+    image: "mug2.webp",
+    url: "mug2.webp",
+    price: 99,
+    badge: "Creative Object"
+  },
+  {
+    id: 14,
+    category: "hoodies",
+    name: "A.P Logo Design Iconic Black Color Hoodie",
+    image: "ho1.webp",
+    url: "ho1.webp",
+    price: 769,
+    badge: "Premium Winter Hoodie"
+    },
+  {
+    id: 15,
+    category: "hoodies",
+    name: "A.P Logo Design Iconic Red Color Hoodie",
+    image: "ho2.webp",
+    url: "ho2.webp",
+    price: 769,
+    badge: "Premium Winter Hoodie"
+    },
+  {
+    id: 26,
+    category: "hoodies",
+    name: "A.P Logo Design white black Hoodie",
+    image: "ho3.webp",
+    url: "ho3.webp",
+    price: 749,
+    badge: "Premium Winter Hoodie"
+    },
+  {
+    id: 27,
+    category: "hoodies",
+    name: "A.P Logo Arted Premium Red & Black Hoodie",
+    image: "ho4.webp",
+    url: "ho4.webp",
+    price: 789,
+    badge: "Premium Winter Hoodie"
+  },
+     {
+    id: 34,
+    category: "hoodies",
+    name: "A.P Premium black & white stylish designed Hoodie",
+    image: "ho5.webp",
+    url: "ho5.webp",
+    price: 799,
+    badge: "Premium Winter Hoodie"
+    }, 
+  {
+    id: 16,
+    category: "caps",
+    name: "A.P Logo Design Classic Black cap",
+    image: "cap1.webp",
+    url: "cap1.webp",
+    price: 239,
+    badge: "Classic cap"
+    },
+    { id : 17,
+    category: "caps",
+    name: "A.P Logo Design Classic red cap",
+    image: "cap2.webp",
+    url: "cap2.webp",
+    price: 229,
+    badge: "Classic cap"
+    },
+  {id : 19,
+    category: "caps",
+    name: "Abdullah Psychotic modern cap",
+    image: "cap4.webp",
+    url: "cap4.webp",
+    price: 249,
+    badge: "Modern cap"
+    },
+  {id : 20,
+    category: "caps",
+    name: "Abdullah Psychotic – Luxury cap",
+    image: "cap5.webp",
+    url: "cap5.webp",
+    price: 359,
+    badge: "Luxury cap"
+    },
+  {id : 35,
+    category: "caps",
+    name: "Abdullah Psychotic – Exclusive cap",
+    image: "cap6.webp",
+    url: "cap6.webp",
+    price: 399,
+    badge: "Exclusive cap"
+    },
+  {
+    id:24,
+    category: "caps",
+    name: "Abdullah Psychotic – classic logo hat",
+    image: "hat2.webp",
+    url: "hat2.webp",
+    price: 2999,
+    badge: "Premium Classic Hat"
+    },
+  {id : 18,
+    category: "caps",
+    name: "Abdullah Psychotic – Hell Rider stylish iconic hat",
+    image: "cap3.webp",
+    url: "cap3.webp",
+    price: 3299,
+    badge: "Premium Iconic Hat"
+    },
+  {id : 25,
+    category: "caps",
+    name: "Abdullah Psychotic – Luxury dragon edition hat",
+    image: "hat3.webp",
+    url: "hat3.webp",
+    price: 3499,
+    badge: "Premium Exclusive Hat"
+    },
+  {id : 21,
+    category: "bags",
+    name: "Abdullah Psychotic – Luxury school bag",
+    image: "bag1.webp",
+    url: "bag1.webp",
+    price: 549,
+    badge: "Premium school bag"
+    },
+  {id : 22,
+    category: "bags",
+    name: "Abdullah Psychotic – Luxury modern bag",
+    image: "bag2.webp",
+    url: "bag2.webp",
+    price: 2249,
+    badge: "Premium fashion bag"
+    },
+  {id : 23,
+    category: "bags",
+    name: "Abdullah Psychotic – Luxury bag(Upper class)",
+    image: "bag3.webp",
+    url: "bag3.webp",
+    price: 2349,
+    badge: "Luxury fashion bag"
+    },
+  {id : 36,
+    category: "perfume",
+    name: "Abdullah Psychotic – Luxury red designed perfume",
+    image: "per1.webp",
+    url: "per1.webp",
+    price: 2599,
+    badge: "Luxury perfume"
+    },
+  {id : 37,
+    category: "perfume",
+    name: "Abdullah Psychotic – Luxury black designed logo perfume (Upper class)",
+    image: "per2.webp",
+    url: "per2.webp",
+    price: 2700,
+    badge: "Luxury perfume"
+    },
+  {id : 38,
+    category: "perfume",
+    name: "Abdullah Psychotic – Luxury black designed logo perfume",
+    image: "per3.webp",
+    url: "per3.webp",
+    price: 2650,
+    badge: "Luxury perfume"
+    }
 ];
 
 /* ----------------------------------------------------
@@ -1529,9 +1846,6 @@ function renderProducts() {
   });
 }
 
-// Call product rendering on script load
-renderProducts();
-
 /* ----------------------------------------------------
   3. CART SYSTEM LOGIC
 ---------------------------------------------------- */
@@ -1541,7 +1855,7 @@ function addToCart(productId) {
     existingItem.qty += 1;
   } else {
     const product = products.find(p => p.id === productId);
-    if (product) cart.push({ ...product, qty: 1 });
+    cart.push({ ...product, qty: 1 });
   }
   saveCartToStorage();
   updateCartUI();
@@ -1571,8 +1885,6 @@ function updateCartUI() {
   const cartContainer = document.getElementById('cart-items-container');
   const cartCountBadge = document.getElementById('cart-count');
   const subtotalEl = document.getElementById('cart-subtotal');
-
-  if (!cartContainer || !cartCountBadge || !subtotalEl) return;
 
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
   cartCountBadge.textContent = totalItems;
@@ -1615,34 +1927,18 @@ const overlay = document.getElementById('overlay');
 const navDrawer = document.getElementById('nav-drawer');
 const cartDrawer = document.getElementById('cart-drawer');
 const checkoutModal = document.getElementById('checkout-modal');
-const musicBtn = document.getElementById('music-btn'); // Added DOM element reference
-
-function moveMusicButton() {
-  if (!musicBtn) return;
-  if (window.innerWidth <= 768) {
-    musicBtn.style.right = "calc(90vw + 15px)";
-  } else {
-    musicBtn.style.right = "405px";
-  }
-}
-
-function resetMusicButton() {
-  if (musicBtn) musicBtn.style.right = "25px";
-}
 
 function openCart() {
   closeAll();
-  if (cartDrawer) cartDrawer.classList.add('active');
-  if (overlay) overlay.classList.add('active');
+  cartDrawer.classList.add('active');
+  overlay.classList.add('active');
   document.body.classList.add('no-scroll');
-
-  moveMusicButton();
 }
 
 function openDrawer() {
   closeAll();
-  if (navDrawer) navDrawer.classList.add('active');
-  if (overlay) overlay.classList.add('active');
+  navDrawer.classList.add('active');
+  overlay.classList.add('active');
   document.body.classList.add('no-scroll');
 }
 
@@ -1652,85 +1948,161 @@ function openCheckout() {
     return;
   }
   closeAll();
-
+  
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
   const finalTotal = subtotal + 100;
 
-  const modalItems = document.getElementById('modal-total-items');
-  const modalTotal = document.getElementById('modal-final-total');
+  document.getElementById('modal-total-items').textContent = totalItems;
+  document.getElementById('modal-final-total').textContent = `৳${finalTotal.toLocaleString()}`;
 
-  if (modalItems) modalItems.textContent = totalItems;
-  if (modalTotal) modalTotal.textContent = `৳${finalTotal.toLocaleString()}`;
-
-  if (checkoutModal) checkoutModal.classList.add('active');
-  if (overlay) overlay.classList.add('active');
+  checkoutModal.classList.add('active');
+  overlay.classList.add('active');
   document.body.classList.add('no-scroll');
 }
 
 function closeAll() {
-  if (navDrawer) navDrawer.classList.remove('active');
-  if (cartDrawer) cartDrawer.classList.remove('active');
-  if (checkoutModal) checkoutModal.classList.remove('active');
-  if (overlay) overlay.classList.remove('active');
+  navDrawer.classList.remove('active');
+  cartDrawer.classList.remove('active');
+  checkoutModal.classList.remove('active');
+  overlay.classList.remove('active');
   document.body.classList.remove('no-scroll');
-
-  resetMusicButton();
 }
 
-// Event Listeners
-if (overlay) {
-  overlay.addEventListener('touchmove', function(e) {
-    e.preventDefault();
-  }, { passive: false });
-  overlay.addEventListener('click', closeAll);
-}
+overlay.addEventListener('touchmove', function(e) {
+  e.preventDefault();
+}, { passive: false });
 
-const menuBtn = document.getElementById('menu-btn');
-if (menuBtn) menuBtn.addEventListener('click', openDrawer);
-
-const closeDrawerBtn = document.getElementById('close-drawer-btn');
-if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeAll);
-
-const cartIconBtn = document.getElementById('cart-icon-btn');
-if (cartIconBtn) cartIconBtn.addEventListener('click', openCart);
-
-const closeCartBtn = document.getElementById('close-cart-btn');
-if (closeCartBtn) closeCartBtn.addEventListener('click', closeAll);
-
-const openCheckoutBtn = document.getElementById('open-checkout-btn');
-if (openCheckoutBtn) openCheckoutBtn.addEventListener('click', openCheckout);
-
-const closeModalBtn = document.getElementById('close-modal-btn');
-if (closeModalBtn) closeModalBtn.addEventListener('click', closeAll);
+document.getElementById('menu-btn').addEventListener('click', openDrawer);
+document.getElementById('close-drawer-btn').addEventListener('click', closeAll);
+document.getElementById('cart-icon-btn').addEventListener('click', openCart);
+document.getElementById('close-cart-btn').addEventListener('click', closeAll);
+document.getElementById('open-checkout-btn').addEventListener('click', openCheckout);
+document.getElementById('close-modal-btn').addEventListener('click', closeAll);
+overlay.addEventListener('click', closeAll);
 
 document.querySelectorAll('.payment-option').forEach(option => {
   option.addEventListener('click', function() {
     document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
     this.classList.add('selected');
-    const radio = this.querySelector('input');
-    if (radio) radio.checked = true;
+    this.querySelector('input').checked = true;
   });
 });
 
-const checkoutForm = document.getElementById('checkout-form');
-if (checkoutForm) {
-  checkoutForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const nameEl = document.getElementById('cust-name');
-    const name = nameEl ? nameEl.value : '';
-    const orderNum = Math.floor(100000 + Math.random() * 900000);
-    alert(`Thank you ${name}! Your order #${orderNum} has been placed.`);
-    cart = [];
-    saveCartToStorage();
-    updateCartUI();
-    closeAll();
+document.getElementById('checkout-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('cust-name').value;
+  const orderNum = Math.floor(100000 + Math.random() * 900000);
+
+  alert(`Thank you ${name}!\n\nYour order #${orderNum} has been placed successfully.\nWe will contact you shortly for confirmation.`);
+  
+  cart = [];
+  saveCartToStorage();
+  updateCartUI();
+  closeAll();
+  this.reset();
+});
+
+window.addEventListener("scroll", () => {
+  const header = document.getElementById("navbar");
+  if (window.scrollY > 50) {
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
+});
+
+/* ----------------------------------------------------
+  5. GOOGLE SHEETS CONTACT FORM INTEGRATION
+---------------------------------------------------- */
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDcRtXeTq3ssW0qH5gJ0t2ieDhkmNPdtKjAoz90FZRDKJuLZd3udt5uee06bYqQ1rn/exec";
+
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const submitBtn = document.getElementById('contact-submit-btn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'SENDING...';
+
+  const formData = {
+    name: document.getElementById('contact-name').value,
+    email: document.getElementById('contact-email').value,
+    message: document.getElementById('contact-message').value
+  };
+
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(() => {
+    alert('Thank you! Your message has been sent successfully.');
+    this.reset();
+  })
+  .catch(error => {
+    alert('There was an error sending your message. Please try again.');
+    console.error('Error:', error);
+  })
+  .finally(() => {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'SEND MESSAGE';
   });
+});
+
+renderProducts();
+updateCartUI();
+
+/* -----------------------------
+   Background Music Controller
+----------------------------- */
+
+const bgMusic = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("music-btn");
+const musicIcon = musicBtn.querySelector("i");
+
+// Set volume to 50%
+bgMusic.volume = 0.7;
+
+// Keep the music icon
+musicIcon.className = "fas fa-music";
+
+// Restore previous state
+const savedState = localStorage.getItem("ap_music");
+
+if (savedState === "playing") {
+    document.addEventListener("click", function firstPlay() {
+      bgMusic.volume = 0.7;
+bgMusic.play().catch(() => {});
+      
+        musicBtn.classList.add("playing");
+        document.removeEventListener("click", firstPlay);
+    }, { once: true });
 }
 
-// Initial UI sync
-updateCartUI();
-  </script>
+musicBtn.addEventListener("click", () => {
+
+    if (bgMusic.paused) {
+bgMusic.volume = 0.7;
+        bgMusic.play().catch(() => {});
+        musicBtn.classList.add("playing");
+        localStorage.setItem("ap_music", "playing");
+
+    } else {
+
+        bgMusic.pause();
+        musicBtn.classList.remove("playing");
+        localStorage.setItem("ap_music", "paused");
+
+    }
+
+    // Always keep the music icon
+    musicIcon.className = "fas fa-music";
+
+});
+</script>
 
 </body>
-</html>
+  </html>
