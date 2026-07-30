@@ -1298,7 +1298,7 @@ footer {
 </audio>
 
 <button id="music-btn">
-    <i class="fas fa-volume-xmark"></i>
+  <i class="fas fa-music"></i>
 </button>
 
 <footer>
@@ -2047,7 +2047,7 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
 renderProducts();
 updateCartUI();
 
-  /* -----------------------------
+/* -----------------------------
    Background Music Controller
 ----------------------------- */
 
@@ -2055,38 +2055,38 @@ const bgMusic = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("music-btn");
 const musicIcon = musicBtn.querySelector("i");
 
+// Keep the music icon
+musicIcon.className = "fas fa-music";
+
 // Restore previous state
 const savedState = localStorage.getItem("ap_music");
 
-if(savedState === "playing"){
-    document.addEventListener("click", function firstPlay(){
-        bgMusic.play();
+if (savedState === "playing") {
+    document.addEventListener("click", function firstPlay() {
+        bgMusic.play().catch(() => {});
         musicBtn.classList.add("playing");
-        musicIcon.className = "fas fa-volume-high";
         document.removeEventListener("click", firstPlay);
-    }, {once:true});
+    }, { once: true });
 }
 
 musicBtn.addEventListener("click", () => {
 
-    if(bgMusic.paused){
+    if (bgMusic.paused) {
 
-        bgMusic.play();
-
+        bgMusic.play().catch(() => {});
         musicBtn.classList.add("playing");
-        musicIcon.className = "fas fa-volume-high";
+        localStorage.setItem("ap_music", "playing");
 
-        localStorage.setItem("ap_music","playing");
-
-    }else{
+    } else {
 
         bgMusic.pause();
-
         musicBtn.classList.remove("playing");
-        musicIcon.className = "fas fa-volume-xmark";
+        localStorage.setItem("ap_music", "paused");
 
-        localStorage.setItem("ap_music","paused");
     }
+
+    // Always keep the music icon
+    musicIcon.className = "fas fa-music";
 
 });
 </script>
