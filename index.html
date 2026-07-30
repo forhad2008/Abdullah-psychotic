@@ -1920,26 +1920,44 @@ function updateCartUI() {
   });
 }
 
-/* ----------------------------------------------------
+      /* ----------------------------------------------------
   4. DRAWER & MODAL UI CONTROLS
 ---------------------------------------------------- */
+
 const overlay = document.getElementById('overlay');
 const navDrawer = document.getElementById('nav-drawer');
 const cartDrawer = document.getElementById('cart-drawer');
 const checkoutModal = document.getElementById('checkout-modal');
 
-  function openCart() {
+/* ---------- Music Button Position ---------- */
+function moveMusicButton() {
+  if (window.innerWidth <= 768) {
+    // Mobile
+    musicBtn.style.right = "calc(90vw + 15px)";
+  } else {
+    // Desktop
+    musicBtn.style.right = "405px";
+  }
+}
+
+function resetMusicButton() {
+  musicBtn.style.right = "25px";
+}
+
+/* ---------- Drawer Controls ---------- */
+function openCart() {
   closeAll();
+
   cartDrawer.classList.add('active');
   overlay.classList.add('active');
   document.body.classList.add('no-scroll');
 
-  // Move music button after cart
-  musicBtn.style.right = "405px"; // 380px cart + 25px gap
-  }
+  moveMusicButton();
+}
 
 function openDrawer() {
   closeAll();
+
   navDrawer.classList.add('active');
   overlay.classList.add('active');
   document.body.classList.add('no-scroll');
@@ -1950,8 +1968,9 @@ function openCheckout() {
     alert("Your cart is empty!");
     return;
   }
+
   closeAll();
-  
+
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
   const finalTotal = subtotal + 100;
@@ -1964,17 +1983,17 @@ function openCheckout() {
   document.body.classList.add('no-scroll');
 }
 
-
-  function closeAll() {
+function closeAll() {
   navDrawer.classList.remove('active');
   cartDrawer.classList.remove('active');
   checkoutModal.classList.remove('active');
   overlay.classList.remove('active');
   document.body.classList.remove('no-scroll');
 
-  // Return music button
-  musicBtn.style.right = "25px";
-  }
+  resetMusicButton();
+}
+
+/* ---------- Events ---------- */
 
 overlay.addEventListener('touchmove', function(e) {
   e.preventDefault();
@@ -1982,152 +2001,24 @@ overlay.addEventListener('touchmove', function(e) {
 
 document.getElementById('menu-btn').addEventListener('click', openDrawer);
 document.getElementById('close-drawer-btn').addEventListener('click', closeAll);
+
 document.getElementById('cart-icon-btn').addEventListener('click', openCart);
 document.getElementById('close-cart-btn').addEventListener('click', closeAll);
+
 document.getElementById('open-checkout-btn').addEventListener('click', openCheckout);
 document.getElementById('close-modal-btn').addEventListener('click', closeAll);
+
 overlay.addEventListener('click', closeAll);
 
+/* ---------- Payment Options ---------- */
+
 document.querySelectorAll('.payment-option').forEach(option => {
-  option.addEventListener('click', function() {
+  option.addEventListener('click', function () {
     document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
     this.classList.add('selected');
     this.querySelector('input').checked = true;
   });
 });
-
-document.getElementById('checkout-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const name = document.getElementById('cust-name').value;
-  const orderNum = Math.floor(100000 + Math.random() * 900000);
-
-  alert(`Thank you ${name}!\n\nYour order #${orderNum} has been placed successfully.\nWe will contact you shortly for confirmation.`);
-  
-  cart = [];
-  saveCartToStorage();
-  updateCartUI();
-  closeAll();
-  this.reset();
-});
-
-window.addEventListener("scroll", () => {
-  const header = document.getElementById("navbar");
-  if (window.scrollY > 50) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
-  }
-});
-
-/* ----------------------------------------------------
-  5. GOOGLE SHEETS CONTACT FORM INTEGRATION
----------------------------------------------------- */
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDcRtXeTq3ssW0qH5gJ0t2ieDhkmNPdtKjAoz90FZRDKJuLZd3udt5uee06bYqQ1rn/exec";
-
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const submitBtn = document.getElementById('contact-submit-btn');
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'SENDING...';
-
-  const formData = {
-    name: document.getElementById('contact-name').value,
-    email: document.getElementById('contact-email').value,
-    message: document.getElementById('contact-message').value
-  };
-
-  fetch(GOOGLE_SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(formData)
-  })
-  .then(() => {
-    alert('Thank you! Your message has been sent successfully.');
-    this.reset();
-  })
-  .catch(error => {
-    alert('There was an error sending your message. Please try again.');
-    console.error('Error:', error);
-  })
-  .finally(() => {
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'SEND MESSAGE';
-  });
-});
-
-renderProducts();
-updateCartUI();
-
-/* -----------------------------
-   Background Music Controller
------------------------------ */
-
-const bgMusic = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("music-btn");
-const musicIcon = musicBtn.querySelector("i");
-
-// Set volume to 50%
-bgMusic.volume = 0.7;
-
-// Keep the music icon
-musicIcon.className = "fas fa-music";
-
-// Restore previous state
-const savedState = localStorage.getItem("ap_music");
-
-if (savedState === "playing") {
-    document.addEventListener("click", function firstPlay() {
-      bgMusic.volume = 0.7;
-bgMusic.play().catch(() => {});
-      
-        musicBtn.classList.add("playing");
-        document.removeEventListener("click", firstPlay);
-    }, { once: true });
-}
-
-musicBtn.addEventListener("click", () => {
-
-    if (bgMusic.paused) {
-bgMusic.volume = 0.7;
-        bgMusic.play().catch(() => {});
-        musicBtn.classList.add("playing");
-        localStorage.setItem("ap_music", "playing");
-
-    } else {
-
-        bgMusic.pause();
-        musicBtn.classList.remove("playing");
-        localStorage.setItem("ap_music", "paused");
-
-    }
-
-    // Always keep the music icon
-    musicIcon.className = "fas fa-music";
-
-});
-  
-  function moveMusicButton() {
-  if (window.innerWidth <= 768) {
-    musicBtn.style.right = "92vw";
-  } else {
-    musicBtn.style.right = "405px";
-  }
-}
-
-function resetMusicButton() {
-  musicBtn.style.right = "25px";
-}
-  // openCart()
-moveMusicButton();
-
-// closeAll()
-resetMusicButton();
-  
-  });
 </script>
 
 </body>
