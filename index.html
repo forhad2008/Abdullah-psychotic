@@ -1052,7 +1052,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 
-transition: .3s;
+transition: right .4s ease, transform .3s ease, background .3s ease;
 }
 
 #music-btn:hover{
@@ -1928,12 +1928,15 @@ const navDrawer = document.getElementById('nav-drawer');
 const cartDrawer = document.getElementById('cart-drawer');
 const checkoutModal = document.getElementById('checkout-modal');
 
-function openCart() {
+  function openCart() {
   closeAll();
   cartDrawer.classList.add('active');
   overlay.classList.add('active');
   document.body.classList.add('no-scroll');
-}
+
+  // Move music button after cart
+  musicBtn.style.right = "405px"; // 380px cart + 25px gap
+  }
 
 function openDrawer() {
   closeAll();
@@ -1961,13 +1964,17 @@ function openCheckout() {
   document.body.classList.add('no-scroll');
 }
 
-function closeAll() {
+
+  function closeAll() {
   navDrawer.classList.remove('active');
   cartDrawer.classList.remove('active');
   checkoutModal.classList.remove('active');
   overlay.classList.remove('active');
   document.body.classList.remove('no-scroll');
-}
+
+  // Return music button
+  musicBtn.style.right = "25px";
+  }
 
 overlay.addEventListener('touchmove', function(e) {
   e.preventDefault();
@@ -2102,6 +2109,25 @@ bgMusic.volume = 0.7;
     musicIcon.className = "fas fa-music";
 
 });
+  
+  function moveMusicButton() {
+  if (window.innerWidth <= 768) {
+    musicBtn.style.right = "92vw";
+  } else {
+    musicBtn.style.right = "405px";
+  }
+}
+
+function resetMusicButton() {
+  musicBtn.style.right = "25px";
+}
+  // openCart()
+moveMusicButton();
+
+// closeAll()
+resetMusicButton();
+  
+  });
 </script>
 
 </body>
