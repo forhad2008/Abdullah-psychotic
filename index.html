@@ -1026,25 +1026,33 @@ footer {
 
   /* Floating Music Button */
 #music-btn{
-    position: fixed;
-    right: 25px;
-    bottom: 25px;
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,.15);
-    background: rgba(10,10,10,.85);
-    backdrop-filter: blur(12px);
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
-    z-index: 9999;
+position: fixed;
+right: 25px;
+bottom: 25px;
+width: 58px;
+height: 58px;
+border-radius: 50%;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+/* Red Border */
+border: 2px solid #ff0000;
 
-    transition:.3s;
+/* White Background */
+background: #ffffff;
+
+backdrop-filter: blur(12px);
+
+/* Black Icon */
+color: #000000;
+
+font-size: 20px;
+cursor: pointer;
+z-index: 9999;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+transition: .3s;
 }
 
 #music-btn:hover{
@@ -2077,7 +2085,7 @@ bgMusic.play().catch(() => {});
 musicBtn.addEventListener("click", () => {
 
     if (bgMusic.paused) {
-
+bgMusic.volume = 0.7;
         bgMusic.play().catch(() => {});
         musicBtn.classList.add("playing");
         localStorage.setItem("ap_music", "playing");
