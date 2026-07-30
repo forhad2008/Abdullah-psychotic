@@ -1024,6 +1024,39 @@ footer {
   text-transform: uppercase;
 }
 
+  /* Floating Music Button */
+#music-btn{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(10,10,10,.85);
+    backdrop-filter: blur(12px);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 9999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:.3s;
+}
+
+#music-btn:hover{
+    transform:scale(1.08);
+    background:var(--primary-color);
+}
+
+#music-btn.playing{
+    background:var(--primary-color);
+    box-shadow:0 0 20px rgba(193,18,31,.45);
+}
+
 @media (min-width: 992px) {
   .horizontal-scroll-container {
     display: grid;
@@ -1258,6 +1291,15 @@ footer {
     "To curate a lifestyle for the bold and the distinct. We deliver exclusive streetwear and high-end goods that embody a fearless mindset—psychotic by mind, legendary by choice. We don't follow paths; we make them."
   </p>
 </section>
+
+  <!-- Background Music -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="musicbg.wav" type="audio/wav">
+</audio>
+
+<button id="music-btn">
+    <i class="fas fa-volume-xmark"></i>
+</button>
 
 <footer>
   <div style="padding: 0 7%;">
@@ -2004,6 +2046,49 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
 
 renderProducts();
 updateCartUI();
+
+  /* -----------------------------
+   Background Music Controller
+----------------------------- */
+
+const bgMusic = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("music-btn");
+const musicIcon = musicBtn.querySelector("i");
+
+// Restore previous state
+const savedState = localStorage.getItem("ap_music");
+
+if(savedState === "playing"){
+    document.addEventListener("click", function firstPlay(){
+        bgMusic.play();
+        musicBtn.classList.add("playing");
+        musicIcon.className = "fas fa-volume-high";
+        document.removeEventListener("click", firstPlay);
+    }, {once:true});
+}
+
+musicBtn.addEventListener("click", () => {
+
+    if(bgMusic.paused){
+
+        bgMusic.play();
+
+        musicBtn.classList.add("playing");
+        musicIcon.className = "fas fa-volume-high";
+
+        localStorage.setItem("ap_music","playing");
+
+    }else{
+
+        bgMusic.pause();
+
+        musicBtn.classList.remove("playing");
+        musicIcon.className = "fas fa-volume-xmark";
+
+        localStorage.setItem("ap_music","paused");
+    }
+
+});
 </script>
 
 </body>
