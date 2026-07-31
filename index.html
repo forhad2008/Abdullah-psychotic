@@ -977,6 +977,71 @@ section {
   letter-spacing: 0.5px;
 }
 
+  /* -----------------------------
+   Sound Experience Section
+----------------------------- */
+
+.sound-section{
+    width:100%;
+    padding:90px 7%;
+    background:
+    linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.72)),
+    url("sound-bg.webp") center center/cover no-repeat;
+}
+
+.sound-box{
+    width:100%;
+    min-height:280px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(10,10,10,.45);
+    backdrop-filter:blur(8px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border-radius:6px;
+}
+
+.sound-box h2{
+    font-family:var(--font-heading);
+    font-size:42px;
+    margin-bottom:12px;
+}
+
+.sound-box p{
+    color:var(--text-muted);
+    margin-bottom:35px;
+    max-width:500px;
+}
+
+.sound-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    width:190px;
+    height:58px;
+
+    border:1px solid #fff;
+    color:#fff;
+    background:transparent;
+
+    font-family:var(--font-accent);
+    font-size:12px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+
+    transition:.35s ease;
+}
+
+.sound-btn:hover{
+    background:var(--primary-color);
+    border-color:var(--primary-color);
+    transform:translateY(-3px);
+}
+
 /* --- FOOTER SECTION --- */
 footer {
   background: #020202;
@@ -1338,6 +1403,19 @@ justify-content: center;
   </p>
 </section>
 
+
+  <!-- Sound Experience Section -->
+<section class="sound-section">
+  <div class="sound-box">
+    <h2>Sound Experience</h2>
+    <p>Immerse yourself in the atmosphere of Abdullah Psychotic.</p>
+
+    <a href="#music-btn" class="sound-btn">
+      <i class="fas fa-music"></i> SOUND
+    </a>
+  </div>
+</section>
+  
   <!-- Background Music -->
 <audio id="bgMusic" loop preload="auto">
     <source src="1musicbg.wav" type="audio/wav">
