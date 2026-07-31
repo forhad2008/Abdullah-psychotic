@@ -930,6 +930,12 @@ section {
   transition: border-color 0.3s ease;
 }
 
+.form-group textarea {
+  resize: none;      /* User আর resize করতে পারবে না */
+  height: 140px;     /* নির্দিষ্ট উচ্চতা */
+  overflow-y: auto;  /* লেখা বেশি হলে ভিতরে scroll হবে */
+}
+
 .form-group input:focus,
 .form-group textarea:focus {
   border-color: var(--primary-color);
