@@ -2222,26 +2222,6 @@ bgMusic.volume = 0.7;
 
 });
 
-  document.getElementById("sound-center-btn").addEventListener("click",()=>{
-
-    if(bgMusic.paused){
-
-        bgMusic.play();
-        bgMusic.volume=0.7;
-
-        musicBtn.classList.add("playing");
-        localStorage.setItem("ap_music","playing");
-
-    }else{
-
-        bgMusic.pause();
-
-        musicBtn.classList.remove("playing");
-        localStorage.setItem("ap_music","paused");
-
-    }
-
-});
 </script>
 
 </body>
