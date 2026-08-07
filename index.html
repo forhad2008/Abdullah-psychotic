@@ -1213,6 +1213,26 @@ justify-content: center;
   }
 }
 
+  .sold-out-btn{
+    background:#ffffff;
+    color:#000000;
+    border:none;
+    padding:10px 18px;
+    border-radius:2px;
+    font-family:var(--font-accent);
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    cursor:not-allowed;
+    opacity:1;
+}
+
+.sold-out-btn:hover{
+    background:#ffffff;
+    color:#000000;
+}
+
 </style>
 </head>
 
@@ -1906,10 +1926,20 @@ const products = [
     }
 ];
 
+  /* -----------------------------
+   SOLD OUT PRODUCTS
+----------------------------- */
+
+const soldOut = [1, 2]; // এখানে যেসব product ID sold out হবে
+
+
+  
 /* ----------------------------------------------------
   2. RENDER PRODUCTS BY CATEGORY
 ---------------------------------------------------- */
 function createCardHTML(product) {
+  const isSoldOut = soldOut.includes(product.id);
+  
   const isLuxury = product.category === 'watches';
   const cardClass = isLuxury ? 'card luxury-card' : 'card';
   const badgeClass = isLuxury ? 'card-badge luxury-badge' : 'card-badge';
@@ -1928,9 +1958,19 @@ function createCardHTML(product) {
         <h3><a href="${product.url}" target="_blank">${product.name}</a></h3>
         <div class="card-bottom">
           <div class="price">$${product.price}</div>
-          <button class="add-cart-btn" onclick="addToCart(${product.id})">
-            <i class="fas fa-plus"></i> Add
-          </button>
+
+          ${
+isSoldOut
+?
+`<button class="sold-out-btn" disabled>
+    SOLD OUT
+</button>`
+:
+`<button class="add-cart-btn" onclick="addToCart(${product.id})">
+    <i class="fas fa-plus"></i> Add
+</button>`
+          }
+          
         </div>
       </div>
     </div>
