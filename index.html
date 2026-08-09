@@ -67,19 +67,70 @@ body.no-scroll {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
-  background: #050505 url('wow0.webp') center -3px / cover no-repeat;
+  height: 100dvh;
+
+  background: #050505 url('wel.webp') center center / cover no-repeat;
+
   z-index: 99999;
   display: flex;
   align-items: center;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 
-  /* Add these */
   overflow: hidden;
   touch-action: none;
   overscroll-behavior: none;
 }
 
+
+  /* =========================
+   Welcome Typing Animation
+========================= */
+
+.welcome-typing {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  
+  color: #ffffff;
+  font-family: var(--font-signature);
+  font-size: 42px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  
+  text-align: center;
+  z-index: 2;
+
+  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.8);
+}
+
+.typing-cursor {
+  display: inline-block;
+  margin-left: 3px;
+  color: #ffffff;
+  animation: cursorBlink 0.7s infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 45% {
+    opacity: 1;
+  }
+
+  46%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .welcome-typing {
+    font-size: 30px;
+  }
+}
+
+
+  
 #welcome-screen.fade-out {
   opacity: 0;
   visibility: hidden;
@@ -1262,7 +1313,11 @@ justify-content: center;
 
 <body>
 
-<div id="welcome-screen"></div>
+<div id="welcome-screen">
+  <div class="welcome-typing">
+    <span id="typing-text"></span><span class="typing-cursor">|</span>
+  </div>
+</div>
 
 <header id="navbar">
   <div class="nav-left">
@@ -1539,17 +1594,40 @@ justify-content: center;
   /* ----------------------------------------------------
   0. WELCOME SCREEN CONTROLLER (Show Once Per Session)
 ---------------------------------------------------- */
-window.addEventListener('DOMContentLoaded', () => {
+
+  window.addEventListener('DOMContentLoaded', () => {
 
   const welcomeScreen = document.getElementById('welcome-screen');
   const heroContent = document.querySelector('.hero-content');
+  const typingText = document.getElementById('typing-text');
 
   if (!welcomeScreen) return;
 
-  // Lock scrolling while welcome screen is visible
+  /* =========================
+     Typing Animation
+  ========================= */
+
+  const text = "Abdullah Psychotic";
+  let index = 0;
+
+  function typeText() {
+    if (index < text.length) {
+      typingText.textContent += text.charAt(index);
+      index++;
+
+      setTimeout(typeText, 100);
+    }
+  }
+
+  typeText();
+
+
+  /* =========================
+     Lock scrolling
+  ========================= */
+
   document.body.classList.add('no-scroll');
 
-  // Block all touch and wheel scrolling
   const blockScroll = (e) => {
     e.preventDefault();
   };
@@ -1560,11 +1638,11 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+
   const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
 
   if (hasSeenWelcome) {
 
-    // Returning visitor
     welcomeScreen.style.display = 'none';
     document.body.classList.remove('no-scroll');
 
@@ -1574,31 +1652,30 @@ window.addEventListener('DOMContentLoaded', () => {
 
   } else {
 
-    // First visit
     setTimeout(() => {
 
-      // Fade out welcome screen
+      /* Fade out welcome screen */
       welcomeScreen.classList.add('fade-out');
+
       sessionStorage.setItem('hasSeenWelcome', 'true');
 
       setTimeout(() => {
 
-        // Remove welcome screen
         welcomeScreen.style.display = 'none';
 
-        // Unlock scrolling
         document.body.classList.remove('no-scroll');
 
-        // Show hero after 0.7 second
         setTimeout(() => {
+
           if (heroContent) {
             heroContent.classList.add('animate-hero');
           }
+
         }, 300);
 
-      }, 700); // Matches CSS fade duration
+      }, 700);
 
-    }, 2500); // Welcome screen visible for 3 seconds
+    }, 2500);
 
   }
 
