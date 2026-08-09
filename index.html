@@ -1603,24 +1603,6 @@ justify-content: center;
 
   if (!welcomeScreen) return;
 
-  /* =========================
-     Typing Animation
-  ========================= */
-
-  const text = "Abdullah Psychotic";
-  let index = 0;
-
-  function typeText() {
-    if (index < text.length) {
-      typingText.textContent += text.charAt(index);
-      index++;
-
-      setTimeout(typeText, 700);
-    }
-  }
-
-  typeText();
-
 
   /* =========================
      Lock scrolling
@@ -1639,6 +1621,10 @@ justify-content: center;
   });
 
 
+  /* =========================
+     Check Previous Visit
+  ========================= */
+
   const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
 
   if (hasSeenWelcome) {
@@ -1650,34 +1636,65 @@ justify-content: center;
       heroContent.classList.add('animate-hero');
     }
 
-  } else {
+    return;
+  }
 
-    setTimeout(() => {
 
-      /* Fade out welcome screen */
-      welcomeScreen.classList.add('fade-out');
+  /* =========================
+     Typing Animation
+  ========================= */
 
-      sessionStorage.setItem('hasSeenWelcome', 'true');
+  const text = "Abdullah Psychotic";
+  let index = 0;
+
+  function typeText() {
+
+    if (index < text.length) {
+
+      typingText.textContent += text.charAt(index);
+      index++;
+
+      // Typing speed
+      setTimeout(typeText, 150);
+
+    } else {
+
+      /* =========================
+         Typing Finished
+         Wait 3 Seconds
+      ========================= */
 
       setTimeout(() => {
 
-        welcomeScreen.style.display = 'none';
+        // Fade out welcome screen
+        welcomeScreen.classList.add('fade-out');
 
-        document.body.classList.remove('no-scroll');
+        sessionStorage.setItem('hasSeenWelcome', 'true');
 
         setTimeout(() => {
 
-          if (heroContent) {
-            heroContent.classList.add('animate-hero');
-          }
+          welcomeScreen.style.display = 'none';
 
-        }, 300);
+          document.body.classList.remove('no-scroll');
 
-      }, 700);
+          // Show hero
+          setTimeout(() => {
 
-    }, 2500);
+            if (heroContent) {
+              heroContent.classList.add('animate-hero');
+            }
 
+          }, 300);
+
+        }, 700);
+
+      }, 3000);
+    }
   }
+
+
+  // Start typing
+  typeText();
 
 });
   
