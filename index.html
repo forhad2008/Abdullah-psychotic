@@ -1593,9 +1593,9 @@ background: url('welc.webp') center center / cover no-repeat;
 </footer>
 
 <script>
-/* ----------------------------------------------------
-   0. WELCOME SCREEN CONTROLLER
-   Typing Animation + Typing Sound
+  /* ----------------------------------------------------
+   WELCOME SCREEN CONTROLLER
+   Auto Typing + Auto Typing Sound
 ---------------------------------------------------- */
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -1604,48 +1604,18 @@ window.addEventListener('DOMContentLoaded', () => {
     const heroContent = document.querySelector('.hero-content');
     const typingText = document.getElementById('typing-text');
 
-    if (!welcomeScreen) return;
+    if (!welcomeScreen || !typingText) return;
 
 
     /* =========================
-       Lock scrolling
+       Lock Scrolling
     ========================= */
 
     document.body.classList.add('no-scroll');
 
-    const blockScroll = (e) => {
-        e.preventDefault();
-    };
-
-    ['touchstart', 'touchmove', 'wheel'].forEach(event => {
-        welcomeScreen.addEventListener(event, blockScroll, {
-            passive: false
-        });
-    });
-
 
     /* =========================
-       Check Previous Visit
-    ========================= */
-
-    const hasSeenWelcome =
-        sessionStorage.getItem('hasSeenWelcome');
-
-    if (hasSeenWelcome) {
-
-        welcomeScreen.style.display = 'none';
-        document.body.classList.remove('no-scroll');
-
-        if (heroContent) {
-            heroContent.classList.add('animate-hero');
-        }
-
-        return;
-    }
-
-
-    /* =========================
-       Typing Text
+       Welcome Text
     ========================= */
 
     const text = "Abdullah Psychotic";
@@ -1658,36 +1628,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const typingSound = new Audio('typing.mp3');
 
-    typingSound.preload = 'auto';
     typingSound.loop = true;
     typingSound.volume = 0.35;
-
-
-    /* =========================
-       Start Typing Sound
-    ========================= */
-
-    function startTypingSound() {
-
-        typingSound.currentTime = 0;
-
-        typingSound.play().catch(() => {
-            // Browser autoplay restriction
-        });
-
-    }
-
-
-    /* =========================
-       Stop Typing Sound
-    ========================= */
-
-    function stopTypingSound() {
-
-        typingSound.pause();
-        typingSound.currentTime = 0;
-
-    }
+    typingSound.preload = 'auto';
 
 
     /* =========================
@@ -1698,40 +1641,44 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (index < text.length) {
 
-            /* Start sound with first character */
-            if (index === 0) {
-                startTypingSound();
-            }
-
-
-            /* Type character */
-            typingText.textContent +=
-                text.charAt(index);
+            /* Type the character */
+            typingText.textContent += text.charAt(index);
 
             index++;
 
 
-            /* Next character */
+            /* Automatically start sound */
+            if (index === 1) {
+
+                typingSound.currentTime = 0;
+
+                typingSound.play().catch(() => {
+                    // Browser autoplay protection
+                });
+
+            }
+
+
+            /* Continue typing */
             setTimeout(typeText, 250);
 
 
         } else {
 
             /* =========================
-               Typing Completely Finished
+               Typing Finished
             ========================= */
 
-            // STOP typing sound immediately
-            stopTypingSound();
+            /* Stop sound immediately */
+            typingSound.pause();
+            typingSound.currentTime = 0;
 
 
-            /* Wait after typing */
+            /* Wait before fade out */
             setTimeout(() => {
 
-                // Fade out welcome screen
                 welcomeScreen.classList.add('fade-out');
 
-                // Remember this session
                 sessionStorage.setItem(
                     'hasSeenWelcome',
                     'true'
@@ -1740,16 +1687,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 setTimeout(() => {
 
-                    // Hide welcome screen
                     welcomeScreen.style.display = 'none';
 
-                    // Unlock scrolling
                     document.body.classList.remove(
                         'no-scroll'
                     );
 
 
-                    // Show hero section
+                    /* Show Hero */
                     setTimeout(() => {
 
                         if (heroContent) {
@@ -1768,7 +1713,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     /* =========================
-       Start Animation
+       START AUTOMATICALLY
     ========================= */
 
     typeText();
