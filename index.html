@@ -1593,7 +1593,6 @@ background: url('welc.webp') center center / cover no-repeat;
 </footer>
 
 <script>
-
 /* ----------------------------------------------------
    0. WELCOME SCREEN CONTROLLER
    Typing Animation + Typing Sound
@@ -1646,7 +1645,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     /* =========================
-       Typing Animation
+       Typing Text
     ========================= */
 
     const text = "Abdullah Psychotic";
@@ -1659,56 +1658,78 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const typingSound = new Audio('typing.mp3');
 
-    typingSound.volume = 0.35;
     typingSound.preload = 'auto';
+    typingSound.loop = true;
+    typingSound.volume = 0.35;
 
 
-    function playTypingSound() {
+    /* =========================
+       Start Typing Sound
+    ========================= */
+
+    function startTypingSound() {
 
         typingSound.currentTime = 0;
 
         typingSound.play().catch(() => {
-            // Browser autoplay restriction হলে error দেখাবে না
+            // Browser autoplay restriction
         });
 
     }
 
 
     /* =========================
-       Type Text
+       Stop Typing Sound
+    ========================= */
+
+    function stopTypingSound() {
+
+        typingSound.pause();
+        typingSound.currentTime = 0;
+
+    }
+
+
+    /* =========================
+       Typing Animation
     ========================= */
 
     function typeText() {
 
         if (index < text.length) {
 
-            // Add one character
+            /* Start sound with first character */
+            if (index === 0) {
+                startTypingSound();
+            }
+
+
+            /* Type character */
             typingText.textContent +=
                 text.charAt(index);
 
             index++;
 
 
-            // Play typing sound
-            playTypingSound();
-
-
-            // Typing speed
+            /* Next character */
             setTimeout(typeText, 250);
 
 
         } else {
 
             /* =========================
-               Typing Finished
-               Wait 1.5 Seconds
+               Typing Completely Finished
             ========================= */
 
+            // STOP typing sound immediately
+            stopTypingSound();
+
+
+            /* Wait after typing */
             setTimeout(() => {
 
                 // Fade out welcome screen
                 welcomeScreen.classList.add('fade-out');
-
 
                 // Remember this session
                 sessionStorage.setItem(
@@ -1732,11 +1753,9 @@ window.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => {
 
                         if (heroContent) {
-
                             heroContent.classList.add(
                                 'animate-hero'
                             );
-
                         }
 
                     }, 300);
@@ -1749,7 +1768,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     /* =========================
-       Start Typing
+       Start Animation
     ========================= */
 
     typeText();
