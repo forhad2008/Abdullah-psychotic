@@ -1594,110 +1594,165 @@ background: url('welc.webp') center center / cover no-repeat;
 
 <script>
 
-  /* ----------------------------------------------------
-  0. WELCOME SCREEN CONTROLLER (Show Once Per Session)
+/* ----------------------------------------------------
+   0. WELCOME SCREEN CONTROLLER
+   Typing Animation + Typing Sound
 ---------------------------------------------------- */
 
-  window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', () => {
 
-  const welcomeScreen = document.getElementById('welcome-screen');
-  const heroContent = document.querySelector('.hero-content');
-  const typingText = document.getElementById('typing-text');
+    const welcomeScreen = document.getElementById('welcome-screen');
+    const heroContent = document.querySelector('.hero-content');
+    const typingText = document.getElementById('typing-text');
 
-  if (!welcomeScreen) return;
+    if (!welcomeScreen) return;
 
 
-  /* =========================
-     Lock scrolling
-  ========================= */
+    /* =========================
+       Lock scrolling
+    ========================= */
 
-  document.body.classList.add('no-scroll');
+    document.body.classList.add('no-scroll');
 
-  const blockScroll = (e) => {
-    e.preventDefault();
-  };
+    const blockScroll = (e) => {
+        e.preventDefault();
+    };
 
-  ['touchstart', 'touchmove', 'wheel'].forEach(event => {
-    welcomeScreen.addEventListener(event, blockScroll, {
-      passive: false
+    ['touchstart', 'touchmove', 'wheel'].forEach(event => {
+        welcomeScreen.addEventListener(event, blockScroll, {
+            passive: false
+        });
     });
-  });
 
 
-  /* =========================
-     Check Previous Visit
-  ========================= */
+    /* =========================
+       Check Previous Visit
+    ========================= */
 
-  const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
+    const hasSeenWelcome =
+        sessionStorage.getItem('hasSeenWelcome');
 
-  if (hasSeenWelcome) {
+    if (hasSeenWelcome) {
 
-    welcomeScreen.style.display = 'none';
-    document.body.classList.remove('no-scroll');
+        welcomeScreen.style.display = 'none';
+        document.body.classList.remove('no-scroll');
 
-    if (heroContent) {
-      heroContent.classList.add('animate-hero');
+        if (heroContent) {
+            heroContent.classList.add('animate-hero');
+        }
+
+        return;
     }
 
-    return;
-  }
+
+    /* =========================
+       Typing Animation
+    ========================= */
+
+    const text = "Abdullah Psychotic";
+    let index = 0;
 
 
-  /* =========================
-     Typing Animation
-  ========================= */
+    /* =========================
+       Typing Sound
+    ========================= */
 
-  const text = "Abdullah Psychotic";
-  let index = 0;
+    const typingSound = new Audio('typing.mp3');
 
-  function typeText() {
+    typingSound.volume = 0.35;
+    typingSound.preload = 'auto';
 
-    if (index < text.length) {
 
-      typingText.textContent += text.charAt(index);
-      index++;
+    function playTypingSound() {
 
-      // Typing speed
-      setTimeout(typeText, 250);
+        typingSound.currentTime = 0;
 
-    } else {
+        typingSound.play().catch(() => {
+            // Browser autoplay restriction হলে error দেখাবে না
+        });
 
-      /* =========================
-         Typing Finished
-         Wait 3 Seconds
-      ========================= */
-
-      setTimeout(() => {
-
-        // Fade out welcome screen
-        welcomeScreen.classList.add('fade-out');
-
-        sessionStorage.setItem('hasSeenWelcome', 'true');
-
-        setTimeout(() => {
-
-          welcomeScreen.style.display = 'none';
-
-          document.body.classList.remove('no-scroll');
-
-          // Show hero
-          setTimeout(() => {
-
-            if (heroContent) {
-              heroContent.classList.add('animate-hero');
-            }
-
-          }, 300);
-
-        }, 700);
-
-      }, 1500);
     }
-  }
 
 
-  // Start typing
-  typeText();
+    /* =========================
+       Type Text
+    ========================= */
+
+    function typeText() {
+
+        if (index < text.length) {
+
+            // Add one character
+            typingText.textContent +=
+                text.charAt(index);
+
+            index++;
+
+
+            // Play typing sound
+            playTypingSound();
+
+
+            // Typing speed
+            setTimeout(typeText, 250);
+
+
+        } else {
+
+            /* =========================
+               Typing Finished
+               Wait 1.5 Seconds
+            ========================= */
+
+            setTimeout(() => {
+
+                // Fade out welcome screen
+                welcomeScreen.classList.add('fade-out');
+
+
+                // Remember this session
+                sessionStorage.setItem(
+                    'hasSeenWelcome',
+                    'true'
+                );
+
+
+                setTimeout(() => {
+
+                    // Hide welcome screen
+                    welcomeScreen.style.display = 'none';
+
+                    // Unlock scrolling
+                    document.body.classList.remove(
+                        'no-scroll'
+                    );
+
+
+                    // Show hero section
+                    setTimeout(() => {
+
+                        if (heroContent) {
+
+                            heroContent.classList.add(
+                                'animate-hero'
+                            );
+
+                        }
+
+                    }, 300);
+
+                }, 700);
+
+            }, 1500);
+        }
+    }
+
+
+    /* =========================
+       Start Typing
+    ========================= */
+
+    typeText();
 
 });
   
