@@ -1111,125 +1111,39 @@ header{
 }
 
 
-/* =========================================================
-   FINAL HEADER FIX
-   - Visible menu/cart icons: 40% smaller
-   - Header logo: reference image
-========================================================= */
-.logo{
-  width:auto;
-  height:auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
+/* FINAL FIX — compact menu/cart buttons + logo image */
 .logo img{
   display:block;
-  width:270px;
+  width:150px;
   max-width:100%;
   height:auto;
   object-fit:contain;
 }
-
-/* Keep the tap area comfortable; reduce only the visible icons. */
-.menu-btn,
-.cart-btn{
-  width:44px !important;
-  height:44px !important;
-  padding:0 !important;
-  margin:0 auto !important;
+.menu-btn,.cart-btn{
+  width:34px !important;
+  height:34px !important;
 }
-
-.menu-btn svg{
-  width:20px !important;
-  height:15px !important;
-}
-
-.cart-btn svg{
-  width:20px !important;
-  height:20px !important;
-}
-
+.menu-btn svg{width:20px !important;height:16px !important}
+.cart-btn svg{width:20px !important;height:20px !important}
 .cart-count{
-  top:0 !important;
-  right:0 !important;
-  min-width:20px !important;
-  height:20px !important;
-  padding:0 4px !important;
-  font-size:9px !important;
-  border-width:1px !important;
+  min-width:16px !important;
+  width:16px !important;
+  height:16px !important;
+  padding:0 !important;
+  font-size:8px !important;
+  top:-2px !important;
+  right:-4px !important;
 }
-
-@media (max-width:768px){
-  header{
-    height:84px !important;
-    grid-template-columns:62px 1fr 62px !important;
-    padding:0 8px !important;
-  }
-
-  .logo img{
-    width:230px;
-    max-width:calc(100vw - 124px);
-  }
-
-  .menu-btn,
-  .cart-btn{
-    width:40px !important;
-    height:40px !important;
-  }
-
-  .menu-btn svg{
-    width:18px !important;
-    height:14px !important;
-  }
-
-  .cart-btn svg{
-    width:18px !important;
-    height:18px !important;
-  }
-
-  .cart-count{
-    min-width:19px !important;
-    height:19px !important;
-    font-size:9px !important;
-  }
+@media(max-width:768px){
+  header{grid-template-columns:50px 1fr 50px !important;padding:0 6px !important}
+  .menu-btn,.cart-btn{width:29px !important;height:29px !important}
+  .menu-btn svg{width:18px !important;height:14px !important}
+  .cart-btn svg{width:18px !important;height:18px !important}
+  .logo img{width:115px !important}
+  .cart-count{min-width:15px !important;width:15px !important;height:15px !important;font-size:7px !important;top:-3px !important;right:-5px !important}
 }
-
-@media (max-width:480px){
-  header{
-    height:80px !important;
-    grid-template-columns:56px 1fr 56px !important;
-  }
-
-  .logo img{
-    width:210px;
-    max-width:calc(100vw - 112px);
-  }
-
-  .menu-btn,
-  .cart-btn{
-    width:36px !important;
-    height:36px !important;
-  }
-
-  .menu-btn svg{
-    width:17px !important;
-    height:13px !important;
-  }
-
-  .cart-btn svg{
-    width:17px !important;
-    height:17px !important;
-  }
-
-  .cart-count{
-    top:-1px !important;
-    right:-1px !important;
-    min-width:18px !important;
-    height:18px !important;
-    font-size:8px !important;
-  }
+@media(max-width:380px){
+  .logo img{width:105px !important}
 }
 
 </style>
@@ -1243,7 +1157,7 @@ header{
   </button>
 
   <a href="index.html" class="logo" aria-label="Abdullah Psychotic">
-    <img src="abdullah-psychotic-logo-transparent.png" alt="Abdullah Psychotic">
+    <img src="abdullah-psychotic-logo.png" alt="Abdullah Psychotic Logo">
   </a>
 
   <button class="cart-btn" aria-label="Shopping cart" onclick="openCart()">
@@ -1314,48 +1228,48 @@ header{
    existing website.
 ========================================= */
 const products = [
-  {id:1,name:"DRAGON SPIRIT T-SHIRT",image:"t1.webp",price:29.99,badge:"NEW ARRIVAL",desc:"100% Premium Cotton<br>Oversized Fit"},
-  {id:2,name:"PSYCHOTIC HOODIE",image:"ho1.webp",price:59.99,badge:"NEW ARRIVAL",desc:"Premium Fleece Fabric<br>Comfort Fit"},
-  {id:3,name:"PSYCHOTIC CAP",image:"cap1.webp",price:24.99,badge:"NEW ARRIVAL",desc:"Adjustable Strap<br>Premium Quality"},
-  {id:4,name:"AP CHRONO WATCH",image:"w2.webp",price:149.99,badge:"NEW ARRIVAL",desc:"Stainless Steel<br>Water Resistant"},
-  {id:5,name:"PSYCHOTIC DUFFLE BAG",image:"bag2.webp",price:79.99,badge:"NEW ARRIVAL",desc:"Water Resistant<br>Premium Material"},
-  {id:6,name:"A.P Oversized Red & Black Chinese Style T-Shirt",image:"t5.webp",price:489,badge:"Premium Graphic T-Shirt",desc:"Premium Cotton • Oversized Fit"},
-  {id:7,name:"A.P Oversized Logo Design Premium T-Shirt",image:"t6.webp",price:489,badge:"Premium Graphic T-Shirt",desc:"Premium Cotton • Oversized Fit"},
-  {id:8,name:"A.P Oversized Logo Design Premium T-Shirt",image:"t7.webp",price:489,badge:"Premium Graphic T-Shirt",desc:"Premium Cotton • Oversized Fit"},
-  {id:9,name:"A.P Oversized Logo Design Premium T-Shirt",image:"t7.webp",price:489,badge:"Premium Graphic T-Shirt",desc:"Premium Cotton • Oversized Fit"},
-  {id:10,name:"A.P Oversized Logo Design Premium T-Shirt",image:"t8.webp",price:489,badge:"Premium Graphic T-Shirt",desc:"Premium Cotton • Oversized Fit"},
-  {id:11,name:"A.P Oversized Logo Design Premium T-Shirt",image:"t9.webp",price:489,badge:"Premium Graphic T-Shirt",desc:"Premium Cotton • Oversized Fit"},
-  {id:12,name:"Premium A.P Logo Sneakers",image:"s1.webp",price:499,badge:"Classic Sneakers",desc:"Premium Build • Everyday Comfort"},
-  {id:13,name:"A.P Bullet Edition Premium Shoes",image:"s01.webp",price:799,badge:"Premium Shoes",desc:"Premium Construction • Signature Design"},
-  {id:14,name:"A.P Ocean Whale Iconic Timepiece",image:"W1.webp",price:7899,badge:"Luxury Wear",desc:"Stainless Steel • Water Resistant"},
-  {id:15,name:"A.P Logo Design Iconic Timepiece",image:"w2.webp",price:9899,badge:"Luxury Wear",desc:"Stainless Steel • Water Resistant"},
-  {id:16,name:"A.P Logo Design Black Bedsheet",image:"bed1.webp",price:1849,badge:"Modern Bedsheets",desc:"Premium Material • Luxury Finish"},
-  {id:17,name:"A.P Logoed Royal Black Satin Bedsheet",image:"bed2.webp",price:1899,badge:"Modern Bedsheets",desc:"Royal Satin • Premium Finish"},
-  {id:18,name:"A.P Logo Design Iconic Black Creative Mug",image:"mug.webp",price:79,badge:"Creative Object",desc:"Premium Ceramic • Signature Design"},
-  {id:19,name:"A.P Logo Design Iconic Golden-Black Mug",image:"mug2.webp",price:99,badge:"Creative Object",desc:"Premium Ceramic • Luxury Finish"},
-  {id:20,name:"A.P Logo Design Iconic Black Hoodie",image:"ho1.webp",price:769,badge:"Premium Winter Hoodie",desc:"Premium Fleece Fabric • Comfort Fit"},
-  {id:21,name:"A.P Logo Design Iconic Red Hoodie",image:"ho2.webp",price:769,badge:"Premium Winter Hoodie",desc:"Premium Fleece Fabric • Comfort Fit"},
-  {id:22,name:"A.P Logo Design White Black Hoodie",image:"ho3.webp",price:749,badge:"Premium Winter Hoodie",desc:"Premium Fleece Fabric • Comfort Fit"},
-  {id:23,name:"A.P Logo Arted Premium Red & Black Hoodie",image:"ho4.webp",price:789,badge:"Premium Winter Hoodie",desc:"Premium Fleece Fabric • Comfort Fit"},
-  {id:24,name:"A.P Premium Black & White Stylish Hoodie",image:"ho5.webp",price:799,badge:"Premium Winter Hoodie",desc:"Premium Fleece Fabric • Comfort Fit"},
-  {id:25,name:"A.P Logo Design Classic Black Cap",image:"cap1.webp",price:239,badge:"Classic Cap",desc:"Adjustable Strap • Premium Quality"},
-  {id:26,name:"A.P Logo Design Classic Red Cap",image:"cap2.webp",price:229,badge:"Classic Cap",desc:"Adjustable Strap • Premium Quality"},
-  {id:27,name:"Abdullah Psychotic Modern Cap",image:"cap4.webp",price:249,badge:"Modern Cap",desc:"Adjustable Strap • Premium Quality"},
-  {id:28,name:"Abdullah Psychotic Luxury Cap",image:"cap5.webp",price:359,badge:"Luxury Cap",desc:"Premium Material • Signature Design"},
-  {id:29,name:"Abdullah Psychotic Exclusive Cap",image:"cap6.webp",price:399,badge:"Exclusive Cap",desc:"Premium Material • Signature Design"},
-  {id:30,name:"Abdullah Psychotic Classic Logo Hat",image:"hat2.webp",price:2999,badge:"Premium Classic Hat",desc:"Exclusive Design • Premium Finish"},
-  {id:31,name:"Abdullah Psychotic Hell Rider Iconic Hat",image:"cap3.webp",price:3299,badge:"Premium Iconic Hat",desc:"Exclusive Design • Premium Finish"},
-  {id:32,name:"Abdullah Psychotic Luxury Dragon Edition Hat",image:"hat3.webp",price:3499,badge:"Premium Exclusive Hat",desc:"Exclusive Design • Premium Finish"},
-  {id:33,name:"Abdullah Psychotic Luxury School Bag",image:"bag1.webp",price:549,badge:"Premium School Bag",desc:"Durable Material • Everyday Carry"},
-  {id:34,name:"Abdullah Psychotic Luxury Modern Bag",image:"bag2.webp",price:2249,badge:"Premium Fashion Bag",desc:"Premium Material • Modern Design"},
-  {id:35,name:"Abdullah Psychotic Luxury Bag — Upper Class",image:"bag3.webp",price:2349,badge:"Luxury Fashion Bag",desc:"Premium Material • Signature Design"},
-  {id:36,name:"Abdullah Psychotic Luxury Red Designed Perfume",image:"per1.webp",price:2599,badge:"Luxury Perfume",desc:"Signature Bottle • Premium Presentation"},
-  {id:37,name:"Abdullah Psychotic Luxury Black Logo Perfume",image:"per2.webp",price:2700,badge:"Luxury Perfume",desc:"Upper Class Edition • Signature Design"},
-  {id:38,name:"Abdullah Psychotic Luxury Black Designed Perfume",image:"per3.webp",price:2650,badge:"Luxury Perfume",desc:"Premium Bottle • Signature Presentation"}
+  {id:1,category:"apparel",name:"Abdullah Psychotic Branded Logo T-Shirt",image:"t1.webp",url:"t1.webp",price:499,badge:"Graphic t-shirt",desc:"Premium Graphic t-Shirt"},
+  {id:2,category:"apparel",name:"Abdullah Psychotic Branded Dragon Edition Logo Trouser",image:"pent.webp",url:"pent.webp",price:599,badge:"Premium Graphic Trouser",desc:"Premium Graphic Trouser"},
+  {id:3,category:"apparel",name:"A.P Oversized Dragon edition premium t-shirt",image:"t4.webp",url:"t4.webp",price:459,badge:"Graphic t-shirt",desc:"Premium Graphic t-shirt"},
+  {id:4,category:"apparel",name:"A.P Oversized Tiger edition premium t-shirt",image:"t3.webp",url:"t3.webp",price:449,badge:"Graphic t-shirt",desc:"Premium Graphic t-shirt"},
+  {id:5,category:"apparel",name:"A.P Oversized Penguin edition premium t-shirt",image:"t2.webp",url:"we5.webp",price:449,badge:"Graphic t-shirt",desc:"Premium Graphic t-shirt"},
+  {id:6,category:"apparel",name:"A.P Oversized logo design premium red & black t-shirt(chinese style)",image:"t5.webp",url:"we6.webp",price:489,badge:"Premium Graphic t-shirt",desc:"Premium Graphic t-shirt"},
+  {id:7,category:"apparel",name:"A.P Oversized logo design premium t-shirt",image:"t6.webp",url:"t6.webp",price:489,badge:"Premium Graphic t-shirt",desc:"Premium Graphic t-shirt"},
+  {id:8,category:"apparel",name:"A.P Oversized logo design premium t-shirt",image:"t7.webp",url:"t7.webp",price:489,badge:"Premium Graphic t-shirt",desc:"Premium Graphic t-shirt"},
+  {id:9,category:"apparel",name:"A.P Oversized logo design premium t-shirt",image:"t7.webp",url:"t7.webp",price:489,badge:"Premium Graphic t-shirt",desc:"Premium Graphic t-shirt"},
+  {id:10,category:"apparel",name:"A.P Oversized logo design premium t-shirt",image:"t8.webp",url:"t8.webp",price:489,badge:"Premium Graphic t-shirt",desc:"Premium Graphic t-shirt"},
+  {id:11,category:"apparel",name:"A.P Oversized logo design premium t-shirt",image:"t9.webp",url:"we11.webp",price:489,badge:"Premium Graphic t-shirt",desc:"Premium Graphic t-shirt"},
+  {id:12,category:"footwear",name:"Premium A.P Logo Sneakers",image:"s1.webp",url:"s1.webp",price:499,badge:"Classic Sneakers",desc:"Classic Sneakers"},
+  {id:13,category:"footwear",name:"A.P bullet Edition Premium Shoes",image:"s01.webp",url:"s01.webp",price:799,badge:"Premium shoes",desc:"Premium shoes"},
+  {id:14,category:"watches",name:"A.P Ocean Whale Iconic Timepiece",image:"W1.webp",url:"W1.webp",price:7899,badge:"Luxury Wear",desc:"Luxury Wear"},
+  {id:15,category:"watches",name:"A.P Logo Design Iconic Timepiece",image:"w2.webp",url:"w2.webp",price:9899,badge:"Luxury Wear",desc:"Luxury Wear"},
+  {id:16,category:"lifestyle",name:"A.P Logo Design Black Bedsheet",image:"bed1.webp",url:"bed1.webp",price:1849,badge:"Modern bedsheets",desc:"Modern bedsheets"},
+  {id:17,category:"lifestyle",name:"A.P Logoed Royal Black Satin Bedsheet",image:"bed2.webp",url:"bed2.webp",price:1899,badge:"Modern bedsheets",desc:"Modern bedsheets"},
+  {id:18,category:"creative",name:"A.P Logo Design Iconic Black Creative Mug",image:"mug.webp",url:"mug.webp",price:79,badge:"Creative Object",desc:"Creative Object"},
+  {id:19,category:"creative",name:"A.P Logo Design Iconic Golden-Black Mug",image:"mug2.webp",url:"mug2.webp",price:99,badge:"Creative Object",desc:"Creative Object"},
+  {id:20,category:"hoodies",name:"A.P Logo Design Iconic Black Color Hoodie",image:"ho1.webp",url:"ho1.webp",price:769,badge:"Premium Winter Hoodie",desc:"Premium Winter Hoodie"},
+  {id:21,category:"hoodies",name:"A.P Logo Design Iconic Red Color Hoodie",image:"ho2.webp",url:"ho2.webp",price:769,badge:"Premium Winter Hoodie",desc:"Premium Winter Hoodie"},
+  {id:22,category:"hoodies",name:"A.P Logo Design white black Hoodie",image:"ho3.webp",url:"weh2.webp",price:749,badge:"Premium Winter Hoodie",desc:"Premium Winter Hoodie"},
+  {id:23,category:"hoodies",name:"A.P Logo Arted Premium Red & Black Hoodie",image:"ho4.webp",url:"ho4.webp",price:789,badge:"Premium Winter Hoodie",desc:"Premium Winter Hoodie"},
+  {id:24,category:"hoodies",name:"A.P Premium black & white stylish designed Hoodie",image:"ho5.webp",url:"ho5.webp",price:799,badge:"Premium Winter Hoodie",desc:"Premium Winter Hoodie"},
+  {id:25,category:"caps",name:"A.P Logo Design Classic Black cap",image:"cap1.webp",url:"cap1.webp",price:239,badge:"Classic cap",desc:"Classic cap"},
+  {id:26,category:"caps",name:"A.P Logo Design Classic red cap",image:"cap2.webp",url:"cap2.webp",price:229,badge:"Classic cap",desc:"Classic cap"},
+  {id:27,category:"caps",name:"Abdullah Psychotic modern cap",image:"cap4.webp",url:"cap4.webp",price:249,badge:"Modern cap",desc:"Modern cap"},
+  {id:28,category:"caps",name:"Abdullah Psychotic – Luxury cap",image:"cap5.webp",url:"cap5.webp",price:359,badge:"Luxury cap",desc:"Luxury cap"},
+  {id:29,category:"caps",name:"Abdullah Psychotic – Exclusive cap",image:"cap6.webp",url:"cap6.webp",price:399,badge:"Exclusive cap",desc:"Exclusive cap"},
+  {id:30,category:"caps",name:"Abdullah Psychotic – classic logo hat",image:"hat2.webp",url:"hat2.webp",price:2999,badge:"Premium Classic Hat",desc:"Premium Classic Hat"},
+  {id:31,category:"caps",name:"Abdullah Psychotic – Hell Rider stylish iconic hat",image:"cap3.webp",url:"cap3.webp",price:3299,badge:"Premium Iconic Hat",desc:"Premium Iconic Hat"},
+  {id:32,category:"caps",name:"Abdullah Psychotic – Luxury dragon edition hat",image:"hat3.webp",url:"hat3.webp",price:3499,badge:"Premium Exclusive Hat",desc:"Premium Exclusive Hat"},
+  {id:33,category:"bags",name:"Abdullah Psychotic – Luxury school bag",image:"bag1.webp",url:"bag1.webp",price:549,badge:"Premium school bag",desc:"Premium school bag"},
+  {id:34,category:"bags",name:"Abdullah Psychotic – Luxury modern bag",image:"bag2.webp",url:"bag2.webp",price:2249,badge:"Premium fashion bag",desc:"Premium fashion bag"},
+  {id:35,category:"bags",name:"Abdullah Psychotic – Luxury bag(Upper class)",image:"bag3.webp",url:"bag3.webp",price:2349,badge:"Luxury fashion bag",desc:"Luxury fashion bag"},
+  {id:36,category:"perfume",name:"Abdullah Psychotic – Luxury red designed perfume",image:"per1.webp",url:"per1.webp",price:2599,badge:"Luxury perfume",desc:"Luxury perfume"},
+  {id:37,category:"perfume",name:"Abdullah Psychotic – Luxury black designed logo perfume (Upper class)",image:"per2.webp",url:"per2.webp",price:2700,badge:"Luxury perfume",desc:"Luxury perfume"},
+  {id:38,category:"perfume",name:"Abdullah Psychotic – Luxury black designed logo perfume",image:"per3.webp",url:"per3.webp",price:2650,badge:"Luxury perfume",desc:"Luxury perfume"}
 ];
 
 /* Same sold-out IDs from your current website */
-const soldOut = [];
+const soldOut = [1, 2];
 
 let cart = JSON.parse(localStorage.getItem("ap_user_cart")) || [];
 
@@ -1371,7 +1285,7 @@ function renderProducts(){
 
     return `
       <article class="product-card">
-        <a class="product-image" href="${product.image}" target="_blank">
+        <a class="product-image" href="${product.url}" target="_blank">
           <img src="${product.image}" alt="${product.name}" loading="lazy">
         </a>
 
@@ -1379,7 +1293,7 @@ function renderProducts(){
           <div class="product-badge">${product.badge}</div>
           <h2 class="product-name">${product.name}</h2>
           <p class="product-description">${product.desc}</p>
-          <div class="product-price">$${product.price.toLocaleString(undefined,{minimumFractionDigits: product.price % 1 ? 2 : 0, maximumFractionDigits: 2})}</div>
+          <div class="product-price">$${product.price.toLocaleString()}</div>
 
           ${
             sold
@@ -1455,7 +1369,7 @@ function updateCart(){
       <img src="${item.image}" alt="${item.name}">
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-price">$${item.price.toLocaleString(undefined,{minimumFractionDigits: item.price % 1 ? 2 : 0, maximumFractionDigits: 2})}</div>
+        <div class="cart-item-price">$${item.price.toLocaleString()}</div>
         <div class="qty">
           <button onclick="changeQty(${item.id},-1)">−</button>
           <span>${item.qty}</span>
