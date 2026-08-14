@@ -1434,7 +1434,99 @@ header {
   }
 
 }
-  
+
+
+  /* =========================================
+   MOBILE NAVBAR — SLIM ICON STYLE
+========================================= */
+
+@media (max-width: 992px) {
+
+  /* Hamburger */
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    font-size: 25px;
+    font-weight: 300;
+    color: #ffffff;
+
+    cursor: pointer;
+    line-height: 1;
+
+    transition: all 0.3s ease;
+  }
+
+  .menu-toggle i {
+    font-size: 25px;
+    font-weight: 300;
+  }
+
+  .menu-toggle:active {
+    transform: scale(0.92);
+  }
+
+
+  /* Cart */
+  .cart-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    font-size: 24px;
+    font-weight: 300;
+    color: #ffffff;
+
+    cursor: pointer;
+    line-height: 1;
+
+    transition: all 0.3s ease;
+  }
+
+  .cart-icon-wrapper i {
+    font-size: 24px;
+    font-weight: 300;
+  }
+
+  .cart-icon-wrapper:active {
+    transform: scale(0.92);
+  }
+
+
+  /* Cart number */
+  .cart-badge {
+    position: absolute;
+
+    top: 1px;
+    right: 0px;
+
+    width: 17px;
+    height: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary-color);
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    font-family: Arial, sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+
+    line-height: 1;
+  }
+
+}
 </style>
 </head>
 
