@@ -409,29 +409,27 @@ header.scrolled {
 
   .menu-toggle,
   .cart-icon-wrapper{
-    width:29px;
-    height:29px;
+    width:52px;
+    height:52px;
   }
 
   .menu-toggle svg{
-    width:18px;
-    height:14px;
+    width:34px;
+    height:26px;
   }
 
   .cart-icon-wrapper svg{
-    width:18px;
-    height:18px;
+    width:34px;
+    height:34px;
   }
 
   .cart-badge{
-    min-width:15px;
-    width:15px;
-    height:15px;
-
-    top:-3px;
-    right:-5px;
-
-    font-size:7px;
+    width:18px;
+    height:18px;
+    min-width:18px;
+    top:-2px;
+    right:-3px;
+    font-size:8px;
   }
 }
 
@@ -1394,14 +1392,12 @@ footer {
 
 <header id="navbar">
 
-  <!-- Logo -->
   <div class="logo-container">
     <a href="#home">
       <img src="logo0.webp" alt="Abdullah Psychotic" class="logo-img">
     </a>
   </div>
 
-  <!-- Desktop Navigation -->
   <nav class="desktop-nav">
     <a href="#home">Home</a>
     <a href="about.html">About Us</a>
@@ -1409,24 +1405,22 @@ footer {
     <a href="#contact">Contact</a>
   </nav>
 
-  <!-- Mobile Menu -->
-<button class="menu-toggle" id="menu-btn" aria-label="Open menu">
-  <svg viewBox="0 0 32 24" aria-hidden="true">
-    <path d="M1 2h30M1 12h30M1 22h30"/>
-  </svg>
-</button>
-
-<div class="nav-right">
-  <button class="cart-icon-wrapper" id="cart-icon-btn" aria-label="Shopping cart">
-    <svg viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M4 6h4l3.1 14.2a2 2 0 0 0 2 1.6h10.8a2 2 0 0 0 1.9-1.4L29 11H9"/>
-      <circle cx="13" cy="27" r="1.8"/>
-      <circle cx="25" cy="27" r="1.8"/>
+  <button class="menu-toggle" id="menu-btn" aria-label="Open menu">
+    <svg viewBox="0 0 32 24" aria-hidden="true">
+      <path d="M1 2h30M1 12h30M1 22h30"/>
     </svg>
-
-    <span class="cart-badge" id="cart-count">0</span>
   </button>
-</div>
+
+  <div class="nav-right">
+    <button class="cart-icon-wrapper" id="cart-icon-btn" aria-label="Shopping cart">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M4 6h4l3.1 14.2a2 2 0 0 0 2 1.6h10.8a2 2 0 0 0 1.9-1.4L29 11H9"/>
+        <circle cx="13" cy="27" r="1.8"/>
+        <circle cx="25" cy="27" r="1.8"/>
+      </svg>
+
+      <span class="cart-badge" id="cart-count">0</span>
+    </button>
   </div>
 
 </header>
