@@ -208,49 +208,233 @@ header.scrolled {
   align-items: center;
 }
 
-.menu-toggle {
-  display: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #fff;
-  transition: color 0.3s ease, transform 0.3s ease;
-  line-height: 1;
+/* =========================================
+   LUXURY MENU + CART BUTTONS
+   SAME STYLE AS SHOP PAGE
+========================================= */
+
+.menu-toggle,
+.cart-icon-wrapper{
+  position:relative;
+  width:34px;
+  height:34px;
+  padding:0;
+  margin:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:#f5f5f5;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  -webkit-tap-highlight-color:transparent;
+
+  transition:
+    transform .25s ease,
+    color .25s ease,
+    opacity .25s ease;
 }
 
-.menu-toggle:hover {
-  color: var(--primary-color);
-  transform: scale(1.05);
+
+/* SVG ICON */
+
+.menu-toggle svg,
+.cart-icon-wrapper svg{
+  display:block;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
 }
 
-.cart-icon-wrapper {
-  position: relative;
-  cursor: pointer;
-  font-size: 21px;
-  color: #fff;
-  line-height: 1;
-  transition: transform 0.3s ease, color 0.3s ease;
+
+/* MENU */
+
+.menu-toggle svg{
+  width:20px;
+  height:16px;
 }
 
-.cart-icon-wrapper:hover {
-  color: var(--primary-color);
-  transform: scale(1.05);
+
+/* CART */
+
+.cart-icon-wrapper svg{
+  width:20px;
+  height:20px;
 }
 
-.cart-badge {
-  font-family: var(--font-accent);
-  position: absolute;
-  top: -7px;
-  right: -8px;
-  background: var(--primary-color);
-  color: #fff;
-  font-size: 8px;
-  font-weight: 300;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+/* HOVER */
+
+.menu-toggle:hover,
+.cart-icon-wrapper:hover{
+  color:#ffffff;
+  transform:scale(1.06);
+}
+
+
+/* ACTIVE / TAP */
+
+.menu-toggle:active,
+.cart-icon-wrapper:active{
+  transform:scale(.92);
+}
+
+
+/* REMOVE BUTTON DEFAULT STYLE */
+
+.menu-toggle:focus,
+.cart-icon-wrapper:focus{
+  outline:none;
+}
+
+
+/* =========================================
+   CART BADGE
+========================================= */
+
+.cart-badge{
+  position:absolute;
+
+  top:-3px;
+  right:-5px;
+
+  min-width:16px;
+  width:16px;
+  height:16px;
+
+  padding:0;
+
+  border:1px solid #000;
+  border-radius:50%;
+
+  background:var(--primary-color);
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-family:var(--font-body);
+  font-size:8px;
+  font-weight:600;
+
+  line-height:1;
+
+  box-shadow:none;
+}
+
+
+/* =========================================
+   DESKTOP HEADER
+========================================= */
+
+@media(min-width:993px){
+
+  .menu-toggle{
+    display:none;
+  }
+
+  .cart-icon-wrapper{
+    width:34px;
+    height:34px;
+  }
+
+  .cart-icon-wrapper svg{
+    width:20px;
+    height:20px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:992px){
+
+  .menu-toggle{
+    display:flex;
+
+    width:34px;
+    height:34px;
+
+    order:1;
+  }
+
+  .menu-toggle svg{
+    width:20px;
+    height:16px;
+  }
+
+  .nav-right{
+    margin-left:auto;
+    order:3;
+
+    display:flex;
+    align-items:center;
+  }
+
+  .cart-icon-wrapper{
+    width:34px;
+    height:34px;
+  }
+
+  .cart-icon-wrapper svg{
+    width:20px;
+    height:20px;
+  }
+
+  .cart-badge{
+    top:-3px;
+    right:-5px;
+
+    min-width:16px;
+    width:16px;
+    height:16px;
+
+    font-size:8px;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media(max-width:480px){
+
+  .menu-toggle,
+  .cart-icon-wrapper{
+    width:29px;
+    height:29px;
+  }
+
+  .menu-toggle svg{
+    width:18px;
+    height:14px;
+  }
+
+  .cart-icon-wrapper svg{
+    width:18px;
+    height:18px;
+  }
+
+  .cart-badge{
+    min-width:15px;
+    width:15px;
+    height:15px;
+
+    top:-3px;
+    right:-5px;
+
+    font-size:7px;
+  }
 }
 
 /* --- DRAWERS & OVERLAY --- */
@@ -270,7 +454,7 @@ header.scrolled {
   transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-.nav-drawer.active {
+.nav-drawer.active
   left: 0;
 }
 
@@ -673,7 +857,7 @@ header.scrolled {
   top: 0;
   left: 0;
   width: 0;
-  height: 100%;
+  heigactive: 0%;
   background: var(--primary-color);
   transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: -1;
@@ -1254,16 +1438,23 @@ footer {
   </nav>
 
   <!-- Mobile Menu -->
-  <div class="menu-toggle" id="menu-btn">
-    <i class="fas fa-bars"></i>
-  </div>
+<button class="menu-toggle" id="menu-btn" aria-label="Open menu">
+  <svg viewBox="0 0 32 24" aria-hidden="true">
+    <path d="M1 2h30M1 12h30M1 22h30"/>
+  </svg>
+</button>
 
-  <!-- Cart -->
-  <div class="nav-right">
-    <div class="cart-icon-wrapper" id="cart-icon-btn">
-      <i class="fas fa-shopping-cart"></i>
-      <span class="cart-badge" id="cart-count">0</span>
-    </div>
+<div class="nav-right">
+  <button class="cart-icon-wrapper" id="cart-icon-btn" aria-label="Shopping cart">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M4 6h4l3.1 14.2a2 2 0 0 0 2 1.6h10.8a2 2 0 0 0 1.9-1.4L29 11H9"/>
+      <circle cx="13" cy="27" r="1.8"/>
+      <circle cx="25" cy="27" r="1.8"/>
+    </svg>
+
+    <span class="cart-badge" id="cart-count">0</span>
+  </button>
+</div>
   </div>
 
 </header>
