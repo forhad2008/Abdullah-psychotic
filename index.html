@@ -2650,6 +2650,35 @@ bgMusic.volume = 0.7;
 
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+
+    const menuBtn = document.getElementById('menu-btn');
+    const navDrawer = document.getElementById('nav-drawer');
+    const closeDrawerBtn = document.getElementById('close-drawer-btn');
+    const overlay = document.getElementById('overlay');
+
+    function openMenu() {
+        navDrawer.classList.add('active');
+        overlay.classList.add('active');
+        document.body.classList.add('no-scroll');
+    }
+
+    function closeMenu() {
+        navDrawer.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+    }
+
+    menuBtn.addEventListener('click', openMenu);
+
+    closeDrawerBtn.addEventListener('click', closeMenu);
+
+    overlay.addEventListener('click', closeMenu);
+
+    window.closeAll = closeMenu;
+
+});
+
 </script>
 
 </body>
