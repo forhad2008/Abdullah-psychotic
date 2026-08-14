@@ -1311,11 +1311,36 @@ background: url('welc.webp') center center / cover no-repeat;
     color:#000000;
 }
 
-
-  /* =========================
-   Desktop Navigation
+/* =========================
+   NAVBAR DESKTOP
 ========================= */
 
+header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 45px;
+  padding: 0 5%;
+}
+
+/* Logo on LEFT */
+.logo-container {
+  position: static;
+  transform: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+}
+
+.logo-img {
+  height: 85px;
+  width: auto;
+  margin-top: 0;
+  object-fit: contain;
+}
+
+/* Navigation */
 .desktop-nav {
   display: flex;
   align-items: center;
@@ -1352,37 +1377,57 @@ background: url('welc.webp') center center / cover no-repeat;
   width: 100%;
 }
 
+/* Cart goes to RIGHT */
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
 
-/* =========================
-   Desktop Layout
-========================= */
-
-@media (min-width: 993px) {
-
-  .menu-toggle {
-    display: none;
-  }
-
-  .nav-left {
-    display: flex;
-    align-items: center;
-  }
-
+/* Hide hamburger on desktop */
+.menu-toggle {
+  display: none;
 }
 
 
 /* =========================
-   Tablet / Mobile
+   MOBILE / TABLET
 ========================= */
 
 @media (max-width: 992px) {
 
+  header {
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  /* Hide desktop nav */
   .desktop-nav {
     display: none;
   }
 
+  /* Show hamburger */
   .menu-toggle {
     display: block;
+    order: 1;
+  }
+
+  /* Logo center */
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .logo-img {
+    height: 92px;
+    margin-top: 20px;
+  }
+
+  /* Cart right */
+  .nav-right {
+    margin-left: auto;
+    order: 3;
   }
 
 }
@@ -1399,29 +1444,25 @@ background: url('welc.webp') center center / cover no-repeat;
 </div>
 
 <header id="navbar">
-  <!-- Desktop Navigation / Mobile Menu -->
-  <div class="nav-left">
 
-    <!-- Hamburger: শুধু mobile/tablet-এ -->
-    <div class="menu-toggle" id="menu-btn">
-      <i class="fas fa-bars"></i>
-    </div>
-
-    <!-- Desktop Navigation -->
-    <nav class="desktop-nav">
-      <a href="#home">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="#shop">Shop</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-  </div>
-
-  <!-- Center Logo -->
+  <!-- Logo -->
   <div class="logo-container">
     <a href="#home">
       <img src="logo0.webp" alt="Abdullah Psychotic" class="logo-img">
     </a>
+  </div>
+
+  <!-- Desktop Navigation -->
+  <nav class="desktop-nav">
+    <a href="#home">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="#shop">Shop</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="menu-toggle" id="menu-btn">
+    <i class="fas fa-bars"></i>
   </div>
 
   <!-- Cart -->
@@ -1431,6 +1472,7 @@ background: url('welc.webp') center center / cover no-repeat;
       <span class="cart-badge" id="cart-count">0</span>
     </div>
   </div>
+
 </header>
 
 <div class="overlay" id="overlay"></div>
