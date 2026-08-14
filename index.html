@@ -1725,10 +1725,9 @@ header {
 </footer>
 
 <script>
-
 /* ----------------------------------------------------
    0. WELCOME SCREEN CONTROLLER
-   Typing Animation + Typing Sound
+   Auto Typing Animation + Typing Sound
 ---------------------------------------------------- */
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -1737,11 +1736,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const heroContent = document.querySelector('.hero-content');
     const typingText = document.getElementById('typing-text');
 
-    if (!welcomeScreen) return;
+    if (!welcomeScreen || !typingText) return;
 
 
     /* =========================
-       Lock scrolling
+       Lock Scrolling
     ========================= */
 
     document.body.classList.add('no-scroll');
@@ -1767,6 +1766,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (hasSeenWelcome) {
 
         welcomeScreen.style.display = 'none';
+
         document.body.classList.remove('no-scroll');
 
         if (heroContent) {
@@ -1782,6 +1782,7 @@ window.addEventListener('DOMContentLoaded', () => {
     ========================= */
 
     const text = "Abdullah Psychotic";
+
     let index = 0;
 
 
@@ -1792,8 +1793,14 @@ window.addEventListener('DOMContentLoaded', () => {
     const typingSound = new Audio('typing.mp3');
 
     typingSound.preload = 'auto';
+
+    /*
+       Loop keeps the typing sound playing
+       while characters are being typed.
+    */
     typingSound.loop = true;
-    typingSound.volume = 1;
+
+    typingSound.volume = 1.0;
 
 
     /* =========================
@@ -1804,10 +1811,33 @@ window.addEventListener('DOMContentLoaded', () => {
 
         typingSound.currentTime = 0;
 
-        typingSound.play().catch(() => {
-            // Browser autoplay restriction
-        });
+        const playPromise = typingSound.play();
 
+        if (playPromise !== undefined) {
+
+            playPromise
+                .then(() => {
+
+                    console.log(
+                        'Typing sound started'
+                    );
+
+                })
+                .catch((error) => {
+
+                    /*
+                       Browser may block autoplay
+                       on some mobile devices.
+                    */
+
+                    console.log(
+                        'Typing sound autoplay blocked:',
+                        error
+                    );
+
+                });
+
+        }
     }
 
 
@@ -1818,6 +1848,7 @@ window.addEventListener('DOMContentLoaded', () => {
     function stopTypingSound() {
 
         typingSound.pause();
+
         typingSound.currentTime = 0;
 
     }
@@ -1831,83 +1862,131 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (index < text.length) {
 
-            /* Start sound with first character */
+
+            /* -------------------------
+               Start sound with
+               first character
+            ------------------------- */
+
             if (index === 0) {
+
                 startTypingSound();
+
             }
 
 
-            /* Type character */
+            /* -------------------------
+               Type current character
+            ------------------------- */
+
             typingText.textContent +=
                 text.charAt(index);
 
             index++;
 
 
-            /* Next character */
+            /* -------------------------
+               Next character
+            ------------------------- */
+
             setTimeout(typeText, 250);
 
 
         } else {
 
+
             /* =========================
-               Typing Completely Finished
+               TYPING FINISHED
             ========================= */
 
-            // STOP typing sound immediately
+
+            /* STOP SOUND IMMEDIATELY */
+
             stopTypingSound();
 
 
-            /* Wait after typing */
+            /* =========================
+               Wait after typing
+            ========================= */
+
             setTimeout(() => {
 
-                // Fade out welcome screen
-                welcomeScreen.classList.add('fade-out');
 
-                // Remember this session
+                /* -------------------------
+                   Fade out welcome screen
+                ------------------------- */
+
+                welcomeScreen.classList.add(
+                    'fade-out'
+                );
+
+
+                /* -------------------------
+                   Remember this session
+                ------------------------- */
+
                 sessionStorage.setItem(
                     'hasSeenWelcome',
                     'true'
                 );
 
 
+                /* =========================
+                   Completely hide screen
+                ========================= */
+
                 setTimeout(() => {
 
-                    // Hide welcome screen
-                    welcomeScreen.style.display = 'none';
 
-                    // Unlock scrolling
+                    welcomeScreen.style.display =
+                        'none';
+
+
+                    /* -------------------------
+                       Unlock scrolling
+                    ------------------------- */
+
                     document.body.classList.remove(
                         'no-scroll'
                     );
 
 
-                    // Show hero section
+                    /* -------------------------
+                       Reveal hero
+                    ------------------------- */
+
                     setTimeout(() => {
 
                         if (heroContent) {
+
                             heroContent.classList.add(
                                 'animate-hero'
                             );
+
                         }
 
                     }, 300);
 
+
                 }, 700);
 
+
             }, 1500);
+
         }
+
     }
 
 
     /* =========================
-       Start Animation
+       START AUTOMATICALLY
     ========================= */
 
     typeText();
 
 });
 
+  
   
 /* ----------------------------------------------------
   1. PRODUCT DATA & GLOBAL STATE CONFIGURATION
