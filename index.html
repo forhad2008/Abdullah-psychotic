@@ -454,15 +454,22 @@ header.scrolled {
   left: 0;
 }
 
-/* =========================================
+
+  /* =========================================
    LUXURY MOBILE MENU DRAWER
 ========================================= */
 
-.nav-drawer {
+.nav-drawer,
+.nav-drawer a,
+.close-drawer,
+.close-drawer i {
   font-family: var(--font-subheading);
 }
 
-/* CLOSE BUTTON */
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
 
 .close-drawer {
   align-self: flex-end;
@@ -478,9 +485,9 @@ header.scrolled {
 
   color: var(--text-main);
 
-  font-family: var(--font-subheading);
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 500;
+  letter-spacing: 2px;
 
   cursor: pointer;
 
@@ -495,7 +502,8 @@ header.scrolled {
 }
 
 .close-drawer i {
-  font-size: 17px;
+  font-size: 15px;
+  line-height: 1;
 }
 
 .close-drawer:hover {
@@ -506,7 +514,9 @@ header.scrolled {
 }
 
 
-/* MENU LINKS */
+/* =========================================
+   MENU LINKS
+========================================= */
 
 .drawer-links {
   display: flex;
@@ -524,13 +534,13 @@ header.scrolled {
 
   padding: 0 5px;
 
-  font-family: var(--font-subheading);
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 3px;
 
   color: var(--text-main);
   text-transform: uppercase;
+  text-decoration: none;
 
   border-bottom: 1px solid rgba(255,255,255,0.07);
 
@@ -541,7 +551,9 @@ header.scrolled {
 }
 
 
-/* RED LINE */
+/* =========================================
+   RED LINE
+========================================= */
 
 .drawer-links a::before {
   content: '';
@@ -559,7 +571,9 @@ header.scrolled {
 }
 
 
-/* HOVER */
+/* =========================================
+   HOVER
+========================================= */
 
 .drawer-links a:hover {
   color: var(--primary-color);
@@ -571,6 +585,7 @@ header.scrolled {
   width: 100%;
   }
 
+  
   
 .overlay {
   position: fixed;
