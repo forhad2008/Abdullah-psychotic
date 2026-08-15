@@ -24,7 +24,7 @@
      BRAND COLORS
   ========================= */
 
-  --primary-color: #C1121F;
+  --primary-color: #a8040f;
   --primary-hover: #780000;
 
   --bg-dark: #050505;
@@ -247,36 +247,20 @@ textarea {
 ========================================================= */
 
 header {
-
   position: fixed;
-
   top: 0;
   left: 0;
-
   width: 100%;
-
   height: 90px;
-
   padding: 0 5%;
-
   display: flex;
-
   align-items: center;
-
   justify-content: flex-start;
-
   gap: 65px;
-
-
-
-
   z-index: 900;
-
-  transition:
-    height .4s ease,
-    background .4s ease,
-    border .4s ease;
 }
+
+
 
 header.scrolled {
 
@@ -343,15 +327,25 @@ header.scrolled {
 /* =========================================================
    DESKTOP NAVIGATION
 ========================================================= */
-
+/* Center Desktop Navigation */
 .desktop-nav {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
   display: flex;
-
   align-items: center;
-
-  gap: 40px;
+  justify-content: center;
+  gap: 35px;
 }
+
+
+
+.menu-toggle {
+    display: none;
+}
+
 
 .desktop-nav a {
 
@@ -422,42 +416,19 @@ header.scrolled {
    MENU + CART ICON BUTTONS
 ========================================================= */
 
-.menu-toggle,
+.menu-toggle {
+    display: none;
+}
+
 .cart-icon-wrapper {
-
-  position: relative;
-
-  width: 40px;
-
-  height: 40px;
-
-  padding: 0;
-
-  margin: 0;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  background: transparent;
-
-  border: 0;
-
-  border-radius: 0;
-
-  color: #f5f5f5;
-
-  cursor: pointer;
-
-  -webkit-tap-highlight-color:
-    transparent;
-
-  transition:
-    transform .25s ease,
-    color .25s ease,
-    opacity .25s ease;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu-toggle svg,
