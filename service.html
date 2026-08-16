@@ -18,11 +18,8 @@
     --accent: #E6004C;
     --accent-glow: rgba(230, 0, 76, 0.4);
 
-    --accent-gradient: linear-gradient(
-        135deg,
-        #FF0055 0%,
-        #990033 100%
-    );
+    --accent-gradient:
+        linear-gradient(135deg, #FF0055 0%, #990033 100%);
 
     --text: #F3F4F6;
     --muted: #9CA3AF;
@@ -45,11 +42,12 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* =========================================
+/* =====================================================
    AMBIENT BACKGROUND
-========================================= */
+===================================================== */
 
 body::before,
 body::after {
@@ -61,7 +59,9 @@ body::after {
     filter: blur(140px);
     z-index: -1;
     pointer-events: none;
-    animation: pulseGlow 8s infinite alternate ease-in-out;
+
+    animation:
+        pulseGlow 8s infinite alternate ease-in-out;
 }
 
 body::before {
@@ -78,6 +78,7 @@ body::after {
 }
 
 @keyframes pulseGlow {
+
     0% {
         transform: scale(1) translate(0, 0);
         opacity: 0.6;
@@ -89,12 +90,30 @@ body::after {
     }
 }
 
-/* =========================================
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 20px;
+}
+
+/* =====================================================
    HEADER
-========================================= */
+===================================================== */
 
 header {
     padding: 20px 8%;
+
     border-bottom: 1px solid var(--border);
 
     display: flex;
@@ -106,8 +125,13 @@ header {
 
     position: sticky;
     top: 0;
+
     z-index: 100;
 }
+
+/* =====================================================
+   LOGO
+===================================================== */
 
 .logo {
     display: flex;
@@ -118,17 +142,21 @@ header {
 .logo img {
     height: 55px;
     width: auto;
+
     object-fit: contain;
     display: block;
 
-    transition: transform 0.3s ease;
+    transition:
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .logo img:hover {
     transform: scale(1.05);
 }
 
-/* Home Button */
+/* =====================================================
+   HOME BUTTON
+===================================================== */
 
 .home-btn {
     text-decoration: none;
@@ -151,25 +179,28 @@ header {
 
 .home-btn:hover {
     background: var(--accent-gradient);
+
     border-color: transparent;
 
-    box-shadow: 0 0 20px var(--accent-glow);
+    box-shadow:
+        0 0 20px var(--accent-glow);
 
     transform: translateY(-2px);
 }
 
-/* =========================================
+/* =====================================================
    MAIN CONTAINER
-========================================= */
+===================================================== */
 
 .container {
     width: min(800px, 92%);
-    margin: 50px auto;
+
+    margin: 50px auto 70px;
 }
 
-/* =========================================
+/* =====================================================
    POLICY CARD
-========================================= */
+===================================================== */
 
 .policy-card {
     background: var(--card-bg);
@@ -205,7 +236,12 @@ header {
         0 30px 90px -10px rgba(230, 0, 76, 0.15);
 }
 
+/* =====================================================
+   CARD ENTRANCE
+===================================================== */
+
 @keyframes cardEntrance {
+
     0% {
         opacity: 0;
         transform: translateY(30px);
@@ -217,7 +253,12 @@ header {
     }
 }
 
+/* =====================================================
+   CARD FLOAT
+===================================================== */
+
 @keyframes floatCard {
+
     0%,
     100% {
         transform: translateY(0);
@@ -228,9 +269,9 @@ header {
     }
 }
 
-/* =========================================
-   ANIMATED TOP BAR
-========================================= */
+/* =====================================================
+   ANIMATED TOP ACCENT
+===================================================== */
 
 .policy-card::before {
     content: '';
@@ -238,7 +279,6 @@ header {
     position: absolute;
 
     top: 0;
-
     left: 10%;
     right: 10%;
 
@@ -248,13 +288,15 @@ header {
 
     border-radius: 2px;
 
-    box-shadow: 0 0 15px var(--accent);
+    box-shadow:
+        0 0 15px var(--accent);
 
     animation:
         shimmerBar 3s infinite alternate ease-in-out;
 }
 
 @keyframes shimmerBar {
+
     0% {
         opacity: 0.5;
         left: 15%;
@@ -268,9 +310,9 @@ header {
     }
 }
 
-/* =========================================
-   TITLE
-========================================= */
+/* =====================================================
+   MAIN TITLE
+===================================================== */
 
 h1 {
     font-family: 'Syne', sans-serif;
@@ -294,9 +336,9 @@ h1 {
     margin-bottom: 4px;
 }
 
-/* =========================================
+/* =====================================================
    LAST UPDATED
-========================================= */
+===================================================== */
 
 .last-update {
     display: inline-block;
@@ -315,16 +357,18 @@ h1 {
 
     padding: 3px 8px;
 
-    background: rgba(230, 0, 76, 0.1);
+    background:
+        rgba(230, 0, 76, 0.1);
 
     border-radius: 12px;
 
-    border: 1px solid rgba(230, 0, 76, 0.2);
+    border:
+        1px solid rgba(230, 0, 76, 0.2);
 }
 
-/* =========================================
+/* =====================================================
    INTRO
-========================================= */
+===================================================== */
 
 .intro-text {
     font-size: 11px;
@@ -338,12 +382,18 @@ h1 {
     font-weight: 300;
 }
 
-/* =========================================
+.intro-text strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* =====================================================
    SECTION HEADINGS
-========================================= */
+===================================================== */
 
 h2 {
     margin-top: 25px;
+
     margin-bottom: 10px;
 
     font-size: 13px;
@@ -365,22 +415,26 @@ h2::before {
     display: inline-block;
 
     width: 4px;
+
     height: 12px;
 
-    background: var(--accent-gradient);
+    background:
+        var(--accent-gradient);
 
     border-radius: 3px;
 
-    transition: transform 0.3s ease;
+    transition:
+        transform 0.3s ease;
 }
 
 .policy-card:hover h2::before {
-    transform: scaleY(1.3);
+    transform:
+        scaleY(1.3);
 }
 
-/* =========================================
+/* =====================================================
    PARAGRAPHS
-========================================= */
+===================================================== */
 
 p {
     color: var(--muted);
@@ -390,9 +444,13 @@ p {
     line-height: 1.6;
 }
 
-/* =========================================
-   LISTS
-========================================= */
+p strong {
+    color: #E5E7EB;
+}
+
+/* =====================================================
+   LIST
+===================================================== */
 
 ul {
     margin-top: 10px;
@@ -402,15 +460,20 @@ ul {
     display: grid;
 
     grid-template-columns:
-        repeat(auto-fit, minmax(220px, 1fr));
+        repeat(
+            auto-fit,
+            minmax(180px, 1fr)
+        );
 
     gap: 8px;
 }
 
 li {
-    background: rgba(255, 255, 255, 0.02);
+    background:
+        rgba(255, 255, 255, 0.02);
 
-    border: 1px solid var(--border);
+    border:
+        1px solid var(--border);
 
     padding: 8px 12px;
 
@@ -420,12 +483,19 @@ li {
 
     font-size: 9.5px;
 
+    line-height: 1.5;
+
     display: flex;
 
     align-items: flex-start;
 
     transition:
-        all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        all 0.3s cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        );
 }
 
 li::before {
@@ -446,12 +516,14 @@ li::before {
 }
 
 li:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background:
+        rgba(255, 255, 255, 0.06);
 
     border-color:
         rgba(230, 0, 76, 0.4);
 
-    transform: translateX(4px);
+    transform:
+        translateX(4px);
 }
 
 li:hover::before {
@@ -459,66 +531,132 @@ li:hover::before {
         rotate(90deg) scale(1.2);
 }
 
-/* =========================================
-   INLINE LINKS
-========================================= */
+li strong {
+    color: #fff;
+}
 
-.policy-card a {
+/* =====================================================
+   INLINE LINKS
+===================================================== */
+
+.policy-link {
     color: var(--accent);
 
-    text-decoration: underline;
+    text-decoration: none;
 
-    text-decoration-color:
-        rgba(230, 0, 76, 0.5);
+    border-bottom:
+        1px solid rgba(230, 0, 76, 0.35);
 
-    transition: 0.3s ease;
+    transition:
+        all 0.3s ease;
 }
 
-.policy-card a:hover {
-    color: #FF4D86;
+.policy-link:hover {
+    color: #ff4d86;
 
-    text-decoration-color: var(--accent);
+    border-bottom-color:
+        var(--accent);
 }
 
-/* =========================================
+/* =====================================================
+   CONTACT BOX
+===================================================== */
+
+.contact-box {
+    margin-top: 10px;
+
+    padding: 12px 16px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255, 255, 255, 0.02);
+
+    border:
+        1px dashed var(--border);
+
+    display: inline-block;
+
+    transition:
+        border-color 0.3s ease;
+}
+
+.contact-box:hover {
+    border-color:
+        var(--accent);
+}
+
+.contact-box a {
+    color: var(--text);
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    transition:
+        0.3s;
+}
+
+.contact-box a:hover {
+    color:
+        var(--accent);
+}
+
+/* =====================================================
    FOOTER
-========================================= */
+===================================================== */
 
 footer {
     text-align: center;
 
     padding: 30px;
 
-    border-top: 1px solid var(--border);
+    border-top:
+        1px solid var(--border);
 
     margin-top: 60px;
 
     color: var(--muted);
 
     font-size: 10px;
+
+    letter-spacing: 0.2px;
 }
 
-/* =========================================
-   RESPONSIVE
-========================================= */
+/* =====================================================
+   MOBILE
+===================================================== */
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
 
     header {
-        padding: 15px 5%;
+        padding:
+            16px 5%;
     }
 
     .logo img {
         height: 48px;
     }
 
+    .home-btn {
+        padding:
+            7px 15px;
+
+        font-size: 10px;
+    }
+
     .container {
         width: 92%;
-        margin: 35px auto;
+
+        margin:
+            35px auto 55px;
     }
 
     .policy-card {
         padding: 25px;
+
         border-radius: 17px;
     }
 
@@ -526,17 +664,51 @@ footer {
         font-size: 22px;
     }
 
+    .intro-text {
+        font-size: 11px;
+    }
+
+    h2 {
+        font-size: 13px;
+    }
+
+    p {
+        font-size: 10px;
+    }
+
     ul {
         grid-template-columns: 1fr;
     }
 
-    .home-btn {
-        padding: 7px 15px;
-        font-size: 10px;
+    li {
+        font-size: 9.5px;
+    }
+
+    footer {
+        padding: 25px 15px;
+        margin-top: 40px;
     }
 }
 
-@media(max-width: 400px) {
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+    header {
+        padding:
+            14px 4%;
+    }
+
+    .logo img {
+        height: 44px;
+    }
+
+    .home-btn {
+        padding:
+            6px 13px;
+    }
 
     .policy-card {
         padding: 22px 18px;
@@ -545,21 +717,21 @@ footer {
     h1 {
         font-size: 20px;
     }
+}
 
-    .intro-text {
-        font-size: 10.5px;
-    }
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
 
-    h2 {
-        font-size: 12px;
-    }
+@media (prefers-reduced-motion: reduce) {
 
-    p {
-        font-size: 9.5px;
-    }
-
-    li {
-        font-size: 9px;
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
     }
 }
 </style>
@@ -567,9 +739,9 @@ footer {
 
 <body>
 
-<!-- =========================================
+<!-- =====================================================
      HEADER
-========================================= -->
+===================================================== -->
 
 <header>
 
@@ -587,9 +759,9 @@ footer {
 </header>
 
 
-<!-- =========================================
+<!-- =====================================================
      TERMS CONTENT
-========================================= -->
+===================================================== -->
 
 <div class="container">
 
@@ -607,8 +779,7 @@ footer {
             By accessing our website, interacting with our digital
             storefront, or purchasing our products, you agree to be
             bound by these Terms of Service. Please review these
-            terms carefully before using our website or placing an
-            order.
+            terms carefully before engaging with our brand.
         </p>
 
 
@@ -618,9 +789,11 @@ footer {
 
         <p>
             These Terms of Service govern your use of the website
-            and services provided by Abdullah Psychotic. By accessing
-            any part of our website, you acknowledge that you have
-            read, understood, and agreed to these terms.
+            and services provided by Abdullah Psychotic. Accessing
+            any part of our website constitutes acceptance of these
+            terms. If you do not agree with the conditions outlined
+            herein, you should not access the platform or use our
+            services.
         </p>
 
 
@@ -629,31 +802,40 @@ footer {
         <h2>Limited Drops & Exclusive Orders</h2>
 
         <p>
-            Due to the exclusive nature and custom craftsmanship of
-            Abdullah Psychotic products, many pieces are produced in
-            limited quantities or made to order.
+            Due to the exclusive nature and custom craftsmanship
+            of Abdullah Psychotic creations, products may be
+            produced in limited quantities or made to order.
         </p>
 
         <ul>
 
             <li>
-                <strong>Order Acceptance:</strong>
-                All orders are subject to product availability and
-                confirmation of payment. We reserve the right to
-                limit quantities per customer or household.
+                <span>
+                    <strong>Order Acceptance:</strong>
+                    All orders are subject to availability and
+                    confirmation of payment. We reserve the right
+                    to limit order quantities per customer or
+                    household.
+                </span>
             </li>
 
             <li>
-                <strong>Production Timeline:</strong>
-                Made-to-order and limited-run products may require
-                up to 14 weeks (98 days) for production.
+                <span>
+                    <strong>Production Timelines:</strong>
+                    Items manufactured on demand or in limited
+                    runs may require a maximum production period
+                    of up to 14 weeks (98 days).
+                </span>
             </li>
 
             <li>
-                <strong>Pricing & Modifications:</strong>
-                Product prices may change without prior notice.
-                We may modify or discontinue products or services
-                at our discretion.
+                <span>
+                    <strong>Pricing & Modifications:</strong>
+                    Product prices may change without notice.
+                    We reserve the right to modify, replace, or
+                    discontinue products or services at our
+                    discretion.
+                </span>
             </li>
 
         </ul>
@@ -664,12 +846,18 @@ footer {
         <h2>Purchases & Finality</h2>
 
         <p>
-            All purchases made through Abdullah Psychotic are
-            generally final. Cancellations, refunds, and exchanges
-            are subject to our
-            <a href="refund-policy.html">
+            All sales conducted through Abdullah Psychotic are
+            strictly final. As detailed in our
+            <a
+                href="refund-policy.html"
+                class="policy-link"
+            >
                 Refunds & Returns Policy
-            </a>.
+            </a>,
+            cancellations, refunds, or exchanges are generally
+            not permitted once an order has been successfully
+            placed, except where specifically stated in that
+            policy.
         </p>
 
 
@@ -678,17 +866,20 @@ footer {
         <h2>Intellectual Property</h2>
 
         <p>
-            All content available on this website, including logos,
-            branding, graphics, product designs, photographs,
-            typography, product names, written content, media, and
-            website code, is owned by or licensed to
-            <strong>Abdullah Psychotic</strong>.
+            All content hosted on this platform, including visual
+            designs, branding elements, graphics, logos,
+            typography, product names, photography, media,
+            written content, and website code, is the exclusive
+            intellectual property of
+            <strong>Abdullah Psychotic</strong>
+            unless otherwise stated.
         </p>
 
-        <p style="margin-top:10px;">
-            Unauthorized copying, reproduction, distribution,
-            modification, or commercial exploitation of our content
-            is prohibited without prior written permission.
+        <p style="margin-top:8px;">
+            Unauthorized reproduction, distribution,
+            modification, copying, or commercial exploitation
+            of our intellectual property without prior written
+            permission is strictly prohibited.
         </p>
 
 
@@ -697,16 +888,17 @@ footer {
         <h2>Shipping & Risk of Loss</h2>
 
         <p>
-            Orders may be delivered through third-party shipping
-            and logistics providers. Once an order has been handed
-            over to the shipping carrier, delivery delays, loss,
-            theft, or damage occurring during transit may be outside
-            our direct control.
+            Orders are fulfilled through third-party shipping
+            and logistics providers. Once an order has been
+            handed over to the applicable carrier, Abdullah
+            Psychotic is not responsible for delays, loss,
+            theft, or damage occurring during transit.
         </p>
 
-        <p style="margin-top:10px;">
+        <p style="margin-top:8px;">
             Customers should use the provided tracking information
-            and contact the relevant shipping carrier when necessary.
+            and contact the shipping carrier directly when
+            assistance is required regarding a shipment.
         </p>
 
 
@@ -715,26 +907,32 @@ footer {
         <h2>Prohibited Conduct</h2>
 
         <p>
-            When using our website, you agree not to engage in
-            activities that could damage, disrupt, or misuse our
-            platform.
+            When using our website or services, you agree not to
+            engage in activities that could damage, disrupt, or
+            misuse our platform, including:
         </p>
 
         <ul>
 
             <li>
-                Automated scraping, bots, or unauthorized automated
-                purchasing systems.
+                <span>
+                    Automated scraping, bots, or automated
+                    purchasing systems during limited drops.
+                </span>
             </li>
 
             <li>
-                Submitting fraudulent payment information or
-                misrepresenting your identity.
+                <span>
+                    Submitting fraudulent payment information
+                    or intentionally misrepresenting your identity.
+                </span>
             </li>
 
             <li>
-                Attempting to breach, disrupt, or compromise the
-                security of our website.
+                <span>
+                    Attempting to breach, disrupt, manipulate,
+                    or compromise the security of our website.
+                </span>
             </li>
 
         </ul>
@@ -745,16 +943,19 @@ footer {
         <h2>Limitation of Liability</h2>
 
         <p>
-            Abdullah Psychotic is not responsible for indirect,
-            incidental, or consequential damages resulting from the
-            use of, or inability to use, our website or products,
-            except where liability cannot legally be excluded.
+            To the extent permitted by applicable law,
+            Abdullah Psychotic shall not be liable for direct,
+            indirect, incidental, or consequential damages
+            resulting from access to, use of, or inability to
+            use our website, services, or products.
         </p>
 
-        <p style="margin-top:10px;">
-            Where legally permitted, our total liability relating
-            to a particular purchase will not exceed the amount
-            actually paid for that purchase.
+        <p style="margin-top:8px;">
+            Where liability cannot legally be excluded, our
+            liability shall be limited to the amount paid by
+            the customer for the specific purchase giving rise
+            to the claim, to the extent permitted by applicable
+            law.
         </p>
 
 
@@ -763,15 +964,18 @@ footer {
         <h2>Governing Law & Updates</h2>
 
         <p>
-            These Terms of Service will be interpreted according to
-            applicable laws and regulations. We reserve the right
-            to update these terms when necessary.
+            These Terms of Service shall be interpreted and
+            applied in accordance with applicable laws and
+            regulations.
         </p>
 
-        <p style="margin-top:10px;">
-            Any updated version will be published on this page.
-            Continued use of the website after an update indicates
-            acceptance of the revised terms.
+        <p style="margin-top:8px;">
+            Abdullah Psychotic reserves the right to modify
+            or update these Terms of Service at any time.
+            Any changes will be reflected on this page with
+            an updated revision date. Continued use of the
+            website after changes are published constitutes
+            acceptance of the updated terms.
         </p>
 
 
@@ -780,39 +984,26 @@ footer {
         <h2>Customer Inquiries</h2>
 
         <p>
-            If you have questions regarding these Terms of Service,
-            your order, or any other matter concerning Abdullah
-            Psychotic, please contact us through the
-            <a href="index.html#contact">
-                Contact page
-            </a>.
+            If you have questions regarding these Terms of
+            Service, your order, or any other matter relating
+            to Abdullah Psychotic, please contact our support
+            team through the website's contact section.
         </p>
 
+        <div class="contact-box">
 
-        <!-- META -->
+            <p
+                style="
+                    font-size:9px;
+                    margin-bottom:2px;
+                "
+            >
+                Customer Support
+            </p>
 
-        <div
-            style="
-                margin-top:30px;
-                padding-top:15px;
-                border-top:1px solid var(--border);
-                color:var(--muted);
-                font-size:9px;
-                letter-spacing:0.7px;
-                display:flex;
-                justify-content:space-between;
-                gap:15px;
-                flex-wrap:wrap;
-            "
-        >
-
-            <span>
-                ABDULLAH PSYCHOTIC — LUXURY DARK STREETWEAR
-            </span>
-
-            <span>
-                TERMS OF SERVICE
-            </span>
+            <a href="index.html#contact">
+                Contact Abdullah Psychotic →
+            </a>
 
         </div>
 
@@ -821,17 +1012,367 @@ footer {
 </div>
 
 
-<!-- =========================================
+<!-- =====================================================
      FOOTER
-========================================= -->
+===================================================== -->
 
 <footer>
 
     © 2026 Abdullah Psychotic —
-    Luxury Dark Streetwear.
-    All Rights Reserved.
+    Luxury Streetwear. All Rights Reserved.
 
 </footer>
+    <script>
+/* =====================================================
+   ABDULLAH PSYCHOTIC
+   NAVIGATION + CART CONTROLLER
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* -----------------------------
+     CART DATA
+  ----------------------------- */
+  let cart = JSON.parse(localStorage.getItem("ap_user_cart")) || [];
+
+  /* -----------------------------
+     ELEMENTS
+  ----------------------------- */
+  const navbar = document.getElementById("navbar");
+
+  const menuBtn = document.getElementById("menu-btn");
+  const closeDrawerBtn = document.getElementById("close-drawer-btn");
+
+  const cartIconBtn = document.getElementById("cart-icon-btn");
+  const closeCartBtn = document.getElementById("close-cart-btn");
+
+  const navDrawer = document.getElementById("nav-drawer");
+  const cartDrawer = document.getElementById("cart-drawer");
+  const overlay = document.getElementById("overlay");
+
+  const cartItemsContainer =
+    document.getElementById("cart-items-container");
+
+  const cartCount =
+    document.getElementById("cart-count");
+
+  const cartSubtotal =
+    document.getElementById("cart-subtotal");
+
+
+  /* =====================================================
+     SAVE CART
+  ===================================================== */
+
+  function saveCart() {
+    localStorage.setItem(
+      "ap_user_cart",
+      JSON.stringify(cart)
+    );
+  }
+
+
+  /* =====================================================
+     UPDATE CART
+  ===================================================== */
+
+  function updateCartUI() {
+
+    let totalItems = 0;
+    let subtotal = 0;
+
+    if (!cartItemsContainer) return;
+
+    if (cart.length === 0) {
+
+      cartItemsContainer.innerHTML = `
+        <p class="empty-cart-msg">
+          Your shopping bag is empty.
+        </p>
+      `;
+
+    } else {
+
+      cartItemsContainer.innerHTML = cart.map(item => {
+
+        const quantity = Number(item.qty) || 0;
+        const price = Number(item.price) || 0;
+
+        totalItems += quantity;
+        subtotal += price * quantity;
+
+        return `
+          <div class="cart-item">
+
+            <img
+              src="${item.image || ""}"
+              alt="${item.name || "Product"}"
+            >
+
+            <div class="cart-item-details">
+
+              <div class="cart-item-title">
+                ${item.name || "Product"}
+              </div>
+
+              <div class="cart-item-price">
+                $${price.toFixed(2)}
+              </div>
+
+              <div class="cart-qty-controls">
+
+                <button
+                  class="qty-btn"
+                  type="button"
+                  onclick="changeQty(${item.id}, -1)"
+                  aria-label="Decrease quantity"
+                >
+                  −
+                </button>
+
+                <span>${quantity}</span>
+
+                <button
+                  class="qty-btn"
+                  type="button"
+                  onclick="changeQty(${item.id}, 1)"
+                  aria-label="Increase quantity"
+                >
+                  +
+                </button>
+
+              </div>
+
+            </div>
+
+            <button
+              class="cart-item-remove"
+              type="button"
+              onclick="removeItem(${item.id})"
+              aria-label="Remove ${item.name || "product"}"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+
+          </div>
+        `;
+
+      }).join("");
+    }
+
+    cartCount.textContent = totalItems;
+    cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+  }
+
+
+  /* =====================================================
+     CHANGE QUANTITY
+  ===================================================== */
+
+  window.changeQty = function(id, delta) {
+
+    const item = cart.find(product => product.id === id);
+
+    if (!item) return;
+
+    item.qty = (Number(item.qty) || 0) + delta;
+
+    if (item.qty <= 0) {
+
+      cart = cart.filter(
+        product => product.id !== id
+      );
+
+    }
+
+    saveCart();
+    updateCartUI();
+  };
+
+
+  /* =====================================================
+     REMOVE ITEM
+  ===================================================== */
+
+  window.removeItem = function(id) {
+
+    cart = cart.filter(
+      product => product.id !== id
+    );
+
+    saveCart();
+    updateCartUI();
+  };
+
+
+  /* =====================================================
+     CLOSE ALL DRAWERS
+  ===================================================== */
+
+  function closeAll() {
+
+    navDrawer.classList.remove("active");
+    cartDrawer.classList.remove("active");
+    overlay.classList.remove("active");
+
+    document.body.classList.remove("no-scroll");
+  }
+
+
+  /* =====================================================
+     OPEN NAVIGATION
+  ===================================================== */
+
+  function openNavigation() {
+
+    cartDrawer.classList.remove("active");
+
+    navDrawer.classList.add("active");
+    overlay.classList.add("active");
+
+    document.body.classList.add("no-scroll");
+  }
+
+
+  /* =====================================================
+     OPEN CART
+  ===================================================== */
+
+  function openCart() {
+
+    navDrawer.classList.remove("active");
+
+    cartDrawer.classList.add("active");
+    overlay.classList.add("active");
+
+    document.body.classList.add("no-scroll");
+
+    updateCartUI();
+  }
+
+
+  /* =====================================================
+     EVENT LISTENERS
+  ===================================================== */
+
+  if (menuBtn) {
+    menuBtn.addEventListener(
+      "click",
+      openNavigation
+    );
+  }
+
+  if (closeDrawerBtn) {
+    closeDrawerBtn.addEventListener(
+      "click",
+      closeAll
+    );
+  }
+
+  if (cartIconBtn) {
+    cartIconBtn.addEventListener(
+      "click",
+      openCart
+    );
+  }
+
+  if (closeCartBtn) {
+    closeCartBtn.addEventListener(
+      "click",
+      closeAll
+    );
+  }
+
+  if (overlay) {
+    overlay.addEventListener(
+      "click",
+      closeAll
+    );
+  }
+
+
+  /* =====================================================
+     CLOSE WITH ESC KEY
+  ===================================================== */
+
+  document.addEventListener("keydown", event => {
+
+    if (event.key === "Escape") {
+      closeAll();
+    }
+
+  });
+
+
+  /* =====================================================
+     CLOSE DRAWER AFTER CLICKING A LINK
+  ===================================================== */
+
+  document
+    .querySelectorAll(".drawer-links a")
+    .forEach(link => {
+
+      link.addEventListener("click", () => {
+        closeAll();
+      });
+
+    });
+
+
+  /* =====================================================
+     HEADER SCROLL EFFECT
+  ===================================================== */
+
+  function handleHeaderScroll() {
+
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+
+  }
+
+  window.addEventListener(
+    "scroll",
+    handleHeaderScroll,
+    { passive: true }
+  );
+
+
+  /* =====================================================
+     UPDATE CART IF CHANGED IN ANOTHER TAB
+  ===================================================== */
+
+  window.addEventListener("storage", event => {
+
+    if (event.key === "ap_user_cart") {
+
+      try {
+
+        cart = JSON.parse(event.newValue) || [];
+
+      } catch {
+
+        cart = [];
+
+      }
+
+      updateCartUI();
+    }
+
+  });
+
+
+  /* =====================================================
+     INITIALIZE
+  ===================================================== */
+
+  handleHeaderScroll();
+  updateCartUI();
+
+});
+    </script>
 
 </body>
 </html>
