@@ -124,13 +124,11 @@ button {
 
 
 /* =========================================================
-   HEADER — SAME STYLE AS FIRST HTML
+   HEADER — FIRST HTML STYLE
 ========================================================= */
 
 header {
-
   position: fixed;
-
   top: 0;
   left: 0;
 
@@ -140,28 +138,24 @@ header {
   padding: 0 5%;
 
   display: flex;
-
   align-items: center;
 
-  justify-content: flex-start;
-
-  gap: 65px;
-
-  background: rgba(5,5,5,1);
+  background: rgba(5, 5, 5, 1);
 
   z-index: 999;
 
-  transition: all .4s ease;
+  transition:
+    height .4s ease,
+    background .4s ease,
+    border-color .4s ease;
 }
 
 header.scrolled {
-
   height: 75px;
 
-  background: rgba(5,5,5,.95);
+  background: rgba(5, 5, 5, .95);
 
   backdrop-filter: blur(15px);
-
   -webkit-backdrop-filter: blur(15px);
 
   border-bottom: 1px solid var(--border-color);
@@ -173,35 +167,25 @@ header.scrolled {
 ========================================================= */
 
 .logo-container {
+  flex-shrink: 0;
 
   display: flex;
-
   align-items: center;
-
-  justify-content: flex-start;
-
-  flex-shrink: 0;
 }
 
 .logo-container a {
-
   display: flex;
-
   align-items: center;
 }
 
 .logo-img {
-
   width: auto;
-
   height: 110px;
 
   object-fit: contain;
 
   filter:
-    drop-shadow(
-      0 2px 8px rgba(0,0,0,.5)
-    );
+    drop-shadow(0 2px 8px rgba(0,0,0,.5));
 
   transition:
     height .4s ease,
@@ -214,33 +198,87 @@ header.scrolled {
 
 
 /* =========================================================
-   LEFT / RIGHT NAV
+   DESKTOP NAV
 ========================================================= */
 
-.nav-left {
+.desktop-nav {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
 
   display: flex;
-
   align-items: center;
+
+  gap: 30px;
+
+  white-space: nowrap;
 }
 
-.nav-right {
+.desktop-nav a {
+  position: relative;
 
+  color: var(--text-main);
+
+  font-family: var(--font-modern);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  transition:
+    color .3s ease,
+    transform .3s ease;
+}
+
+.desktop-nav a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -7px;
+
+  width: 0;
+  height: 1px;
+
+  background: var(--primary-color);
+
+  transition: width .3s ease;
+}
+
+.desktop-nav a:hover,
+.desktop-nav a.active {
+  color: var(--primary-color);
+}
+
+.desktop-nav a:hover::after,
+.desktop-nav a.active::after {
+  width: 100%;
+}
+
+
+/* =========================================================
+   NAV RIGHT
+========================================================= */
+
+.nav-right {
   margin-left: auto;
 
   display: flex;
-
   align-items: center;
 }
 
 
 /* =========================================================
-   MENU + CART BUTTONS
+   MENU / CART BUTTON
 ========================================================= */
 
 .menu-toggle,
 .cart-icon-wrapper {
-
   position: relative;
 
   width: 40px;
@@ -250,56 +288,58 @@ header.scrolled {
   margin: 0;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
-  background: #fff;
+  background: transparent;
 
   border: 0;
 
-  color: #000;
+  color: var(--text-main);
 
   cursor: pointer;
 
   box-sizing: border-box;
 
   transition:
-    transform .3s ease,
     color .3s ease,
-    background .3s ease;
+    transform .3s ease;
 }
 
 .menu-toggle:hover,
 .cart-icon-wrapper:hover {
+  color: var(--primary-color);
 
-  color: #a50505;
-
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
 .menu-toggle:active,
 .cart-icon-wrapper:active {
-
-  transform: scale(.92);
+  transform: scale(.94);
 }
 
 .menu-toggle:focus,
 .cart-icon-wrapper:focus {
-
   outline: none;
 }
 
-
-/* Font Awesome icons */
-
-.menu-toggle i {
-  font-size: 21px;
+.menu-toggle i,
+.cart-icon-wrapper i {
+  font-size: 19px;
+  line-height: 1;
 }
 
-.cart-icon-wrapper i {
-  font-size: 18px;
+
+/* =========================================================
+   MENU HIDDEN ON DESKTOP
+========================================================= */
+
+.nav-mobile-left {
+  display: none;
+}
+
+.menu-toggle {
+  display: none;
 }
 
 
@@ -308,24 +348,19 @@ header.scrolled {
 ========================================================= */
 
 .cart-badge {
-
   position: absolute;
 
-  top: 3px;
-  right: 3px;
+  top: 2px;
+  right: 2px;
 
-  width: 16px;
-  height: 16px;
-
-  min-width: 16px;
+  width: 15px;
+  height: 15px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
-  border: 1px solid #000;
+  border: 1px solid #050505;
 
   border-radius: 50%;
 
@@ -335,11 +370,23 @@ header.scrolled {
 
   font-family: var(--font-modern);
 
-  font-size: 8px;
-
+  font-size: 7px;
   font-weight: 700;
 
   line-height: 1;
+}
+
+
+/* =========================================================
+   NAV DRAWER — SAME WEIGHT AS CART DRAWER
+========================================================= */
+
+.nav-drawer,
+.cart-drawer {
+  width: min(80vw, 400px);
+  height: 100dvh;
+
+  box-sizing: border-box;
 }
 
 
@@ -348,28 +395,17 @@ header.scrolled {
 ========================================================= */
 
 .nav-drawer {
-
   position: fixed;
 
   top: 0;
-
   left: -100%;
 
-  width: min(80vw, 400px);
-
-  height: 100dvh;
-
-  padding:
-    30px
-    38px
-    60px;
+  padding: 30px 38px 60px;
 
   display: flex;
-
   flex-direction: column;
 
-  background:
-    rgba(10,10,10,.98);
+  background: rgba(10,10,10,.98);
 
   backdrop-filter: blur(20px);
 
@@ -394,7 +430,6 @@ header.scrolled {
 ========================================================= */
 
 .close-drawer {
-
   position: relative;
 
   align-self: flex-end;
@@ -421,22 +456,18 @@ header.scrolled {
 ========================================================= */
 
 .drawer-links {
-
   display: flex;
-
   flex-direction: column;
 
   gap: 25px;
 }
 
 .drawer-links a {
-
   position: relative;
 
   font-family: var(--font-modern);
 
   font-size: 13px;
-
   font-weight: 600;
 
   letter-spacing: 3px;
@@ -449,17 +480,14 @@ header.scrolled {
 }
 
 .drawer-links a::before {
-
   content: "";
 
   position: absolute;
 
   left: -18px;
-
   top: 50%;
 
   width: 0;
-
   height: 1px;
 
   background: var(--primary-color);
@@ -470,7 +498,6 @@ header.scrolled {
 }
 
 .drawer-links a:hover {
-
   color: var(--primary-color);
 
   transform: translateX(7px);
@@ -482,60 +509,16 @@ header.scrolled {
 
 
 /* =========================================================
-   OVERLAY
-========================================================= */
-
-.overlay {
-
-  position: fixed;
-
-  inset: 0;
-
-  width: 100vw;
-  height: 100vh;
-
-  background:
-    rgba(0,0,0,.72);
-
-  backdrop-filter: blur(5px);
-
-  z-index: 998;
-
-  opacity: 0;
-
-  pointer-events: none;
-
-  transition:
-    opacity .4s ease;
-
-  touch-action: none;
-}
-
-.overlay.active {
-
-  opacity: 1;
-
-  pointer-events: auto;
-}
-
-
-/* =========================================================
    CART DRAWER
 ========================================================= */
 
 .cart-drawer {
-
   position: fixed;
 
   top: 0;
-
   right: -100%;
 
-  width: 390px;
-
-  max-width: 92vw;
-
-  height: 100vh;
+  padding: 30px;
 
   background: #080808;
 
@@ -545,10 +528,7 @@ header.scrolled {
   z-index: 1001;
 
   display: flex;
-
   flex-direction: column;
-
-  padding: 26px;
 
   transition:
     right .4s cubic-bezier(.77,0,.175,1);
@@ -557,6 +537,8 @@ header.scrolled {
 .cart-drawer.active {
   right: 0;
 }
+     
+ 
 
 
 /* =========================================================
@@ -1804,7 +1786,6 @@ footer {
   text-transform: uppercase;
 }
 
-
 /* =========================================================
    TABLET
 ========================================================= */
@@ -1812,19 +1793,33 @@ footer {
 @media (max-width: 992px) {
 
   header {
+    height: 80px;
+
+    padding: 0 5%;
 
     justify-content: space-between;
+  }
 
-    gap: 0;
+  .nav-mobile-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .desktop-nav {
+    display: none;
   }
 
   .logo-container {
-
     position: absolute;
 
     left: 50%;
+    top: 50%;
 
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
   }
 
   .logo-img {
@@ -1832,64 +1827,24 @@ footer {
   }
 
   .nav-right {
-
     margin-left: auto;
-
-    order: 3;
   }
 
   .menu-toggle,
   .cart-icon-wrapper {
-
     width: 40px;
     height: 40px;
   }
 
-
-  .menu-toggle {
-    display: flex;
+  .menu-toggle i,
+  .cart-icon-wrapper i {
+    font-size: 19px;
   }
 
-.menu-toggle svg {
-
-  width: 34px;
-  height: 30px;
-}
-
-.cart-icon-wrapper svg {
-
-  width: 24px;
-  height: 24px;
-}
-     
-  .grid-2col {
-
-    grid-template-columns: 1fr;
-
-    gap: 55px;
-  }
-
-  .about-image {
-    max-width: 750px;
-    margin: auto;
-  }
-
-  .story-grid {
-
-    grid-template-columns:
-      1fr 1fr;
-  }
-
-  .story-card:last-child {
-
-    grid-column:
-      span 2;
-  }
-
-  .footer-top {
-
-    grid-template-columns:
-      1fr 1fr;
+  .nav-drawer,
+  .cart-drawer {
+    width: 80vw;
+    max-width: 300px;
   }
 }
 
@@ -1901,19 +1856,16 @@ footer {
 @media (max-width: 768px) {
 
   header {
-
     height: 76px;
 
     padding: 0 22px;
   }
 
   header.scrolled {
-
     height: 68px;
   }
 
   .logo-img {
-
     height: 95px;
 
     margin-top: 8px;
@@ -1921,147 +1873,20 @@ footer {
 
   .menu-toggle,
   .cart-icon-wrapper {
-
     width: 40px;
     height: 40px;
   }
 
-     .menu-toggle svg {
-
-  width: 28px;
-  height: 24px;
-}
-
-.cart-icon-wrapper svg {
-
-  width: 21px;
-  height: 21px;
-}
-     
-  .menu-toggle i {
-    font-size: 19px;
-  }
-
+  .menu-toggle i,
   .cart-icon-wrapper i {
-    font-size: 17px;
+    font-size: 18px;
   }
 
-
-  .about-hero {
-
-    min-height: 80vh;
+  .nav-drawer,
+  .cart-drawer {
+    width: 80vw;
+    max-width: 300px;
   }
-
-  .about-hero-content {
-
-    padding:
-      120px 20px
-      60px;
-  }
-
-  .about-hero h1 {
-
-    font-size:
-      clamp(52px,15vw,80px);
-
-    letter-spacing:
-      -2px;
-  }
-
-  .about-hero p {
-
-    font-size: 10px;
-
-    letter-spacing: 1.5px;
-  }
-
-
-  .about-section {
-
-    padding:
-      85px 6%;
-  }
-
-  .section-title {
-
-    font-size: 47px;
-  }
-
-  .about-image img {
-
-    height: 450px;
-  }
-
-
-  .stats-banner {
-
-    grid-template-columns:
-      1fr 1fr;
-
-    padding:
-      50px 5%;
-  }
-
-  .stat-item {
-
-    border-right: 0;
-
-    border-bottom:
-      1px solid var(--border-color);
-
-    padding: 25px 10px;
-  }
-
-  .stat-item:nth-child(3),
-  .stat-item:nth-child(4) {
-
-    border-bottom: 0;
-  }
-
-
-  .story-grid {
-
-    grid-template-columns: 1fr;
-
-  }
-
-  .story-card:last-child {
-
-    grid-column:
-      auto;
-  }
-
-  .story-card {
-
-    min-height:
-      auto;
-
-    padding:
-      30px 25px;
-  }
-
-
-  .founder-quote {
-
-    font-size: 34px;
-  }
-
-
-  .final-section {
-
-    padding:
-      100px 6%;
-  }
-
-
-  .footer-top {
-
-    grid-template-columns:
-      1fr;
-
-    gap: 40px;
-  }
-
 }
 
 
@@ -2072,102 +1897,49 @@ footer {
 @media (max-width: 480px) {
 
   header {
-
-    padding:
-      0 18px;
+    padding: 0 18px;
   }
 
   .logo-img {
-
     height: 82px;
-
     margin-top: 8px;
   }
 
   .menu-toggle,
   .cart-icon-wrapper {
-
     width: 30px;
     height: 30px;
   }
 
-     .menu-toggle svg {
-
-  width: 24px;
-  height: 20px;
-}
-
-.cart-icon-wrapper svg {
-
-  width: 19px;
-  height: 19px;
-}
-     
-  .menu-toggle i {
+  .menu-toggle i,
+  .cart-icon-wrapper i {
     font-size: 16px;
   }
 
-  .cart-icon-wrapper i {
-    font-size: 15px;
+  .cart-badge {
+    top: 2px;
+    right: 2px;
+
+    width: 13px;
+    height: 13px;
+
+    font-size: 6px;
   }
 
-  .cart-badge {
-
-    top: 4px;
-    right: 4px;
-
-    width: 14px;
-    height: 14px;
-
-    min-width: 14px;
-
-    font-size: 7px;
+  .nav-drawer,
+  .cart-drawer {
+    width: 75vw;
+    max-width: 75vw;
   }
 
   .nav-drawer {
-
-    width: 75vw;
-
     padding:
       27px
       27px
       45px;
   }
-
-  .about-hero h1 {
-
-    font-size:
-      51px;
-  }
-
-  .about-image img {
-
-    height: 380px;
-  }
-
-  .stats-banner {
-
-    grid-template-columns:
-      1fr;
-  }
-
-  .stat-item {
-
-    border-bottom:
-      1px solid var(--border-color) !important;
-  }
-
-  .stat-item:last-child {
-
-    border-bottom:
-      0 !important;
-  }
-
-  .founder-quote {
-
-    font-size: 29px;
-  }
-}
+     }
+     
 
 </style>
 </head>
@@ -2182,57 +1954,52 @@ footer {
 
 <header id="navbar">
 
-  <div class="nav-left">
-
-    <div
+  <!-- MOBILE MENU -->
+  <div class="nav-mobile-left">
+    <button
       class="menu-toggle"
       id="menu-btn"
       aria-label="Open menu"
-      role="button"
-      tabindex="0"
+      type="button"
     >
-
       <i class="fas fa-bars"></i>
-
-    </div>
-
+    </button>
   </div>
 
-
+  <!-- LOGO -->
   <div class="logo-container">
-
     <a href="index.html">
-
       <img
         src="logo0.webp"
         alt="Abdullah Psychotic"
         class="logo-img"
       >
-
     </a>
-
   </div>
 
+  <!-- DESKTOP NAV -->
+  <nav class="desktop-nav">
+    <a href="index.html#home">HOME</a>
+    <a href="index.html#shop">SHOP</a>
+    <a href="about.html" class="active">ABOUT US</a>
+    <a href="index.html#contact">CONTACT</a>
+  </nav>
 
+  <!-- CART -->
   <div class="nav-right">
-
-    <div
+    <button
       class="cart-icon-wrapper"
       id="cart-icon-btn"
-      aria-label="Open shopping bag"
-      role="button"
-      tabindex="0"
+      aria-label="Open shopping cart"
+      type="button"
     >
-
       <i class="fas fa-shopping-cart"></i>
 
       <span
         class="cart-badge"
         id="cart-count"
       >0</span>
-
-    </div>
-
+    </button>
   </div>
 
 </header>
