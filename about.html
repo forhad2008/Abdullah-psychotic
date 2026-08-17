@@ -1,2254 +1,1215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>About Abdullah Psychotic</title>
 
-<!-- =========================================================
-     FONTS
-========================================================= -->
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
->
-
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <style>
+:root{
+  --primary-color:#c1121f;
+  --primary-dark:#780000;
+  --gold:#c8a951;
+  --bg-dark:#050505;
+  --bg-soft:#090909;
+  --card-bg:#0d0d0d;
+  --text-main:#f5f5f5;
+  --text-muted:#8d8d8d;
+  --border-color:rgba(255,255,255,.09);
+
+  --drawer-bg:#f8f7e8;
+  --drawer-text:#111;
+
+  --font-heading:"Cormorant Garamond",serif;
+  --font-body:"Manrope",sans-serif;
+  --font-modern:"DM Sans",sans-serif;
+  --font-subheading:"Cinzel",serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  background:var(--bg-dark);
+  color:var(--text-main);
+  font-family:var(--font-body);
+  font-size:15px;
+  line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body.no-scroll{overflow:hidden;touch-action:none}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+::selection{background:var(--primary-color);color:#fff}
+
+::-webkit-scrollbar{width:7px}
+::-webkit-scrollbar-track{background:#050505}
+::-webkit-scrollbar-thumb{background:var(--primary-color);border-radius:20px}
 
 /* =========================================================
-   ROOT
+   EXACT FIRST-HTML NAVBAR
 ========================================================= */
 
-:root {
-
-  --primary-color: #c1121f;
-  --primary-dark: #780000;
-
-  --gold: #c8a951;
-
-  --bg-dark: #050505;
-  --bg-soft: #090909;
-
-  --card-bg: #0d0d0d;
-  --card-bg-2: #111111;
-
-  --text-main: #f5f5f5;
-  --text-soft: #d2d2d2;
-  --text-muted: #8d8d8d;
-
-  --border-color: rgba(255,255,255,.09);
-
-  --font-heading: "Cormorant Garamond", serif;
-  --font-body: "Manrope", sans-serif;
-  --font-modern: "DM Sans", sans-serif;
-
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:90px;
+  padding:0 5%;
+  display:flex;
+  background:rgba(5,5,5,1);
+  align-items:center;
+  justify-content:flex-start;
+  gap:65px;
+  z-index:999;
+  transition:all .4s ease;
 }
 
-
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+header.scrolled{
+  height:75px;
+  background:rgba(5,5,5,.95);
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border-color);
 }
 
-html {
-  scroll-behavior: smooth;
+.logo-container{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  flex-shrink:0;
 }
 
-body {
+.logo-container a{display:flex;align-items:center}
 
-  background: var(--bg-dark);
-
-  color: var(--text-main);
-
-  font-family: var(--font-body);
-
-  font-size: 15px;
-
-  line-height: 1.7;
-
-  overflow-x: hidden;
-
-  -webkit-font-smoothing: antialiased;
+.logo-img{
+  width:auto;
+  height:110px;
+  object-fit:contain;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));
+  transition:height .4s ease,transform .3s ease;
 }
 
-body.no-scroll {
-  overflow: hidden;
-  touch-action: none;
+.logo-container:hover .logo-img{transform:scale(1.02)}
+
+.nav-left{display:flex;align-items:center}
+
+.nav-right{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
 }
 
-img {
-  max-width: 100%;
-  display: block;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font-family: inherit;
-}
-
-::selection {
-  background: var(--primary-color);
-  color: #fff;
-}
-
-
-/* =========================================================
-   SCROLLBAR
-========================================================= */
-
-::-webkit-scrollbar {
-  width: 7px;
-}
-
-::-webkit-scrollbar-track {
-  background: #050505;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 20px;
-}
-
-
-/* =========================================================
-   HEADER
-   SAME NAVBAR SYSTEM
-========================================================= */
-
-header {
-
-  position: fixed;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 90px;
-
-  padding: 0 5%;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: flex-start;
-
-  gap: 65px;
-
-  background: #050505;
-
-  z-index: 999;
-
-  transition:
-    height .4s ease,
-    background .4s ease,
-    border-color .4s ease;
-}
-
-header.scrolled {
-
-  height: 75px;
-
-  background: rgba(5,5,5,.95);
-
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-
-  border-bottom:
-    1px solid var(--border-color);
-}
-
-
-/* =========================================================
-   LOGO
-========================================================= */
-
-.logo-container {
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: flex-start;
-
-  flex-shrink: 0;
-}
-
-.logo-container a {
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-}
-
-.logo-img {
-
-  width: auto;
-
-  height: 110px;
-
-  object-fit: contain;
-
-  filter:
-    drop-shadow(
-      0 2px 8px rgba(0,0,0,.5)
-    );
-
-  transition:
-    height .4s ease,
-    transform .3s ease;
-}
-
-.logo-container:hover .logo-img {
-  transform: scale(1.02);
-}
-
-
-/* =========================================================
-   NAV LEFT / RIGHT
-========================================================= */
-
-.nav-left {
-
-  display: flex;
-
-  align-items: center;
-
-  flex-shrink: 0;
-}
-
-.nav-right {
-
-  margin-left: auto;
-
-  display: flex;
-
-  align-items: center;
-
-  flex-shrink: 0;
-}
-
-
-/* =========================================================
-   MENU + CART
-   EXACT SAME WEIGHT
-========================================================= */
-
+/* EXACT 40x40 BUTTON SIZE */
 .menu-toggle,
-.cart-icon-wrapper {
-
-  position: relative;
-
-  width: 40px;
-  height: 40px;
-
-  min-width: 40px;
-  min-height: 40px;
-
-  padding: 0;
-  margin: 0;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  flex-shrink: 0;
-
-  background: #fff;
-
-  border: 0;
-
-  color: #000;
-
-  cursor: pointer;
-
-  box-sizing: border-box;
-
-  transition:
-    transform .3s ease,
-    color .3s ease,
-    background .3s ease;
+.cart-icon-wrapper{
+  position:relative;
+  width:40px;
+  height:40px;
+  padding:0;
+  margin:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border:0;
+  color:#000;
+  cursor:pointer;
+  box-sizing:border-box;
+  transition:transform .3s ease,color .3s ease,background .3s ease;
 }
+
+/* Exact first-HTML SVG sizing */
+.menu-toggle svg,
+.cart-icon-wrapper svg{
+  display:block;
+  margin:0;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.menu-toggle svg{width:28px;height:24px}
+.cart-icon-wrapper svg{width:21px;height:21px}
 
 .menu-toggle:hover,
-.cart-icon-wrapper:hover {
-
-  color: #a50505;
-
-  transform: scale(1.06);
+.cart-icon-wrapper:hover{
+  color:#a50505;
+  transform:scale(1.06);
 }
 
 .menu-toggle:active,
-.cart-icon-wrapper:active {
-
-  transform: scale(.94);
-}
+.cart-icon-wrapper:active{transform:scale(.92)}
 
 .menu-toggle:focus,
-.cart-icon-wrapper:focus {
+.cart-icon-wrapper:focus{outline:none}
 
-  outline: none;
+/* EXACT CART BADGE */
+.cart-badge{
+  position:absolute;
+  top:8px;
+  right:8px;
+  width:16px;
+  height:16px;
+  min-width:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #000;
+  border-radius:50%;
+  background:var(--primary-color);
+  color:#fff;
+  font-family:var(--font-body);
+  font-size:8px;
+  font-weight:600;
+  line-height:1;
 }
-
 
 /* =========================================================
-   FONT AWESOME ICONS
+   EXACT FIRST-HTML EDITORIAL DRAWER
 ========================================================= */
 
-.menu-toggle i {
-
-  font-size: 21px;
-
-  line-height: 1;
+.nav-drawer{
+  position:fixed;
+  top:0;
+  left:0;
+  width:min(80vw,400px);
+  height:100dvh;
+  padding:30px 38px 60px;
+  display:flex;
+  flex-direction:column;
+  background:var(--drawer-bg);
+  color:var(--drawer-text);
+  font-family:var(--font-subheading);
+  box-shadow:12px 0 45px rgba(0,0,0,.15);
+  overflow-y:auto;
+  overflow-x:hidden;
+  scrollbar-width:none;
+  transform:translateX(-105%);
+  visibility:hidden;
+  pointer-events:none;
+  transition:
+    transform .5s cubic-bezier(.77,0,.175,1),
+    visibility 0s linear .5s;
+  z-index:1001;
 }
 
-.cart-icon-wrapper i {
+.nav-drawer::-webkit-scrollbar{display:none}
 
-  font-size: 18px;
-
-  line-height: 1;
+.nav-drawer.active{
+  transform:translateX(0);
+  visibility:visible;
+  pointer-events:auto;
+  transition:
+    transform .5s cubic-bezier(.77,0,.175,1),
+    visibility 0s linear 0s;
 }
 
-
-/* =========================================================
-   CART BADGE
-========================================================= */
-
-.cart-badge {
-
-  position: absolute;
-
-  top: 3px;
-  right: 3px;
-
-  width: 16px;
-  height: 16px;
-
-  min-width: 16px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  border:
-    1px solid #000;
-
-  border-radius: 50%;
-
-  background: var(--primary-color);
-
-  color: #fff;
-
-  font-family: var(--font-modern);
-
-  font-size: 8px;
-
-  font-weight: 700;
-
-  line-height: 1;
+.close-drawer{
+  position:relative;
+  flex-shrink:0;
+  width:38px;
+  height:38px;
+  margin:0 0 45px 0;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:transparent;
+  border:0;
+  color:var(--drawer-text);
+  cursor:pointer;
+  font-size:0;
+  transition:transform .35s ease,opacity .25s ease;
 }
 
+.close-drawer i{display:none}
+
+.close-drawer::before,
+.close-drawer::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:34px;
+  height:1.5px;
+  background:var(--drawer-text);
+  transform-origin:center;
+}
+
+.close-drawer::before{
+  transform:translate(-50%,-50%) rotate(45deg);
+}
+.close-drawer::after{
+  transform:translate(-50%,-50%) rotate(-45deg);
+}
+
+.close-drawer:hover{
+  transform:rotate(90deg);
+  opacity:.55;
+}
+
+.drawer-links{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
+.drawer-links a{
+  position:relative;
+  width:100%;
+  min-height:60px;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color:var(--drawer-text);
+  background:transparent;
+  border:0;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-family:var(--font-subheading);
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:1px;
+  line-height:1;
+  transition:opacity .3s ease,transform .3s ease;
+}
+
+.drawer-links a:hover{
+  color:var(--drawer-text);
+  opacity:.5;
+  transform:translateX(5px);
+}
+
+.drawer-links a::before,
+.drawer-links a::after{display:none;content:none}
 
 /* =========================================================
    OVERLAY
 ========================================================= */
 
-.overlay {
+.overlay{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100dvh;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+  z-index:1000;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .45s ease,visibility 0s linear .45s;
+  touch-action:none;
+}
 
-  position: fixed;
+.overlay.active{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition:opacity .45s ease,visibility 0s linear 0s;
+}
 
-  inset: 0;
+/* =========================================================
+   EXACT FIRST-HTML CART DRAWER
+========================================================= */
 
-  width: 100vw;
-  height: 100vh;
+.cart-drawer{
+  position:fixed;
+  top:0;
+  right:0;
+  width:380px;
+  max-width:92vw;
+  height:100dvh;
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  background:#0a0a0a;
+  border-left:1px solid var(--border-color);
+  z-index:1002;
+  transform:translateX(105%);
+  visibility:hidden;
+  pointer-events:none;
+  transition:
+    transform .45s cubic-bezier(.77,0,.175,1),
+    visibility 0s linear .45s;
+  touch-action:pan-y;
+}
 
+.cart-drawer.active{
+  transform:translateX(0);
+  visibility:visible;
+  pointer-events:auto;
+  transition:
+    transform .45s cubic-bezier(.77,0,.175,1),
+    visibility 0s linear 0s;
+}
+
+.cart-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-bottom:20px;
+  border-bottom:1px solid var(--border-color);
+  flex-shrink:0;
+}
+
+.cart-header h3{
+  font-family:var(--font-subheading);
+  font-size:16px;
+  font-weight:500;
+  letter-spacing:2px;
+}
+
+.close-cart{
+  color:var(--text-muted);
+  font-size:18px;
+  cursor:pointer;
+  transition:color .25s ease,transform .25s ease;
+}
+.close-cart:hover{color:#fff;transform:rotate(90deg)}
+
+.cart-items{
+  flex:1;
+  overflow-y:auto;
+  padding:22px 0;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.empty-cart-msg{
+  text-align:center;
+  color:var(--text-muted);
+  margin-top:60px;
+  font-family:var(--font-heading);
+  font-size:21px;
+  font-style:italic;
+}
+
+.cart-item{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  padding:12px;
+  background:#0e0e0e;
+  border:1px solid var(--border-color);
+  border-radius:6px;
+}
+
+.cart-item img{
+  width:64px;
+  height:64px;
+  object-fit:cover;
+  border-radius:4px;
+}
+
+.cart-item-details{flex-grow:1}
+
+.cart-item-title{
+  font-family:var(--font-modern);
+  font-size:13px;
+  font-weight:600;
+  line-height:1.3;
+  margin-bottom:3px;
+}
+
+.cart-item-price{
+  color:var(--primary-color);
+  font-family:var(--font-modern);
+  font-size:12px;
+  font-weight:600;
+}
+
+.cart-qty-controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:8px;
+}
+
+.qty-btn{
+  width:22px;
+  height:22px;
+  border:1px solid var(--border-color);
+  background:#171717;
+  color:#fff;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:3px;
+}
+
+.qty-btn:hover{
+  background:var(--primary-color);
+  border-color:var(--primary-color);
+}
+
+.cart-item-remove{
+  color:var(--text-muted);
+  cursor:pointer;
+  font-size:13px;
+  padding:5px;
+}
+.cart-item-remove:hover{color:var(--primary-color)}
+
+.cart-footer{
+  padding-top:20px;
+  border-top:1px solid var(--border-color);
+  flex-shrink:0;
+}
+
+.cart-total-row{
+  display:flex;
+  justify-content:space-between;
+  font-family:var(--font-modern);
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:18px;
+}
+
+.checkout-btn{
+  width:100%;
+  display:block;
+  text-align:center;
+  background:var(--primary-color);
+  color:#fff;
+  border:0;
+  padding:14px;
+  border-radius:3px;
+  font-family:var(--font-modern);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2px;
+  cursor:pointer;
+  transition:background .3s ease,transform .3s ease;
+}
+
+.checkout-btn:hover{
+  background:var(--primary-dark);
+  transform:translateY(-2px);
+}
+
+/* =========================================================
+   ABOUT CONTENT
+========================================================= */
+
+.about-hero{
+  position:relative;
+  min-height:90vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
   background:
-    rgba(0,0,0,.72);
-
-  backdrop-filter: blur(5px);
-
-  -webkit-backdrop-filter: blur(5px);
-
-  z-index: 998;
-
-  opacity: 0;
-
-  pointer-events: none;
-
-  transition:
-    opacity .4s ease;
-
-  touch-action: none;
+    linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.42) 45%,#050505 100%),
+    url("bg01.webp") center/cover no-repeat;
 }
 
-.overlay.active {
-
-  opacity: 1;
-
-  pointer-events: auto;
+.about-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at center,transparent 20%,rgba(0,0,0,.55) 100%);
+  pointer-events:none;
 }
 
-
-/* =========================================================
-   MENU DRAWER
-========================================================= */
-
-.nav-drawer {
-
-  position: fixed;
-
-  top: 0;
-  left: -100%;
-
-  width: min(80vw, 400px);
-
-  height: 100dvh;
-
-  padding:
-    30px
-    38px
-    60px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  background:
-    rgba(10,10,10,.98);
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  color: #fff;
-
-  border-right:
-    1px solid var(--border-color);
-
-  z-index: 1000;
-
-  transition:
-    left .4s cubic-bezier(.77,0,.175,1);
+.about-hero-content{
+  position:relative;
+  z-index:2;
+  max-width:900px;
+  padding:120px 25px 70px;
+  animation:heroReveal 1.1s ease forwards;
 }
 
-.nav-drawer.active {
-  left: 0;
+@keyframes heroReveal{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-
-/* =========================================================
-   CLOSE MENU
-========================================================= */
-
-.close-drawer {
-
-  position: relative;
-
-  align-self: flex-end;
-
-  width: 20px;
-  height: 20px;
-
-  margin-bottom: 35px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-
-  color: var(--text-muted);
-
-  transition:
-    color .3s ease,
-    transform .3s ease;
-}
-
-.close-drawer:hover {
-
-  color: #fff;
-
-  transform: rotate(90deg);
-}
-
-.close-drawer i {
-  font-size: 18px;
-}
-
-
-/* =========================================================
-   DRAWER LINKS
-========================================================= */
-
-.drawer-links {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 25px;
-}
-
-.drawer-links a {
-
-  position: relative;
-
-  font-family: var(--font-modern);
-
-  font-size: 13px;
-
-  font-weight: 600;
-
-  letter-spacing: 3px;
-
-  color: #fff;
-
-  transition:
-    color .3s ease,
-    transform .3s ease;
-}
-
-.drawer-links a::before {
-
-  content: "";
-
-  position: absolute;
-
-  left: -18px;
-
-  top: 50%;
-
-  width: 0;
-
-  height: 1px;
-
-  background: var(--primary-color);
-
-  transform: translateY(-50%);
-
-  transition:
-    width .3s ease;
-}
-
-.drawer-links a:hover {
-
-  color: var(--primary-color);
-
-  transform: translateX(7px);
-}
-
-.drawer-links a:hover::before {
-  width: 10px;
-}
-
-
-/* =========================================================
-   CART DRAWER
-========================================================= */
-
-.cart-drawer {
-
-  position: fixed;
-
-  top: 0;
-  right: -100%;
-
-  width: 390px;
-
-  max-width: 92vw;
-
-  height: 100dvh;
-
-  background: #080808;
-
-  border-left:
-    1px solid var(--border-color);
-
-  z-index: 1001;
-
-  display: flex;
-
-  flex-direction: column;
-
-  padding: 26px;
-
-  transition:
-    right .4s cubic-bezier(.77,0,.175,1);
-}
-
-.cart-drawer.active {
-  right: 0;
-}
-
-
-/* =========================================================
-   CART HEADER
-========================================================= */
-
-.cart-header {
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  padding-bottom: 20px;
-
-  border-bottom:
-    1px solid var(--border-color);
-
-  flex-shrink: 0;
-}
-
-.cart-header h3 {
-
-  font-family: var(--font-modern);
-
-  font-size: 12px;
-
-  font-weight: 700;
-
-  letter-spacing: 3px;
-}
-
-.close-cart {
-
-  font-size: 17px;
-
-  cursor: pointer;
-
-  color: var(--text-muted);
-
-  transition:
-    color .3s ease,
-    transform .3s ease;
-}
-
-.close-cart:hover {
-
-  color: #fff;
-
-  transform: rotate(90deg);
-}
-
-
-/* =========================================================
-   CART ITEMS
-========================================================= */
-
-.cart-items {
-
-  flex: 1;
-
-  overflow-y: auto;
-
-  padding: 22px 0;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 14px;
-}
-
-.empty-cart-msg {
-
-  text-align: center;
-
-  color: var(--text-muted);
-
-  margin-top: 60px;
-
-  font-family: var(--font-heading);
-
-  font-size: 21px;
-
-  font-style: italic;
-}
-
-.cart-item {
-
-  display: flex;
-
-  gap: 14px;
-
-  align-items: center;
-
-  padding: 12px;
-
-  background: #0e0e0e;
-
-  border:
-    1px solid var(--border-color);
-
-  border-radius: 6px;
-}
-
-.cart-item img {
-
-  width: 64px;
-  height: 64px;
-
-  object-fit: cover;
-
-  border-radius: 4px;
-}
-
-.cart-item-details {
-  flex-grow: 1;
-}
-
-.cart-item-title {
-
-  font-family: var(--font-modern);
-
-  font-size: 13px;
-
-  font-weight: 600;
-
-  line-height: 1.3;
-
-  margin-bottom: 3px;
-}
-
-.cart-item-price {
-
-  color: var(--primary-color);
-
-  font-family: var(--font-modern);
-
-  font-size: 12px;
-
-  font-weight: 600;
-}
-
-.cart-qty-controls {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 8px;
-
-  margin-top: 8px;
-}
-
-.qty-btn {
-
-  width: 22px;
-  height: 22px;
-
-  border:
-    1px solid var(--border-color);
-
-  background: #171717;
-
-  color: #fff;
-
-  cursor: pointer;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 3px;
-
-  transition:
-    all .25s ease;
-}
-
-.qty-btn:hover {
-
-  background: var(--primary-color);
-
-  border-color: var(--primary-color);
-}
-
-.cart-item-remove {
-
-  color: var(--text-muted);
-
-  cursor: pointer;
-
-  font-size: 13px;
-
-  padding: 5px;
-
-  transition:
-    color .25s ease;
-}
-
-.cart-item-remove:hover {
-  color: var(--primary-color);
-}
-
-
-/* =========================================================
-   CART FOOTER
-========================================================= */
-
-.cart-footer {
-
-  padding-top: 20px;
-
-  border-top:
-    1px solid var(--border-color);
-
-  flex-shrink: 0;
-}
-
-.cart-total-row {
-
-  display: flex;
-
-  justify-content: space-between;
-
-  font-family: var(--font-modern);
-
-  font-size: 13px;
-
-  font-weight: 600;
-
-  margin-bottom: 18px;
-}
-
-.checkout-btn {
-
-  width: 100%;
-
-  display: block;
-
-  text-align: center;
-
-  background: var(--primary-color);
-
-  color: #fff;
-
-  border: 0;
-
-  padding: 14px;
-
-  border-radius: 3px;
-
-  font-family: var(--font-modern);
-
-  font-size: 10px;
-
-  font-weight: 700;
-
-  letter-spacing: 2px;
-
-  cursor: pointer;
-
-  transition:
-    background .3s ease,
-    transform .3s ease;
-}
-
-.checkout-btn:hover {
-
-  background: var(--primary-dark);
-
-  transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.about-hero {
-
-  position: relative;
-
-  min-height: 90vh;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  text-align: center;
-
-  overflow: hidden;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,.25) 0%,
-      rgba(0,0,0,.42) 45%,
-      #050505 100%
-    ),
-    url("bg01.webp")
-    center / cover
-    no-repeat;
-}
-
-.about-hero::after {
-
-  content: "";
-
-  position: absolute;
-
-  inset: 0;
-
-  background:
-    radial-gradient(
-      circle at center,
-      transparent 20%,
-      rgba(0,0,0,.55) 100%
-    );
-
-  pointer-events: none;
-}
-
-.about-hero-content {
-
-  position: relative;
-
-  z-index: 2;
-
-  max-width: 900px;
-
-  padding:
-    120px 25px 70px;
-
-  animation:
-    heroReveal 1.1s ease forwards;
-}
-
-@keyframes heroReveal {
-
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-kicker {
-
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  margin-bottom: 25px;
-
-  font-family: var(--font-modern);
-
-  font-size: 10px;
-
-  font-weight: 600;
-
-  letter-spacing: 5px;
-
-  text-transform: uppercase;
-
-  color: #ddd;
+.hero-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:25px;
+  font-family:var(--font-modern);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  color:#ddd;
 }
 
 .hero-kicker::before,
-.hero-kicker::after {
-
-  content: "";
-
-  width: 30px;
-
-  height: 1px;
-
-  background: var(--primary-color);
+.hero-kicker::after{
+  content:"";
+  width:30px;
+  height:1px;
+  background:var(--primary-color);
 }
 
-.about-hero h1 {
-
-  font-family: var(--font-heading);
-
-  font-size:
-    clamp(58px, 9vw, 125px);
-
-  line-height: .88;
-
-  font-weight: 500;
-
-  letter-spacing: -3px;
-
-  text-transform: uppercase;
-
-  margin-bottom: 30px;
+.about-hero h1{
+  font-family:var(--font-heading);
+  font-size:clamp(58px,9vw,125px);
+  line-height:.88;
+  font-weight:500;
+  letter-spacing:-3px;
+  text-transform:uppercase;
+  margin-bottom:30px;
 }
 
-.about-hero h1 span {
-
-  display: block;
-
-  color: var(--primary-color);
-
-  font-style: italic;
-
-  font-weight: 400;
+.about-hero h1 span{
+  display:block;
+  color:var(--primary-color);
+  font-style:italic;
+  font-weight:400;
 }
 
-.about-hero p {
-
-  max-width: 600px;
-
-  margin: auto;
-
-  color: #c5c5c5;
-
-  font-family: var(--font-modern);
-
-  font-size: 13px;
-
-  letter-spacing: 2px;
-
-  text-transform: uppercase;
+.about-hero p{
+  max-width:600px;
+  margin:auto;
+  color:#c5c5c5;
+  font-family:var(--font-modern);
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase;
 }
 
+.about-section{position:relative;padding:120px 7%}
+
+.section-label{
+  display:inline-block;
+  margin-bottom:12px;
+  color:var(--primary-color);
+  font-family:var(--font-modern);
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:4px;
+  text-transform:uppercase;
+}
+
+.section-title{
+  font-family:var(--font-heading);
+  font-size:clamp(42px,5vw,68px);
+  line-height:1;
+  font-weight:500;
+  letter-spacing:-1px;
+}
+
+.section-title span{color:var(--primary-color)}
+
+.section-description{
+  max-width:620px;
+  color:var(--text-muted);
+  font-size:15px;
+  line-height:1.9;
+}
+
+.story-section{
+  background:linear-gradient(180deg,#050505,#080808);
+}
+
+.grid-2col{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:90px;
+  align-items:center;
+}
+
+.about-text-block p{
+  color:var(--text-muted);
+  font-size:15px;
+  line-height:2;
+  margin-top:22px;
+  max-width:650px;
+}
+
+.about-text-block strong{color:#fff}
+
+.about-image{
+  position:relative;
+  overflow:hidden;
+  border-radius:3px;
+  background:#111;
+  border:1px solid var(--border-color);
+}
+
+.about-image::before{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border:1px solid rgba(255,255,255,.12);
+  z-index:2;
+  pointer-events:none;
+}
+
+.about-image img{
+  width:100%;
+  height:600px;
+  object-fit:cover;
+  transition:transform .8s cubic-bezier(.2,.7,.2,1);
+}
+
+.about-image:hover img{transform:scale(1.045)}
+
+.image-number{
+  position:absolute;
+  bottom:25px;
+  left:28px;
+  z-index:3;
+  font-family:var(--font-modern);
+  font-size:10px;
+  letter-spacing:3px;
+  color:#fff;
+}
+
+.founder-section{
+  background:#090909;
+  border-top:1px solid var(--border-color);
+  border-bottom:1px solid var(--border-color);
+  text-align:center;
+}
+
+.founder-inner{max-width:950px;margin:auto}
+
+.founder-quote{
+  margin-top:40px;
+  font-family:var(--font-heading);
+  font-size:clamp(30px,4vw,52px);
+  line-height:1.35;
+  font-weight:400;
+  font-style:italic;
+  color:#eee;
+}
+
+.founder-quote span{color:var(--primary-color)}
+
+.founder-name{
+  margin-top:35px;
+  font-family:var(--font-modern);
+  font-size:11px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:#fff;
+}
+
+.founder-line{
+  width:50px;
+  height:1px;
+  margin:18px auto;
+  background:var(--primary-color);
+}
+
+.stats-banner{
+  padding:70px 7%;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:linear-gradient(135deg,#0c0c0c,#050505);
+  border-bottom:1px solid var(--border-color);
+}
+
+.stat-item{
+  text-align:center;
+  padding:15px;
+  border-right:1px solid var(--border-color);
+}
+.stat-item:last-child{border-right:0}
+
+.stat-number{
+  font-family:var(--font-heading);
+  font-size:clamp(38px,4vw,60px);
+  line-height:1;
+  color:#fff;
+  font-weight:500;
+}
+.stat-number span{color:var(--primary-color)}
+
+.stat-label{
+  margin-top:12px;
+  font-family:var(--font-modern);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--text-muted);
+}
+
+.identity-section{background:#050505}
+
+.identity-header{
+  max-width:700px;
+  margin:0 auto 60px;
+  text-align:center;
+}
+
+.identity-header .section-description{margin:20px auto 0}
+
+.story-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.story-card{
+  position:relative;
+  min-height:330px;
+  padding:35px 30px;
+  background:linear-gradient(145deg,#111,#090909);
+  border:1px solid var(--border-color);
+  overflow:hidden;
+  transition:transform .4s ease,border-color .4s ease,background .4s ease;
+}
+
+.story-card::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-100px;
+  bottom:-100px;
+  background:radial-gradient(circle,rgba(193,18,31,.18),transparent 70%);
+  transition:transform .5s ease;
+}
+
+.story-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(193,18,31,.4);
+}
+
+.story-card:hover::after{transform:scale(1.5)}
+
+.story-card i{
+  font-size:22px;
+  color:var(--primary-color);
+  margin-bottom:30px;
+}
+
+.story-card h3{
+  font-family:var(--font-heading);
+  font-size:31px;
+  font-weight:500;
+  margin-bottom:15px;
+}
+
+.story-card p{
+  color:var(--text-muted);
+  font-size:14px;
+  line-height:1.8;
+}
+
+.color-meaning-list{
+  list-style:none;
+  margin-top:25px;
+  display:flex;
+  flex-direction:column;
+  gap:11px;
+}
+
+.color-meaning-list li{
+  color:#aaa;
+  font-family:var(--font-modern);
+  font-size:11px;
+}
+
+.color-meaning-list strong{color:#eee}
+
+.color-dot{
+  display:inline-block;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  margin-right:7px;
+}
+
+.color-dot.black{background:#111;border:1px solid #555}
+.color-dot.red{background:var(--primary-color)}
+.color-dot.gold{background:var(--gold)}
+
+.manifesto-card{
+  background:linear-gradient(145deg,rgba(55,5,8,.45),#090909);
+}
+
+.manifesto-text{
+  font-family:var(--font-heading);
+  font-size:24px;
+  line-height:1.65;
+  font-style:italic;
+  color:#e5e5e5;
+}
+
+.manifesto-text strong{color:var(--primary-color)}
+
+.philosophy-list{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.philosophy-list li{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--text-muted);
+  font-size:13px;
+}
+
+.philosophy-list li i{
+  font-size:9px;
+  color:var(--primary-color);
+}
+
+.final-section{
+  padding:150px 7%;
+  text-align:center;
+  background:linear-gradient(180deg,#050505,#0b0506);
+}
+
+.final-title{
+  max-width:1000px;
+  margin:auto;
+  font-family:var(--font-heading);
+  font-size:clamp(45px,7vw,90px);
+  font-weight:500;
+  line-height:.95;
+  letter-spacing:-2px;
+}
+
+.final-title span{color:var(--primary-color)}
+
+.final-text{
+  max-width:600px;
+  margin:30px auto 0;
+  color:var(--text-muted);
+  font-size:14px;
+  line-height:1.9;
+}
+
+.final-button{
+  display:inline-flex;
+  margin-top:35px;
+  padding:14px 28px;
+  border:1px solid rgba(255,255,255,.2);
+  font-family:var(--font-modern);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  transition:background .3s ease,border-color .3s ease,transform .3s ease;
+}
+
+.final-button:hover{
+  background:var(--primary-color);
+  border-color:var(--primary-color);
+  transform:translateY(-3px);
+}
+
+footer{
+  background:#020202;
+  border-top:1px solid var(--border-color);
+  padding-top:70px;
+}
+
+.footer-wrapper{padding:0 7%}
+
+.footer-top{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1.2fr;
+  gap:50px;
+  padding-bottom:60px;
+}
+
+.footer-brand img{height:42px;width:auto}
+
+.footer-brand p{
+  max-width:320px;
+  margin-top:18px;
+  color:var(--text-muted);
+  font-size:13px;
+  line-height:1.8;
+}
+
+.footer-links h4{
+  font-family:var(--font-modern);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:3px;
+  margin-bottom:20px;
+}
+
+.footer-links ul{list-style:none}
+.footer-links li{margin-bottom:11px}
+
+.footer-links a{
+  color:var(--text-muted);
+  font-size:12px;
+}
+
+.footer-links a:hover{color:#fff}
+
+.social-links{
+  display:flex;
+  gap:9px;
+  margin-top:25px;
+}
+
+.social-links a{
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--border-color);
+  color:#aaa;
+  transition:all .3s ease;
+}
+
+.social-links a:hover{
+  background:var(--primary-color);
+  border-color:var(--primary-color);
+  color:#fff;
+  transform:translateY(-3px);
+}
+
+.footer-bottom{
+  padding:22px 0;
+  border-top:1px solid rgba(255,255,255,.05);
+  text-align:center;
+  font-family:var(--font-modern);
+  font-size:9px;
+  letter-spacing:2px;
+  color:#666;
+  text-transform:uppercase;
+}
 
 /* =========================================================
-   GENERAL SECTION
+   RESPONSIVE — SAME NAVBAR SIZING AS FIRST HTML
 ========================================================= */
 
-.about-section {
-
-  position: relative;
-
-  padding:
-    120px 7%;
-}
-
-.section-label {
-
-  display: inline-block;
-
-  margin-bottom: 12px;
-
-  color: var(--primary-color);
-
-  font-family: var(--font-modern);
-
-  font-size: 9px;
-
-  font-weight: 700;
-
-  letter-spacing: 4px;
-
-  text-transform: uppercase;
-}
-
-.section-title {
-
-  font-family: var(--font-heading);
-
-  font-size:
-    clamp(42px, 5vw, 68px);
-
-  line-height: 1;
-
-  font-weight: 500;
-
-  letter-spacing: -1px;
-}
-
-.section-title span {
-  color: var(--primary-color);
-}
-
-.section-description {
-
-  max-width: 620px;
-
-  color: var(--text-muted);
-
-  font-size: 15px;
-
-  line-height: 1.9;
-}
-
-
-/* =========================================================
-   BRAND STORY
-========================================================= */
-
-.story-section {
-
-  background:
-    linear-gradient(
-      180deg,
-      #050505 0%,
-      #080808 100%
-    );
-}
-
-.grid-2col {
-
-  display: grid;
-
-  grid-template-columns:
-    minmax(0,1fr)
-    minmax(0,1fr);
-
-  gap: 90px;
-
-  align-items: center;
-}
-
-.about-text-block p {
-
-  color: var(--text-muted);
-
-  font-size: 15px;
-
-  line-height: 2;
-
-  margin-top: 22px;
-
-  max-width: 650px;
-}
-
-.about-text-block strong {
-  color: #fff;
-}
-
-.about-image {
-
-  position: relative;
-
-  overflow: hidden;
-
-  border-radius: 3px;
-
-  background: #111;
-
-  border:
-    1px solid var(--border-color);
-}
-
-.about-image::before {
-
-  content: "";
-
-  position: absolute;
-
-  inset: 14px;
-
-  border:
-    1px solid rgba(255,255,255,.12);
-
-  z-index: 2;
-
-  pointer-events: none;
-}
-
-.about-image img {
-
-  width: 100%;
-
-  height: 600px;
-
-  object-fit: cover;
-
-  display: block;
-
-  transition:
-    transform .8s cubic-bezier(.2,.7,.2,1);
-}
-
-.about-image:hover img {
-  transform: scale(1.045);
-}
-
-.image-number {
-
-  position: absolute;
-
-  bottom: 25px;
-  left: 28px;
-
-  z-index: 3;
-
-  font-family: var(--font-modern);
-
-  font-size: 10px;
-
-  letter-spacing: 3px;
-
-  color: #fff;
-}
-
-
-/* =========================================================
-   FOUNDER
-========================================================= */
-
-.founder-section {
-
-  background: #090909;
-
-  border-top:
-    1px solid var(--border-color);
-
-  border-bottom:
-    1px solid var(--border-color);
-
-  text-align: center;
-}
-
-.founder-inner {
-
-  max-width: 950px;
-
-  margin: auto;
-}
-
-.founder-quote {
-
-  margin-top: 40px;
-
-  font-family: var(--font-heading);
-
-  font-size:
-    clamp(30px,4vw,52px);
-
-  line-height: 1.35;
-
-  font-weight: 400;
-
-  font-style: italic;
-
-  color: #eee;
-}
-
-.founder-quote span {
-  color: var(--primary-color);
-}
-
-.founder-name {
-
-  margin-top: 35px;
-
-  font-family: var(--font-modern);
-
-  font-size: 11px;
-
-  letter-spacing: 4px;
-
-  text-transform: uppercase;
-
-  color: #fff;
-}
-
-.founder-line {
-
-  width: 50px;
-
-  height: 1px;
-
-  margin: 18px auto;
-
-  background: var(--primary-color);
-}
-
-
-/* =========================================================
-   STATS
-========================================================= */
-
-.stats-banner {
-
-  padding:
-    70px 7%;
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  background:
-    linear-gradient(
-      135deg,
-      #0c0c0c,
-      #050505
-    );
-
-  border-bottom:
-    1px solid var(--border-color);
-}
-
-.stat-item {
-
-  text-align: center;
-
-  padding: 15px;
-
-  border-right:
-    1px solid var(--border-color);
-}
-
-.stat-item:last-child {
-  border-right: 0;
-}
-
-.stat-number {
-
-  font-family: var(--font-heading);
-
-  font-size:
-    clamp(38px,4vw,60px);
-
-  line-height: 1;
-
-  color: #fff;
-
-  font-weight: 500;
-}
-
-.stat-number span {
-  color: var(--primary-color);
-}
-
-.stat-label {
-
-  margin-top: 12px;
-
-  font-family: var(--font-modern);
-
-  font-size: 9px;
-
-  font-weight: 600;
-
-  letter-spacing: 3px;
-
-  text-transform: uppercase;
-
-  color: var(--text-muted);
-}
-
-
-/* =========================================================
-   CORE IDENTITY
-========================================================= */
-
-.identity-section {
-  background: #050505;
-}
-
-.identity-header {
-
-  max-width: 700px;
-
-  margin:
-    0 auto 60px;
-
-  text-align: center;
-}
-
-.identity-header .section-description {
-
-  margin:
-    20px auto 0;
-}
-
-
-/* =========================================================
-   STORY CARDS
-========================================================= */
-
-.story-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap: 20px;
-}
-
-.story-card {
-
-  position: relative;
-
-  min-height: 330px;
-
-  padding:
-    35px 30px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #111,
-      #090909
-    );
-
-  border:
-    1px solid var(--border-color);
-
-  overflow: hidden;
-
-  transition:
-    transform .4s ease,
-    border-color .4s ease,
-    background .4s ease;
-}
-
-.story-card::after {
-
-  content: "";
-
-  position: absolute;
-
-  width: 180px;
-  height: 180px;
-
-  right: -100px;
-  bottom: -100px;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(193,18,31,.18),
-      transparent 70%
-    );
-
-  transition:
-    transform .5s ease;
-}
-
-.story-card:hover {
-
-  transform: translateY(-8px);
-
-  border-color:
-    rgba(193,18,31,.4);
-}
-
-.story-card:hover::after {
-  transform: scale(1.5);
-}
-
-.story-card i {
-
-  font-size: 22px;
-
-  color: var(--primary-color);
-
-  margin-bottom: 30px;
-}
-
-.story-card h3 {
-
-  font-family: var(--font-heading);
-
-  font-size: 31px;
-
-  font-weight: 500;
-
-  margin-bottom: 15px;
-}
-
-.story-card p {
-
-  color: var(--text-muted);
-
-  font-size: 14px;
-
-  line-height: 1.8;
-}
-
-
-/* =========================================================
-   COLOR MEANING
-========================================================= */
-
-.color-meaning-list {
-
-  list-style: none;
-
-  margin-top: 25px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 11px;
-}
-
-.color-meaning-list li {
-
-  color: #aaa;
-
-  font-family: var(--font-modern);
-
-  font-size: 11px;
-}
-
-.color-meaning-list strong {
-  color: #eee;
-}
-
-.color-dot {
-
-  display: inline-block;
-
-  width: 9px;
-  height: 9px;
-
-  border-radius: 50%;
-
-  margin-right: 7px;
-}
-
-.color-dot.black {
-
-  background: #111;
-
-  border:
-    1px solid #555;
-}
-
-.color-dot.red {
-  background: var(--primary-color);
-}
-
-.color-dot.gold {
-  background: var(--gold);
-}
-
-
-/* =========================================================
-   MANIFESTO
-========================================================= */
-
-.manifesto-card {
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(55,5,8,.45),
-      #090909
-    );
-}
-
-.manifesto-text {
-
-  font-family: var(--font-heading);
-
-  font-size: 24px;
-
-  line-height: 1.65;
-
-  font-style: italic;
-
-  color: #e5e5e5;
-}
-
-.manifesto-text strong {
-  color: var(--primary-color);
-}
-
-
-/* =========================================================
-   PHILOSOPHY
-========================================================= */
-
-.philosophy-list {
-
-  list-style: none;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 16px;
-}
-
-.philosophy-list li {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  color: var(--text-muted);
-
-  font-size: 13px;
-}
-
-.philosophy-list li i {
-
-  font-size: 9px;
-
-  color: var(--primary-color);
-
-  margin: 0;
-}
-
-
-/* =========================================================
-   FINAL SECTION
-========================================================= */
-
-.final-section {
-
-  padding:
-    150px 7%;
-
-  text-align: center;
-
-  background:
-    linear-gradient(
-      180deg,
-      #050505,
-      #0b0506
-    );
-}
-
-.final-title {
-
-  max-width: 1000px;
-
-  margin: auto;
-
-  font-family: var(--font-heading);
-
-  font-size:
-    clamp(45px,7vw,90px);
-
-  font-weight: 500;
-
-  line-height: .95;
-
-  letter-spacing: -2px;
-}
-
-.final-title span {
-  color: var(--primary-color);
-}
-
-.final-text {
-
-  max-width: 600px;
-
-  margin:
-    30px auto 0;
-
-  color: var(--text-muted);
-
-  font-size: 14px;
-
-  line-height: 1.9;
-}
-
-.final-button {
-
-  display: inline-flex;
-
-  margin-top: 35px;
-
-  padding:
-    14px 28px;
-
-  border:
-    1px solid rgba(255,255,255,.2);
-
-  font-family: var(--font-modern);
-
-  font-size: 10px;
-
-  font-weight: 700;
-
-  letter-spacing: 3px;
-
-  text-transform: uppercase;
-
-  transition:
-    background .3s ease,
-    border-color .3s ease,
-    transform .3s ease;
-}
-
-.final-button:hover {
-
-  background: var(--primary-color);
-
-  border-color: var(--primary-color);
-
-  transform: translateY(-3px);
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-
-  background: #020202;
-
-  border-top:
-    1px solid var(--border-color);
-
-  padding-top: 70px;
-}
-
-.footer-wrapper {
-  padding: 0 7%;
-}
-
-.footer-top {
-
-  display: grid;
-
-  grid-template-columns:
-    2fr 1fr 1fr 1.2fr;
-
-  gap: 50px;
-
-  padding-bottom: 60px;
-}
-
-.footer-brand img {
-
-  height: 42px;
-
-  width: auto;
-}
-
-.footer-brand p {
-
-  max-width: 320px;
-
-  margin-top: 18px;
-
-  color: var(--text-muted);
-
-  font-size: 13px;
-
-  line-height: 1.8;
-}
-
-.footer-links h4 {
-
-  font-family: var(--font-modern);
-
-  font-size: 10px;
-
-  font-weight: 700;
-
-  letter-spacing: 3px;
-
-  margin-bottom: 20px;
-}
-
-.footer-links ul {
-  list-style: none;
-}
-
-.footer-links li {
-  margin-bottom: 11px;
-}
-
-.footer-links a {
-
-  color: var(--text-muted);
-
-  font-size: 12px;
-
-  transition:
-    color .25s ease;
-}
-
-.footer-links a:hover {
-  color: #fff;
-}
-
-
-/* =========================================================
-   SOCIAL
-========================================================= */
-
-.social-links {
-
-  display: flex;
-
-  gap: 9px;
-
-  margin-top: 25px;
-}
-
-.social-links a {
-
-  width: 34px;
-  height: 34px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  border:
-    1px solid var(--border-color);
-
-  color: #aaa;
-
-  transition:
-    all .3s ease;
-}
-
-.social-links a:hover {
-
-  background: var(--primary-color);
-
-  border-color: var(--primary-color);
-
-  color: #fff;
-
-  transform: translateY(-3px);
-}
-
-
-/* =========================================================
-   FOOTER BOTTOM
-========================================================= */
-
-.footer-bottom {
-
-  padding:
-    22px 0;
-
-  border-top:
-    1px solid rgba(255,255,255,.05);
-
-  text-align: center;
-
-  font-family: var(--font-modern);
-
-  font-size: 9px;
-
-  letter-spacing: 2px;
-
-  color: #666;
-
-  text-transform: uppercase;
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 992px) {
-
-  header {
-
-    justify-content: space-between;
-
-    gap: 0;
+@media(max-width:992px){
+  header{
+    justify-content:space-between;
+    gap:0;
   }
 
-  .logo-container {
-
-    position: absolute;
-
-    left: 50%;
-
-    transform: translateX(-50%);
+  .logo-container{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
   }
 
-  .logo-img {
-    height: 98px;
-  }
+  .logo-img{height:98px}
 
-  .nav-right {
-    margin-left: auto;
+  .nav-right{
+    margin-left:auto;
+    order:3;
   }
-
-  /*
-     KEEP EXACT SAME BUTTON SIZE
-  */
 
   .menu-toggle,
-  .cart-icon-wrapper {
-
-    width: 40px;
-    height: 40px;
-
-    min-width: 40px;
-    min-height: 40px;
+  .cart-icon-wrapper{
+    width:40px;
+    height:40px;
   }
 
-  .menu-toggle i {
-    font-size: 21px;
+  .menu-toggle{display:flex}
+
+  .menu-toggle svg{
+    width:34px;
+    height:30px;
   }
 
-  .cart-icon-wrapper i {
-    font-size: 18px;
+  .cart-icon-wrapper svg{
+    width:24px;
+    height:24px;
   }
 
-
-  .grid-2col {
-
-    grid-template-columns: 1fr;
-
-    gap: 55px;
+  .grid-2col{
+    grid-template-columns:1fr;
+    gap:55px;
   }
 
-  .about-image {
-
-    max-width: 750px;
-
-    margin: auto;
+  .about-image{
+    max-width:750px;
+    margin:auto;
   }
 
-  .story-grid {
-
-    grid-template-columns:
-      1fr 1fr;
+  .story-grid{
+    grid-template-columns:1fr 1fr;
   }
 
-  .story-card:last-child {
+  .story-card:last-child{grid-column:span 2}
 
-    grid-column:
-      span 2;
-  }
-
-  .footer-top {
-
-    grid-template-columns:
-      1fr 1fr;
+  .footer-top{
+    grid-template-columns:1fr 1fr;
   }
 }
 
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 768px) {
-
-  header {
-
-    height: 76px;
-
-    padding:
-      0 22px;
+@media(max-width:768px){
+  header{
+    height:76px;
+    padding:0 22px;
   }
 
-  header.scrolled {
+  header.scrolled{height:68px}
 
-    height: 68px;
+  .logo-img{
+    height:95px;
+    margin-top:8px;
   }
-
-  .logo-img {
-
-    height: 95px;
-
-    margin-top: 8px;
-  }
-
-
-  /*
-     SAME BUTTON SIZE AS DESKTOP
-  */
 
   .menu-toggle,
-  .cart-icon-wrapper {
-
-    width: 40px;
-    height: 40px;
-
-    min-width: 40px;
-    min-height: 40px;
+  .cart-icon-wrapper{
+    width:40px;
+    height:40px;
   }
 
-  .menu-toggle i {
-
-    font-size: 21px;
+  /* SAME MOBILE ICON SIZE */
+  .menu-toggle svg{
+    width:28px;
+    height:24px;
   }
 
-  .cart-icon-wrapper i {
-
-    font-size: 18px;
+  .cart-icon-wrapper svg{
+    width:21px;
+    height:21px;
   }
 
+  .about-hero{min-height:80vh}
 
-  .about-hero {
-
-    min-height: 80vh;
+  .about-hero-content{
+    padding:120px 20px 60px;
   }
 
-  .about-hero-content {
-
-    padding:
-      120px 20px 60px;
+  .about-hero h1{
+    font-size:clamp(52px,15vw,80px);
+    letter-spacing:-2px;
   }
 
-  .about-hero h1 {
-
-    font-size:
-      clamp(52px,15vw,80px);
-
-    letter-spacing:
-      -2px;
+  .about-hero p{
+    font-size:10px;
+    letter-spacing:1.5px;
   }
 
-  .about-hero p {
+  .about-section{padding:85px 6%}
 
-    font-size: 10px;
+  .section-title{font-size:47px}
 
-    letter-spacing: 1.5px;
+  .about-image img{height:450px}
+
+  .stats-banner{
+    grid-template-columns:1fr 1fr;
+    padding:50px 5%;
   }
 
-
-  .about-section {
-
-    padding:
-      85px 6%;
-  }
-
-  .section-title {
-
-    font-size: 47px;
-  }
-
-  .about-image img {
-
-    height: 450px;
-  }
-
-
-  .stats-banner {
-
-    grid-template-columns:
-      1fr 1fr;
-
-    padding:
-      50px 5%;
-  }
-
-  .stat-item {
-
-    border-right: 0;
-
-    border-bottom:
-      1px solid var(--border-color);
-
-    padding:
-      25px 10px;
+  .stat-item{
+    border-right:0;
+    border-bottom:1px solid var(--border-color);
+    padding:25px 10px;
   }
 
   .stat-item:nth-child(3),
-  .stat-item:nth-child(4) {
-
-    border-bottom: 0;
+  .stat-item:nth-child(4){
+    border-bottom:0;
   }
 
+  .story-grid{grid-template-columns:1fr}
 
-  .story-grid {
+  .story-card:last-child{grid-column:auto}
 
-    grid-template-columns: 1fr;
+  .story-card{
+    min-height:auto;
+    padding:30px 25px;
   }
 
-  .story-card:last-child {
+  .founder-quote{font-size:34px}
 
-    grid-column:
-      auto;
-  }
+  .final-section{padding:100px 6%}
 
-  .story-card {
-
-    min-height:
-      auto;
-
-    padding:
-      30px 25px;
-  }
-
-
-  .founder-quote {
-
-    font-size: 34px;
-  }
-
-
-  .final-section {
-
-    padding:
-      100px 6%;
-  }
-
-
-  .footer-top {
-
-    grid-template-columns:
-      1fr;
-
-    gap: 40px;
+  .footer-top{
+    grid-template-columns:1fr;
+    gap:40px;
   }
 }
 
+@media(max-width:480px){
+  header{padding:0 18px}
 
-/* =========================================================
-   SMALL MOBILE
-   IMPORTANT:
-   BUTTONS DO NOT SHRINK
-========================================================= */
-
-@media (max-width: 480px) {
-
-  header {
-
-    padding:
-      0 18px;
+  .logo-img{
+    height:82px;
+    margin-top:8px;
   }
-
-  .logo-img {
-
-    height: 82px;
-
-    margin-top: 8px;
-  }
-
-
-  /*
-     KEEP 40x40
-     DO NOT CHANGE TO 30x30
-  */
 
   .menu-toggle,
-  .cart-icon-wrapper {
-
-    width: 40px;
-    height: 40px;
-
-    min-width: 40px;
-    min-height: 40px;
+  .cart-icon-wrapper{
+    width:30px;
+    height:30px;
   }
 
-  .menu-toggle i {
-
-    font-size: 21px;
+  /* KEEP THE FIRST HTML'S SMALL-MOBILE ICON SCALE */
+  .menu-toggle svg{
+    width:24px;
+    height:20px;
   }
 
-  .cart-icon-wrapper i {
-
-    font-size: 18px;
+  .cart-icon-wrapper svg{
+    width:19px;
+    height:19px;
   }
 
-
-  .cart-badge {
-
-    top: 3px;
-    right: 3px;
-
-    width: 16px;
-    height: 16px;
-
-    min-width: 16px;
-
-    font-size: 8px;
+  .cart-badge{
+    top:4px;
+    right:4px;
+    width:14px;
+    height:14px;
+    min-width:14px;
+    font-size:7px;
   }
 
-
-  .nav-drawer {
-
-    width: 75vw;
-
-    padding:
-      27px
-      27px
-      45px;
+  .nav-drawer{
+    width:75vw;
+    padding:27px 27px 45px;
   }
 
+  .about-hero h1{font-size:51px}
 
-  .about-hero h1 {
+  .about-image img{height:380px}
 
-    font-size:
-      51px;
+  .stats-banner{grid-template-columns:1fr}
+
+  .stat-item{
+    border-bottom:1px solid var(--border-color)!important;
   }
 
-  .about-image img {
+  .stat-item:last-child{border-bottom:0!important}
 
-    height: 380px;
-  }
-
-
-  .stats-banner {
-
-    grid-template-columns:
-      1fr;
-  }
-
-  .stat-item {
-
-    border-bottom:
-      1px solid var(--border-color) !important;
-  }
-
-  .stat-item:last-child {
-
-    border-bottom:
-      0 !important;
-  }
-
-
-  .founder-quote {
-
-    font-size: 29px;
-  }
+  .founder-quote{font-size:29px}
 }
-
 </style>
 </head>
 
-
 <body>
 
-
 <!-- =========================================================
-     HEADER
+     HEADER — SAME AS FIRST HTML
 ========================================================= -->
-
 <header id="navbar">
 
-
-  <!-- MENU -->
-
   <div class="nav-left">
-
     <div
       class="menu-toggle"
       id="menu-btn"
@@ -2256,35 +1217,22 @@ footer {
       role="button"
       tabindex="0"
     >
-
-      <i class="fas fa-bars"></i>
-
+      <!-- Same SVG hamburger -->
+      <svg viewBox="0 0 28 24" aria-hidden="true">
+        <line x1="2" y1="3" x2="26" y2="3"></line>
+        <line x1="2" y1="12" x2="26" y2="12"></line>
+        <line x1="2" y1="21" x2="26" y2="21"></line>
+      </svg>
     </div>
-
   </div>
-
-
-  <!-- LOGO -->
 
   <div class="logo-container">
-
     <a href="index.html">
-
-      <img
-        src="logo0.webp"
-        alt="Abdullah Psychotic"
-        class="logo-img"
-      >
-
+      <img src="logo0.webp" alt="Abdullah Psychotic" class="logo-img">
     </a>
-
   </div>
 
-
-  <!-- CART -->
-
   <div class="nav-right">
-
     <div
       class="cart-icon-wrapper"
       id="cart-icon-btn"
@@ -2292,143 +1240,86 @@ footer {
       role="button"
       tabindex="0"
     >
+      <!-- Same SVG cart -->
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"></path>
+        <circle cx="10" cy="20" r="1.4"></circle>
+        <circle cx="18" cy="20" r="1.4"></circle>
+      </svg>
 
-      <i class="fas fa-shopping-cart"></i>
-
-      <span
-        class="cart-badge"
-        id="cart-count"
-      >
-        0
-      </span>
-
+      <span class="cart-badge" id="cart-count">0</span>
     </div>
-
   </div>
-
 </header>
-
 
 <!-- =========================================================
      OVERLAY
 ========================================================= -->
-
-<div
-  class="overlay"
-  id="overlay"
-></div>
-
+<div class="overlay" id="overlay"></div>
 
 <!-- =========================================================
-     MENU DRAWER
+     SAME EDITORIAL MENU DRAWER
 ========================================================= -->
-
-<div
-  class="nav-drawer"
-  id="nav-drawer"
->
+<div class="nav-drawer" id="nav-drawer">
 
   <div
     class="close-drawer"
     id="close-drawer-btn"
     aria-label="Close menu"
+    role="button"
+    tabindex="0"
   >
-
     <i class="fas fa-times"></i>
-
   </div>
 
-
   <nav class="drawer-links">
-
-    <a href="index.html#home">
-      HOME
-    </a>
-
-    <a href="index.html#shop">
-      SHOP
-    </a>
-
-    <a href="about.html">
-      ABOUT US
-    </a>
-
-    <a href="index.html#contact">
-      CONTACT
-    </a>
-
+    <a href="index.html#home">HOME</a>
+    <a href="index.html#shop">SHOP</a>
+    <a href="about.html">ABOUT US</a>
+    <a href="index.html#contact">CONTACT</a>
   </nav>
-
 </div>
 
-
 <!-- =========================================================
-     CART DRAWER
+     SAME CART DRAWER
 ========================================================= -->
-
-<div
-  class="cart-drawer"
-  id="cart-drawer"
->
+<div class="cart-drawer" id="cart-drawer">
 
   <div class="cart-header">
-
-    <h3>
-      YOUR CART
-    </h3>
+    <h3>YOUR CART</h3>
 
     <i
       class="fas fa-times close-cart"
       id="close-cart-btn"
+      aria-label="Close cart"
+      role="button"
+      tabindex="0"
     ></i>
-
   </div>
 
-
-  <div
-    class="cart-items"
-    id="cart-items-container"
-  ></div>
-
+  <div class="cart-items" id="cart-items-container"></div>
 
   <div class="cart-footer">
 
     <div class="cart-total-row">
-
-      <span>
-        SUBTOTAL
-      </span>
-
-      <span id="cart-subtotal">
-        $0
-      </span>
-
+      <span>SUBTOTAL</span>
+      <span id="cart-subtotal">$0</span>
     </div>
 
-
-    <a
-      href="index.html#shop"
-      class="checkout-btn"
-    >
+    <a href="index.html#shop" class="checkout-btn">
       CONTINUE SHOPPING
     </a>
 
   </div>
-
 </div>
-
 
 <!-- =========================================================
      HERO
 ========================================================= -->
-
 <section class="about-hero">
-
   <div class="about-hero-content">
 
-    <div class="hero-kicker">
-      THE ABP STORY
-    </div>
+    <div class="hero-kicker">THE ABP STORY</div>
 
     <h1>
       BITE THE
@@ -2441,39 +1332,29 @@ footer {
     </p>
 
   </div>
-
 </section>
-
 
 <!-- =========================================================
      BRAND STORY
 ========================================================= -->
-
 <section class="about-section story-section">
 
   <div class="grid-2col">
 
-
     <div class="about-text-block">
 
-      <span class="section-label">
-        The Beginning
-      </span>
+      <span class="section-label">The Beginning</span>
 
       <h2 class="section-title">
-
         Every Legacy Begins
         With <span>One Question.</span>
-
       </h2>
-
 
       <p>
         My name is Abdullah Forhad.
         Before this brand existed, there was an ordinary person
         who constantly questioned himself.
       </p>
-
 
       <p>
         I believed I wasn't enough.
@@ -2482,25 +1363,21 @@ footer {
         For years, I searched for acceptance in the eyes of others.
       </p>
 
-
       <p>
         Then I realized something.
         Confidence doesn't come from people's approval.
         It comes from building your own identity.
       </p>
 
-
       <p>
         The day I stopped chasing validation was the day
         <strong>Abdullah Psychotic</strong> was born.
       </p>
 
-
       <p>
         This brand isn't built to follow trends.
         It exists for those who dream bigger than their fears.
       </p>
-
 
       <p>
         Every piece represents discipline, individuality,
@@ -2508,117 +1385,63 @@ footer {
         you were meant to be.
       </p>
 
-
       <p>
-        <strong>
-          We don't sell clothes.
-          We create identity.
-        </strong>
+        <strong>We don't sell clothes.
+        We create identity.</strong>
       </p>
 
     </div>
 
-
     <div class="about-image">
-
-      <img
-        src="bg0.webp"
-        alt="Abdullah Psychotic Brand Vision"
-      >
-
-      <span class="image-number">
-        AP — 01
-      </span>
-
+      <img src="bg0.webp" alt="Abdullah Psychotic Brand Vision">
+      <span class="image-number">AP — 01</span>
     </div>
 
   </div>
-
 </section>
-
 
 <!-- =========================================================
      STATS
 ========================================================= -->
-
 <section class="stats-banner">
 
   <div class="stat-item">
-
-    <div class="stat-number">
-      100<span>%</span>
-    </div>
-
-    <div class="stat-label">
-      Premium Craftsmanship
-    </div>
-
+    <div class="stat-number">100<span>%</span></div>
+    <div class="stat-label">Premium Craftsmanship</div>
   </div>
 
-
   <div class="stat-item">
-
-    <div class="stat-number">
-      2026
-    </div>
-
-    <div class="stat-label">
-      Established
-    </div>
-
+    <div class="stat-number">2026</div>
+    <div class="stat-label">Established</div>
   </div>
 
-
   <div class="stat-item">
-
-    <div class="stat-number">
-      <span>LIMITED</span>
-    </div>
-
-    <div class="stat-label">
-      Exclusive Drops
-    </div>
-
+    <div class="stat-number"><span>LIMITED</span></div>
+    <div class="stat-label">Exclusive Drops</div>
   </div>
 
-
   <div class="stat-item">
-
-    <div class="stat-number">
-      01
-    </div>
-
-    <div class="stat-label">
-      Unwavering Vision
-    </div>
-
+    <div class="stat-number">01</div>
+    <div class="stat-label">Unwavering Vision</div>
   </div>
 
 </section>
 
-
 <!-- =========================================================
-     FOUNDER LETTER
+     FOUNDER
 ========================================================= -->
-
 <section class="about-section founder-section">
 
   <div class="founder-inner">
 
-    <span class="section-label">
-      From The Founder
-    </span>
+    <span class="section-label">From The Founder</span>
 
     <h2 class="section-title">
-
       A Letter From
       <span>The Founder</span>
-
     </h2>
 
-
     <div class="founder-quote">
-
       “I didn't create Abdullah Psychotic
       because I had confidence.
       I created it because I wanted to
@@ -2627,132 +1450,80 @@ footer {
       If our designs inspire even one person
       to believe in themselves,
       then this brand has already succeeded.”
-
     </div>
-
 
     <div class="founder-line"></div>
 
-
-    <div class="founder-name">
-      Abdullah Forhad
-    </div>
+    <div class="founder-name">Abdullah Forhad</div>
 
   </div>
-
 </section>
-
 
 <!-- =========================================================
      CORE IDENTITY
 ========================================================= -->
-
 <section class="about-section identity-section">
 
   <div class="identity-header">
 
-    <span class="section-label">
-      Core Identity
-    </span>
+    <span class="section-label">Core Identity</span>
 
     <h2 class="section-title">
       Pillars of <span>Resilience</span>
     </h2>
 
     <p class="section-description">
-
       Psychological strength combined with
       luxury dark streetwear.
-
     </p>
 
   </div>
 
-
   <div class="story-grid">
-
-
-    <!-- =====================================================
-         MINDSET
-    ====================================================== -->
 
     <div class="story-card">
 
       <i class="fas fa-shield-halved"></i>
 
-      <h3>
-        The Mindset
-      </h3>
+      <h3>The Mindset</h3>
 
       <p>
-
         Black represents focus.
         Red represents sacrifice.
         Gold represents victory earned
         through resilience.
-
       </p>
-
 
       <ul class="color-meaning-list">
 
         <li>
-
           <span class="color-dot black"></span>
-
-          <strong>
-            Matte Black:
-          </strong>
-
+          <strong>Matte Black:</strong>
           Focus & Discipline
-
         </li>
 
-
         <li>
-
           <span class="color-dot red"></span>
-
-          <strong>
-            Blood Red:
-          </strong>
-
+          <strong>Blood Red:</strong>
           Sacrifice & Endurance
-
         </li>
 
-
         <li>
-
           <span class="color-dot gold"></span>
-
-          <strong>
-            Antique Gold:
-          </strong>
-
+          <strong>Antique Gold:</strong>
           Earned Victory
-
         </li>
 
       </ul>
-
     </div>
-
-
-    <!-- =====================================================
-         MANIFESTO
-    ====================================================== -->
 
     <div class="story-card manifesto-card">
 
       <i class="fas fa-quote-left"></i>
 
-      <h3>
-        Brand Manifesto
-      </h3>
+      <h3>Brand Manifesto</h3>
 
       <blockquote class="manifesto-text">
-
         “They said slow down.
         We moved forward.<br>
 
@@ -2763,103 +1534,44 @@ footer {
         We became stronger.<br>
 
         We don't follow trends.
-        <strong>
-          We create legacy.
-        </strong>”
-
+        <strong>We create legacy.</strong>”
       </blockquote>
 
     </div>
-
-
-    <!-- =====================================================
-         PHILOSOPHY
-    ====================================================== -->
 
     <div class="story-card">
 
       <i class="fas fa-gem"></i>
 
-      <h3>
-        Brand Philosophy
-      </h3>
+      <h3>Brand Philosophy</h3>
 
       <ul class="philosophy-list">
 
-        <li>
-
-          <i class="fas fa-check"></i>
-
-          Built for leaders.
-
-        </li>
-
-
-        <li>
-
-          <i class="fas fa-check"></i>
-
-          Designed under pressure.
-
-        </li>
-
-
-        <li>
-
-          <i class="fas fa-check"></i>
-
-          Crafted with premium quality.
-
-        </li>
-
-
-        <li>
-
-          <i class="fas fa-check"></i>
-
-          Limited. Exclusive. Unforgettable.
-
-        </li>
-
-
-        <li>
-
-          <i class="fas fa-check"></i>
-
-          Luxury is earned, never given.
-
-        </li>
+        <li><i class="fas fa-check"></i>Built for leaders.</li>
+        <li><i class="fas fa-check"></i>Designed under pressure.</li>
+        <li><i class="fas fa-check"></i>Crafted with premium quality.</li>
+        <li><i class="fas fa-check"></i>Limited. Exclusive. Unforgettable.</li>
+        <li><i class="fas fa-check"></i>Luxury is earned, never given.</li>
 
       </ul>
-
     </div>
 
   </div>
-
 </section>
-
 
 <!-- =========================================================
      FINAL STATEMENT
 ========================================================= -->
-
 <section class="final-section">
 
-  <span class="section-label">
-    Abdullah Psychotic
-  </span>
-
+  <span class="section-label">Abdullah Psychotic</span>
 
   <h2 class="final-title">
-
     Become The Person
     You Were <span>Meant To Be.</span>
-
   </h2>
 
-
   <p class="final-text">
-
     Wear your discipline.
     Carry your resilience.
     Build your identity.
@@ -2869,638 +1581,269 @@ footer {
 
     It is a reminder of what you survived
     to become.
-
   </p>
 
-
-  <a
-    href="index.html#shop"
-    class="final-button"
-  >
+  <a href="index.html#shop" class="final-button">
     Explore The Collection
   </a>
 
 </section>
 
-
 <!-- =========================================================
      FOOTER
 ========================================================= -->
-
 <footer>
 
   <div class="footer-wrapper">
 
     <div class="footer-top">
 
-
-      <!-- BRAND -->
-
       <div class="footer-brand">
 
-        <img
-          src="logo.png"
-          alt="Abdullah Psychotic"
-        >
+        <img src="logo.png" alt="Abdullah Psychotic">
 
         <p>
-
           Defining contemporary dark streetwear
           with luxurious craftsmanship,
           bold cuts, and mental resilience.
-
         </p>
-
 
         <div class="social-links">
 
-
-          <a
-            href="https://www.facebook.com/profile.php?id=61580779565120"
-            aria-label="Facebook"
-          >
-
+          <a href="https://www.facebook.com/profile.php?id=61580779565120" aria-label="Facebook">
             <i class="fab fa-facebook-f"></i>
-
           </a>
 
-
-          <a
-            href="https://www.instagram.com/abdullah.thelegend2008?igsh=YWd3a3dqdmc4cXo2"
-            aria-label="Instagram"
-          >
-
+          <a href="https://www.instagram.com/abdullah.thelegend2008?igsh=YWd3a3dqdmc4cXo2" aria-label="Instagram">
             <i class="fab fa-instagram"></i>
-
           </a>
 
-
-          <a
-            href="https://x.com/abdullahtheLeg"
-            aria-label="X"
-          >
-
+          <a href="https://x.com/abdullahtheLeg" aria-label="X">
             <i class="fab fa-x-twitter"></i>
-
           </a>
 
-
-          <a
-            href="https://www.youtube.com/@abdullahforhadthelegend"
-            aria-label="YouTube"
-          >
-
+          <a href="https://www.youtube.com/@abdullahforhadthelegend" aria-label="YouTube">
             <i class="fab fa-youtube"></i>
-
           </a>
-
 
         </div>
-
       </div>
-
-
-      <!-- SHOP -->
 
       <div class="footer-links">
-
-        <h4>
-          SHOP
-        </h4>
-
+        <h4>SHOP</h4>
         <ul>
-
-          <li>
-            <a href="index.html#shop">
-              New Arrivals
-            </a>
-          </li>
-
-          <li>
-            <a href="index.html#shop">
-              Footwear Collection
-            </a>
-          </li>
-
-          <li>
-            <a href="index.html#shop">
-              Streetwear Essentials
-            </a>
-          </li>
-
-          <li>
-            <a href="index.html#shop">
-              Accessories & Watches
-            </a>
-          </li>
-
+          <li><a href="index.html#shop">New Arrivals</a></li>
+          <li><a href="index.html#shop">Footwear Collection</a></li>
+          <li><a href="index.html#shop">Streetwear Essentials</a></li>
+          <li><a href="index.html#shop">Accessories & Watches</a></li>
         </ul>
-
       </div>
-
-
-      <!-- SUPPORT -->
 
       <div class="footer-links">
-
-        <h4>
-          SUPPORT
-        </h4>
-
+        <h4>SUPPORT</h4>
         <ul>
-
-          <li>
-            <a href="index.html#contact">
-              Order Tracking
-            </a>
-          </li>
-
-          <li>
-            <a href="index.html#contact">
-              Shipping & Returns
-            </a>
-          </li>
-
-          <li>
-            <a href="index.html#contact">
-              Size Guide
-            </a>
-          </li>
-
-          <li>
-            <a href="index.html#contact">
-              FAQs
-            </a>
-          </li>
-
+          <li><a href="index.html#contact">Order Tracking</a></li>
+          <li><a href="index.html#contact">Shipping & Returns</a></li>
+          <li><a href="index.html#contact">Size Guide</a></li>
+          <li><a href="index.html#contact">FAQs</a></li>
         </ul>
-
       </div>
-
-
-      <!-- LEGAL -->
 
       <div class="footer-links">
-
-        <h4>
-          LEGAL
-        </h4>
-
+        <h4>LEGAL</h4>
         <ul>
-
-          <li>
-            <a href="privacy.html">
-              Privacy Policy
-            </a>
-          </li>
-
-          <li>
-            <a href="service.html">
-              Terms of Service
-            </a>
-          </li>
-
-          <li>
-            <a href="refunds.html">
-              Refund Policy
-            </a>
-          </li>
-
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="service.html">Terms of Service</a></li>
+          <li><a href="refunds.html">Refund Policy</a></li>
         </ul>
-
       </div>
-
 
     </div>
 
-
     <div class="footer-bottom">
-
-      &copy; 2026 Abdullah Psychotic —
-      Luxury Streetwear.
+      &copy; 2026 Abdullah Psychotic — Luxury Streetwear.
       All rights reserved.
-
     </div>
 
   </div>
-
 </footer>
 
-
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
-
 <script>
-
 /* =========================================================
-   CART STORAGE
+   CART
 ========================================================= */
 
-let cart =
-  JSON.parse(
-    localStorage.getItem('ap_user_cart')
-  ) || [];
+let cart = JSON.parse(localStorage.getItem("ap_user_cart")) || [];
 
+const navDrawer = document.getElementById("nav-drawer");
+const cartDrawer = document.getElementById("cart-drawer");
+const overlay = document.getElementById("overlay");
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+const menuBtn = document.getElementById("menu-btn");
+const closeDrawerBtn = document.getElementById("close-drawer-btn");
 
-const navDrawer =
-  document.getElementById('nav-drawer');
+const cartIconBtn = document.getElementById("cart-icon-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
 
-const cartDrawer =
-  document.getElementById('cart-drawer');
+function updateCartUI(){
 
-const overlay =
-  document.getElementById('overlay');
-
-const menuBtn =
-  document.getElementById('menu-btn');
-
-const closeDrawerBtn =
-  document.getElementById('close-drawer-btn');
-
-const cartIconBtn =
-  document.getElementById('cart-icon-btn');
-
-const closeCartBtn =
-  document.getElementById('close-cart-btn');
-
-
-/* =========================================================
-   UPDATE CART UI
-========================================================= */
-
-function updateCartUI() {
-
-  const cartCountEl =
-    document.getElementById('cart-count');
-
-  const cartItemsContainer =
-    document.getElementById(
-      'cart-items-container'
-    );
-
-  const cartSubtotalEl =
-    document.getElementById(
-      'cart-subtotal'
-    );
-
+  const countEl = document.getElementById("cart-count");
+  const itemsEl = document.getElementById("cart-items-container");
+  const subtotalEl = document.getElementById("cart-subtotal");
 
   let totalCount = 0;
-
   let subtotal = 0;
 
+  if(cart.length === 0){
 
-  if (cart.length === 0) {
-
-    cartItemsContainer.innerHTML = `
+    itemsEl.innerHTML = `
       <p class="empty-cart-msg">
         Your shopping bag is empty.
       </p>
     `;
 
-  } else {
+  }else{
 
-    cartItemsContainer.innerHTML =
-      cart.map(item => {
+    itemsEl.innerHTML = cart.map(item => {
 
-        totalCount += item.qty;
+      totalCount += Number(item.qty) || 0;
+      subtotal += (Number(item.price) || 0) * (Number(item.qty) || 0);
 
-        subtotal +=
-          Number(item.price) * item.qty;
+      return `
+        <div class="cart-item">
 
+          <img src="${item.image}" alt="${item.name}">
 
-        return `
+          <div class="cart-item-details">
 
-          <div class="cart-item">
+            <div class="cart-item-title">
+              ${item.name}
+            </div>
 
-            <img
-              src="${item.image}"
-              alt="${item.name}"
-            >
+            <div class="cart-item-price">
+              $${item.price}
+            </div>
 
+            <div class="cart-qty-controls">
 
-            <div class="cart-item-details">
+              <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
 
-              <div class="cart-item-title">
-                ${item.name}
-              </div>
+              <span>${item.qty}</span>
 
-
-              <div class="cart-item-price">
-                $${item.price}
-              </div>
-
-
-              <div class="cart-qty-controls">
-
-                <button
-                  class="qty-btn"
-                  onclick="changeQty(${item.id}, -1)"
-                >
-                  -
-                </button>
-
-
-                <span>
-                  ${item.qty}
-                </span>
-
-
-                <button
-                  class="qty-btn"
-                  onclick="changeQty(${item.id}, 1)"
-                >
-                  +
-                </button>
-
-              </div>
+              <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
 
             </div>
 
-
-            <i
-              class="fas fa-trash-alt cart-item-remove"
-              onclick="removeItem(${item.id})"
-            ></i>
-
           </div>
 
-        `;
+          <i
+            class="fas fa-trash-alt cart-item-remove"
+            onclick="removeItem(${item.id})"
+            aria-label="Remove item"
+          ></i>
 
-      }).join('');
+        </div>
+      `;
 
+    }).join("");
   }
 
-
-  cartCountEl.textContent =
-    totalCount;
-
-  cartSubtotalEl.textContent =
-    `$${subtotal}`;
-
+  countEl.textContent = totalCount;
+  subtotalEl.textContent = `$${subtotal}`;
 }
 
+function changeQty(id,delta){
 
-/* =========================================================
-   CHANGE QUANTITY
-========================================================= */
-
-function changeQty(id, delta) {
-
-  const item =
-    cart.find(
-      product => product.id === id
-    );
-
-
-  if (!item) return;
-
+  const item = cart.find(product => product.id === id);
+  if(!item) return;
 
   item.qty += delta;
 
-
-  if (item.qty <= 0) {
-
-    cart =
-      cart.filter(
-        product => product.id !== id
-      );
-
+  if(item.qty <= 0){
+    cart = cart.filter(product => product.id !== id);
   }
 
-
-  localStorage.setItem(
-    'ap_user_cart',
-    JSON.stringify(cart)
-  );
-
-
+  localStorage.setItem("ap_user_cart",JSON.stringify(cart));
   updateCartUI();
-
 }
 
+function removeItem(id){
 
-/* =========================================================
-   REMOVE ITEM
-========================================================= */
+  cart = cart.filter(product => product.id !== id);
 
-function removeItem(id) {
-
-  cart =
-    cart.filter(
-      product => product.id !== id
-    );
-
-
-  localStorage.setItem(
-    'ap_user_cart',
-    JSON.stringify(cart)
-  );
-
-
+  localStorage.setItem("ap_user_cart",JSON.stringify(cart));
   updateCartUI();
-
 }
 
+function closeAll(){
 
-/* =========================================================
-   CLOSE EVERYTHING
-========================================================= */
-
-function closeAll() {
-
-  navDrawer.classList.remove('active');
-
-  cartDrawer.classList.remove('active');
-
-  overlay.classList.remove('active');
-
-  document.body.classList.remove('no-scroll');
-
+  navDrawer.classList.remove("active");
+  cartDrawer.classList.remove("active");
+  overlay.classList.remove("active");
+  document.body.classList.remove("no-scroll");
 }
 
+function openMenu(){
 
-/* =========================================================
-   OPEN MENU
-========================================================= */
-
-function openMenu() {
-
-  cartDrawer.classList.remove('active');
-
-  navDrawer.classList.add('active');
-
-  overlay.classList.add('active');
-
-  document.body.classList.add('no-scroll');
-
+  cartDrawer.classList.remove("active");
+  navDrawer.classList.add("active");
+  overlay.classList.add("active");
+  document.body.classList.add("no-scroll");
 }
 
+function openCart(){
 
-/* =========================================================
-   OPEN CART
-========================================================= */
-
-function openCart() {
-
-  navDrawer.classList.remove('active');
-
-  cartDrawer.classList.add('active');
-
-  overlay.classList.add('active');
-
-  document.body.classList.add('no-scroll');
-
+  navDrawer.classList.remove("active");
+  cartDrawer.classList.add("active");
+  overlay.classList.add("active");
+  document.body.classList.add("no-scroll");
 }
 
+menuBtn.addEventListener("click",openMenu);
+closeDrawerBtn.addEventListener("click",closeAll);
 
-/* =========================================================
-   CLICK EVENTS
-========================================================= */
+cartIconBtn.addEventListener("click",openCart);
+closeCartBtn.addEventListener("click",closeAll);
 
-menuBtn.addEventListener(
-  'click',
-  openMenu
-);
+overlay.addEventListener("click",closeAll);
 
-closeDrawerBtn.addEventListener(
-  'click',
-  closeAll
-);
+document.addEventListener("keydown",event => {
 
-cartIconBtn.addEventListener(
-  'click',
-  openCart
-);
-
-closeCartBtn.addEventListener(
-  'click',
-  closeAll
-);
-
-overlay.addEventListener(
-  'click',
-  closeAll
-);
-
-
-/* =========================================================
-   ESCAPE KEY
-========================================================= */
-
-document.addEventListener(
-  'keydown',
-  event => {
-
-    if (event.key === 'Escape') {
-
-      closeAll();
-
-    }
-
+  if(event.key === "Escape"){
+    closeAll();
   }
-);
 
-
-/* =========================================================
-   HEADER SCROLL
-========================================================= */
-
-window.addEventListener(
-  'scroll',
-  () => {
-
-    const header =
-      document.getElementById('navbar');
-
-
-    if (window.scrollY > 50) {
-
-      header.classList.add('scrolled');
-
-    } else {
-
-      header.classList.remove('scrolled');
-
-    }
-
+  if(
+    (event.key === "Enter" || event.key === " ") &&
+    document.activeElement === menuBtn
+  ){
+    event.preventDefault();
+    openMenu();
   }
-);
 
-
-/* =========================================================
-   KEYBOARD MENU
-========================================================= */
-
-menuBtn.addEventListener(
-  'keydown',
-  event => {
-
-    if (
-      event.key === 'Enter' ||
-      event.key === ' '
-    ) {
-
-      event.preventDefault();
-
-      openMenu();
-
-    }
-
+  if(
+    (event.key === "Enter" || event.key === " ") &&
+    document.activeElement === cartIconBtn
+  ){
+    event.preventDefault();
+    openCart();
   }
-);
+});
 
+window.addEventListener("scroll",() => {
 
-/* =========================================================
-   KEYBOARD CART
-========================================================= */
+  const header = document.getElementById("navbar");
 
-cartIconBtn.addEventListener(
-  'keydown',
-  event => {
-
-    if (
-      event.key === 'Enter' ||
-      event.key === ' '
-    ) {
-
-      event.preventDefault();
-
-      openCart();
-
-    }
-
+  if(window.scrollY > 50){
+    header.classList.add("scrolled");
+  }else{
+    header.classList.remove("scrolled");
   }
-);
 
-
-/* =========================================================
-   CLOSE DRAWER WHEN CLICKING LINK
-========================================================= */
-
-document.querySelectorAll('.drawer-links a')
-  .forEach(link => {
-
-    link.addEventListener(
-      'click',
-      closeAll
-    );
-
-  });
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
+});
 
 updateCartUI();
-
 </script>
-
 
 </body>
 </html>
