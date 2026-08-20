@@ -40,6 +40,7 @@
   --drawer-text: #111111;
 
 
+
   /* =========================
      FONTS
   ========================= */
@@ -54,6 +55,7 @@
 
   --font-signature: 'Allura', cursive;
 }
+
 
 
 /* =========================================================
@@ -112,6 +114,7 @@ textarea {
 }
 
 
+
 /* =========================================================
    SCROLLBAR
 ========================================================= */
@@ -133,6 +136,7 @@ textarea {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-hover);
 }
+
 
 
 /* =========================================================
@@ -242,6 +246,7 @@ textarea {
 }
 
 
+
 /* =========================================================
    HEADER
 ========================================================= */
@@ -264,6 +269,8 @@ header {
 
 
 
+
+
 header.scrolled {
 
   height: 75px;
@@ -278,6 +285,7 @@ header.scrolled {
   border-bottom:
     1px solid var(--border-color);
 }
+
 
 
 /* =========================================================
@@ -326,6 +334,7 @@ header.scrolled {
 }
 
 
+
 /* =========================================================
    DESKTOP NAVIGATION
 ========================================================= */
@@ -344,9 +353,12 @@ header.scrolled {
 
 
 
+
+
 .menu-toggle {
     display: none;
 }
+
 
 
 .desktop-nav a {
@@ -400,6 +412,7 @@ header.scrolled {
 }
 
 
+
 /* =========================================================
    HEADER RIGHT
 ========================================================= */
@@ -414,6 +427,7 @@ header.scrolled {
 }
 
 
+
 /* =========================================================
    MENU + CART ICON BUTTONS
 ========================================================= */
@@ -421,6 +435,7 @@ header.scrolled {
 .menu-toggle {
     display: none;
 }
+
 
 
   .menu-toggle,
@@ -443,7 +458,8 @@ header.scrolled {
     box-sizing: border-box;
 }
 
-  
+
+
 .menu-toggle svg,
 .cart-icon-wrapper svg {
 
@@ -494,6 +510,7 @@ header.scrolled {
 }
 
 
+
 /* =========================================================
    CART BADGE
 ========================================================= */
@@ -535,6 +552,7 @@ header.scrolled {
 
   line-height: 1;
 }
+
 
 
 /* =========================================================
@@ -615,6 +633,7 @@ header.scrolled {
 }
 
 
+
 /* =========================================================
    DRAWER CLOSE BUTTON
 ========================================================= */
@@ -657,11 +676,13 @@ header.scrolled {
 }
 
 
+
 /* Hide FontAwesome X */
 
 .close-drawer i {
   display: none;
 }
+
 
 
 /* Thin Editorial X */
@@ -710,6 +731,7 @@ header.scrolled {
 
   opacity: .55;
 }
+
 
 
 /* =========================================================
@@ -770,6 +792,7 @@ header.scrolled {
 }
 
 
+
 /* No red line */
 
 .drawer-links a::before,
@@ -779,6 +802,7 @@ header.scrolled {
 
   content: none;
 }
+
 
 
 /* Drawer hover */
@@ -793,6 +817,7 @@ header.scrolled {
   transform:
     translateX(5px);
 }
+
 
 
 /* =========================================================
@@ -833,6 +858,7 @@ header.scrolled {
   transform:
     translateX(5px);
 }
+
 
 
 /* =========================================================
@@ -885,6 +911,7 @@ header.scrolled {
     opacity .45s ease,
     visibility 0s linear 0s;
 }
+
 
 
 /* =========================================================
@@ -949,6 +976,7 @@ header.scrolled {
 }
 
 
+
 /* =========================================================
    CART HEADER
 ========================================================= */
@@ -1001,6 +1029,7 @@ header.scrolled {
 
   transform: rotate(90deg);
 }
+
 
 
 /* =========================================================
@@ -1171,6 +1200,7 @@ header.scrolled {
 }
 
 
+
 /* =========================================================
    CART FOOTER
 ========================================================= */
@@ -1208,8 +1238,11 @@ header.scrolled {
 
 
 
+
+
 /* =========================================================
-   SIZE SELECTION BOTTOM SHEET — PREMIUM COMPACT
+   SIZE SELECTION BOTTOM SHEET
+   — FIXED BOTTOM / ADD TO CART ALWAYS AT BOTTOM
 ========================================================= */
 .size-sheet {
   position: fixed;
@@ -1222,15 +1255,15 @@ header.scrolled {
   background: var(--drawer-bg);
   color: var(--drawer-text);
   z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   transform: translateY(105%);
   visibility: hidden;
   pointer-events: none;
   box-shadow: 0 -15px 50px rgba(0,0,0,.25);
   transition: transform .45s cubic-bezier(.77,0,.175,1),
               visibility 0s linear .45s;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
 }
 
 .size-sheet.active {
@@ -1242,6 +1275,7 @@ header.scrolled {
 }
 
 .size-sheet-header {
+  flex: 0 0 54px;
   height: 54px;
   min-height: 54px;
   padding: 0 22px;
@@ -1249,7 +1283,6 @@ header.scrolled {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgba(17,17,17,.12);
-  flex-shrink: 0;
 }
 
 .size-sheet-header h3 {
@@ -1262,8 +1295,9 @@ header.scrolled {
 }
 
 .close-size-sheet {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1271,20 +1305,27 @@ header.scrolled {
   border: 0;
   color: #111;
   cursor: pointer;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 300;
   line-height: 1;
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.close-size-sheet:hover {
+  transform: rotate(90deg);
+  opacity: .55;
 }
 
 .size-sheet-content {
   flex: 1;
   min-height: 0;
-  padding: 13px 28px 14px;
-  text-align: center;
-  overflow: hidden;
+  width: 100%;
+  padding: 14px 38px calc(14px + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  overflow: hidden;
 }
 
 .size-product-image {
@@ -1294,13 +1335,14 @@ header.scrolled {
   display: block;
   object-fit: contain;
   background: #efeee4;
-  flex-shrink: 0;
+  flex: 0 0 auto;
 }
 
 .size-product-brand {
   margin-bottom: 3px;
   font-family: var(--font-subheading);
   font-size: 9px;
+  font-weight: 400;
   letter-spacing: 2.5px;
   text-transform: uppercase;
   flex-shrink: 0;
@@ -1310,15 +1352,15 @@ header.scrolled {
   margin-bottom: 3px;
   font-family: var(--font-body);
   font-size: 15px;
-  line-height: 1.15;
   font-weight: 500;
+  line-height: 1.15;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   flex-shrink: 0;
 }
 
 .size-product-price {
-  margin-bottom: 9px;
+  margin-bottom: 10px;
   color: #666;
   font-family: var(--font-body);
   font-size: 12px;
@@ -1328,17 +1370,18 @@ header.scrolled {
 
 .size-select-row {
   width: 100%;
+  margin-bottom: 7px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  margin-bottom: 6px;
   flex-shrink: 0;
 }
 
 .size-label {
   font-family: var(--font-body);
   font-size: 14px;
+  font-weight: 400;
   letter-spacing: 2px;
 }
 
@@ -1354,14 +1397,16 @@ header.scrolled {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 7px;
-  margin-bottom: 9px;
+  gap: 8px;
+  margin-bottom: 10px;
   flex-shrink: 0;
 }
 
 .size-option {
-  min-height: 40px;
-  height: 40px;
+  width: 100%;
+  height: 42px;
+  min-height: 42px;
+  padding: 0;
   background: transparent;
   border: 1px solid rgba(17,17,17,.18);
   color: #666;
@@ -1369,7 +1414,8 @@ header.scrolled {
   font-family: var(--font-body);
   font-size: 14px;
   letter-spacing: 1px;
-  transition: all .25s ease;
+  transition: background .25s ease, color .25s ease,
+              border-color .25s ease, transform .2s ease;
 }
 
 .size-option:hover,
@@ -1379,26 +1425,41 @@ header.scrolled {
   color: #fff;
 }
 
+.size-option:active {
+  transform: scale(.97);
+}
+
+/* The critical line: this pushes ADD TO CART to the bottom. */
 .size-confirm-btn {
   width: 100%;
-  min-height: 46px;
-  height: 46px;
-  margin-bottom: 8px;
+  height: 52px;
+  min-height: 52px;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding: 0;
   border: 0;
   background: #05050d;
   color: #fff;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 3.5px;
   text-transform: uppercase;
-  transition: background .25s ease, transform .2s ease;
   flex-shrink: 0;
+  transition: background .25s ease, transform .2s ease;
 }
 
-.size-confirm-btn:hover { background: #222; }
-.size-confirm-btn:active { transform: scale(.99); }
+.size-confirm-btn:hover {
+  background: #222;
+}
+
+.size-confirm-btn:active {
+  transform: scale(.99);
+}
 
 @media (max-width: 768px) {
   .size-sheet {
@@ -1407,6 +1468,7 @@ header.scrolled {
   }
 
   .size-sheet-header {
+    flex-basis: 50px;
     height: 50px;
     min-height: 50px;
     padding: 0 18px;
@@ -1424,7 +1486,7 @@ header.scrolled {
   }
 
   .size-sheet-content {
-    padding: 11px 18px 12px;
+    padding: 11px 18px calc(12px + env(safe-area-inset-bottom));
   }
 
   .size-product-image {
@@ -1433,15 +1495,45 @@ header.scrolled {
     margin-bottom: 6px;
   }
 
-  .size-product-brand { font-size: 10px; letter-spacing: 2.2px; }
-  .size-product-name { font-size: 16px; }
-  .size-product-price { font-size: 14px; margin-bottom: 8px; }
-  .size-select-row { margin-bottom: 5px; }
-  .size-label { font-size: 13px; }
-  .size-chart-link { font-size: 10px; }
-  .size-options { gap: 6px; margin-bottom: 8px; }
-  .size-option { min-height: 39px; height: 39px; font-size: 13px; }
-  .size-confirm-btn { min-height: 46px; height: 44px; font-size: 10px; letter-spacing: 3px; }
+  .size-product-brand {
+    font-size: 10px;
+    letter-spacing: 2.2px;
+  }
+
+  .size-product-name {
+    font-size: 16px;
+  }
+
+  .size-product-price {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .size-label {
+    font-size: 13px;
+  }
+
+  .size-chart-link {
+    font-size: 10px;
+  }
+
+  .size-options {
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .size-option {
+    height: 40px;
+    min-height: 40px;
+    font-size: 13px;
+  }
+
+  .size-confirm-btn {
+    height: 48px;
+    min-height: 48px;
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1451,16 +1543,25 @@ header.scrolled {
   }
 
   .size-sheet-header {
+    flex-basis: 48px;
     height: 48px;
     min-height: 48px;
     padding: 0 15px;
   }
 
-  .size-sheet-header h3 { font-size: 13px; letter-spacing: 2.8px; }
-  .close-size-sheet { width: 30px; height: 30px; font-size: 26px; }
+  .size-sheet-header h3 {
+    font-size: 13px;
+    letter-spacing: 2.8px;
+  }
+
+  .close-size-sheet {
+    width: 30px;
+    height: 30px;
+    font-size: 27px;
+  }
 
   .size-sheet-content {
-    padding: 9px 15px 10px;
+    padding: 9px 15px calc(10px + env(safe-area-inset-bottom));
   }
 
   .size-product-image {
@@ -1469,15 +1570,53 @@ header.scrolled {
     margin-bottom: 5px;
   }
 
-  .size-product-brand { font-size: 7.5px; letter-spacing: 2px; margin-bottom: 2px; }
-  .size-product-name { font-size: 13px; letter-spacing: 1px; margin-bottom: 2px; }
-  .size-product-price { font-size: 10px; margin-bottom: 7px; letter-spacing: 2px; }
-  .size-select-row { margin-bottom: 4px; }
-  .size-label { font-size: 12px; }
-  .size-chart-link { font-size: 9px; }
-  .size-options { gap: 5px; margin-bottom: 7px; }
-  .size-option { min-height: 37px; height: 37px; font-size: 12px; }
-  .size-confirm-btn { min-height: 42px; height: 42px; font-size: 9px; letter-spacing: 2.7px; }
+  .size-product-brand {
+    font-size: 7.5px;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+
+  .size-product-name {
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+
+  .size-product-price {
+    font-size: 10px;
+    margin-bottom: 7px;
+    letter-spacing: 2px;
+  }
+
+  .size-select-row {
+    margin-bottom: 5px;
+  }
+
+  .size-label {
+    font-size: 12px;
+  }
+
+  .size-chart-link {
+    font-size: 9px;
+  }
+
+  .size-options {
+    gap: 5px;
+    margin-bottom: 7px;
+  }
+
+  .size-option {
+    height: 37px;
+    min-height: 37px;
+    font-size: 12px;
+  }
+
+  .size-confirm-btn {
+    height: 46px;
+    min-height: 46px;
+    font-size: 9px;
+    letter-spacing: 2.7px;
+  }
 }
 
 /* =========================================================
@@ -1561,6 +1700,7 @@ header.scrolled {
 
   letter-spacing: 2px;
 }
+
 
 
 /* =========================================================
@@ -1657,6 +1797,7 @@ header.scrolled {
 
   color: #fff;
 }
+
 
 
 /* =========================================================
@@ -1792,6 +1933,7 @@ header.scrolled {
 }
 
 
+
 /* =========================================================
    HERO
 ========================================================= */
@@ -1902,6 +2044,7 @@ header.scrolled {
 }
 
 
+
 /* =========================================================
    SECTIONS
 ========================================================= */
@@ -1983,6 +2126,7 @@ section {
 }
 
 
+
 /* =========================================================
    PRODUCT SCROLL
 ========================================================= */
@@ -2013,6 +2157,7 @@ section {
 
   scroll-snap-align: start;
 }
+
 
 
 /* =========================================================
@@ -2180,6 +2325,7 @@ section {
 }
 
 
+
 /* =========================================================
    LUXURY HIGHLIGHT
 ========================================================= */
@@ -2295,6 +2441,7 @@ section {
 }
 
 
+
 /* =========================================================
    CONTACT
 ========================================================= */
@@ -2371,6 +2518,7 @@ section {
 }
 
 
+
 /* =========================================================
    MISSION
 ========================================================= */
@@ -2415,6 +2563,7 @@ section {
 }
 
 
+
 /* =========================================================
    SOUND BANNER
 ========================================================= */
@@ -2457,6 +2606,7 @@ section {
 
   justify-content: center;
 }
+
 
 
 /* =========================================================
@@ -2539,6 +2689,7 @@ footer {
 }
 
 
+
 /* =========================================================
    SOCIAL
 ========================================================= */
@@ -2593,6 +2744,7 @@ footer {
 }
 
 
+
 /* =========================================================
    FOOTER BOTTOM
 ========================================================= */
@@ -2620,6 +2772,7 @@ footer {
 
   text-transform: uppercase;
 }
+
 
 
 /* =========================================================
@@ -2656,7 +2809,7 @@ footer {
 
   cursor: pointer;
 
-  z-index: 9999;
+  z-index: 1100;
 
   transition:
     right .4s ease,
@@ -2689,6 +2842,7 @@ footer {
 }
 
 
+
 /* =========================================================
    DESKTOP PRODUCT GRID
 ========================================================= */
@@ -2713,6 +2867,7 @@ footer {
     flex: unset;
   }
 }
+
 
 
 /* =========================================================
@@ -2821,6 +2976,7 @@ footer {
 }
 
 
+
 /* =========================================================
    MOBILE
 ========================================================= */
@@ -2839,6 +2995,7 @@ footer {
 
     font-size: 30px;
   }
+
 
 
   /* Header */
@@ -2864,6 +3021,7 @@ footer {
   }
 
 
+
   /* Drawer */
 
   .nav-drawer {
@@ -2879,6 +3037,7 @@ footer {
   }
 
 
+
   .close-drawer {
   width: 20px;
   height: 20px;
@@ -2890,7 +3049,7 @@ footer {
   width: 21px;
   height: 1.2px;
 }
-  
+
   .drawer-links a {
 
     min-height: 48px;
@@ -2905,6 +3064,7 @@ footer {
 
     font-size: 18px;
   }
+
 
 
   /* Hero */
@@ -2929,7 +3089,7 @@ footer {
     linear-gradient(
       180deg,
       rgba(0,0,0,.05) 0%,
-      
+
       rgba(20,0,0,.03) 100%
     ),
     url('bgra2.png')
@@ -2954,6 +3114,7 @@ footer {
   }
 
 
+
   /* Sections */
 
   section {
@@ -2971,6 +3132,7 @@ footer {
 
     margin-bottom: 45px;
   }
+
 
 
   /* Product */
@@ -2992,12 +3154,14 @@ footer {
   }
 
 
+
   /* Contact */
 
   .contact-container {
 
     padding: 35px 25px;
   }
+
 
 
   /* Footer */
@@ -3009,6 +3173,7 @@ footer {
   }
 
 
+
   /* Music */
 
   #music-btn {
@@ -3018,12 +3183,8 @@ footer {
     bottom: 18px;
   }
 
-  .size-product-image {
-        width: 280px;
-        height: 300px;
-        object-fit: contain;
-  }
 }
+
 
 
 /* =========================================================
@@ -3046,6 +3207,7 @@ footer {
   }
 
 
+
     .menu-toggle,
     .cart-icon-wrapper {
         width: 28px;
@@ -3062,7 +3224,8 @@ footer {
         border: 0;
     }
 
-    
+
+
   .menu-toggle svg {
 
     width: 20px;
@@ -3076,6 +3239,7 @@ footer {
 
     height: 18px;
   }
+
 
 
   /* Drawer */
@@ -3123,6 +3287,7 @@ footer {
   }
 
 
+
   /* Hero */
 
   .hero h1 {
@@ -3140,6 +3305,7 @@ footer {
   }
 
 
+
   /* Buttons */
 
   .btn,
@@ -3155,6 +3321,7 @@ footer {
 
     letter-spacing: 2.5px;
   }
+
 
 
   /* Product */
@@ -3176,6 +3343,7 @@ footer {
   }
 
 
+
   /* Cart */
 
   .cart-drawer {
@@ -3187,6 +3355,7 @@ footer {
     padding:
       22px;
   }
+
 
 
   /* Checkout */
@@ -3204,6 +3373,7 @@ footer {
     flex-direction: column;
   }
 }
+
 
 
 /* =========================================================
@@ -3243,6 +3413,7 @@ footer {
 }
 
 
+
 /* =========================================================
    REDUCE MOTION
 ========================================================= */
@@ -3262,8 +3433,117 @@ footer {
     transition-duration: .01ms !important;
   }
   }
+
   
-  </style>
+/* =========================================================
+   FINAL MOBILE SIZE SHEET FIX
+   — EVERYTHING FITS IN ONE VIEW / NO INTERNAL SCROLL
+========================================================= */
+.size-sheet {
+  height: 56dvh;
+  max-height: 56dvh;
+  overflow: hidden;
+}
+
+.size-sheet-content {
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.size-product-image {
+  width: 150px !important;
+  height: 150px !important;
+  max-width: 150px !important;
+  max-height: 150px !important;
+  object-fit: contain !important;
+  flex: 0 0 150px !important;
+  margin: 0 auto 6px !important;
+}
+
+.size-confirm-btn {
+  margin-top: auto !important;
+  flex: 0 0 48px !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 480px) {
+  .size-sheet {
+    height: 56dvh;
+    max-height: 56dvh;
+  }
+
+  .size-sheet-header {
+    height: 48px;
+    min-height: 48px;
+  }
+
+  .size-sheet-content {
+    padding: 8px 15px calc(8px + env(safe-area-inset-bottom));
+  }
+
+  .size-product-image {
+    width: 128px !important;
+    height: 128px !important;
+    max-width: 128px !important;
+    max-height: 128px !important;
+    flex-basis: 128px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .size-product-brand {
+    font-size: 8px;
+    margin-bottom: 2px;
+  }
+
+  .size-product-name {
+    font-size: 13px;
+    line-height: 1.1;
+    margin-bottom: 2px;
+  }
+
+  .size-product-price {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+
+  .size-select-row {
+    margin-bottom: 5px;
+  }
+
+  .size-label {
+    font-size: 12px;
+  }
+
+  .size-chart-link {
+    font-size: 9px;
+  }
+
+  .size-options {
+    gap: 5px;
+    margin-bottom: 7px;
+  }
+
+  .size-option {
+    height: 37px;
+    min-height: 37px;
+    font-size: 12px;
+  }
+
+  .size-confirm-btn {
+    height: 46px !important;
+    min-height: 46px !important;
+    flex-basis: 46px !important;
+    font-size: 10px;
+    letter-spacing: 2.8px;
+  }
+}
+
+</style>
 
 </head>
 
@@ -3321,7 +3601,7 @@ footer {
     <a href="shop.html" onclick="closeAll()">Shop</a>
     <a href="#contact" onclick="closeAll()">Contact</a>
     <a href="https://forhad2008.github.io/Captain-Abdullah/" onclick="closeAll()">Underworld</a>
-    
+
   </nav>
 </div>
 
@@ -3403,7 +3683,7 @@ footer {
     <div class="form-group">
       <input type="text" id="cust-address" placeholder="Delivery Address" required>
     </div>
-    
+
     <div>
       <label style="font-family: var(--font-accent); font-size: 11px; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase;">Payment Method:</label>
       <div class="payment-options">
@@ -3514,6 +3794,7 @@ footer {
 </section>
 
 
+
   <!-- Sound Experience Section -->
 <section class="sound-banner">
 
@@ -3531,7 +3812,7 @@ footer {
     </div>
 
 </section>
-  
+
   <!-- Background Music -->
 <audio id="bgMusic" loop preload="auto">
     <source src="1musicbg.wav" type="audio/wav">
@@ -3606,6 +3887,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (!welcomeScreen || !typingText) return;
 
 
+
     /* =========================
        Lock Scrolling
     ========================= */
@@ -3621,6 +3903,7 @@ window.addEventListener('DOMContentLoaded', () => {
             passive: false
         });
     });
+
 
 
     /* =========================
@@ -3644,6 +3927,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
 
+
     /* =========================
        Typing Text
     ========================= */
@@ -3651,6 +3935,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const text = "Abdullah Psychotic";
 
     let index = 0;
+
 
 
     /* =========================
@@ -3668,6 +3953,7 @@ window.addEventListener('DOMContentLoaded', () => {
     typingSound.loop = true;
 
     typingSound.volume = 1.0;
+
 
 
     /* =========================
@@ -3708,6 +3994,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
 
+
     /* =========================
        Stop Typing Sound
     ========================= */
@@ -3721,6 +4008,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
 
+
     /* =========================
        Typing Animation
     ========================= */
@@ -3728,6 +4016,7 @@ window.addEventListener('DOMContentLoaded', () => {
     function typeText() {
 
         if (index < text.length) {
+
 
 
             /* -------------------------
@@ -3742,6 +4031,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
 
 
+
             /* -------------------------
                Type current character
             ------------------------- */
@@ -3752,6 +4042,7 @@ window.addEventListener('DOMContentLoaded', () => {
             index++;
 
 
+
             /* -------------------------
                Next character
             ------------------------- */
@@ -3759,7 +4050,9 @@ window.addEventListener('DOMContentLoaded', () => {
             setTimeout(typeText, 150);
 
 
+
         } else {
+
 
 
             /* =========================
@@ -3767,9 +4060,11 @@ window.addEventListener('DOMContentLoaded', () => {
             ========================= */
 
 
+
             /* STOP SOUND IMMEDIATELY */
 
             stopTypingSound();
+
 
 
             /* =========================
@@ -3779,6 +4074,7 @@ window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
 
 
+
                 /* -------------------------
                    Fade out welcome screen
                 ------------------------- */
@@ -3786,6 +4082,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 welcomeScreen.classList.add(
                     'fade-out'
                 );
+
 
 
                 /* -------------------------
@@ -3798,6 +4095,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 );
 
 
+
                 /* =========================
                    Completely hide screen
                 ========================= */
@@ -3805,8 +4103,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
 
 
+
                     welcomeScreen.style.display =
                         'none';
+
 
 
                     /* -------------------------
@@ -3816,6 +4116,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     document.body.classList.remove(
                         'no-scroll'
                     );
+
 
 
                     /* -------------------------
@@ -3835,7 +4136,9 @@ window.addEventListener('DOMContentLoaded', () => {
                     }, 300);
 
 
+
                 }, 700);
+
 
 
             }, 1500);
@@ -3843,6 +4146,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
     }
+
 
 
     /* =========================
@@ -3853,8 +4157,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 });
 
-  
-  
+
+
+
+
 /* ----------------------------------------------------
   1. PRODUCT DATA & GLOBAL STATE CONFIGURATION
 ---------------------------------------------------- */
@@ -3944,7 +4250,7 @@ const products = [
     price: 489,
     badge: "Premium Graphic t-shirt"
   },
-  
+
   {
     id: 10,
     category: "apparel",
@@ -3981,7 +4287,7 @@ const products = [
     price: 799,
     badge: "Premium shoes"
   },
-  
+
   {
     id: 14,
     category: "watches",
@@ -4001,7 +4307,7 @@ const products = [
     price: 9899,
     badge: "Luxury Wear"
   },
-  
+
   {
     id: 16,
     category: "lifestyle",
@@ -4207,13 +4513,15 @@ const products = [
 const soldOut = [1, 2]; // এখানে যেসব product ID sold out হবে
 
 
-  
+
+
+
 /* ----------------------------------------------------
   2. RENDER PRODUCTS BY CATEGORY
 ---------------------------------------------------- */
 function createCardHTML(product) {
   const isSoldOut = soldOut.includes(product.id);
-  
+
   const isLuxury = product.category === 'watches';
   const cardClass = isLuxury ? 'card luxury-card' : 'card';
   const badgeClass = isLuxury ? 'card-badge luxury-badge' : 'card-badge';
@@ -4244,7 +4552,7 @@ isSoldOut
     <i class="fas fa-plus"></i> Add
 </button>`
           }
-          
+
         </div>
       </div>
     </div>
@@ -4470,7 +4778,7 @@ function openCheckout() {
     return;
   }
   closeAll();
-  
+
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
   const finalTotal = subtotal + 100;
@@ -4534,7 +4842,7 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
   const orderNum = Math.floor(100000 + Math.random() * 900000);
 
   alert(`Thank you ${name}!\n\nYour order #${orderNum} has been placed successfully.\nWe will contact you shortly for confirmation.`);
-  
+
   cart = [];
   saveCartToStorage();
   updateCartUI();
@@ -4558,7 +4866,7 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwu-v4lXL48t4
 
 document.getElementById('contact-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  
+
   const submitBtn = document.getElementById('contact-submit-btn');
   submitBtn.disabled = true;
   submitBtn.textContent = 'SENDING...';
@@ -4615,7 +4923,7 @@ if (savedState === "playing") {
     document.addEventListener("click", function firstPlay() {
       bgMusic.volume = 0.7;
 bgMusic.play().catch(() => {});
-      
+
         musicBtn.classList.add("playing");
         document.removeEventListener("click", firstPlay);
     }, { once: true });
