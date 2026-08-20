@@ -3748,7 +3748,7 @@ footer {
 
     <div class="size-select-row">
       <span class="size-label">Size:</span>
-      <a href="#" class="size-chart-link" onclick="return false;">Size chart</a>
+      <a href="#" class="size-chart-link" id="size-chart-link" onclick="return false;">Size chart</a>
     </div>
 
     <div class="size-options" id="size-options">
@@ -4706,6 +4706,18 @@ function renderProducts() {
 let pendingProduct = null;
 let selectedSize = null;
 
+function getOptions(product) {
+  if (product.category === 'apparel' || product.category === 'hoodies') {
+    return { label: 'Size', values: ['S', 'M', 'L', 'XL', 'XXL'] };
+  }
+
+  if (product.category === 'footwear') {
+    return { label: 'Size', values: ['39', '40', '41', '42', '43', '44', '45'] };
+  }
+
+  return { label: 'Size', values: ['ONE SIZE'] };
+}
+
 function addToCart(productId) {
   const product = products.find(p => p.id === productId);
   if (!product || soldOut.includes(productId)) return;
@@ -4718,11 +4730,35 @@ function addToCart(productId) {
   document.getElementById('size-product-brand').textContent = 'ABDULLAH PSYCHOTIC';
   document.getElementById('size-product-name').textContent = product.name;
   document.getElementById('size-product-price').textContent =
-    `$${product.price.toLocaleString()} USD`;
+    `৳${product.price.toLocaleString()}`;
+
+  const options = getOptions(product);
+  const sizeOptions = document.getElementById('size-options');
+  const sizeLabel = document.querySelector('.size-label');
+  const sizeChartLink = document.getElementById('size-chart-link');
+
+  if (sizeLabel) sizeLabel.textContent = `${options.label}:`;
+
+  sizeOptions.innerHTML = options.values.map(value =>
+    `<button type="button" class="size-option" data-size="${value}">${value}</button>`
+  ).join('');
 
   document.querySelectorAll('.size-option').forEach(option => {
-    option.classList.remove('selected');
+    option.addEventListener('click', () => selectSize(option.dataset.size));
   });
+
+  if (sizeChartLink) {
+    sizeChartLink.onclick = function(event) {
+      event.preventDefault();
+      const guide = product.category === 'footwear'
+        ? `SHOE SIZE GUIDE\n\n39 / 40 / 41 / 42 / 43 / 44 / 45\n\nPlease choose your usual shoe size.`
+        : (product.category === 'apparel' || product.category === 'hoodies')
+          ? `SIZE GUIDE\n\nS — Small\nM — Medium\nL — Large\nXL — Extra Large\nXXL — Extra Extra Large\n\nPlease choose your usual size.`
+          : `SIZE GUIDE\n\nThis product is available in ONE SIZE.`;
+      alert(guide);
+      return false;
+    };
+  }
 
   closeAll();
   sizeSheet.classList.add('active');
@@ -4947,10 +4983,6 @@ document.getElementById('close-size-sheet').addEventListener('click', () => {
   document.body.classList.remove('no-scroll');
 });
 
-document.querySelectorAll('.size-option').forEach(option => {
-  option.addEventListener('click', () => selectSize(option.dataset.size));
-});
-
 document.getElementById('confirm-size-btn').addEventListener('click', confirmSizeAndAddToCart);
 
 overlay.addEventListener('click', closeAll);
@@ -4963,18 +4995,87 @@ document.querySelectorAll('.payment-option').forEach(option => {
   });
 });
 
-document.getElementById('checkout-form').addEventListener('submit', function(e) {
+/* ----------------------------------------------------
+  5. ORDER CHECKOUT -> GOOGLE SHEETS + OWNER EMAIL
+---------------------------------------------------- */
+/*
+  IMPORTANT:
+  Paste your deployed Google Apps Script Web App URL below.
+  The Apps Script file supplied with this HTML saves the complete order
+  to Google Sheets and sends the order email to forhadalpha08@gmail.com.
+*/
+const ORDER_SCRIPT_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+document.getElementById('checkout-form').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const name = document.getElementById('cust-name').value;
-  const orderNum = Math.floor(100000 + Math.random() * 900000);
 
-  alert(`Thank you ${name}!\n\nYour order #${orderNum} has been placed successfully.\nWe will contact you shortly for confirmation.`);
+  if (cart.length === 0) {
+    alert('Your cart is empty.');
+    return;
+  }
 
-  cart = [];
-  saveCartToStorage();
-  updateCartUI();
-  closeAll();
-  this.reset();
+  if (!ORDER_SCRIPT_URL || ORDER_SCRIPT_URL.includes('PASTE_YOUR')) {
+    alert('Order system is not connected yet. Add your Google Apps Script Web App URL to ORDER_SCRIPT_URL first.');
+    return;
+  }
+
+  const submitBtn = this.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  const orderNum = 'AP-' + Date.now().toString().slice(-10) + '-' + Math.floor(100 + Math.random() * 900);
+
+  const totalItems = cart.reduce((sum, item) => sum + Number(item.qty || 0), 0);
+  const subtotal = cart.reduce((sum, item) => sum + (Number(item.price) * Number(item.qty || 0)), 0);
+  const deliveryCharge = 100;
+  const total = subtotal + deliveryCharge;
+
+  const orderData = {
+    type: 'order',
+    orderId: orderNum,
+    customerName: document.getElementById('cust-name').value.trim(),
+    customerPhone: document.getElementById('cust-phone').value.trim(),
+    customerAddress: document.getElementById('cust-address').value.trim(),
+    paymentMethod: document.querySelector('input[name="payment"]:checked')?.value || 'COD',
+    totalItems,
+    subtotal,
+    deliveryCharge,
+    total,
+    currency: 'BDT',
+    items: cart.map(item => ({
+      productId: item.id,
+      name: item.name,
+      category: item.category || '',
+      size: item.size || 'ONE SIZE',
+      price: Number(item.price),
+      quantity: Number(item.qty || 1),
+      lineTotal: Number(item.price) * Number(item.qty || 1)
+    }))
+  };
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'PLACING ORDER...';
+
+  try {
+    await fetch(ORDER_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(orderData)
+    });
+
+    alert(`Thank you ${orderData.customerName}!\n\nYour order #${orderNum} has been placed successfully.\nWe will contact you shortly for confirmation.`);
+
+    cart = [];
+    saveCartToStorage();
+    updateCartUI();
+    closeAll();
+    this.reset();
+  } catch (error) {
+    console.error('Order submission error:', error);
+    alert('There was a problem sending your order. Please try again.');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+  }
 });
 
 window.addEventListener("scroll", () => {
