@@ -1207,6 +1207,197 @@ header.scrolled {
 }
 
 
+
+/* =========================================================
+   SIZE SELECTION BOTTOM SHEET
+========================================================= */
+
+.size-sheet {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  max-height: 82dvh;
+  padding: 0;
+  background: var(--drawer-bg);
+  color: var(--drawer-text);
+  z-index: 1200;
+  transform: translateY(105%);
+  visibility: hidden;
+  pointer-events: none;
+  box-shadow: 0 -15px 50px rgba(0,0,0,.25);
+  transition: transform .45s cubic-bezier(.77,0,.175,1),
+              visibility 0s linear .45s;
+  overflow: hidden;
+}
+.size-sheet.active {
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform .45s cubic-bezier(.77,0,.175,1),
+              visibility 0s linear 0s;
+}
+.size-sheet-header {
+  height: 78px;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(17,17,17,.12);
+  flex-shrink: 0;
+}
+.size-sheet-header h3 {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+.close-size-sheet {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  color: #111;
+  cursor: pointer;
+  font-size: 31px;
+  font-weight: 300;
+  line-height: 1;
+}
+.size-sheet-content {
+  padding: 42px 38px 30px;
+  text-align: center;
+  overflow: hidden;
+}
+.size-product-image {
+  width: min(310px, 55vw);
+  height: min(310px, 55vw);
+  margin: 0 auto 18px;
+  display: block;
+  object-fit: contain;
+  background: #efeee4;
+}
+.size-product-brand {
+  margin-bottom: 8px;
+  font-family: var(--font-subheading);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.size-product-name {
+  margin-bottom: 8px;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.size-product-price {
+  margin-bottom: 26px;
+  color: #666;
+  font-family: var(--font-body);
+  font-size: 14px;
+  letter-spacing: 3px;
+}
+.size-select-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+.size-label {
+  font-family: var(--font-body);
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.size-chart-link {
+  color: #111;
+  border-bottom: 1px solid #111;
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+.size-options {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.size-option {
+  min-height: 58px;
+  background: transparent;
+  border: 1px solid rgba(17,17,17,.18);
+  color: #666;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 16px;
+  letter-spacing: 1px;
+  transition: all .25s ease;
+}
+.size-option:hover,
+.size-option.selected {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+.size-confirm-btn {
+  width: 100%;
+  min-height: 62px;
+  border: 0;
+  background: #05050d;
+  color: #fff;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transition: background .25s ease, transform .2s ease;
+}
+.size-confirm-btn:hover { background: #222; }
+.size-confirm-btn:active { transform: scale(.99); }
+
+@media (max-width: 768px) {
+  .size-sheet { max-height: 88dvh; }
+  .size-sheet-header { height: 76px; padding: 0 22px; }
+  .size-sheet-header h3 { font-size: 16px; letter-spacing: 3.5px; }
+  .size-sheet-content { padding: 28px 22px 22px; }
+  .size-product-image {
+    width: min(300px, 52vw);
+    height: min(300px, 52vw);
+    margin-bottom: 14px;
+  }
+  .size-product-name { font-size: 16px; }
+  .size-product-price { margin-bottom: 20px; }
+  .size-option { min-height: 52px; font-size: 15px; }
+  .size-confirm-btn { min-height: 58px; }
+}
+@media (max-width: 480px) {
+  .size-sheet { max-height: 91dvh; }
+  .size-sheet-header { height: 70px; padding: 0 18px; }
+  .size-sheet-header h3 { font-size: 14px; letter-spacing: 3px; }
+  .close-size-sheet { width: 32px; height: 32px; font-size: 29px; }
+  .size-sheet-content { padding: 24px 18px 18px; }
+  .size-product-image {
+    width: min(250px, 52vw);
+    height: min(250px, 52vw);
+  }
+  .size-product-brand { font-size: 9px; letter-spacing: 2.5px; }
+  .size-product-name { font-size: 14px; letter-spacing: 1.2px; }
+  .size-product-price { font-size: 12px; margin-bottom: 17px; }
+  .size-select-row { margin-bottom: 10px; }
+  .size-label { font-size: 15px; }
+  .size-chart-link { font-size: 11px; }
+  .size-options { gap: 7px; margin-bottom: 12px; }
+  .size-option { min-height: 48px; font-size: 14px; }
+  .size-confirm-btn { min-height: 55px; font-size: 11px; letter-spacing: 3px; }
+}
+
 /* =========================================================
    CHECKOUT MODAL
 ========================================================= */
@@ -3063,6 +3254,36 @@ footer {
   </div>
 </div>
 
+<!-- SIZE SELECTION BOTTOM SHEET -->
+<div class="size-sheet" id="size-sheet" aria-hidden="true">
+  <div class="size-sheet-header">
+    <h3>CHOOSE OPTIONS</h3>
+    <button type="button" class="close-size-sheet" id="close-size-sheet" aria-label="Close">&times;</button>
+  </div>
+
+  <div class="size-sheet-content">
+    <img id="size-product-image" class="size-product-image" src="" alt="">
+    <div id="size-product-brand" class="size-product-brand">CAPTAIN ABDULLAH</div>
+    <div id="size-product-name" class="size-product-name"></div>
+    <div id="size-product-price" class="size-product-price"></div>
+
+    <div class="size-select-row">
+      <span class="size-label">Size:</span>
+      <a href="#" class="size-chart-link" onclick="return false;">Size chart</a>
+    </div>
+
+    <div class="size-options" id="size-options">
+      <button type="button" class="size-option" data-size="S">S</button>
+      <button type="button" class="size-option" data-size="M">M</button>
+      <button type="button" class="size-option" data-size="L">L</button>
+      <button type="button" class="size-option" data-size="XL">XL</button>
+      <button type="button" class="size-option" data-size="XXL">XXL</button>
+    </div>
+
+    <button type="button" class="size-confirm-btn" id="confirm-size-btn">ADD TO CART</button>
+  </div>
+</div>
+
 <div class="modal" id="checkout-modal">
   <div class="modal-header">
     <h3>CHECKOUT</h3>
@@ -3551,6 +3772,13 @@ window.addEventListener('DOMContentLoaded', () => {
 ---------------------------------------------------- */
 let cart = JSON.parse(localStorage.getItem('ap_user_cart')) || [];
 
+/* Upgrade previously saved cart items to the size-aware format. */
+cart = cart.map(item => ({
+  ...item,
+  size: item.size || 'M',
+  cartKey: item.cartKey || `${item.id}-${item.size || 'M'}`
+}));
+
 function saveCartToStorage() {
   localStorage.setItem('ap_user_cart', JSON.stringify(cart));
 }
@@ -3964,34 +4192,118 @@ function renderProducts() {
 /* ----------------------------------------------------
   3. CART SYSTEM LOGIC
 ---------------------------------------------------- */
+/* ----------------------------------------------------
+   SIZE SELECTION + CART SYSTEM
+---------------------------------------------------- */
+
+let pendingProduct = null;
+let selectedSize = null;
+
 function addToCart(productId) {
-  const existingItem = cart.find(item => item.id === productId);
+  const product = products.find(p => p.id === productId);
+  if (!product || soldOut.includes(productId)) return;
+
+  pendingProduct = product;
+  selectedSize = null;
+
+  document.getElementById('size-product-image').src = product.image;
+  document.getElementById('size-product-image').alt = product.name;
+  document.getElementById('size-product-brand').textContent = 'CAPTAIN ABDULLAH';
+  document.getElementById('size-product-name').textContent = product.name;
+  document.getElementById('size-product-price').textContent =
+    `$${product.price.toLocaleString()} USD`;
+
+  document.querySelectorAll('.size-option').forEach(option => {
+    option.classList.remove('selected');
+  });
+
+  closeAll();
+  sizeSheet.classList.add('active');
+  sizeSheet.setAttribute('aria-hidden', 'false');
+  overlay.classList.add('active');
+  document.body.classList.add('no-scroll');
+}
+
+function selectSize(size) {
+  selectedSize = size;
+
+  document.querySelectorAll('.size-option').forEach(option => {
+    option.classList.toggle('selected', option.dataset.size === size);
+  });
+}
+
+function confirmSizeAndAddToCart() {
+  if (!pendingProduct) return;
+
+  if (!selectedSize) {
+    alert('Please select a size first.');
+    return;
+  }
+
+  const cartKey = `${pendingProduct.id}-${selectedSize}`;
+  const existingItem = cart.find(item => item.cartKey === cartKey);
+
   if (existingItem) {
     existingItem.qty += 1;
   } else {
-    const product = products.find(p => p.id === productId);
-    cart.push({ ...product, qty: 1 });
+    cart.push({
+      ...pendingProduct,
+      size: selectedSize,
+      cartKey: cartKey,
+      qty: 1
+    });
   }
+
   saveCartToStorage();
   updateCartUI();
+
+  pendingProduct = null;
+  selectedSize = null;
+
+  closeSizeSheet();
   openCart();
 }
 
-function updateQuantity(productId, change) {
-  const item = cart.find(item => item.id === productId);
+function closeSizeSheet() {
+  const sheet = document.getElementById('size-sheet');
+
+  if (sheet) {
+    sheet.classList.remove('active');
+    sheet.setAttribute('aria-hidden', 'true');
+  }
+
+  pendingProduct = null;
+  selectedSize = null;
+
+  document.querySelectorAll('.size-option').forEach(option => {
+    option.classList.remove('selected');
+  });
+}
+
+function getCartItemKey(item) {
+  if (!item.size) item.size = 'M';
+  if (!item.cartKey) item.cartKey = `${item.id}-${item.size}`;
+  return item.cartKey;
+}
+
+function updateQuantity(cartKey, change) {
+  const item = cart.find(item => getCartItemKey(item) === cartKey);
+
   if (item) {
     item.qty += change;
+
     if (item.qty <= 0) {
-      removeFromCart(productId);
+      removeFromCart(cartKey);
       return;
     }
   }
+
   saveCartToStorage();
   updateCartUI();
 }
 
-function removeFromCart(productId) {
-  cart = cart.filter(item => item.id !== productId);
+function removeFromCart(cartKey) {
+  cart = cart.filter(item => getCartItemKey(item) !== cartKey);
   saveCartToStorage();
   updateCartUI();
 }
@@ -4022,13 +4334,16 @@ function updateCartUI() {
         <div class="cart-item-details">
           <div class="cart-item-title"><a href="${item.url}" target="_blank">${item.name}</a></div>
           <div class="cart-item-price">$${item.price}</div>
+          <div style="font-size:11px; color:var(--text-muted); margin-top:4px; letter-spacing:1px;">
+            SIZE: ${item.size || 'M'}
+          </div>
           <div class="cart-qty-controls">
-            <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+            <button class="qty-btn" onclick="updateQuantity('${getCartItemKey(item)}', -1)">-</button>
             <span style="font-size:12px; font-weight:600;">${item.qty}</span>
-            <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+            <button class="qty-btn" onclick="updateQuantity('${getCartItemKey(item)}', 1)">+</button>
           </div>
         </div>
-        <i class="fas fa-trash cart-item-remove" onclick="removeFromCart(${item.id})"></i>
+        <i class="fas fa-trash cart-item-remove" onclick="removeFromCart('${getCartItemKey(item)}')"></i>
       </div>
     `;
     cartContainer.insertAdjacentHTML('beforeend', itemHTML);
@@ -4042,6 +4357,7 @@ const overlay = document.getElementById('overlay');
 const navDrawer = document.getElementById('nav-drawer');
 const cartDrawer = document.getElementById('cart-drawer');
 const checkoutModal = document.getElementById('checkout-modal');
+const sizeSheet = document.getElementById('size-sheet');
 
 function openCart() {
   closeAll();
@@ -4083,6 +4399,7 @@ function closeAll() {
   navDrawer.classList.remove('active');
   cartDrawer.classList.remove('active');
   checkoutModal.classList.remove('active');
+  closeSizeSheet();
   overlay.classList.remove('active');
   document.body.classList.remove('no-scroll');
 
@@ -4100,6 +4417,19 @@ document.getElementById('cart-icon-btn').addEventListener('click', openCart);
 document.getElementById('close-cart-btn').addEventListener('click', closeAll);
 document.getElementById('open-checkout-btn').addEventListener('click', openCheckout);
 document.getElementById('close-modal-btn').addEventListener('click', closeAll);
+
+document.getElementById('close-size-sheet').addEventListener('click', () => {
+  closeSizeSheet();
+  overlay.classList.remove('active');
+  document.body.classList.remove('no-scroll');
+});
+
+document.querySelectorAll('.size-option').forEach(option => {
+  option.addEventListener('click', () => selectSize(option.dataset.size));
+});
+
+document.getElementById('confirm-size-btn').addEventListener('click', confirmSizeAndAddToCart);
+
 overlay.addEventListener('click', closeAll);
 
 document.querySelectorAll('.payment-option').forEach(option => {
