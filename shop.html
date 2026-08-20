@@ -8,29 +8,29 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* =========================================================
-   ROOT
-========================================================= */
-
 :root{
-  --red:#d20f1d;
-  --red-dark:#9e0914;
-  --bg:#050505;
-  --card:#101010;
-  --muted:#8c8c8c;
-  --white:#f5f5f5;
-  --cream:#faf8ed;
   --black:#050505;
-  --border:rgba(255,255,255,.12);
+  --black2:#090909;
+  --card:#0b0b0b;
+  --white:#ffffff;
+  --soft-white:#eeeeee;
+  --muted:#9a9a9a;
+  --border:rgba(255,255,255,.10);
 
   --heading:"Playfair Display",serif;
   --subheading:"Cinzel",serif;
   --body:"Montserrat",sans-serif;
 }
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
   margin:0;
@@ -43,8 +43,8 @@ html{
 }
 
 body{
-  background:#e8e5de;
-  color:#202328;
+  background:#050505;
+  color:#fff;
   font-family:var(--body);
   overflow-x:hidden;
 }
@@ -54,8 +54,8 @@ body.locked{
 }
 
 a{
-  text-decoration:none;
   color:inherit;
+  text-decoration:none;
 }
 
 button{
@@ -73,7 +73,7 @@ img{
 ========================================================= */
 
 ::-webkit-scrollbar{
-  width:7px;
+  width:6px;
 }
 
 ::-webkit-scrollbar-track{
@@ -81,13 +81,13 @@ img{
 }
 
 ::-webkit-scrollbar-thumb{
-  background:var(--red);
+  background:#444;
   border-radius:10px;
 }
 
 
 /* =========================================================
-   HEADER - PREVIOUS BLACK STYLE
+   HEADER
 ========================================================= */
 
 header{
@@ -101,12 +101,11 @@ header{
   grid-template-columns:70px 1fr 70px;
   align-items:center;
 
-  background:rgba(5,5,5,.97);
-  border-bottom:1px solid rgba(255,255,255,.10);
+  background:#050505;
 
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.10);
 }
+
 
 .menu-btn,
 .cart-btn{
@@ -118,10 +117,12 @@ header{
   margin:auto;
 
   padding:0;
+
   border:0;
 
   background:transparent;
-  color:#f5f5f5;
+
+  color:#fff;
 
   display:flex;
   align-items:center;
@@ -136,7 +137,7 @@ header{
 
 .menu-btn:hover,
 .cart-btn:hover{
-  transform:scale(1.08);
+  transform:scale(1.06);
 }
 
 .menu-btn:active,
@@ -163,23 +164,32 @@ header{
   height:23px;
 }
 
+
+/* =========================================================
+   LOGO
+========================================================= */
+
 .logo{
   justify-self:center;
+
+  width:150px;
 
   display:flex;
   align-items:center;
   justify-content:center;
-
-  width:150px;
 }
 
 .logo img{
-  width:115px;
+  width:125px;
   height:auto;
-  max-height:70px;
 
   object-fit:contain;
 }
+
+
+/* =========================================================
+   CART COUNT
+========================================================= */
 
 .cart-count{
   position:absolute;
@@ -187,14 +197,13 @@ header{
   top:-3px;
   right:-5px;
 
-  min-width:17px;
   width:17px;
   height:17px;
 
   border-radius:50%;
 
-  background:var(--red);
-  color:#fff;
+  background:#fff;
+  color:#050505;
 
   display:flex;
   align-items:center;
@@ -203,7 +212,7 @@ header{
   font-size:8px;
   font-weight:700;
 
-  border:1px solid #000;
+  border:1px solid #050505;
 }
 
 
@@ -215,7 +224,7 @@ header{
   position:fixed;
   inset:0;
 
-  background:rgba(0,0,0,.72);
+  background:rgba(0,0,0,.76);
 
   backdrop-filter:blur(5px);
   -webkit-backdrop-filter:blur(5px);
@@ -242,6 +251,7 @@ header{
 
 .menu-drawer{
   position:fixed;
+
   top:0;
   left:-380px;
 
@@ -251,11 +261,11 @@ header{
 
   z-index:1300;
 
-  background:#090909;
+  background:#080808;
 
   border-right:1px solid var(--border);
 
-  box-shadow:18px 0 55px rgba(0,0,0,.5);
+  box-shadow:18px 0 55px rgba(0,0,0,.6);
 
   padding:28px;
 
@@ -280,11 +290,13 @@ header{
 }
 
 .menu-brand{
-  color:#fff;
-
   font-family:var(--subheading);
+
   font-size:11px;
+
   letter-spacing:2px;
+
+  color:#fff;
 }
 
 .menu-close{
@@ -295,19 +307,23 @@ header{
   border-radius:50%;
 
   background:#111;
-  color:#aaa;
+
+  color:#fff;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
   font-size:20px;
+
   cursor:pointer;
+
+  transition:.2s;
 }
 
 .menu-close:hover{
-  color:#fff;
-  border-color:var(--red);
+  background:#fff;
+  color:#050505;
 }
 
 .menu-links{
@@ -320,13 +336,17 @@ header{
 }
 
 .menu-links a{
+  display:flex;
+  align-items:center;
+
   padding:15px 14px;
 
-  color:#bbb;
+  color:#ccc;
 
-  border-radius:8px;
+  border-radius:6px;
 
   font-size:12px;
+
   letter-spacing:1.5px;
 
   transition:.25s;
@@ -334,7 +354,7 @@ header{
 
 .menu-links a:hover{
   color:#fff;
-  background:rgba(210,15,29,.1);
+  background:#111;
   padding-left:18px;
 }
 
@@ -346,6 +366,7 @@ header{
   text-align:center;
 
   font-size:9px;
+
   letter-spacing:2px;
 }
 
@@ -356,11 +377,11 @@ header{
 
 .products-page{
   width:100%;
-  max-width:1450px;
+  max-width:1200px;
 
   margin:auto;
 
-  padding:22px 16px 70px;
+  padding:28px 16px 70px;
 }
 
 
@@ -370,15 +391,15 @@ header{
 
 .product-list{
   display:grid;
+
   grid-template-columns:repeat(2,minmax(0,1fr));
 
-  gap:14px;
+  gap:16px;
 }
 
 
 /* =========================================================
    PRODUCT CARD
-   SHORTER FULL BOX
 ========================================================= */
 
 .product-card{
@@ -386,262 +407,318 @@ header{
 
   min-width:0;
 
+  background:#0b0b0b;
+
+  border:1px solid rgba(255,255,255,.08);
+
   overflow:hidden;
 
-  background:#f5f4f1;
-
-  box-shadow:
-    0 2px 8px rgba(0,0,0,.04),
-    0 8px 20px rgba(0,0,0,.04);
-
-  transition:.25s;
+  transition:
+    transform .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease;
 }
 
 .product-card:hover{
-  transform:translateY(-2px);
+  transform:translateY(-3px);
+
+  border-color:rgba(255,255,255,.20);
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,.55);
 }
 
 
 /* =========================================================
-   IMAGE
-   SHORTER THAN PREVIOUS VERSION
+   PRODUCT IMAGE
 ========================================================= */
 
 .product-image{
   position:relative;
 
+  display:block;
+
   width:100%;
-  height:330px;
+
+  height:245px;
 
   overflow:hidden;
 
-  background:#111;
+  background:#080808;
 
-  display:block;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.product-image::after{
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 65%,
+      rgba(0,0,0,.18)
+    );
 }
 
 .product-image img{
   width:100%;
   height:100%;
 
-  object-fit:cover;
+  object-fit:contain;
 
-  transition:.4s;
+  padding:5px;
+
+  filter:
+    drop-shadow(
+      0 12px 18px rgba(0,0,0,.65)
+    );
+
+  transition:transform .45s ease;
 }
 
-.product-card:hover .product-image img{
-  transform:scale(1.025);
-}
-
-
-/* =========================================================
-   LIMITED BADGE
-========================================================= */
-
-.product-badge{
-  position:absolute;
-
-  top:14px;
-  left:14px;
-
-  min-width:145px;
-  height:36px;
-
-  padding:0 13px;
-
-  background:#f4f4f2;
-  color:#25282c;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:9px;
-  font-weight:600;
-
-  letter-spacing:2.7px;
-  text-transform:uppercase;
-
-  z-index:3;
+.product-card:hover
+.product-image img{
+  transform:scale(1.035);
 }
 
 
 /* =========================================================
-   WHITE PLUS BUTTON / BLACK PLUS
+   PLUS BUTTON
+   IMPORTANT:
+   It stays INSIDE image only.
+   Therefore product information can NEVER
+   hide behind it.
 ========================================================= */
 
-.plus-btn{
+.product-plus{
   position:absolute;
 
   right:14px;
   bottom:14px;
 
-  width:64px;
-  height:64px;
+  z-index:10;
+
+  width:54px;
+  height:54px;
 
   border:0;
 
-  background:#ffffff;
-  color:#111111;
+  background:#fff;
+
+  color:#050505;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  cursor:pointer;
+  font-size:34px;
 
-  z-index:5;
-
-  font-size:40px;
+  font-family:Arial,sans-serif;
   font-weight:300;
+
   line-height:1;
 
-  transition:.2s;
+  cursor:pointer;
 
-  box-shadow:0 5px 16px rgba(0,0,0,.14);
+  box-shadow:
+    0 5px 20px rgba(0,0,0,.45);
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    color .2s ease;
 }
 
-.plus-btn:hover{
-  background:#111;
+.product-plus:hover{
+  transform:scale(1.06);
+
+  background:#050505;
+
   color:#fff;
 }
 
-.plus-btn:active{
+.product-plus:active{
   transform:scale(.92);
 }
 
 
 /* =========================================================
-   PRODUCT INFO - SHORT HEIGHT
+   PRODUCT INFO
 ========================================================= */
 
 .product-info{
-  min-height:156px;
+  position:relative;
 
-  padding:20px 20px 19px;
+  min-height:112px;
 
-  background:#f7f7f6;
+  padding:15px 15px 16px;
 
-  display:flex;
-  flex-direction:column;
+  background:#0b0b0b;
+
+  color:#fff;
 }
 
-.product-brand{
-  color:#6e7276;
+
+/* BRAND */
+.product-badge{
+  color:#bdbdbd;
 
   font-family:var(--subheading);
 
-  font-size:9px;
-  font-weight:600;
+  font-size:8px;
+
+  font-weight:500;
 
   letter-spacing:2px;
 
   text-transform:uppercase;
 
-  margin-bottom:13px;
+  margin-bottom:7px;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
 }
 
+
+/* PRODUCT NAME */
 .product-name{
-  color:#2e3236;
+  color:#fff;
 
   font-family:var(--body);
 
-  font-size:17px;
-  font-weight:400;
+  font-size:16px;
+
+  font-weight:500;
 
   line-height:1.35;
 
-  margin-bottom:12px;
+  margin:0;
+
+  padding-right:0;
 }
+
+
+/* DESCRIPTION */
+
+.product-description{
+  display:none;
+}
+
+
+/* PRICE */
 
 .product-price{
-  margin-top:auto;
+  color:#fff;
 
-  color:#292d31;
+  font-size:15px;
 
-  font-size:16px;
-  font-weight:700;
+  font-weight:600;
 
-  letter-spacing:.7px;
+  margin-top:9px;
 }
 
-.sold-label{
-  position:absolute;
 
-  right:14px;
-  bottom:14px;
+/* SOLD OUT */
 
-  height:50px;
-  min-width:110px;
+.sold-out{
+  width:100%;
 
-  background:#111;
-  color:#fff;
+  height:34px;
+
+  margin-top:10px;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  font-size:9px;
-  font-weight:700;
-  letter-spacing:2px;
+  background:#fff;
 
-  z-index:5;
+  color:#050505;
+
+  font-size:10px;
+
+  font-weight:700;
+
+  letter-spacing:1.5px;
 }
 
 
 /* =========================================================
-   CART
+   CART DRAWER
 ========================================================= */
 
 .cart-drawer{
   position:fixed;
-  inset:0 0 0 auto;
 
-  width:min(430px,80vw);
+  top:0;
+  right:0;
+  bottom:0;
+
+  width:min(430px,90vw);
+
   height:100dvh;
 
-  background:#090909;
+  background:#080808;
 
   border-left:1px solid var(--border);
 
-  z-index:1300;
+  z-index:9999;
 
   display:flex;
   flex-direction:column;
 
   transform:translateX(100%);
 
-  transition:transform .38s cubic-bezier(.77,0,.175,1);
+  transition:
+    transform .38s
+    cubic-bezier(.77,0,.175,1);
 
-  box-shadow:-18px 0 55px rgba(0,0,0,.55);
+  box-shadow:-18px 0 55px rgba(0,0,0,.6);
+
+  overflow:hidden;
 }
 
 .cart-drawer.active{
   transform:translateX(0);
 }
 
+
+/* =========================================================
+   CART HEADER
+========================================================= */
+
 .cart-header{
   flex-shrink:0;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
 
   min-height:76px;
 
   padding:0 22px;
 
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
   border-bottom:1px solid var(--border);
 
-  background:#0b0b0b;
+  background:#050505;
 }
 
 .cart-header h2{
-  color:#fff;
+  margin:0;
 
   font-family:var(--subheading);
 
   font-size:15px;
+
   letter-spacing:2.5px;
 }
 
@@ -649,22 +726,33 @@ header{
   width:40px;
   height:40px;
 
-  border:1px solid var(--border);
+  border:1px solid #222;
 
   background:#fff;
+
   color:#050505;
 
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
   font-size:24px;
+
   cursor:pointer;
 
   transition:.2s;
 }
 
 .cart-close:hover{
-  background:var(--red);
+  background:#050505;
   color:#fff;
-  border-color:var(--red);
+  border-color:#fff;
 }
+
+
+/* =========================================================
+   CART ITEMS
+========================================================= */
 
 .cart-items{
   flex:1;
@@ -684,10 +772,16 @@ header{
   margin-top:70px;
 
   font-family:var(--heading);
+
   font-size:15px;
 }
 
+
+/* CART ITEM */
+
 .cart-item{
+  position:relative;
+
   display:grid;
 
   grid-template-columns:72px minmax(0,1fr) 34px;
@@ -705,9 +799,9 @@ header{
   width:72px;
   height:82px;
 
-  object-fit:cover;
+  object-fit:contain;
 
-  background:#101010;
+  background:#111;
 }
 
 .cart-item-info{
@@ -720,6 +814,7 @@ header{
   font-family:var(--heading);
 
   font-size:12px;
+
   line-height:1.35;
 }
 
@@ -729,17 +824,24 @@ header{
   font-size:10px;
 
   margin-top:5px;
+
   letter-spacing:.8px;
 }
 
 .cart-item-price{
-  color:#f22935;
+  color:#fff;
 
   font-size:12px;
-  font-weight:600;
 
   margin-top:6px;
+
+  font-weight:600;
 }
+
+
+/* =========================================================
+   QUANTITY
+========================================================= */
 
 .qty{
   display:flex;
@@ -754,27 +856,32 @@ header{
   width:27px;
   height:27px;
 
-  border:1px solid var(--border);
+  border:1px solid #333;
 
   background:#111;
+
   color:#fff;
 
   cursor:pointer;
 }
 
 .qty button:hover{
-  border-color:var(--red);
-  color:var(--red);
+  background:#fff;
+  color:#050505;
 }
 
 .qty span{
-  color:#fff;
-
   min-width:14px;
 
   text-align:center;
+
   font-size:11px;
 }
+
+
+/* =========================================================
+   REMOVE
+========================================================= */
 
 .remove{
   align-self:start;
@@ -782,20 +889,26 @@ header{
   width:34px;
   height:34px;
 
-  border:1px solid var(--border);
+  border:1px solid #222;
 
   background:#111;
+
   color:#aaa;
 
   font-size:21px;
+
   cursor:pointer;
 }
 
 .remove:hover{
-  background:var(--red);
-  color:#fff;
-  border-color:var(--red);
+  background:#fff;
+  color:#050505;
 }
+
+
+/* =========================================================
+   CART FOOTER
+========================================================= */
 
 .cart-footer{
   flex-shrink:0;
@@ -804,7 +917,7 @@ header{
 
   padding:18px 22px 22px;
 
-  background:#0b0b0b;
+  background:#050505;
 }
 
 .total{
@@ -812,11 +925,10 @@ header{
   align-items:center;
   justify-content:space-between;
 
-  color:#fff;
-
   font-family:var(--subheading);
 
   font-size:14px;
+
   letter-spacing:.5px;
 
   margin-bottom:15px;
@@ -824,14 +936,17 @@ header{
 
 .checkout{
   width:100%;
+
   height:52px;
 
-  border:1px solid var(--red);
+  border:1px solid #fff;
 
-  background:var(--red);
-  color:#fff;
+  background:#fff;
+
+  color:#050505;
 
   font-weight:700;
+
   letter-spacing:2px;
 
   cursor:pointer;
@@ -840,29 +955,32 @@ header{
 }
 
 .checkout:hover{
-  background:#fff;
-  color:#050505;
-  border-color:#fff;
+  background:#050505;
+
+  color:#fff;
 }
 
 
 /* =========================================================
-   OPTIONS MODAL
+   OPTIONS OVERLAY
 ========================================================= */
 
 .options-overlay{
   position:fixed;
+
   inset:0;
 
   z-index:2000;
 
-  background:rgba(0,0,0,.72);
+  background:rgba(0,0,0,.78);
 
   backdrop-filter:blur(7px);
   -webkit-backdrop-filter:blur(7px);
 
   opacity:0;
+
   visibility:hidden;
+
   pointer-events:none;
 
   transition:.25s;
@@ -870,9 +988,16 @@ header{
 
 .options-overlay.active{
   opacity:1;
+
   visibility:visible;
+
   pointer-events:auto;
 }
+
+
+/* =========================================================
+   OPTIONS WINDOW
+========================================================= */
 
 .options-window{
   position:fixed;
@@ -886,64 +1011,81 @@ header{
 
   max-height:92dvh;
 
-  background:var(--cream);
+  background:#f5f5f5;
 
-  color:#171717;
+  color:#111;
 
   z-index:2100;
 
-  border-radius:22px 22px 0 0;
+  border-radius:20px 20px 0 0;
 
   overflow:hidden;
 
-  box-shadow:0 -20px 70px rgba(0,0,0,.5);
+  box-shadow:
+    0 -20px 70px rgba(0,0,0,.6);
 
-  transition:transform .42s cubic-bezier(.77,0,.175,1);
+  transition:
+    transform .42s
+    cubic-bezier(.77,0,.175,1);
 
   display:flex;
   flex-direction:column;
 }
 
-.options-overlay.active .options-window{
+.options-overlay.active
+.options-window{
   transform:translate(-50%,0);
 }
+
+
+/* =========================================================
+   OPTIONS HEADER
+========================================================= */
 
 .options-header{
   flex:0 0 auto;
 
-  height:82px;
+  height:78px;
 
   display:flex;
+
   align-items:center;
   justify-content:space-between;
 
   padding:0 30px;
 
-  border-bottom:1px solid rgba(0,0,0,.12);
+  border-bottom:1px solid #ddd;
 }
 
 .options-header h2{
   font-family:var(--subheading);
 
-  font-size:19px;
+  font-size:18px;
+
   font-weight:500;
 
   letter-spacing:3px;
 }
 
 .options-close{
-  width:44px;
-  height:44px;
+  width:42px;
+  height:42px;
 
   border:0;
 
   background:transparent;
 
-  color:#171717;
+  color:#111;
 
-  font-size:34px;
+  font-size:32px;
+
   cursor:pointer;
 }
+
+
+/* =========================================================
+   OPTIONS BODY
+========================================================= */
 
 .options-body{
   overflow-y:auto;
@@ -967,7 +1109,11 @@ header{
   width:170px;
   height:190px;
 
-  background:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#e9e9e9;
 
   overflow:hidden;
 }
@@ -976,13 +1122,14 @@ header{
   width:100%;
   height:100%;
 
-  object-fit:cover;
+  object-fit:contain;
 }
 
 .option-product-info h3{
   font-family:var(--heading);
 
   font-size:22px;
+
   font-weight:500;
 
   line-height:1.25;
@@ -991,7 +1138,7 @@ header{
 }
 
 .option-price{
-  color:#555;
+  color:#666;
 
   font-size:15px;
 
@@ -1000,8 +1147,14 @@ header{
   margin-bottom:14px;
 }
 
+
+/* =========================================================
+   OPTION LABEL
+========================================================= */
+
 .option-label{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
 
@@ -1026,8 +1179,14 @@ header{
   cursor:pointer;
 }
 
+
+/* =========================================================
+   SIZE OPTIONS
+========================================================= */
+
 .size-options{
   display:flex;
+
   flex-wrap:wrap;
 
   gap:8px;
@@ -1035,18 +1194,28 @@ header{
 
 .size-btn{
   min-width:58px;
+
   height:45px;
 
   padding:0 13px;
 
-  border:1px solid #c9c7bc;
+  border:1px solid #c9c9c9;
 
   background:transparent;
 
-  color:#555;
+  color:#444;
 
   font-size:13px;
+
   cursor:pointer;
+
+  transition:.2s;
+}
+
+.size-btn:hover{
+  border-color:#111;
+
+  color:#111;
 }
 
 .size-btn.selected{
@@ -1057,54 +1226,43 @@ header{
   color:#fff;
 }
 
+
+/* =========================================================
+   CONFIRM
+========================================================= */
+
 .confirm-add{
   width:100%;
+
   height:53px;
 
   border:0;
 
   background:#050505;
+
   color:#fff;
 
   font-size:14px;
+
   letter-spacing:3px;
 
   font-weight:500;
+
   cursor:pointer;
 }
 
 .confirm-add:disabled{
   opacity:.35;
+
   cursor:not-allowed;
 }
 
 
 /* =========================================================
-   DESKTOP
+   DESKTOP MODAL
 ========================================================= */
 
 @media(min-width:769px){
-
-  .products-page{
-    padding:30px 25px 80px;
-  }
-
-  .product-list{
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:20px;
-  }
-
-  .product-image{
-    height:400px;
-  }
-
-  .product-info{
-    min-height:145px;
-  }
-
-  .product-name{
-    font-size:17px;
-  }
 
   .options-window{
     bottom:50%;
@@ -1116,22 +1274,10 @@ header{
     border-radius:18px;
   }
 
-  .options-overlay.active .options-window{
+  .options-overlay.active
+  .options-window{
     transform:translate(-50%,50%);
   }
-}
-
-
-@media(min-width:1200px){
-
-  .product-list{
-    grid-template-columns:repeat(4,minmax(0,1fr));
-  }
-
-  .product-image{
-    height:370px;
-  }
-
 }
 
 
@@ -1151,110 +1297,107 @@ header{
 
   .menu-btn,
   .cart-btn{
-    width:29px;
-    height:29px;
+    width:30px;
+    height:30px;
   }
 
   .menu-btn svg{
-    width:25px;
-    height:19px;
+    width:19px;
+    height:15px;
   }
 
   .cart-btn svg{
-    width:18px;
-    height:18px;
+    width:19px;
+    height:19px;
   }
 
   .logo img{
-    width:100px;
-    max-height:62px;
+    width:115px;
   }
 
-  .cart-count{
-    min-width:15px;
-    width:15px;
-    height:15px;
 
-    font-size:7px;
-
-    top:-3px;
-    right:-5px;
-  }
+  /* PRODUCTS */
 
   .products-page{
-    padding:16px 15px 60px;
+    padding:
+      22px
+      15px
+      60px;
   }
 
   .product-list{
-    gap:12px;
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+    gap:10px;
   }
 
-  /* SHORTER MOBILE IMAGE */
+
+  /* IMAGE */
 
   .product-image{
-    height:235px;
+    height:175px;
+  }
+
+  .product-image img{
+    padding:3px;
+  }
+
+
+  /* PLUS */
+
+  .product-plus{
+    width:46px;
+    height:46px;
+
+    right:8px;
+    bottom:8px;
+
+    font-size:29px;
+  }
+
+
+  /* INFO */
+
+  .product-info{
+    min-height:105px;
+
+    padding:
+      12px
+      9px
+      13px;
   }
 
   .product-badge{
-    top:10px;
-    left:10px;
-
-    min-width:112px;
-    height:31px;
-
-    padding:0 8px;
-
-    font-size:7px;
-
-    letter-spacing:1.8px;
-  }
-
-  .plus-btn{
-    width:54px;
-    height:54px;
-
-    right:10px;
-    bottom:10px;
-
-    font-size:35px;
-  }
-
-  /* SHORT FULL PRODUCT BOX */
-
-  .product-info{
-    min-height:132px;
-
-    padding:15px 13px 15px;
-  }
-
-  .product-brand{
-    font-size:7px;
+    font-size:6.5px;
 
     letter-spacing:1.4px;
 
-    margin-bottom:9px;
+    margin-bottom:6px;
   }
 
   .product-name{
-    font-size:12px;
+    font-size:11px;
 
-    line-height:1.32;
-
-    margin-bottom:9px;
+    line-height:1.35;
   }
 
   .product-price{
-    font-size:13px;
+    font-size:14px;
+
+    margin-top:8px;
   }
+
 
   /* CART */
 
   .cart-drawer{
-    width:100vw;
+    width:90vw;
   }
 
   .cart-header{
     min-height:68px;
+
     padding:0 16px;
   }
 
@@ -1266,6 +1409,7 @@ header{
     padding:16px;
   }
 
+
   /* OPTIONS */
 
   .options-window{
@@ -1273,7 +1417,11 @@ header{
 
     max-height:91dvh;
 
-    border-radius:20px 20px 0 0;
+    border-radius:
+      20px
+      20px
+      0
+      0;
   }
 
   .options-header{
@@ -1288,70 +1436,50 @@ header{
     letter-spacing:2.5px;
   }
 
-  .options-close{
-    width:40px;
-    height:40px;
-
-    font-size:31px;
-  }
-
   .options-body{
-    padding:18px;
+    padding:
+      18px
+      18px
+      20px;
   }
 
   .option-product{
-    grid-template-columns:105px 1fr;
+    grid-template-columns:
+      115px
+      1fr;
 
-    gap:14px;
+    gap:15px;
 
     margin-bottom:18px;
   }
 
   .option-image{
-    width:105px;
-    height:125px;
+    width:115px;
+    height:135px;
   }
 
   .option-product-info h3{
-    font-size:15px;
-
-    line-height:1.3;
-
-    margin-bottom:6px;
+    font-size:16px;
   }
 
   .option-price{
     font-size:12px;
-
-    letter-spacing:1px;
-
-    margin-bottom:11px;
-  }
-
-  .option-label span:first-child{
-    font-size:12px;
-  }
-
-  .size-options{
-    gap:6px;
   }
 
   .size-btn{
-    min-width:43px;
+    min-width:45px;
 
-    height:37px;
+    height:38px;
 
-    padding:0 8px;
+    padding:0 9px;
 
-    font-size:10px;
+    font-size:11px;
   }
 
   .confirm-add{
     height:49px;
 
-    font-size:11px;
-
-    letter-spacing:2px;
+    font-size:12px;
   }
 
 }
@@ -1364,40 +1492,38 @@ header{
 @media(max-width:380px){
 
   .products-page{
-    padding-left:10px;
-    padding-right:10px;
+    padding-left:12px;
+    padding-right:12px;
   }
 
   .product-list{
-    gap:10px;
+    gap:8px;
   }
 
   .product-image{
-    height:210px;
+    height:155px;
   }
 
-  .product-badge{
-    min-width:95px;
-    height:28px;
+  .product-plus{
+    width:42px;
+    height:42px;
 
-    font-size:6px;
-    letter-spacing:1.4px;
-  }
+    right:7px;
+    bottom:7px;
 
-  .plus-btn{
-    width:48px;
-    height:48px;
-
-    font-size:31px;
+    font-size:27px;
   }
 
   .product-info{
-    min-height:122px;
+    min-height:98px;
 
-    padding:13px 10px;
+    padding:
+      10px
+      8px
+      11px;
   }
 
-  .product-brand{
+  .product-badge{
     font-size:6px;
   }
 
@@ -1406,7 +1532,7 @@ header{
   }
 
   .product-price{
-    font-size:12px;
+    font-size:13px;
   }
 
 }
@@ -1418,13 +1544,16 @@ header{
 
 #cart-drawer.cart-drawer{
   position:fixed !important;
+
   top:0 !important;
   right:0 !important;
   bottom:0 !important;
   left:auto !important;
+
   z-index:9999 !important;
-  display:flex !important;
+
   visibility:visible !important;
+
   transform:translateX(100%) !important;
 }
 
@@ -1438,6 +1567,7 @@ header{
 
 </style>
 </head>
+
 
 <body>
 
@@ -1453,9 +1583,15 @@ header{
     aria-label="Open menu"
     onclick="openMenu()"
   >
+
     <svg viewBox="0 0 32 24">
-      <path d="M1 2h30M1 12h30M1 22h30"/>
+
+      <path d="M1 2h30"/>
+      <path d="M1 12h30"/>
+      <path d="M1 22h30"/>
+
     </svg>
+
   </button>
 
 
@@ -1464,10 +1600,12 @@ header{
     class="logo"
     aria-label="Abdullah Psychotic"
   >
+
     <img
       src="logo0.webp"
       alt="Abdullah Psychotic Logo"
     >
+
   </a>
 
 
@@ -1478,22 +1616,41 @@ header{
   >
 
     <svg viewBox="0 0 32 32">
-      <path d="M4 6h4l3.1 14.2a2 2 0 0 0 2 1.6h10.8a2 2 0 0 0 1.9-1.4L29 11H9"/>
-      <circle cx="13" cy="27" r="1.8"/>
-      <circle cx="25" cy="27" r="1.8"/>
+
+      <path
+        d="M4 6h4l3.1 14.2a2 2 0 0 0 2 1.6h10.8a2 2 0 0 0 1.9-1.4L29 11H9"
+      />
+
+      <circle
+        cx="13"
+        cy="27"
+        r="1.8"
+      />
+
+      <circle
+        cx="25"
+        cy="27"
+        r="1.8"
+      />
+
     </svg>
+
 
     <span
       class="cart-count"
       id="cart-count"
-    >0</span>
+    >
+      0
+    </span>
 
   </button>
 
 </header>
 
 
-<!-- MENU OVERLAY -->
+<!-- =======================================================
+     MENU OVERLAY
+======================================================= -->
 
 <div
   class="overlay"
@@ -1502,7 +1659,9 @@ header{
 ></div>
 
 
-<!-- MENU -->
+<!-- =======================================================
+     MENU DRAWER
+======================================================= -->
 
 <aside
   class="menu-drawer"
@@ -1518,7 +1677,6 @@ header{
     <button
       class="menu-close"
       onclick="closeMenu()"
-      aria-label="Close menu"
     >
       ×
     </button>
@@ -1580,7 +1738,7 @@ header{
 
 
 <!-- =======================================================
-     CART
+     CART DRAWER
 ======================================================= -->
 
 <aside
@@ -1590,12 +1748,13 @@ header{
 
   <div class="cart-header">
 
-    <h2>YOUR CART</h2>
+    <h2>
+      YOUR CART
+    </h2>
 
     <button
       class="cart-close"
       onclick="closeCart()"
-      aria-label="Close cart"
     >
       ×
     </button>
@@ -1613,9 +1772,13 @@ header{
 
     <div class="total">
 
-      <span>SUBTOTAL</span>
+      <span>
+        SUBTOTAL
+      </span>
 
-      <span id="subtotal">$0</span>
+      <span id="subtotal">
+        $0
+      </span>
 
     </div>
 
@@ -1633,7 +1796,7 @@ header{
 
 
 <!-- =======================================================
-     PRODUCT OPTIONS
+     OPTIONS MODAL
 ======================================================= -->
 
 <div
@@ -1641,11 +1804,16 @@ header{
   id="options-overlay"
 >
 
-  <div class="options-window">
+  <div
+    class="options-window"
+    id="options-window"
+  >
 
     <div class="options-header">
 
-      <h2>CHOOSE OPTIONS</h2>
+      <h2>
+        CHOOSE OPTIONS
+      </h2>
 
       <button
         class="options-close"
@@ -1674,7 +1842,10 @@ header{
 
         <div class="option-product-info">
 
-          <h3 id="option-name"></h3>
+          <h3
+            id="option-name"
+          ></h3>
+
 
           <div
             class="option-price"
@@ -1685,7 +1856,7 @@ header{
           <div class="option-label">
 
             <span id="option-label">
-              SIZE
+              Size
             </span>
 
             <span
@@ -1726,6 +1897,7 @@ header{
 
 <script>
 
+
 /* =========================================================
    PRODUCT DATA
 ========================================================= */
@@ -1739,97 +1911,107 @@ const products = [
     image:"t1.webp",
     url:"t1.webp",
     price:499,
-    badge:"LIMITED (800)"
+    badge:"Captain Abdullah",
+    desc:"Premium Graphic t-Shirt"
   },
 
   {
     id:2,
     category:"apparel",
-    name:"Abdullah Psychotic Dragon Edition Trouser",
+    name:"Abdullah Psychotic Branded Dragon Edition Logo Trouser",
     image:"pent.webp",
     url:"pent.webp",
     price:599,
-    badge:"LIMITED (700)"
+    badge:"Captain Abdullah",
+    desc:"Premium Graphic Trouser"
   },
 
   {
     id:3,
     category:"apparel",
-    name:"A.P Oversized Dragon Edition Premium T-Shirt",
+    name:"A.P Oversized Dragon edition premium t-shirt",
     image:"t4.webp",
     url:"t4.webp",
     price:459,
-    badge:"LIMITED (699)"
+    badge:"Captain Abdullah",
+    desc:"Premium Graphic t-shirt"
   },
 
   {
     id:4,
     category:"apparel",
-    name:"A.P Oversized Tiger Edition Premium T-Shirt",
+    name:"A.P Oversized Tiger edition premium t-shirt",
     image:"t3.webp",
     url:"t3.webp",
     price:449,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Graphic t-shirt"
   },
 
   {
     id:5,
     category:"apparel",
-    name:"A.P Oversized Penguin Edition Premium T-Shirt",
+    name:"A.P Oversized Penguin edition premium t-shirt",
     image:"t2.webp",
     url:"we5.webp",
     price:449,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Graphic t-shirt"
   },
 
   {
     id:6,
     category:"apparel",
-    name:"A.P Premium Red & Black T-Shirt",
+    name:"A.P Oversized logo design premium red & black t-shirt",
     image:"t5.webp",
     url:"we6.webp",
     price:489,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Graphic t-shirt"
   },
 
   {
     id:7,
     category:"apparel",
-    name:"A.P Oversized Premium T-Shirt",
+    name:"A.P Oversized logo design premium t-shirt",
     image:"t6.webp",
     url:"t6.webp",
     price:489,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Graphic t-shirt"
   },
 
   {
     id:8,
     category:"apparel",
-    name:"A.P Signature Oversized T-Shirt",
+    name:"A.P Oversized logo design premium t-shirt",
     image:"t7.webp",
     url:"t7.webp",
     price:489,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Graphic t-shirt"
   },
 
   {
     id:10,
     category:"apparel",
-    name:"A.P Premium Logo T-Shirt",
+    name:"A.P Oversized logo design premium t-shirt",
     image:"t8.webp",
     url:"t8.webp",
     price:489,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Graphic t-shirt"
   },
 
   {
     id:11,
     category:"apparel",
-    name:"A.P Oversized Iconic T-Shirt",
+    name:"A.P Oversized logo design premium t-shirt",
     image:"t9.webp",
     url:"we11.webp",
     price:489,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Graphic t-shirt"
   },
 
   {
@@ -1839,17 +2021,19 @@ const products = [
     image:"s1.webp",
     url:"s1.webp",
     price:499,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Classic Sneakers"
   },
 
   {
     id:13,
     category:"footwear",
-    name:"A.P Bullet Edition Premium Shoes",
+    name:"A.P bullet Edition Premium Shoes",
     image:"s01.webp",
     url:"s01.webp",
     price:799,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium shoes"
   },
 
   {
@@ -1859,7 +2043,8 @@ const products = [
     image:"W1.webp",
     url:"W1.webp",
     price:7899,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Luxury Wear"
   },
 
   {
@@ -1869,7 +2054,8 @@ const products = [
     image:"w2.webp",
     url:"w2.webp",
     price:9899,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Luxury Wear"
   },
 
   {
@@ -1879,7 +2065,8 @@ const products = [
     image:"bed1.webp",
     url:"bed1.webp",
     price:1849,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Modern bedsheets"
   },
 
   {
@@ -1889,217 +2076,239 @@ const products = [
     image:"bed2.webp",
     url:"bed2.webp",
     price:1899,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Modern bedsheets"
   },
 
   {
     id:18,
     category:"creative",
-    name:"A.P Iconic Black Creative Mug",
+    name:"A.P Logo Design Iconic Black Creative Mug",
     image:"mug.webp",
     url:"mug.webp",
     price:79,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Creative Object"
   },
 
   {
     id:19,
     category:"creative",
-    name:"A.P Iconic Golden Black Mug",
+    name:"A.P Logo Design Iconic Golden-Black Mug",
     image:"mug2.webp",
     url:"mug2.webp",
     price:99,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Creative Object"
   },
 
   {
     id:20,
     category:"hoodies",
-    name:"A.P Iconic Black Color Hoodie",
+    name:"A.P Logo Design Iconic Black Color Hoodie",
     image:"ho1.webp",
     url:"ho1.webp",
     price:769,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Winter Hoodie"
   },
 
   {
     id:21,
     category:"hoodies",
-    name:"A.P Iconic Red Color Hoodie",
+    name:"A.P Logo Design Iconic Red Color Hoodie",
     image:"ho2.webp",
     url:"ho2.webp",
     price:769,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Winter Hoodie"
   },
 
   {
     id:22,
     category:"hoodies",
-    name:"A.P White Black Premium Hoodie",
+    name:"A.P Logo Design white black Hoodie",
     image:"ho3.webp",
     url:"weh2.webp",
     price:749,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Winter Hoodie"
   },
 
   {
     id:23,
     category:"hoodies",
-    name:"A.P Red & Black Art Hoodie",
+    name:"A.P Logo Arted Premium Red & Black Hoodie",
     image:"ho4.webp",
     url:"ho4.webp",
     price:789,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Winter Hoodie"
   },
 
   {
     id:24,
     category:"hoodies",
-    name:"A.P Black & White Stylish Hoodie",
+    name:"A.P Premium black & white stylish designed Hoodie",
     image:"ho5.webp",
     url:"ho5.webp",
     price:799,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Winter Hoodie"
   },
 
   {
     id:25,
     category:"caps",
-    name:"A.P Classic Black Cap",
+    name:"A.P Logo Design Classic Black cap",
     image:"cap1.webp",
     url:"cap1.webp",
     price:239,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Classic cap"
   },
 
   {
     id:26,
     category:"caps",
-    name:"A.P Classic Red Cap",
+    name:"A.P Logo Design Classic red cap",
     image:"cap2.webp",
     url:"cap2.webp",
     price:229,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Classic cap"
   },
 
   {
     id:27,
     category:"caps",
-    name:"Abdullah Psychotic Modern Cap",
+    name:"Abdullah Psychotic modern cap",
     image:"cap4.webp",
     url:"cap4.webp",
     price:249,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Modern cap"
   },
 
   {
     id:28,
     category:"caps",
-    name:"Abdullah Psychotic Luxury Cap",
+    name:"Abdullah Psychotic – Luxury cap",
     image:"cap5.webp",
     url:"cap5.webp",
     price:359,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Luxury cap"
   },
 
   {
     id:29,
     category:"caps",
-    name:"Abdullah Psychotic Exclusive Cap",
+    name:"Abdullah Psychotic – Exclusive cap",
     image:"cap6.webp",
     url:"cap6.webp",
     price:399,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Exclusive cap"
   },
 
   {
     id:30,
     category:"caps",
-    name:"Abdullah Psychotic Classic Logo Hat",
+    name:"Abdullah Psychotic – classic logo hat",
     image:"hat2.webp",
     url:"hat2.webp",
     price:2999,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Classic Hat"
   },
 
   {
     id:31,
     category:"caps",
-    name:"Abdullah Psychotic Hell Rider Iconic Hat",
+    name:"Abdullah Psychotic – Hell Rider stylish iconic hat",
     image:"cap3.webp",
     url:"cap3.webp",
     price:3299,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Iconic Hat"
   },
 
   {
     id:32,
     category:"caps",
-    name:"Abdullah Psychotic Dragon Edition Hat",
+    name:"Abdullah Psychotic – Luxury dragon edition hat",
     image:"hat3.webp",
     url:"hat3.webp",
     price:3499,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium Exclusive Hat"
   },
 
   {
     id:33,
     category:"bags",
-    name:"Abdullah Psychotic Luxury School Bag",
+    name:"Abdullah Psychotic – Luxury school bag",
     image:"bag1.webp",
     url:"bag1.webp",
     price:549,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium school bag"
   },
 
   {
     id:34,
     category:"bags",
-    name:"Abdullah Psychotic Luxury Modern Bag",
+    name:"Abdullah Psychotic – Luxury modern bag",
     image:"bag2.webp",
     url:"bag2.webp",
     price:2249,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Premium fashion bag"
   },
 
   {
     id:35,
     category:"bags",
-    name:"Abdullah Psychotic Upper Class Luxury Bag",
+    name:"Abdullah Psychotic – Luxury bag Upper class",
     image:"bag3.webp",
     url:"bag3.webp",
     price:2349,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Luxury fashion bag"
   },
 
   {
     id:36,
     category:"perfume",
-    name:"Abdullah Psychotic Luxury Red Perfume",
+    name:"Abdullah Psychotic – Luxury red designed perfume",
     image:"per1.webp",
     url:"per1.webp",
     price:2599,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Luxury perfume"
   },
 
   {
     id:37,
     category:"perfume",
-    name:"Abdullah Psychotic Upper Class Black Perfume",
+    name:"Abdullah Psychotic – Luxury black designed logo perfume",
     image:"per2.webp",
     url:"per2.webp",
     price:2700,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Luxury perfume"
   },
 
   {
     id:38,
     category:"perfume",
-    name:"Abdullah Psychotic Luxury Black Logo Perfume",
+    name:"Abdullah Psychotic – Luxury black designed logo perfume",
     image:"per3.webp",
     url:"per3.webp",
     price:2650,
-    badge:"LIMITED"
+    badge:"Captain Abdullah",
+    desc:"Luxury perfume"
   }
 
 ];
@@ -2122,12 +2331,16 @@ let cart =
   ) || [];
 
 
+/* =========================================================
+   CURRENT PRODUCT
+========================================================= */
+
 let optionProduct = null;
 let selectedSize = null;
 
 
 /* =========================================================
-   SIZE OPTIONS
+   OPTIONS
 ========================================================= */
 
 function getOptions(product){
@@ -2138,8 +2351,15 @@ function getOptions(product){
   ){
 
     return {
-      label:"SIZE",
-      values:["S","M","L","XL","XXL"]
+      label:"Size",
+
+      values:[
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ]
     };
 
   }
@@ -2148,16 +2368,28 @@ function getOptions(product){
   if(product.category === "footwear"){
 
     return {
-      label:"SIZE",
-      values:["39","40","41","42","43","44","45"]
+      label:"Size",
+
+      values:[
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45"
+      ]
     };
 
   }
 
 
   return {
-    label:"SIZE",
-    values:["ONE SIZE"]
+    label:"Size",
+
+    values:[
+      "ONE SIZE"
+    ]
   };
 
 }
@@ -2184,7 +2416,9 @@ function saveCart(){
 function renderProducts(){
 
   const list =
-    document.getElementById("product-list");
+    document.getElementById(
+      "product-list"
+    );
 
 
   list.innerHTML =
@@ -2198,54 +2432,65 @@ function renderProducts(){
 
         <article class="product-card">
 
-          <a
-            class="product-image"
-            href="${product.url}"
-            target="_blank"
-          >
+          <div class="product-image">
 
-            <img
-              src="${product.image}"
-              alt="${product.name}"
-              loading="lazy"
+            <a
+              href="${product.url}"
+              target="_blank"
             >
 
-            <div class="product-badge">
-              ${product.badge}
-            </div>
-
-          </a>
-
-
-          ${
-            sold
-
-            ?
-
-            `
-              <div class="sold-label">
-                SOLD OUT
-              </div>
-            `
-
-            :
-
-            `
-              <button
-                class="plus-btn"
-                onclick="openOptions(${product.id})"
-                aria-label="Add to cart"
+              <img
+                src="${product.image}"
+                alt="${product.name}"
+                loading="lazy"
               >
-                +
-              </button>
-            `
-          }
+
+            </a>
+
+
+            ${
+              sold
+
+              ?
+
+              `
+
+                <div
+                  class="product-plus"
+                  style="
+                    background:#222;
+                    color:#777;
+                    cursor:not-allowed;
+                    font-size:12px;
+                  "
+                >
+                  SOLD
+                </div>
+
+              `
+
+              :
+
+              `
+
+                <button
+                  class="product-plus"
+                  onclick="openOptions(${product.id})"
+                  aria-label="Add ${product.name} to cart"
+                >
+                  +
+                </button>
+
+              `
+            }
+
+          </div>
 
 
           <div class="product-info">
 
-            <div class="product-brand">
-              ABDULLAH PSYCHOTIC
+            <div class="product-badge">
+              ${product.badge}
             </div>
 
 
@@ -2276,25 +2521,37 @@ function renderProducts(){
 function openOptions(id){
 
   const product =
-    products.find(p => p.id === id);
+    products.find(
+      p => p.id === id
+    );
 
   if(!product) return;
 
 
   optionProduct = product;
+
   selectedSize = null;
 
 
-  document.getElementById("option-image").src =
-    product.image;
+  document.getElementById(
+    "option-image"
+  ).src = product.image;
 
-  document.getElementById("option-image").alt =
+
+  document.getElementById(
+    "option-image"
+  ).alt = product.name;
+
+
+  document.getElementById(
+    "option-name"
+  ).textContent =
     product.name;
 
-  document.getElementById("option-name").textContent =
-    product.name;
 
-  document.getElementById("option-price").textContent =
+  document.getElementById(
+    "option-price"
+  ).textContent =
     "$" +
     product.price.toLocaleString() +
     " USD";
@@ -2304,37 +2561,46 @@ function openOptions(id){
     getOptions(product);
 
 
-  document.getElementById("option-label").textContent =
+  document.getElementById(
+    "option-label"
+  ).textContent =
     options.label;
 
 
   const sizeBox =
-    document.getElementById("size-options");
+    document.getElementById(
+      "size-options"
+    );
 
 
   sizeBox.innerHTML =
-    options.values.map(value => `
+    options.values.map(
+      value => `
 
-      <button
-        class="size-btn"
-        onclick="selectSize(this,'${value}')"
-      >
-        ${value}
-      </button>
+        <button
+          class="size-btn"
+          onclick="selectSize(this,'${value}')"
+        >
+          ${value}
+        </button>
 
-    `).join("");
-
-
-  document.getElementById("confirm-add").disabled =
-    true;
+      `
+    ).join("");
 
 
-  document
-    .getElementById("options-overlay")
-    .classList.add("active");
+  document.getElementById(
+    "confirm-add"
+  ).disabled = true;
 
 
-  document.body.classList.add("locked");
+  document.getElementById(
+    "options-overlay"
+  ).classList.add("active");
+
+
+  document.body.classList.add(
+    "locked"
+  );
 
 }
 
@@ -2349,31 +2615,39 @@ function selectSize(button,size){
     .querySelectorAll(".size-btn")
     .forEach(btn => {
 
-      btn.classList.remove("selected");
+      btn.classList.remove(
+        "selected"
+      );
 
     });
 
 
-  button.classList.add("selected");
+  button.classList.add(
+    "selected"
+  );
 
 
   selectedSize = size;
 
 
-  document
-    .getElementById("confirm-add")
-    .disabled = false;
+  document.getElementById(
+    "confirm-add"
+  ).disabled = false;
 
 }
 
 
 /* =========================================================
-   CONFIRM ADD TO CART
+   ADD TO CART
 ========================================================= */
 
 function confirmAddToCart(){
 
-  if(!optionProduct || !selectedSize){
+  if(!optionProduct){
+    return;
+  }
+
+  if(!selectedSize){
     return;
   }
 
@@ -2423,11 +2697,14 @@ function confirmAddToCart(){
 function closeOptions(){
 
   document
-    .getElementById("options-overlay")
+    .getElementById(
+      "options-overlay"
+    )
     .classList.remove("active");
 
 
   optionProduct = null;
+
   selectedSize = null;
 
 
@@ -2441,7 +2718,9 @@ function closeOptions(){
       .classList.contains("active")
   ){
 
-    document.body.classList.remove("locked");
+    document.body.classList.remove(
+      "locked"
+    );
 
   }
 
@@ -2463,7 +2742,7 @@ L — Large
 XL — Extra Large
 XXL — Extra Extra Large
 
-For shoes:
+Shoes:
 39 / 40 / 41 / 42 / 43 / 44 / 45
 
 Please choose your usual size.`
@@ -2507,6 +2786,7 @@ function changeQty(id,size,amount){
 
 
   saveCart();
+
   updateCart();
 
 }
@@ -2529,6 +2809,7 @@ function removeItem(id,size){
 
 
   saveCart();
+
   updateCart();
 
 }
@@ -2542,37 +2823,48 @@ function updateCart(){
 
   const count =
     cart.reduce(
-      (sum,item) => sum + item.qty,
+      (sum,item) =>
+        sum + item.qty,
       0
     );
 
 
-  document.getElementById("cart-count").textContent =
-    count;
+  document.getElementById(
+    "cart-count"
+  ).textContent = count;
 
 
   const subtotal =
     cart.reduce(
       (sum,item) =>
-        sum + (item.price * item.qty),
+        sum +
+        item.price *
+        item.qty,
       0
     );
 
 
-  document.getElementById("subtotal").textContent =
-    "$" + subtotal.toLocaleString();
+  document.getElementById(
+    "subtotal"
+  ).textContent =
+    "$" +
+    subtotal.toLocaleString();
 
 
   const box =
-    document.getElementById("cart-items");
+    document.getElementById(
+      "cart-items"
+    );
 
 
   if(!cart.length){
 
     box.innerHTML = `
+
       <div class="empty">
         Your shopping bag is empty.
       </div>
+
     `;
 
     return;
@@ -2581,69 +2873,81 @@ function updateCart(){
 
 
   box.innerHTML =
-    cart.map(item => `
+    cart.map(
+      item => `
 
-      <div class="cart-item">
+        <div class="cart-item">
 
-        <img
-          src="${item.image}"
-          alt="${item.name}"
-        >
+          <img
+            src="${item.image}"
+            alt="${item.name}"
+          >
 
 
-        <div class="cart-item-info">
+          <div class="cart-item-info">
 
-          <div class="cart-item-name">
-            ${item.name}
+            <div class="cart-item-name">
+              ${item.name}
+            </div>
+
+
+            <div class="cart-item-size">
+              SIZE: ${item.size}
+            </div>
+
+
+            <div class="cart-item-price">
+              $${item.price.toLocaleString()}
+            </div>
+
+
+            <div class="qty">
+
+              <button
+                onclick="changeQty(
+                  ${item.id},
+                  '${item.size}',
+                  -1
+                )"
+              >
+                −
+              </button>
+
+
+              <span>
+                ${item.qty}
+              </span>
+
+
+              <button
+                onclick="changeQty(
+                  ${item.id},
+                  '${item.size}',
+                  1
+                )"
+              >
+                +
+              </button>
+
+            </div>
+
           </div>
 
 
-          <div class="cart-item-size">
-            SIZE: ${item.size}
-          </div>
-
-
-          <div class="cart-item-price">
-            $${item.price.toLocaleString()}
-          </div>
-
-
-          <div class="qty">
-
-            <button
-              onclick="changeQty(${item.id},'${item.size}',-1)"
-            >
-              −
-            </button>
-
-
-            <span>
-              ${item.qty}
-            </span>
-
-
-            <button
-              onclick="changeQty(${item.id},'${item.size}',1)"
-            >
-              +
-            </button>
-
-          </div>
+          <button
+            class="remove"
+            onclick="removeItem(
+              ${item.id},
+              '${item.size}'
+            )"
+          >
+            ×
+          </button>
 
         </div>
 
-
-        <button
-          class="remove"
-          onclick="removeItem(${item.id},'${item.size}')"
-          aria-label="Remove item"
-        >
-          ×
-        </button>
-
-      </div>
-
-    `).join("");
+      `
+    ).join("");
 
 }
 
@@ -2656,6 +2960,8 @@ function openMenu(){
 
   closeCart();
 
+  closeOptions();
+
 
   document
     .getElementById("menu-drawer")
@@ -2667,7 +2973,9 @@ function openMenu(){
     .classList.add("active");
 
 
-  document.body.classList.add("locked");
+  document.body.classList.add(
+    "locked"
+  );
 
 }
 
@@ -2694,7 +3002,9 @@ function closeMenu(){
       .classList.contains("active")
   ){
 
-    document.body.classList.remove("locked");
+    document.body.classList.remove(
+      "locked"
+    );
 
   }
 
@@ -2720,7 +3030,9 @@ function openCart(){
     .classList.add("active");
 
 
-  document.body.classList.add("locked");
+  document.body.classList.add(
+    "locked"
+  );
 
 }
 
@@ -2747,7 +3059,9 @@ function closeCart(){
       .classList.contains("active")
   ){
 
-    document.body.classList.remove("locked");
+    document.body.classList.remove(
+      "locked"
+    );
 
   }
 
@@ -2762,7 +3076,9 @@ function checkout(){
 
   if(!cart.length){
 
-    alert("Your cart is empty!");
+    alert(
+      "Your cart is empty!"
+    );
 
     return;
 
@@ -2776,7 +3092,7 @@ function checkout(){
 
 
 /* =========================================================
-   ESCAPE KEY
+   ESCAPE
 ========================================================= */
 
 document.addEventListener(
@@ -2786,7 +3102,9 @@ document.addEventListener(
     if(e.key === "Escape"){
 
       closeOptions();
+
       closeCart();
+
       closeMenu();
 
     }
