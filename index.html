@@ -3548,7 +3548,7 @@ footer {
       <span>Subtotal:</span>
       <span id="cart-subtotal">$0</span>
     </div>
-    <a href="cart.html" class="checkout-btn">PROCEED TO CHECKOUT</a>
+    <button type="button" id="proceed-checkout-btn" class="checkout-btn">PROCEED TO CHECKOUT</button>
   </div>
 </div>
 
@@ -4723,6 +4723,20 @@ overlay.addEventListener('touchmove', function(e) {
 document.getElementById('menu-btn').addEventListener('click', openDrawer);
 document.getElementById('close-drawer-btn').addEventListener('click', closeAll);
 document.getElementById('cart-icon-btn').addEventListener('click', openCart);
+
+// PROCEED TO CHECKOUT — only open cart.html when the cart has products
+const proceedCheckoutBtn = document.getElementById('proceed-checkout-btn');
+if (proceedCheckoutBtn) {
+  proceedCheckoutBtn.addEventListener('click', function () {
+    if (!cart || cart.length === 0) {
+      alert('Your shopping bag is empty.');
+      return;
+    }
+
+    window.location.href = 'cart.html';
+  });
+}
+
 document.getElementById('close-cart-btn').addEventListener('click', closeAll);
 
 document.getElementById('close-size-sheet').addEventListener('click', () => {
