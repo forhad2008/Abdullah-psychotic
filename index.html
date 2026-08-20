@@ -915,6 +915,104 @@ header.scrolled {
 
 
 /* =========================================================
+   UNDERWORLD SUBMENU
+========================================================= */
+
+.drawer-links {
+  min-height: calc(100% - 83px);
+}
+
+.underworld-wrap {
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 40px;
+}
+
+.underworld-toggle {
+  width: 100%;
+  min-height: 60px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: 0;
+  color: var(--drawer-text);
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: 'Brunson', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1;
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+.underworld-toggle:hover {
+  opacity: .5;
+  transform: translateX(5px);
+}
+
+.underworld-arrow {
+  font-size: 20px;
+  line-height: 1;
+  transition: transform .3s ease;
+}
+
+.underworld-wrap.open .underworld-arrow {
+  transform: rotate(90deg);
+}
+
+.underworld-submenu {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(17,17,17,.18);
+  margin-left: 2px;
+  padding-left: 16px;
+  transition: max-height .4s ease, opacity .3s ease, padding .3s ease, margin .3s ease, visibility 0s linear .4s;
+}
+
+.underworld-wrap.open .underworld-submenu {
+  max-height: 320px;
+  opacity: 1;
+  visibility: visible;
+  margin-top: 4px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  transition: max-height .4s ease, opacity .3s ease, padding .3s ease, margin .3s ease, visibility 0s linear 0s;
+}
+
+.underworld-submenu a {
+  min-height: 45px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: var(--drawer-text);
+  text-decoration: none;
+  font-family: var(--font-subheading);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.underworld-submenu a:hover {
+  opacity: .5;
+  transform: translateX(4px);
+}
+
+@media (max-width: 480px) {
+  .underworld-wrap { margin-bottom: 40px; }
+  .underworld-toggle { min-height: 56px; font-size: 13px; }
+  .underworld-submenu a { min-height: 42px; font-size: 9px; letter-spacing: 1.8px; }
+}
+
+/* =========================================================
    CART DRAWER
 ========================================================= */
 
@@ -3595,13 +3693,26 @@ footer {
 
 <div class="nav-drawer" id="nav-drawer">
   <div class="close-drawer" id="close-drawer-btn"><i class="fas fa-times"></i></div>
+
   <nav class="drawer-links">
     <a href="#home" onclick="closeAll()">Home</a>
     <a href="about.html" onclick="closeAll()">About Us</a>
     <a href="shop.html" onclick="closeAll()">Shop</a>
     <a href="#contact" onclick="closeAll()">Contact</a>
-    <a href="https://forhad2008.github.io/Captain-Abdullah/" onclick="closeAll()">Underworld</a>
 
+    <div class="underworld-wrap" id="underworld-wrap">
+      <button type="button" class="underworld-toggle" id="underworld-toggle" aria-expanded="false" aria-controls="underworld-submenu">
+        <span>Underworld</span>
+        <span class="underworld-arrow">›</span>
+      </button>
+
+      <div class="underworld-submenu" id="underworld-submenu">
+        <a href="https://forhad2008.github.io/Captain-Abdullah/" onclick="closeAll()">Captain Abdullah</a>
+        <a href="https://github.com/" target="_blank" rel="noopener" onclick="closeAll()">Creative Archive</a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" onclick="closeAll()">Visual Journal</a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener" onclick="closeAll()">Media House</a>
+      </div>
+    </div>
   </nav>
 </div>
 
@@ -4791,11 +4902,27 @@ function openCheckout() {
   document.body.classList.add('no-scroll');
 }
 
+const underworldWrap = document.getElementById('underworld-wrap');
+const underworldToggle = document.getElementById('underworld-toggle');
+
+if (underworldWrap && underworldToggle) {
+  underworldToggle.addEventListener('click', () => {
+    const isOpen = underworldWrap.classList.toggle('open');
+    underworldToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+}
+
 function closeAll() {
   navDrawer.classList.remove('active');
   cartDrawer.classList.remove('active');
   checkoutModal.classList.remove('active');
   closeSizeSheet();
+
+  if (underworldWrap && underworldToggle) {
+    underworldWrap.classList.remove('open');
+    underworldToggle.setAttribute('aria-expanded', 'false');
+  }
+
   overlay.classList.remove('active');
   document.body.classList.remove('no-scroll');
 
