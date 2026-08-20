@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Now remove the checkout window and unnessesecery thing from here and relate the link of checkout with cart.html, <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1716,187 +1716,6 @@ header.scrolled {
     letter-spacing: 2.7px;
   }
 }
-
-/* =========================================================
-   CHECKOUT MODAL
-========================================================= */
-
-.modal {
-
-  position: fixed;
-
-  top: 50%;
-  left: 50%;
-
-  width: 90%;
-
-  max-width: 500px;
-
-  padding: 35px;
-
-  background:
-    var(--card-bg);
-
-  border:
-    1px solid var(--border-color);
-
-  border-radius: 4px;
-
-  z-index: 1100;
-
-  opacity: 0;
-
-  visibility: hidden;
-
-  pointer-events: none;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.95);
-
-  transition:
-    opacity .3s ease,
-    transform .3s ease,
-    visibility 0s linear .3s;
-}
-
-.modal.active {
-
-  opacity: 1;
-
-  visibility: visible;
-
-  pointer-events: auto;
-
-  transform:
-    translate(-50%,-50%)
-    scale(1);
-
-  transition:
-    opacity .3s ease,
-    transform .3s ease,
-    visibility 0s linear 0s;
-}
-
-.modal-header {
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  margin-bottom: 25px;
-}
-
-.modal-header h3 {
-
-  font-family:
-    var(--font-subheading);
-
-  font-size: 20px;
-
-  letter-spacing: 2px;
-}
-
-
-
-/* =========================================================
-   CHECKOUT FORM
-========================================================= */
-
-.checkout-form {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 15px;
-}
-
-.checkout-summary {
-
-  padding: 18px;
-
-  margin-bottom: 15px;
-
-  background:
-    #050505;
-
-  border:
-    1px solid var(--border-color);
-
-  border-radius: 4px;
-
-  font-size: 14px;
-}
-
-.checkout-summary-row {
-
-  display: flex;
-
-  justify-content: space-between;
-
-  margin-bottom: 10px;
-
-  font-family:
-    var(--font-body);
-}
-
-.payment-options {
-
-  display: flex;
-
-  gap: 10px;
-
-  margin-top: 8px;
-}
-
-.payment-option {
-
-  flex: 1;
-
-  padding: 12px 10px;
-
-  background:
-    #050505;
-
-  border:
-    1px solid var(--border-color);
-
-  border-radius: 2px;
-
-  text-align: center;
-
-  cursor: pointer;
-
-  font-family:
-    var(--font-accent);
-
-  font-size: 11px;
-
-  letter-spacing: .5px;
-
-  transition:
-    all .3s ease;
-}
-
-.payment-option input {
-  display: none;
-}
-
-.payment-option.selected {
-
-  border-color:
-    var(--primary-color);
-
-  background:
-    rgba(193,18,31,.08);
-
-  color: #fff;
-}
-
-
 
 /* =========================================================
    BUTTON SYSTEM
@@ -3729,7 +3548,7 @@ footer {
       <span>Subtotal:</span>
       <span id="cart-subtotal">$0</span>
     </div>
-    <button class="checkout-btn" id="open-checkout-btn">PROCEED TO CHECKOUT</button>
+    <a href="cart.html" class="checkout-btn">PROCEED TO CHECKOUT</a>
   </div>
 </div>
 
@@ -3763,56 +3582,7 @@ footer {
   </div>
 </div>
 
-<div class="modal" id="checkout-modal">
-  <div class="modal-header">
-    <h3>CHECKOUT</h3>
-    <i class="fas fa-times close-cart" id="close-modal-btn"></i>
-  </div>
 
-  <div class="checkout-summary">
-    <div class="checkout-summary-row">
-      <span>Total Items:</span>
-      <strong id="modal-total-items">0</strong>
-    </div>
-    <div class="checkout-summary-row">
-      <span>Delivery Fee:</span>
-      <strong>$10</strong>
-    </div>
-    <div class="checkout-summary-row" style="margin-bottom: 0; font-size: 18px; color: var(--primary-color);">
-      <span>Final Amount:</span>
-      <strong id="modal-final-total">$0</strong>
-    </div>
-  </div>
-
-  <form class="checkout-form" id="checkout-form">
-    <div class="form-group">
-      <input type="text" id="cust-name" placeholder="Full Name" required>
-    </div>
-    <div class="form-group">
-      <input type="tel" id="cust-phone" placeholder="Phone Number" required>
-    </div>
-    <div class="form-group">
-      <input type="text" id="cust-address" placeholder="Delivery Address" required>
-    </div>
-
-    <div>
-      <label style="font-family: var(--font-accent); font-size: 11px; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase;">Payment Method:</label>
-      <div class="payment-options">
-        <label class="payment-option selected" id="opt-cod">
-          <input type="radio" name="payment" value="COD" checked> Cash on Delivery
-        </label>
-        <label class="payment-option" id="opt-bkash">
-          <input type="radio" name="payment" value="bKash"> bKash
-        </label>
-        <label class="payment-option" id="opt-card">
-          <input type="radio" name="payment" value="Card"> Card
-        </label>
-      </div>
-    </div>
-
-    <button type="submit" class="submit-btn" style="margin-top: 10px;">PLACE ORDER</button>
-  </form>
-</div>
 
 <section id="home" class="hero">
   <div class="hero-content">
@@ -4899,7 +4669,6 @@ function updateCartUI() {
 const overlay = document.getElementById('overlay');
 const navDrawer = document.getElementById('nav-drawer');
 const cartDrawer = document.getElementById('cart-drawer');
-const checkoutModal = document.getElementById('checkout-modal');
 const sizeSheet = document.getElementById('size-sheet');
 
 function openCart() {
@@ -4919,24 +4688,6 @@ function openDrawer() {
   document.body.classList.add('no-scroll');
 }
 
-function openCheckout() {
-  if (cart.length === 0) {
-    alert("Your cart is empty!");
-    return;
-  }
-  closeAll();
-
-  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-  const finalTotal = subtotal + 100;
-
-  document.getElementById('modal-total-items').textContent = totalItems;
-  document.getElementById('modal-final-total').textContent = `৳${finalTotal.toLocaleString()}`;
-
-  checkoutModal.classList.add('active');
-  overlay.classList.add('active');
-  document.body.classList.add('no-scroll');
-}
 
 const underworldWrap = document.getElementById('underworld-wrap');
 const underworldToggle = document.getElementById('underworld-toggle');
@@ -4951,7 +4702,6 @@ if (underworldWrap && underworldToggle) {
 function closeAll() {
   navDrawer.classList.remove('active');
   cartDrawer.classList.remove('active');
-  checkoutModal.classList.remove('active');
   closeSizeSheet();
 
   if (underworldWrap && underworldToggle) {
@@ -4974,8 +4724,6 @@ document.getElementById('menu-btn').addEventListener('click', openDrawer);
 document.getElementById('close-drawer-btn').addEventListener('click', closeAll);
 document.getElementById('cart-icon-btn').addEventListener('click', openCart);
 document.getElementById('close-cart-btn').addEventListener('click', closeAll);
-document.getElementById('open-checkout-btn').addEventListener('click', openCheckout);
-document.getElementById('close-modal-btn').addEventListener('click', closeAll);
 
 document.getElementById('close-size-sheet').addEventListener('click', () => {
   closeSizeSheet();
@@ -4987,96 +4735,6 @@ document.getElementById('confirm-size-btn').addEventListener('click', confirmSiz
 
 overlay.addEventListener('click', closeAll);
 
-document.querySelectorAll('.payment-option').forEach(option => {
-  option.addEventListener('click', function() {
-    document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
-    this.classList.add('selected');
-    this.querySelector('input').checked = true;
-  });
-});
-
-/* ----------------------------------------------------
-  5. ORDER CHECKOUT -> GOOGLE SHEETS + OWNER EMAIL
----------------------------------------------------- */
-/*
-  IMPORTANT:
-  Paste your deployed Google Apps Script Web App URL below.
-  The Apps Script file supplied with this HTML saves the complete order
-  to Google Sheets and sends the order email to forhadalpha08@gmail.com.
-*/
-const ORDER_SCRIPT_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
-
-document.getElementById('checkout-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-
-  if (cart.length === 0) {
-    alert('Your cart is empty.');
-    return;
-  }
-
-  if (!ORDER_SCRIPT_URL || ORDER_SCRIPT_URL.includes('PASTE_YOUR')) {
-    alert('Order system is not connected yet. Add your Google Apps Script Web App URL to ORDER_SCRIPT_URL first.');
-    return;
-  }
-
-  const submitBtn = this.querySelector('button[type="submit"]');
-  const originalText = submitBtn.textContent;
-  const orderNum = 'AP-' + Date.now().toString().slice(-10) + '-' + Math.floor(100 + Math.random() * 900);
-
-  const totalItems = cart.reduce((sum, item) => sum + Number(item.qty || 0), 0);
-  const subtotal = cart.reduce((sum, item) => sum + (Number(item.price) * Number(item.qty || 0)), 0);
-  const deliveryCharge = 100;
-  const total = subtotal + deliveryCharge;
-
-  const orderData = {
-    type: 'order',
-    orderId: orderNum,
-    customerName: document.getElementById('cust-name').value.trim(),
-    customerPhone: document.getElementById('cust-phone').value.trim(),
-    customerAddress: document.getElementById('cust-address').value.trim(),
-    paymentMethod: document.querySelector('input[name="payment"]:checked')?.value || 'COD',
-    totalItems,
-    subtotal,
-    deliveryCharge,
-    total,
-    currency: 'BDT',
-    items: cart.map(item => ({
-      productId: item.id,
-      name: item.name,
-      category: item.category || '',
-      size: item.size || 'ONE SIZE',
-      price: Number(item.price),
-      quantity: Number(item.qty || 1),
-      lineTotal: Number(item.price) * Number(item.qty || 1)
-    }))
-  };
-
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'PLACING ORDER...';
-
-  try {
-    await fetch(ORDER_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(orderData)
-    });
-
-    alert(`Thank you ${orderData.customerName}!\n\nYour order #${orderNum} has been placed successfully.\nWe will contact you shortly for confirmation.`);
-
-    cart = [];
-    saveCartToStorage();
-    updateCartUI();
-    closeAll();
-    this.reset();
-  } catch (error) {
-    console.error('Order submission error:', error);
-    alert('There was a problem sending your order. Please try again.');
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = originalText;
-  }
-});
 
 window.addEventListener("scroll", () => {
   const header = document.getElementById("navbar");
