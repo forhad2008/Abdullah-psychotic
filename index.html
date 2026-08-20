@@ -1418,9 +1418,9 @@ header.scrolled {
   }
 
   .close-size-sheet {
-    width: 32px;
-    height: 32px;
-    font-size: 27px;
+    width: 36px;
+    height: 36px;
+    font-size: 32px;
   }
 
   .size-sheet-content {
@@ -1428,20 +1428,20 @@ header.scrolled {
   }
 
   .size-product-image {
-    width: min(145px, 30vw);
-    height: min(145px, 30vw);
+    width: min(180px, 55vw);
+    height: min(180px, 55vw);
     margin-bottom: 6px;
   }
 
-  .size-product-brand { font-size: 8px; letter-spacing: 2.2px; }
-  .size-product-name { font-size: 14px; }
-  .size-product-price { font-size: 11px; margin-bottom: 8px; }
+  .size-product-brand { font-size: 10px; letter-spacing: 2.2px; }
+  .size-product-name { font-size: 16px; }
+  .size-product-price { font-size: 14px; margin-bottom: 8px; }
   .size-select-row { margin-bottom: 5px; }
   .size-label { font-size: 13px; }
   .size-chart-link { font-size: 10px; }
   .size-options { gap: 6px; margin-bottom: 8px; }
   .size-option { min-height: 39px; height: 39px; font-size: 13px; }
-  .size-confirm-btn { min-height: 44px; height: 44px; font-size: 10px; letter-spacing: 3px; }
+  .size-confirm-btn { min-height: 46px; height: 44px; font-size: 10px; letter-spacing: 3px; }
 }
 
 @media (max-width: 480px) {
@@ -4296,7 +4296,7 @@ function addToCart(productId) {
 
   document.getElementById('size-product-image').src = product.image;
   document.getElementById('size-product-image').alt = product.name;
-  document.getElementById('size-product-brand').textContent = 'CAPTAIN ABDULLAH';
+  document.getElementById('size-product-brand').textContent = 'ABDULLAH PSYCHOTIC';
   document.getElementById('size-product-name').textContent = product.name;
   document.getElementById('size-product-price').textContent =
     `$${product.price.toLocaleString()} USD`;
