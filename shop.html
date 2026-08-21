@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -180,7 +181,7 @@ header{
 }
 
 .logo img{
-  width:137.5px;
+  width:125px;
   height:auto;
 
   object-fit:contain;
@@ -489,8 +490,11 @@ header{
 
 
 /* =========================================================
-   PRODUCT SHOPPING CART BUTTON
-   Opens the same size/options window as before.
+   PLUS BUTTON
+   IMPORTANT:
+   It stays INSIDE image only.
+   Therefore product information can NEVER
+   hide behind it.
 ========================================================= */
 
 .product-plus{
@@ -514,10 +518,10 @@ header{
   align-items:center;
   justify-content:center;
 
-  font-size:0;
+  font-size:46px;
 
   font-family:Arial,sans-serif;
-  font-weight:300;
+  font-weight: 300;
 
   line-height:1;
 
@@ -541,21 +545,7 @@ header{
 }
 
 .product-plus:active{
-  transform:scale(.94);
-}
-
-.product-plus svg{
-  width:22px;
-  height:22px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:2;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-
-.product-plus:hover svg{
-  transform:scale(1.04);
+  transform:scale(1.6);
 }
 
 
@@ -1323,7 +1313,7 @@ header{
   }
 
   .logo img{
-    width:126.5px;
+    width:115px;
   }
 
 
@@ -1364,13 +1354,8 @@ header{
     right:8px;
     bottom:8px;
 
-    font-size:0;
-    font-weight:300;
-  }
-
-  .product-plus svg{
-    width:18px;
-    height:18px;
+    font-size:32px;
+    font-weight: 300;
   }
 
 
@@ -1528,13 +1513,8 @@ header{
     right:7px;
     bottom:7px;
 
-    font-size:0;
-    font-weight:300;
-  }
-
-  .product-plus svg{
-    width:16px;
-    height:16px;
+    font-size:28px;
+    font-weight: 300;
   }
 
   .product-info{
@@ -1589,11 +1569,10 @@ header{
 }
 
 </style>
+
 </head>
 
-
 <body>
-
 
 <!-- =======================================================
      HEADER
@@ -1601,75 +1580,75 @@ header{
 
 <header>
 
-  <button
-    class="menu-btn"
-    aria-label="Open menu"
-    onclick="openMenu()"
-  >
+<button
+class="menu-btn"
+aria-label="Open menu"
+onclick="openMenu()"
 
-    <svg viewBox="0 0 32 24">
 
-      <path d="M1 2h30"/>
-      <path d="M1 12h30"/>
-      <path d="M1 22h30"/>
 
-    </svg>
+<svg viewBox="0 0 32 24">
+
+  <path d="M1 2h30"/>
+  <path d="M1 12h30"/>
+  <path d="M1 22h30"/>
+
+</svg>
 
   </button>
 
+<a
+href="index.html"
+class="logo"
+aria-label="Abdullah Psychotic"
 
-  <a
-    href="index.html"
-    class="logo"
-    aria-label="Abdullah Psychotic"
-  >
 
-    <img
-      src="logo0.webp"
-      alt="Abdullah Psychotic Logo"
-    >
+
+<img
+  src="logo0.webp"
+  alt="Abdullah Psychotic Logo"
+>
 
   </a>
 
-
-  <button
-    class="cart-btn"
-    aria-label="Shopping cart"
-    onclick="openCart()"
-  >
-
-    <svg viewBox="0 0 32 32">
-
-      <path
-        d="M4 6h4l3.1 14.2a2 2 0 0 0 2 1.6h10.8a2 2 0 0 0 1.9-1.4L29 11H9"
-      />
-
-      <circle
-        cx="13"
-        cy="27"
-        r="1.8"
-      />
-
-      <circle
-        cx="25"
-        cy="27"
-        r="1.8"
-      />
-
-    </svg>
+<button
+class="cart-btn"
+aria-label="Shopping cart"
+onclick="openCart()"
 
 
-    <span
-      class="cart-count"
-      id="cart-count"
-    >
-      0
-    </span>
+
+<svg viewBox="0 0 32 32">
+
+  <path
+    d="M4 6h4l3.1 14.2a2 2 0 0 0 2 1.6h10.8a2 2 0 0 0 1.9-1.4L29 11H9"
+  />
+
+  <circle
+    cx="13"
+    cy="27"
+    r="1.8"
+  />
+
+  <circle
+    cx="25"
+    cy="27"
+    r="1.8"
+  />
+
+</svg>
+
+
+<span
+  class="cart-count"
+  id="cart-count"
+>
+  0
+</span>
 
   </button>
 
 </header>
-
 
 <!-- =======================================================
      MENU OVERLAY
@@ -1680,7 +1659,6 @@ header{
   id="menu-overlay"
   onclick="closeMenu()"
 ></div>
-
 
 <!-- =======================================================
      MENU DRAWER
@@ -1693,47 +1671,44 @@ header{
 
   <div class="menu-top">
 
-    <div class="menu-brand">
-      ABDULLAH PSYCHOTIC
-    </div>
+<div class="menu-brand">
+  ABDULLAH PSYCHOTIC
+</div>
 
-    <button
-      class="menu-close"
-      onclick="closeMenu()"
-    >
-      ×
-    </button>
+<button
+  class="menu-close"
+  onclick="closeMenu()"
+>
+  ×
+</button>
 
   </div>
 
-
   <nav class="menu-links">
 
-    <a href="index.html">
-      HOME
-    </a>
+<a href="index.html">
+  HOME
+</a>
 
-    <a href="shop.html">
-      ALL PRODUCTS
-    </a>
+<a href="shop.html">
+  ALL PRODUCTS
+</a>
 
-    <a href="index.html#about">
-      ABOUT
-    </a>
+<a href="index.html#about">
+  ABOUT
+</a>
 
-    <a href="index.html#contact">
-      CONTACT
-    </a>
+<a href="index.html#contact">
+  CONTACT
+</a>
 
   </nav>
-
 
   <div class="menu-bottom">
     EST. ABDULLAH PSYCHOTIC
   </div>
 
 </aside>
-
 
 <!-- =======================================================
      PRODUCTS
@@ -1748,7 +1723,6 @@ header{
 
 </main>
 
-
 <!-- =======================================================
      CART OVERLAY
 ======================================================= -->
@@ -1758,7 +1732,6 @@ header{
   id="cart-overlay"
   onclick="closeCart()"
 ></div>
-
 
 <!-- =======================================================
      CART DRAWER
@@ -1771,52 +1744,49 @@ header{
 
   <div class="cart-header">
 
-    <h2>
-      YOUR CART
-    </h2>
+<h2>
+  YOUR CART
+</h2>
 
-    <button
-      class="cart-close"
-      onclick="closeCart()"
-    >
-      ×
-    </button>
+<button
+  class="cart-close"
+  onclick="closeCart()"
+>
+  ×
+</button>
 
   </div>
-
 
   <div
     class="cart-items"
     id="cart-items"
   ></div>
 
-
   <div class="cart-footer">
 
-    <div class="total">
+<div class="total">
 
-      <span>
-        SUBTOTAL
-      </span>
+  <span>
+    SUBTOTAL
+  </span>
 
-      <span id="subtotal">
-        $0
-      </span>
+  <span id="subtotal">
+    $0
+  </span>
 
-    </div>
+</div>
 
 
-    <button
-      class="checkout"
-      onclick="checkout()"
-    >
-      CHECKOUT
-    </button>
+<button
+  class="checkout"
+  onclick="checkout()"
+>
+  CHECKOUT
+</button>
 
   </div>
 
 </aside>
-
 
 <!-- =======================================================
      OPTIONS MODAL
@@ -1832,91 +1802,90 @@ header{
     id="options-window"
   >
 
-    <div class="options-header">
+<div class="options-header">
 
-      <h2>
-        CHOOSE OPTIONS
-      </h2>
+  <h2>
+    CHOOSE OPTIONS
+  </h2>
 
-      <button
-        class="options-close"
-        onclick="closeOptions()"
+  <button
+    class="options-close"
+    onclick="closeOptions()"
+  >
+    ×
+  </button>
+
+</div>
+
+
+<div class="options-body">
+
+  <div class="option-product">
+
+    <div class="option-image">
+
+      <img
+        id="option-image"
+        src=""
+        alt=""
       >
-        ×
-      </button>
 
     </div>
 
 
-    <div class="options-body">
+    <div class="option-product-info">
 
-      <div class="option-product">
-
-        <div class="option-image">
-
-          <img
-            id="option-image"
-            src=""
-            alt=""
-          >
-
-        </div>
+      <h3
+        id="option-name"
+      ></h3>
 
 
-        <div class="option-product-info">
-
-          <h3
-            id="option-name"
-          ></h3>
-
-
-          <div
-            class="option-price"
-            id="option-price"
-          ></div>
+      <div
+        class="option-price"
+        id="option-price"
+      ></div>
 
 
-          <div class="option-label">
+      <div class="option-label">
 
-            <span id="option-label">
-              Size
-            </span>
+        <span id="option-label">
+          Size
+        </span>
 
-            <span
-              class="size-chart"
-              onclick="showSizeChart()"
-            >
-              Size chart
-            </span>
-
-          </div>
-
-
-          <div
-            class="size-options"
-            id="size-options"
-          ></div>
-
-        </div>
+        <span
+          class="size-chart"
+          onclick="showSizeChart()"
+        >
+          Size chart
+        </span>
 
       </div>
 
 
-      <button
-        class="confirm-add"
-        id="confirm-add"
-        onclick="confirmAddToCart()"
-        disabled
-      >
-        CONFIRM ADD TO CART
-      </button>
+      <div
+        class="size-options"
+        id="size-options"
+      ></div>
 
     </div>
 
   </div>
 
+
+  <button
+    class="confirm-add"
+    id="confirm-add"
+    onclick="confirmAddToCart()"
+    disabled
+  >
+    CONFIRM ADD TO CART
+  </button>
+
 </div>
 
+  </div>
+
+</div>
 
 <script>
 
@@ -2501,11 +2470,7 @@ function renderProducts(){
                   onclick="openOptions(${product.id})"
                   aria-label="Add ${product.name} to cart"
                 >
-                  <svg viewBox="0 0 32 32" aria-hidden="true">
-                    <path d="M4 6h4l3.1 14.2a2 2 0 0 0 2 1.6h10.8a2 2 0 0 0 1.9-1.4L29 11H9"/>
-                    <circle cx="13" cy="27" r="1.8"/>
-                    <circle cx="25" cy="27" r="1.8"/>
-                  </svg>
+                  +
                 </button>
 
               `
