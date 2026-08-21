@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -10,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+  
 <style>
 
 :root{
@@ -180,7 +181,7 @@ header{
 }
 
 .logo img{
-  width:137.5px;
+  width:125px;
   height:auto;
 
   object-fit:contain;
@@ -489,8 +490,11 @@ header{
 
 
 /* =========================================================
-   PRODUCT SHOPPING CART BUTTON
-   Opens the same size/options window as before.
+   PLUS BUTTON
+   IMPORTANT:
+   It stays INSIDE image only.
+   Therefore product information can NEVER
+   hide behind it.
 ========================================================= */
 
 .product-plus{
@@ -514,10 +518,10 @@ header{
   align-items:center;
   justify-content:center;
 
-  font-size:0;
+  font-size:46px;
 
   font-family:Arial,sans-serif;
-  font-weight:300;
+  font-weight: 300;
 
   line-height:1;
 
@@ -541,21 +545,7 @@ header{
 }
 
 .product-plus:active{
-  transform:scale(.94);
-}
-
-.product-plus svg{
-  width:22px;
-  height:22px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:2;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-
-.product-plus:hover svg{
-  transform:scale(1.04);
+  transform:scale(1.6);
 }
 
 
@@ -1323,7 +1313,7 @@ header{
   }
 
   .logo img{
-    width:126.5px;
+    width:115px;
   }
 
 
@@ -1364,13 +1354,8 @@ header{
     right:8px;
     bottom:8px;
 
-    font-size:0;
-    font-weight:300;
-  }
-
-  .product-plus svg{
-    width:18px;
-    height:18px;
+    font-size:32px;
+    font-weight: 300;
   }
 
 
@@ -1528,13 +1513,8 @@ header{
     right:7px;
     bottom:7px;
 
-    font-size:0;
-    font-weight:300;
-  }
-
-  .product-plus svg{
-    width:16px;
-    height:16px;
+    font-size:28px;
+    font-weight: 300;
   }
 
   .product-info{
