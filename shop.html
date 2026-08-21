@@ -180,7 +180,7 @@ header{
 }
 
 .logo img{
-  width:125px;
+  width:137.5px;
   height:auto;
 
   object-fit:contain;
@@ -489,11 +489,8 @@ header{
 
 
 /* =========================================================
-   PLUS BUTTON
-   IMPORTANT:
-   It stays INSIDE image only.
-   Therefore product information can NEVER
-   hide behind it.
+   PRODUCT SHOPPING CART BUTTON
+   Opens the same size/options window as before.
 ========================================================= */
 
 .product-plus{
@@ -517,10 +514,10 @@ header{
   align-items:center;
   justify-content:center;
 
-  font-size:46px;
+  font-size:0;
 
   font-family:Arial,sans-serif;
-  font-weight: 300;
+  font-weight:300;
 
   line-height:1;
 
@@ -544,7 +541,21 @@ header{
 }
 
 .product-plus:active{
-  transform:scale(1.6);
+  transform:scale(.94);
+}
+
+.product-plus svg{
+  width:22px;
+  height:22px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.product-plus:hover svg{
+  transform:scale(1.04);
 }
 
 
@@ -1312,7 +1323,7 @@ header{
   }
 
   .logo img{
-    width:115px;
+    width:126.5px;
   }
 
 
@@ -1353,8 +1364,13 @@ header{
     right:8px;
     bottom:8px;
 
-    font-size:32px;
-    font-weight: 300;
+    font-size:0;
+    font-weight:300;
+  }
+
+  .product-plus svg{
+    width:18px;
+    height:18px;
   }
 
 
@@ -1512,8 +1528,13 @@ header{
     right:7px;
     bottom:7px;
 
-    font-size:28px;
-    font-weight: 300;
+    font-size:0;
+    font-weight:300;
+  }
+
+  .product-plus svg{
+    width:16px;
+    height:16px;
   }
 
   .product-info{
@@ -2480,7 +2501,11 @@ function renderProducts(){
                   onclick="openOptions(${product.id})"
                   aria-label="Add ${product.name} to cart"
                 >
-                  +
+                  <svg viewBox="0 0 32 32" aria-hidden="true">
+                    <path d="M4 6h4l3.1 14.2a2 2 0 0 0 2 1.6h10.8a2 2 0 0 0 1.9-1.4L29 11H9"/>
+                    <circle cx="13" cy="27" r="1.8"/>
+                    <circle cx="25" cy="27" r="1.8"/>
+                  </svg>
                 </button>
 
               `
