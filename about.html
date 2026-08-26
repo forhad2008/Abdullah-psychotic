@@ -1200,6 +1200,312 @@ footer{
   .founder-quote{font-size:29px}
 }
 </style>
+
+
+<style id="about-navbar-professional-redesign">
+/* =========================================================
+   ABOUT.HTML — PROFESSIONAL RESPONSIVE NAVBAR
+   Desktop/Laptop: Logo + centered links + Cart
+   Mobile: Hamburger + centered logo + Cart
+========================================================= */
+
+header{
+  height:88px !important;
+  padding:0 clamp(24px,5vw,72px) !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:clamp(28px,4vw,65px) !important;
+  background:rgba(5,5,5,.90) !important;
+  border-bottom:1px solid rgba(255,255,255,.045) !important;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 8px 35px rgba(0,0,0,.12);
+}
+
+header.scrolled{
+  height:74px !important;
+  background:rgba(5,5,5,.96) !important;
+  border-bottom-color:rgba(255,255,255,.09) !important;
+}
+
+/* Logo */
+.logo-container{
+  flex:0 0 auto;
+  min-width:145px;
+}
+
+.logo-img,
+header.scrolled .logo-img{
+  height:82px;
+  width:auto;
+  margin:0;
+  object-fit:contain;
+}
+
+/* =========================================================
+   DESKTOP / LAPTOP
+========================================================= */
+@media (min-width:993px){
+
+  /* No hamburger on desktop/laptop */
+  .nav-left,
+  .menu-toggle{
+    display:none !important;
+  }
+
+  /* Desktop navigation */
+  .desktop-nav{
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+    gap:clamp(8px,1vw,18px);
+    flex:1 1 auto;
+    min-width:0;
+    height:100%;
+  }
+
+  .desktop-nav a{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:40px;
+    padding:0 clamp(10px,1.1vw,17px);
+    color:rgba(255,255,255,.68);
+    font-family:var(--font-modern);
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:2px;
+    white-space:nowrap;
+    transition:color .25s ease,background .25s ease;
+  }
+
+  .desktop-nav a::after{
+    content:"";
+    position:absolute;
+    bottom:5px;
+    left:50%;
+    width:0;
+    height:1px;
+    background:var(--primary-color);
+    transform:translateX(-50%);
+    transition:width .25s ease;
+  }
+
+  .desktop-nav a:hover,
+  .desktop-nav a.active{
+    color:#fff;
+  }
+
+  .desktop-nav a:hover::after,
+  .desktop-nav a.active::after{
+    width:18px;
+  }
+
+  /* Cart on far right */
+  .nav-right{
+    flex:0 0 auto;
+    margin-left:auto !important;
+  }
+
+  .cart-icon-wrapper{
+    width:42px !important;
+    height:42px !important;
+    background:rgba(255,255,255,.045) !important;
+    border:1px solid rgba(255,255,255,.10) !important;
+    border-radius:50% !important;
+    color:#fff !important;
+  }
+
+  .cart-icon-wrapper:hover{
+    background:rgba(193,18,31,.14) !important;
+    border-color:rgba(193,18,31,.55) !important;
+  }
+
+  .cart-badge{
+    top:-2px !important;
+    right:-2px !important;
+    border:2px solid #050505 !important;
+  }
+
+  /* Give About hero clean clearance */
+  .about-hero{
+    padding-top:88px;
+  }
+}
+
+/* =========================================================
+   TABLET / MOBILE
+========================================================= */
+@media (max-width:992px){
+
+  header{
+    height:76px !important;
+    padding:0 22px !important;
+    justify-content:space-between !important;
+    gap:0 !important;
+  }
+
+  header.scrolled{
+    height:68px !important;
+  }
+
+  .desktop-nav{
+    display:none !important;
+  }
+
+  .nav-left{
+    display:flex !important;
+    align-items:center;
+    flex:0 0 auto;
+    order:1;
+  }
+
+  .menu-toggle{
+    display:flex !important;
+    width:38px !important;
+    height:38px !important;
+    flex:0 0 38px;
+    border-radius:50%;
+    background:#fff;
+    color:#000;
+  }
+
+  .menu-toggle svg{
+    width:23px;
+    height:19px;
+  }
+
+  .logo-container{
+    position:absolute !important;
+    left:50% !important;
+    top:50% !important;
+    transform:translate(-50%,-50%) !important;
+    min-width:0;
+    z-index:2;
+  }
+
+  .logo-img,
+  header.scrolled .logo-img{
+    height:76px;
+    margin:0;
+  }
+
+  .nav-right{
+    display:flex !important;
+    order:3;
+    margin-left:auto !important;
+  }
+
+  .cart-icon-wrapper{
+    width:38px !important;
+    height:38px !important;
+    flex:0 0 38px;
+    border-radius:50%;
+  }
+
+  .cart-icon-wrapper svg{
+    width:18px;
+    height:18px;
+  }
+
+  .cart-badge{
+    top:4px;
+    right:4px;
+    width:14px;
+    height:14px;
+    min-width:14px;
+    font-size:7px;
+  }
+
+  .about-hero{
+    padding-top:76px;
+  }
+}
+
+/* =========================================================
+   PHONE
+========================================================= */
+@media (max-width:600px){
+
+  header{
+    height:64px !important;
+    padding:0 14px !important;
+  }
+
+  header.scrolled{
+    height:60px !important;
+  }
+
+  .menu-toggle,
+  .cart-icon-wrapper{
+    width:36px !important;
+    height:36px !important;
+    flex-basis:36px;
+  }
+
+  .menu-toggle svg{
+    width:21px;
+    height:17px;
+  }
+
+  .cart-icon-wrapper svg{
+    width:17px;
+    height:17px;
+  }
+
+  .logo-img,
+  header.scrolled .logo-img{
+    height:66px;
+  }
+
+  .about-hero{
+    padding-top:64px;
+  }
+}
+
+/* =========================================================
+   MINI PHONE
+========================================================= */
+@media (max-width:380px){
+
+  header{
+    height:58px !important;
+    padding:0 9px !important;
+  }
+
+  header.scrolled{
+    height:55px !important;
+  }
+
+  .menu-toggle,
+  .cart-icon-wrapper{
+    width:32px !important;
+    height:32px !important;
+    flex-basis:32px;
+  }
+
+  .menu-toggle svg{
+    width:18px;
+    height:14px;
+  }
+
+  .cart-icon-wrapper svg{
+    width:16px;
+    height:16px;
+  }
+
+  .logo-img,
+  header.scrolled .logo-img{
+    height:59px;
+  }
+
+  .about-hero{
+    padding-top:58px;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -1231,6 +1537,14 @@ footer{
       <img src="logo0.webp" alt="Abdullah Psychotic" class="logo-img">
     </a>
   </div>
+
+  <!-- DESKTOP NAVIGATION -->
+  <nav class="desktop-nav" aria-label="Main navigation">
+    <a href="index.html">HOME</a>
+    <a href="index.html#shop">SHOP</a>
+    <a href="about.html" class="active">ABOUT US</a>
+    <a href="index.html#contact">CONTACT</a>
+  </nav>
 
   <div class="nav-right">
     <div
