@@ -5403,6 +5403,20 @@ a{
   }
 }
 </style>
+
+<style id="no-welcome-on-big-devices">
+/* No welcome screen on desktop / laptop / large tablet.
+   Mobile and smaller tablet keep the existing welcome behavior. */
+@media (min-width: 1024px) {
+  #welcome-screen {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
