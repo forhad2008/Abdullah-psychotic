@@ -5357,6 +5357,52 @@ a{
 }
 </style>
 
+<style id="final-cart-window-position-fix">
+
+/* =========================================================
+   FINAL CART / SIZE WINDOW POSITION FIX
+   - Mobile: ADD TO CART sits exactly 15px above the bottom.
+   - Tablet / laptop / desktop: the cart option window is centered.
+   - Existing cart and JavaScript behavior is preserved.
+========================================================= */
+
+/* Keep the bottom-sheet behavior on phones. */
+@media (max-width: 768px) {
+  .size-confirm-btn {
+    margin-bottom: 15px !important;
+  }
+}
+
+/* Center the cart/option window on tablets, laptops and desktops. */
+@media (min-width: 769px) {
+  .size-sheet {
+    left: 50% !important;
+    right: auto !important;
+    top: 50% !important;
+    bottom: auto !important;
+    width: min(560px, 88vw) !important;
+    height: auto !important;
+    max-height: 86vh !important;
+    transform: translate(-50%, -46%) !important;
+    border-radius: 4px !important;
+    box-shadow: 0 25px 80px rgba(0,0,0,.45) !important;
+  }
+
+  .size-sheet.active {
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .size-sheet-content {
+    max-height: calc(86vh - 54px);
+    overflow: hidden;
+    padding-bottom: 15px !important;
+  }
+
+  .size-confirm-btn {
+    margin-bottom: 15px !important;
+  }
+}
+</style>
 </head>
 
 <body>
