@@ -16,8 +16,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 
-<style>
 
+<style>
 
 :root{
 
@@ -73,7 +73,7 @@ display:flex;
 
 align-items:center;
 
-justify-content:space-between;
+justify-content:center;
 
 padding:0 30px;
 
@@ -87,8 +87,17 @@ z-index:100;
 
 
 
+/* CENTER LOGO */
 
 .logo-container{
+
+position:absolute;
+
+left:50%;
+
+top:50%;
+
+transform:translate(-50%,-50%);
 
 display:flex;
 
@@ -277,7 +286,9 @@ color:var(--primary-color);
 
 
 
-/* ================= LUXURY FOOTER ================= */
+
+
+/* ================= FOOTER ================= */
 
 
 footer{
@@ -336,7 +347,6 @@ margin-top:8px;
 
 
 
-
 .social-links{
 
 display:flex;
@@ -369,8 +379,6 @@ color:var(--primary-color);
 
 
 
-
-
 .footer-links h4{
 
 font-family:'Cinzel',serif;
@@ -389,7 +397,6 @@ color:white;
 
 
 
-
 .footer-links ul{
 
 list-style:none;
@@ -403,7 +410,6 @@ list-style:none;
 margin-bottom:9px;
 
 }
-
 
 
 
@@ -431,8 +437,6 @@ color:white;
 
 
 
-
-
 .footer-bottom{
 
 margin-top:40px;
@@ -454,38 +458,8 @@ color:#666;
 
 
 
-@media(max-width:700px){
 
-
-.footer-top{
-
-grid-template-columns:1fr 1fr;
-
-gap:30px;
-
-}
-
-
-
-.footer-brand{
-
-grid-column:span 2;
-
-}
-
-
-
-.footer-brand img{
-
-height:65px;
-
-}
-
-
-
-  }
-  
-/* ================= MOBILE ================= */
+/* ================= RESPONSIVE ================= */
 
 
 @media(max-width:700px){
@@ -501,10 +475,9 @@ padding:0 15px;
 
 
 
-
 .logo-img{
 
-height: 80px;
+height:80px;
 
 }
 
@@ -554,13 +527,35 @@ font-size:19px;
 
 
 
+.footer-top{
+
+grid-template-columns:1fr 1fr;
+
+gap:30px;
 
 }
 
 
 
-</style>
+.footer-brand{
 
+grid-column:span 2;
+
+}
+
+
+
+.footer-brand img{
+
+height:65px;
+
+}
+
+
+
+}
+
+</style>
 
 </head>
 
