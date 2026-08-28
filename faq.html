@@ -315,14 +315,15 @@ color:var(--primary-color);
 }
 
 
-/* ================= FOOTER ================= */
+
+/* ================= LUXURY FOOTER ================= */
 
 
 footer{
 
-border-top:1px solid var(--border-color);
+border-top:1px solid rgba(255,255,255,.08);
 
-padding:80px 7%;
+padding:55px 7% 25px;
 
 background:#050505;
 
@@ -334,9 +335,11 @@ background:#050505;
 
 display:grid;
 
-grid-template-columns:2fr 1fr 1fr 1fr;
+grid-template-columns:1.6fr 1fr 1fr 1fr;
 
-gap:50px;
+gap:40px;
+
+align-items:start;
 
 }
 
@@ -344,9 +347,11 @@ gap:50px;
 
 .footer-brand img{
 
-height:100px;
+height:75px;
 
-margin-left:-25px;
+width:auto;
+
+margin-left:-15px;
 
 }
 
@@ -354,17 +359,20 @@ margin-left:-25px;
 
 .footer-brand p{
 
-max-width:350px;
+font-family:'Cormorant Garamond',serif;
+
+font-size:17px;
+
+line-height:1.7;
 
 color:#8E8E93;
 
-font-size:15px;
+max-width:300px;
 
-line-height:1.8;
-
-margin-top:15px;
+margin-top:8px;
 
 }
+
 
 
 
@@ -372,9 +380,9 @@ margin-top:15px;
 
 display:flex;
 
-gap:20px;
+gap:18px;
 
-margin-top:25px;
+margin-top:20px;
 
 }
 
@@ -382,9 +390,9 @@ margin-top:25px;
 
 .social-links a{
 
-color:white;
+color:#aaa;
 
-font-size:18px;
+font-size:16px;
 
 transition:.3s;
 
@@ -400,17 +408,24 @@ color:var(--primary-color);
 
 
 
+
+
 .footer-links h4{
 
 font-family:'Cinzel',serif;
 
-font-size:15px;
+font-size:13px;
+
+font-weight:600;
 
 letter-spacing:3px;
 
-margin-bottom:25px;
+margin-bottom:18px;
+
+color:white;
 
 }
+
 
 
 
@@ -424,19 +439,22 @@ list-style:none;
 
 .footer-links li{
 
-margin-bottom:14px;
+margin-bottom:9px;
 
 }
 
 
 
+
 .footer-links a{
+
+font-family:'Montserrat',sans-serif;
+
+font-size:13px;
 
 text-decoration:none;
 
-color:#8E8E93;
-
-font-size:14px;
+color:#777;
 
 transition:.3s;
 
@@ -452,25 +470,60 @@ color:white;
 
 
 
+
+
 .footer-bottom{
 
-border-top:1px solid var(--border-color);
+margin-top:40px;
 
-margin-top:60px;
+padding-top:18px;
 
-padding-top:25px;
+border-top:1px solid rgba(255,255,255,.08);
 
 text-align:center;
 
-font-size:13px;
+font-size:11px;
 
-color:#777;
+letter-spacing:2px;
+
+color:#666;
 
 }
 
 
 
 
+@media(max-width:700px){
+
+
+.footer-top{
+
+grid-template-columns:1fr 1fr;
+
+gap:30px;
+
+}
+
+
+
+.footer-brand{
+
+grid-column:span 2;
+
+}
+
+
+
+.footer-brand img{
+
+height:65px;
+
+}
+
+
+
+  }
+  
 /* ================= MOBILE ================= */
 
 
@@ -549,21 +602,6 @@ font-size:19px;
 
 }
 
-
-
-.footer-top{
-
-grid-template-columns:1fr;
-
-}
-
-
-
-footer{
-
-padding:60px 25px;
-
-}
 
 
 
