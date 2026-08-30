@@ -5624,7 +5624,26 @@ a{
 </footer>
 
 <script>
-/* ===== 0. WELCOME SCREEN CONTROLLER ===== */
+/* =========================================================
+   ABDULLAH PSYCHOTIC — MAIN WEBSITE JAVASCRIPT
+   ---------------------------------------------------------
+   FEATURES
+   1. Welcome screen
+   2. Product rendering
+   3. Shopping cart
+   4. Size selection
+   5. Sold-out system
+   6. Navigation / cart drawers
+   7. Newsletter subscribe
+   8. Newsletter unsubscribe
+   9. Persistent subscription state
+   10. Background music
+========================================================= */
+
+
+/* =========================================================
+   0. WELCOME SCREEN CONTROLLER
+========================================================= */
 
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -5634,28 +5653,47 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if (!welcomeScreen || !typingText) return;
 
-    // Desktop/laptop: skip the welcome screen and reveal the hero immediately.
+    /* Desktop / laptop:
+       Skip welcome animation completely. */
+
     if (window.matchMedia('(min-width: 1024px)').matches) {
+
         welcomeScreen.remove();
+
         document.body.classList.remove('no-scroll');
-        heroContent?.classList.add('animate-hero');
+
+        if (heroContent) {
+            heroContent.classList.add('animate-hero');
+        }
+
         return;
     }
 
     document.body.classList.add('no-scroll');
 
-    const blockScroll = (e) => {
-        e.preventDefault();
+
+    /* Prevent scrolling while welcome screen is active */
+
+    const blockScroll = (event) => {
+        event.preventDefault();
     };
 
-    ['touchstart', 'touchmove', 'wheel'].forEach(event => {
-        welcomeScreen.addEventListener(event, blockScroll, {
-            passive: false
-        });
+    ['touchstart', 'touchmove', 'wheel'].forEach(eventName => {
+
+        welcomeScreen.addEventListener(
+            eventName,
+            blockScroll,
+            { passive: false }
+        );
+
     });
+
+
+    /* Check if welcome screen was already seen */
 
     const hasSeenWelcome =
         sessionStorage.getItem('hasSeenWelcome');
+
 
     if (hasSeenWelcome) {
 
@@ -5670,16 +5708,22 @@ window.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    const text = "Abdullah Psychotic";
+
+    /* Typing animation */
+
+    const text = 'Abdullah Psychotic';
 
     let index = 0;
+
+
+    /* Typing sound */
 
     const typingSound = new Audio('typing.mp3');
 
     typingSound.preload = 'auto';
     typingSound.loop = true;
-
     typingSound.volume = 1.0;
+
 
     function startTypingSound() {
 
@@ -5691,44 +5735,36 @@ window.addEventListener('DOMContentLoaded', () => {
 
             playPromise
                 .then(() => {
-
-                    console.log(
-                        'Typing sound started'
-                    );
-
+                    console.log('Typing sound started');
                 })
-                .catch((error) => {
-
+                .catch(error => {
                     console.log(
                         'Typing sound autoplay blocked:',
                         error
                     );
-
                 });
 
         }
     }
 
+
     function stopTypingSound() {
 
         typingSound.pause();
-
         typingSound.currentTime = 0;
 
     }
+
 
     function typeText() {
 
         if (index < text.length) {
 
             if (index === 0) {
-
                 startTypingSound();
-
             }
 
-            typingText.textContent +=
-                text.charAt(index);
+            typingText.textContent += text.charAt(index);
 
             index++;
 
@@ -5740,23 +5776,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
             setTimeout(() => {
 
-                welcomeScreen.classList.add(
-                    'fade-out'
-                );
+                welcomeScreen.classList.add('fade-out');
 
                 sessionStorage.setItem(
                     'hasSeenWelcome',
                     'true'
                 );
 
+
                 setTimeout(() => {
 
-                    welcomeScreen.style.display =
-                        'none';
+                    welcomeScreen.style.display = 'none';
 
                     document.body.classList.remove(
                         'no-scroll'
                     );
+
 
                     setTimeout(() => {
 
@@ -5775,837 +5810,2458 @@ window.addEventListener('DOMContentLoaded', () => {
             }, 1500);
 
         }
-
     }
+
 
     typeText();
 
 });
 
-/* ===== 1. PRODUCT DATA & GLOBAL STATE CONFIGURATION ===== */
-let cart = JSON.parse(localStorage.getItem('ap_user_cart')) || [];
 
-/* Upgrade previously saved cart items to the size-aware format. */
+/* =========================================================
+   1. PRODUCT DATA & GLOBAL STATE
+========================================================= */
+
+
+/* Load saved cart */
+
+let cart =
+    JSON.parse(
+        localStorage.getItem('ap_user_cart')
+    ) || [];
+
+
+/* Upgrade old cart format */
+
 cart = cart.map(item => ({
-  ...item,
-  size: item.size || 'M',
-  cartKey: item.cartKey || `${item.id}-${item.size || 'M'}`
+
+    ...item,
+
+    size: item.size || 'M',
+
+    cartKey:
+        item.cartKey ||
+        `${item.id}-${item.size || 'M'}`
+
 }));
 
+
+/* Save cart */
+
 function saveCartToStorage() {
-  localStorage.setItem('ap_user_cart', JSON.stringify(cart));
+
+    localStorage.setItem(
+        'ap_user_cart',
+        JSON.stringify(cart)
+    );
+
 }
+
+
+/* =========================================================
+   PRODUCT DATABASE
+========================================================= */
 
 const products = [
-  {
-    id: 1,
-    category: "apparel",
-    name: "Abdullah Psychotic Branded Logo T-Shirt",
-    image: "t1.webp",
-    url: "t1.webp",
-    price: 499,
-    badge: "Graphic t-shirt"
-  },
-  {
-    id: 2,
-    category: "apparel",
-    name: "Abdullah Psychotic Branded Dragon Edition Logo Trouser",
-    image: "pent.webp",
-    url: "pent.webp",
-    price: 599,
-    badge: "Premium Graphic Trouser"
-  },
-  {
-    id: 3,
-    category: "apparel",
-    name: "A.P Oversized Dragon edition premium t-shirt",
-    image: "t4.webp",
-    url: "t4.webp",
-    price: 459,
-    badge: "Graphic t-shirt"
-  },
-  {
-    id: 4,
-    category: "apparel",
-    name: "A.P Oversized Tiger edition premium t-shirt",
-    image: "t3.webp",
-    url: "t3.webp",
-    price: 449,
-    badge: "Graphic t-shirt"
-  },
-  {
-    id: 5,
-    category: "apparel",
-    name: "A.P Oversized Penguin edition premium t-shirt",
-    image: "t2.webp",
-    url: "we5.webp",
-    price: 449,
-    badge: "Graphic t-shirt"
-  },
-  {
-    id: 6,
-    category: "apparel",
-    name: "A.P Oversized logo design premium red & black t-shirt(chinese style)",
-    image: "t5.webp",
-    url: "we6.webp",
-    price: 489,
-    badge: "Premium Graphic t-shirt"
-  },
-  {
-    id: 7,
-    category: "apparel",
-    name: "A.P Oversized logo design premium t-shirt",
-    image: "t6.webp",
-    url: "t6.webp",
-    price: 489,
-    badge: "Premium Graphic t-shirt"
-  },
-  {
-    id: 8,
-    category: "apparel",
-    name: "A.P Oversized logo design premium t-shirt",
-    image: "t7.webp",
-    url: "t7.webp",
-    price: 489,
-    badge: "Premium Graphic t-shirt"
-  },
 
-  {
-    id: 10,
-    category: "apparel",
-    name: "A.P Oversized logo design premium t-shirt",
-    image: "t8.webp",
-    url: "t8.webp",
-    price: 489,
-    badge: "Premium Graphic t-shirt"
-  },
-  {
-    id: 11,
-    category: "apparel",
-    name: "A.P Oversized logo design premium t-shirt",
-    image: "t9.webp",
-    url: "we11.webp",
-    price: 489,
-    badge: "Premium Graphic t-shirt"
-  },
-  {
-    id: 12,
-    category: "footwear",
-    name: "Premium A.P Logo Sneakers",
-    image: "s1.webp",
-    url: "s1.webp",
-    price: 499,
-    badge: "Classic Sneakers"
-  },
-  {
-    id: 13,
-    category: "footwear",
-    name: "A.P bullet Edition Premium Shoes",
-    image: "s01.webp",
-    url: "s01.webp",
-    price: 799,
-    badge: "Premium shoes"
-  },
+    {
+        id: 1,
+        category: 'apparel',
+        name: 'Abdullah Psychotic Branded Logo T-Shirt',
+        image: 't1.webp',
+        url: 't1.webp',
+        price: 499,
+        badge: 'Graphic t-shirt'
+    },
 
-  {
-    id: 14,
-    category: "watches",
-    name: "A.P Ocean Whale Iconic Timepiece",
-    image: "W1.webp",
-    url: "W1.webp",
-    price: 7899,
-    badge: "Luxury Wear"
-  },
+    {
+        id: 2,
+        category: 'apparel',
+        name: 'Abdullah Psychotic Branded Dragon Edition Logo Trouser',
+        image: 'pent.webp',
+        url: 'pent.webp',
+        price: 599,
+        badge: 'Premium Graphic Trouser'
+    },
 
-{
-    id: 15,
-    category: "watches",
-    name: "A.P Logo Design Iconic Timepiece",
-    image: "w2.webp",
-    url: "w2.webp",
-    price: 9899,
-    badge: "Luxury Wear"
-  },
+    {
+        id: 3,
+        category: 'apparel',
+        name: 'A.P Oversized Dragon edition premium t-shirt',
+        image: 't4.webp',
+        url: 't4.webp',
+        price: 459,
+        badge: 'Graphic t-shirt'
+    },
 
-  {
-    id: 16,
-    category: "lifestyle",
-    name: "A.P Logo Design Black Bedsheet",
-    image: "bed1.webp",
-    url: "bed1.webp",
-    price: 1849,
-    badge: "Modern bedsheets"
-  },
-  {
-    id: 17,
-    category: "lifestyle",
-    name: "A.P Logoed Royal Black Satin Bedsheet",
-    image: "bed2.webp",
-    url: "bed2.webp",
-    price: 1899,
-    badge: "Modern bedsheets"
-  },
-  {
-    id: 18,
-    category: "creative",
-    name: "A.P Logo Design Iconic Black Creative Mug",
-    image: "mug.webp",
-    url: "mug.webp",
-    price: 79,
-    badge: "Creative Object"
-  },
-  {
-    id: 19,
-    category: "creative",
-    name: "A.P Logo Design Iconic Golden-Black Mug",
-    image: "mug2.webp",
-    url: "mug2.webp",
-    price: 99,
-    badge: "Creative Object"
-  },
-  /*hoodie*/
-  {
-    id: 20,
-    category: "hoodies",
-    name: "A.P Logo Design Iconic Black Color Hoodie",
-    image: "ho1.webp",
-    url: "ho1.webp",
-    price: 769,
-    badge: "Premium Winter Hoodie"
+    {
+        id: 4,
+        category: 'apparel',
+        name: 'A.P Oversized Tiger edition premium t-shirt',
+        image: 't3.webp',
+        url: 't3.webp',
+        price: 449,
+        badge: 'Graphic t-shirt'
     },
-  {
-    id: 21,
-    category: "hoodies",
-    name: "A.P Logo Design Iconic Red Color Hoodie",
-    image: "ho2.webp",
-    url: "ho2.webp",
-    price: 769,
-    badge: "Premium Winter Hoodie"
+
+    {
+        id: 5,
+        category: 'apparel',
+        name: 'A.P Oversized Penguin edition premium t-shirt',
+        image: 't2.webp',
+        url: 'we5.webp',
+        price: 449,
+        badge: 'Graphic t-shirt'
     },
-  {
-    id: 22,
-    category: "hoodies",
-    name: "A.P Logo Design white black Hoodie",
-    image: "ho3.webp",
-    url: "weh2.webp",
-    price: 749,
-    badge: "Premium Winter Hoodie"
+
+    {
+        id: 6,
+        category: 'apparel',
+        name: 'A.P Oversized logo design premium red & black t-shirt(chinese style)',
+        image: 't5.webp',
+        url: 'we6.webp',
+        price: 489,
+        badge: 'Premium Graphic t-shirt'
     },
-  {
-    id: 23,
-    category: "hoodies",
-    name: "A.P Logo Arted Premium Red & Black Hoodie",
-    image: "ho4.webp",
-    url: "ho4.webp",
-    price: 789,
-    badge: "Premium Winter Hoodie"
-  },
-     {
-    id: 24,
-    category: "hoodies",
-    name: "A.P Premium black & white stylish designed Hoodie",
-    image: "ho5.webp",
-    url: "ho5.webp",
-    price: 799,
-    badge: "Premium Winter Hoodie"
+
+    {
+        id: 7,
+        category: 'apparel',
+        name: 'A.P Oversized logo design premium t-shirt',
+        image: 't6.webp',
+        url: 't6.webp',
+        price: 489,
+        badge: 'Premium Graphic t-shirt'
     },
-  {
-    id: 25,
-    category: "caps",
-    name: "A.P Logo Design Classic Black cap",
-    image: "cap1.webp",
-    url: "cap1.webp",
-    price: 239,
-    badge: "Classic cap"
+
+    {
+        id: 8,
+        category: 'apparel',
+        name: 'A.P Oversized logo design premium t-shirt',
+        image: 't7.webp',
+        url: 't7.webp',
+        price: 489,
+        badge: 'Premium Graphic t-shirt'
     },
-    { id : 26,
-    category: "caps",
-    name: "A.P Logo Design Classic red cap",
-    image: "cap2.webp",
-    url: "cap2.webp",
-    price: 229,
-    badge: "Classic cap"
+
+    {
+        id: 10,
+        category: 'apparel',
+        name: 'A.P Oversized logo design premium t-shirt',
+        image: 't8.webp',
+        url: 't8.webp',
+        price: 489,
+        badge: 'Premium Graphic t-shirt'
     },
-  {id : 27,
-    category: "caps",
-    name: "Abdullah Psychotic modern cap",
-    image: "cap4.webp",
-    url: "cap4.webp",
-    price: 249,
-    badge: "Modern cap"
+
+    {
+        id: 11,
+        category: 'apparel',
+        name: 'A.P Oversized logo design premium t-shirt',
+        image: 't9.webp',
+        url: 'we11.webp',
+        price: 489,
+        badge: 'Premium Graphic t-shirt'
     },
-  {id : 28,
-    category: "caps",
-    name: "Abdullah Psychotic – Luxury cap",
-    image: "cap5.webp",
-    url: "cap5.webp",
-    price: 359,
-    badge: "Luxury cap"
+
+    {
+        id: 12,
+        category: 'footwear',
+        name: 'Premium A.P Logo Sneakers',
+        image: 's1.webp',
+        url: 's1.webp',
+        price: 499,
+        badge: 'Classic Sneakers'
     },
-  {id : 29,
-    category: "caps",
-    name: "Abdullah Psychotic – Exclusive cap",
-    image: "cap6.webp",
-    url: "cap6.webp",
-    price: 399,
-    badge: "Exclusive cap"
+
+    {
+        id: 13,
+        category: 'footwear',
+        name: 'A.P bullet Edition Premium Shoes',
+        image: 's01.webp',
+        url: 's01.webp',
+        price: 799,
+        badge: 'Premium shoes'
     },
-  {
-    id: 30,
-    category: "caps",
-    name: "Abdullah Psychotic – classic logo hat",
-    image: "hat2.webp",
-    url: "hat2.webp",
-    price: 2999,
-    badge: "Premium Classic Hat"
+
+    {
+        id: 14,
+        category: 'watches',
+        name: 'A.P Ocean Whale Iconic Timepiece',
+        image: 'W1.webp',
+        url: 'W1.webp',
+        price: 7899,
+        badge: 'Luxury Wear'
     },
-  {id : 31,
-    category: "caps",
-    name: "Abdullah Psychotic – Hell Rider stylish iconic hat",
-    image: "cap3.webp",
-    url: "cap3.webp",
-    price: 3299,
-    badge: "Premium Iconic Hat"
+
+    {
+        id: 15,
+        category: 'watches',
+        name: 'A.P Logo Design Iconic Timepiece',
+        image: 'w2.webp',
+        url: 'w2.webp',
+        price: 9899,
+        badge: 'Luxury Wear'
     },
-  {id : 32,
-    category: "caps",
-    name: "Abdullah Psychotic – Luxury dragon edition hat",
-    image: "hat3.webp",
-    url: "hat3.webp",
-    price: 3499,
-    badge: "Premium Exclusive Hat"
+
+    {
+        id: 16,
+        category: 'lifestyle',
+        name: 'A.P Logo Design Black Bedsheet',
+        image: 'bed1.webp',
+        url: 'bed1.webp',
+        price: 1849,
+        badge: 'Modern bedsheets'
     },
-  {id : 33,
-    category: "bags",
-    name: "Abdullah Psychotic – Luxury school bag",
-    image: "bag1.webp",
-    url: "bag1.webp",
-    price: 549,
-    badge: "Premium school bag"
+
+    {
+        id: 17,
+        category: 'lifestyle',
+        name: 'A.P Logoed Royal Black Satin Bedsheet',
+        image: 'bed2.webp',
+        url: 'bed2.webp',
+        price: 1899,
+        badge: 'Modern bedsheets'
     },
-  {id : 34,
-    category: "bags",
-    name: "Abdullah Psychotic – Luxury modern bag",
-    image: "bag2.webp",
-    url: "bag2.webp",
-    price: 2249,
-    badge: "Premium fashion bag"
+
+    {
+        id: 18,
+        category: 'creative',
+        name: 'A.P Logo Design Iconic Black Creative Mug',
+        image: 'mug.webp',
+        url: 'mug.webp',
+        price: 79,
+        badge: 'Creative Object'
     },
-  {id : 35,
-    category: "bags",
-    name: "Abdullah Psychotic – Luxury bag(Upper class)",
-    image: "bag3.webp",
-    url: "bag3.webp",
-    price: 2349,
-    badge: "Luxury fashion bag"
+
+    {
+        id: 19,
+        category: 'creative',
+        name: 'A.P Logo Design Iconic Golden-Black Mug',
+        image: 'mug2.webp',
+        url: 'mug2.webp',
+        price: 99,
+        badge: 'Creative Object'
     },
-  {id : 36,
-    category: "perfume",
-    name: "Abdullah Psychotic – Luxury red designed perfume",
-    image: "per1.webp",
-    url: "per1.webp",
-    price: 2599,
-    badge: "Luxury perfume"
+
+    {
+        id: 20,
+        category: 'hoodies',
+        name: 'A.P Logo Design Iconic Black Color Hoodie',
+        image: 'ho1.webp',
+        url: 'ho1.webp',
+        price: 769,
+        badge: 'Premium Winter Hoodie'
     },
-  {id : 37,
-    category: "perfume",
-    name: "Abdullah Psychotic – Luxury black designed logo perfume (Upper class)",
-    image: "per2.webp",
-    url: "per2.webp",
-    price: 2700,
-    badge: "Luxury perfume"
+
+    {
+        id: 21,
+        category: 'hoodies',
+        name: 'A.P Logo Design Iconic Red Color Hoodie',
+        image: 'ho2.webp',
+        url: 'ho2.webp',
+        price: 769,
+        badge: 'Premium Winter Hoodie'
     },
-  {id : 38,
-    category: "perfume",
-    name: "Abdullah Psychotic – Luxury black designed logo perfume",
-    image: "per3.webp",
-    url: "per3.webp",
-    price: 2650,
-    badge: "Luxury perfume"
+
+    {
+        id: 22,
+        category: 'hoodies',
+        name: 'A.P Logo Design white black Hoodie',
+        image: 'ho3.webp',
+        url: 'weh2.webp',
+        price: 749,
+        badge: 'Premium Winter Hoodie'
+    },
+
+    {
+        id: 23,
+        category: 'hoodies',
+        name: 'A.P Logo Arted Premium Red & Black Hoodie',
+        image: 'ho4.webp',
+        url: 'ho4.webp',
+        price: 789,
+        badge: 'Premium Winter Hoodie'
+    },
+
+    {
+        id: 24,
+        category: 'hoodies',
+        name: 'A.P Premium black & white stylish designed Hoodie',
+        image: 'ho5.webp',
+        url: 'ho5.webp',
+        price: 799,
+        badge: 'Premium Winter Hoodie'
+    },
+
+    {
+        id: 25,
+        category: 'caps',
+        name: 'A.P Logo Design Classic Black cap',
+        image: 'cap1.webp',
+        url: 'cap1.webp',
+        price: 239,
+        badge: 'Classic cap'
+    },
+
+    {
+        id: 26,
+        category: 'caps',
+        name: 'A.P Logo Design Classic red cap',
+        image: 'cap2.webp',
+        url: 'cap2.webp',
+        price: 229,
+        badge: 'Classic cap'
+    },
+
+    {
+        id: 27,
+        category: 'caps',
+        name: 'Abdullah Psychotic modern cap',
+        image: 'cap4.webp',
+        url: 'cap4.webp',
+        price: 249,
+        badge: 'Modern cap'
+    },
+
+    {
+        id: 28,
+        category: 'caps',
+        name: 'Abdullah Psychotic – Luxury cap',
+        image: 'cap5.webp',
+        url: 'cap5.webp',
+        price: 359,
+        badge: 'Luxury cap'
+    },
+
+    {
+        id: 29,
+        category: 'caps',
+        name: 'Abdullah Psychotic – Exclusive cap',
+        image: 'cap6.webp',
+        url: 'cap6.webp',
+        price: 399,
+        badge: 'Exclusive cap'
+    },
+
+    {
+        id: 30,
+        category: 'caps',
+        name: 'Abdullah Psychotic – classic logo hat',
+        image: 'hat2.webp',
+        url: 'hat2.webp',
+        price: 2999,
+        badge: 'Premium Classic Hat'
+    },
+
+    {
+        id: 31,
+        category: 'caps',
+        name: 'Abdullah Psychotic – Hell Rider stylish iconic hat',
+        image: 'cap3.webp',
+        url: 'cap3.webp',
+        price: 3299,
+        badge: 'Premium Iconic Hat'
+    },
+
+    {
+        id: 32,
+        category: 'caps',
+        name: 'Abdullah Psychotic – Luxury dragon edition hat',
+        image: 'hat3.webp',
+        url: 'hat3.webp',
+        price: 3499,
+        badge: 'Premium Exclusive Hat'
+    },
+
+    {
+        id: 33,
+        category: 'bags',
+        name: 'Abdullah Psychotic – Luxury school bag',
+        image: 'bag1.webp',
+        url: 'bag1.webp',
+        price: 549,
+        badge: 'Premium school bag'
+    },
+
+    {
+        id: 34,
+        category: 'bags',
+        name: 'Abdullah Psychotic – Luxury modern bag',
+        image: 'bag2.webp',
+        url: 'bag2.webp',
+        price: 2249,
+        badge: 'Premium fashion bag'
+    },
+
+    {
+        id: 35,
+        category: 'bags',
+        name: 'Abdullah Psychotic – Luxury bag(Upper class)',
+        image: 'bag3.webp',
+        url: 'bag3.webp',
+        price: 2349,
+        badge: 'Luxury fashion bag'
+    },
+
+    {
+        id: 36,
+        category: 'perfume',
+        name: 'Abdullah Psychotic – Luxury red designed perfume',
+        image: 'per1.webp',
+        url: 'per1.webp',
+        price: 2599,
+        badge: 'Luxury perfume'
+    },
+
+    {
+        id: 37,
+        category: 'perfume',
+        name: 'Abdullah Psychotic – Luxury black designed logo perfume (Upper class)',
+        image: 'per2.webp',
+        url: 'per2.webp',
+        price: 2700,
+        badge: 'Luxury perfume'
+    },
+
+    {
+        id: 38,
+        category: 'perfume',
+        name: 'Abdullah Psychotic – Luxury black designed logo perfume',
+        image: 'per3.webp',
+        url: 'per3.webp',
+        price: 2650,
+        badge: 'Luxury perfume'
     }
+
 ];
 
-  /* ===== SOLD OUT PRODUCTS ===== */
 
-const soldOut = []; // এখানে যেসব product ID sold out হবে
+/* =========================================================
+   SOLD OUT PRODUCTS
+========================================================= */
 
-/* ===== 2. RENDER PRODUCTS BY CATEGORY ===== */
+const soldOut = [];
+
+
+/* =========================================================
+   2. PRODUCT RENDERING
+========================================================= */
+
 function createCardHTML(product) {
-  const isSoldOut = soldOut.includes(product.id);
 
-  const isLuxury = product.category === 'watches';
-  const cardClass = isLuxury ? 'card luxury-card' : 'card';
-  const badgeClass = isLuxury ? 'card-badge luxury-badge' : 'card-badge';
+    const isSoldOut =
+        soldOut.includes(product.id);
 
-  const badgeHTML = product.badge
-    ? `<span class="${badgeClass}">${product.badge}</span>`
-    : '';
+    const isLuxury =
+        product.category === 'watches';
 
-  return `
-    <div class="${cardClass}" data-id="${product.id}">
-      <a href="${product.url}" target="_blank" class="card-img-wrapper">
-        ${badgeHTML}
-        <img src="${product.image}" alt="${product.name}" loading="lazy">
-      </a>
-      <div class="card-content">
-        <h3><a href="${product.url}" target="_blank">${product.name}</a></h3>
-        <div class="card-bottom">
-          <div class="price">$${product.price}</div>
+    const cardClass =
+        isLuxury
+            ? 'card luxury-card'
+            : 'card';
 
-          ${
-isSoldOut
-?
-`<button class="sold-out-btn" disabled>
-    SOLD OUT
-</button>`
-:
-`<button class="add-cart-btn" onclick="addToCart(${product.id})">
-    <i class="fas fa-plus"></i> Add
-</button>`
-          }
+    const badgeClass =
+        isLuxury
+            ? 'card-badge luxury-badge'
+            : 'card-badge';
+
+
+    const badgeHTML =
+        product.badge
+            ? `<span class="${badgeClass}">
+                    ${product.badge}
+               </span>`
+            : '';
+
+
+    return `
+        <div class="${cardClass}" data-id="${product.id}">
+
+            <a
+                href="${product.url}"
+                target="_blank"
+                class="card-img-wrapper"
+            >
+                ${badgeHTML}
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                    loading="lazy"
+                >
+            </a>
+
+
+            <div class="card-content">
+
+                <h3>
+                    <a
+                        href="${product.url}"
+                        target="_blank"
+                    >
+                        ${product.name}
+                    </a>
+                </h3>
+
+
+                <div class="card-bottom">
+
+                    <div class="price">
+                        $${product.price}
+                    </div>
+
+
+                    ${
+                        isSoldOut
+
+                        ?
+
+                        `
+                        <button
+                            class="sold-out-btn"
+                            disabled
+                        >
+                            SOLD OUT
+                        </button>
+                        `
+
+                        :
+
+                        `
+                        <button
+                            class="add-cart-btn"
+                            onclick="addToCart(${product.id})"
+                        >
+                            <i class="fas fa-plus"></i>
+                            Add
+                        </button>
+                        `
+                    }
+
+                </div>
+
+            </div>
 
         </div>
-      </div>
-    </div>
-  `;
+    `;
 }
+
 
 function renderProducts() {
-  const containers = {
-    apparel: document.getElementById('grid-apparel'),
-    footwear: document.getElementById('grid-footwear'),
-    watches: document.getElementById('grid-watches'),
-    lifestyle: document.getElementById('grid-lifestyle'),
-    creative: document.getElementById('grid-creative'),
-    hoodies: document.getElementById('grid-hoodies'),
-    caps: document.getElementById('grid-caps'),
-    bags: document.getElementById('grid-bags'),
-    perfume: document.getElementById('grid-perfume')
-  };
 
-  Object.values(containers).forEach(container => {
-    if (container) container.innerHTML = '';
-  });
+    const containers = {
 
-  products.forEach(product => {
-    const cardHTML = createCardHTML(product);
-    const targetContainer = containers[product.category];
-    if (targetContainer) {
-      targetContainer.insertAdjacentHTML('beforeend', cardHTML);
-    }
-  });
+        apparel:
+            document.getElementById('grid-apparel'),
+
+        footwear:
+            document.getElementById('grid-footwear'),
+
+        watches:
+            document.getElementById('grid-watches'),
+
+        lifestyle:
+            document.getElementById('grid-lifestyle'),
+
+        creative:
+            document.getElementById('grid-creative'),
+
+        hoodies:
+            document.getElementById('grid-hoodies'),
+
+        caps:
+            document.getElementById('grid-caps'),
+
+        bags:
+            document.getElementById('grid-bags'),
+
+        perfume:
+            document.getElementById('grid-perfume')
+
+    };
+
+
+    Object.values(containers).forEach(container => {
+
+        if (container) {
+            container.innerHTML = '';
+        }
+
+    });
+
+
+    products.forEach(product => {
+
+        const cardHTML =
+            createCardHTML(product);
+
+        const targetContainer =
+            containers[product.category];
+
+
+        if (targetContainer) {
+
+            targetContainer.insertAdjacentHTML(
+                'beforeend',
+                cardHTML
+            );
+
+        }
+
+    });
+
 }
 
-/* ===== 3. CART SYSTEM LOGIC ===== */
-/* ===== SIZE SELECTION + CART SYSTEM ===== */
+
+/* =========================================================
+   3. SIZE SELECTION + CART
+========================================================= */
 
 let pendingProduct = null;
 let selectedSize = null;
 
+
 function getOptions(product) {
-  if (product.category === 'apparel' || product.category === 'hoodies') {
-    return { label: 'Size', values: ['S', 'M', 'L', 'XL', 'XXL'] };
-  }
 
-  if (product.category === 'footwear') {
-    return { label: 'Size', values: ['39', '40', '41', '42', '43', '44', '45'] };
-  }
+    if (
+        product.category === 'apparel' ||
+        product.category === 'hoodies'
+    ) {
 
-  return { label: 'Size', values: ['ONE SIZE'] };
+        return {
+            label: 'Size',
+            values: [
+                'S',
+                'M',
+                'L',
+                'XL',
+                'XXL'
+            ]
+        };
+
+    }
+
+
+    if (product.category === 'footwear') {
+
+        return {
+            label: 'Size',
+            values: [
+                '39',
+                '40',
+                '41',
+                '42',
+                '43',
+                '44',
+                '45'
+            ]
+        };
+
+    }
+
+
+    return {
+        label: 'Size',
+        values: ['ONE SIZE']
+    };
+
 }
+
+
+/* =========================================================
+   ADD TO CART
+========================================================= */
 
 function addToCart(productId) {
-  const product = products.find(p => p.id === productId);
-  if (!product || soldOut.includes(productId)) return;
 
-  pendingProduct = product;
-  selectedSize = null;
+    const product =
+        products.find(
+            p => p.id === productId
+        );
 
-  document.getElementById('size-product-image').src = product.image;
-  document.getElementById('size-product-image').alt = product.name;
-  document.getElementById('size-product-brand').textContent = 'ABDULLAH PSYCHOTIC';
-  document.getElementById('size-product-name').textContent = product.name;
-  document.getElementById('size-product-price').textContent =
-    `$${product.price.toLocaleString()}`;
 
-  const options = getOptions(product);
-  const sizeOptions = document.getElementById('size-options');
-  const sizeLabel = document.querySelector('.size-label');
-  const sizeChartLink = document.getElementById('size-chart-link');
+    if (
+        !product ||
+        soldOut.includes(productId)
+    ) {
+        return;
+    }
 
-  if (sizeLabel) sizeLabel.textContent = `${options.label}:`;
 
-  sizeOptions.innerHTML = options.values.map(value =>
-    `<button type="button" class="size-option" data-size="${value}">${value}</button>`
-  ).join('');
+    pendingProduct = product;
+    selectedSize = null;
 
-  document.querySelectorAll('.size-option').forEach(option => {
-    option.addEventListener('click', () => selectSize(option.dataset.size));
-  });
 
-  if (sizeChartLink) {
-    sizeChartLink.onclick = function(event) {
-      event.preventDefault();
-      const guide = product.category === 'footwear'
-        ? `SHOE SIZE GUIDE\n\n39 / 40 / 41 / 42 / 43 / 44 / 45\n\nPlease choose your usual shoe size.`
-        : (product.category === 'apparel' || product.category === 'hoodies')
-          ? `SIZE GUIDE\n\nS — Small\nM — Medium\nL — Large\nXL — Extra Large\nXXL — Extra Extra Large\n\nPlease choose your usual size.`
-          : `SIZE GUIDE\n\nThis product is available in ONE SIZE.`;
-      alert(guide);
-      return false;
-    };
-  }
+    const image =
+        document.getElementById(
+            'size-product-image'
+        );
 
-  closeAll();
-  sizeSheet.classList.add('active');
-  sizeSheet.setAttribute('aria-hidden', 'false');
-  overlay.classList.add('active');
-  document.body.classList.add('no-scroll');
+    const brand =
+        document.getElementById(
+            'size-product-brand'
+        );
+
+    const name =
+        document.getElementById(
+            'size-product-name'
+        );
+
+    const price =
+        document.getElementById(
+            'size-product-price'
+        );
+
+
+    if (image) {
+
+        image.src = product.image;
+        image.alt = product.name;
+
+    }
+
+
+    if (brand) {
+
+        brand.textContent =
+            'ABDULLAH PSYCHOTIC';
+
+    }
+
+
+    if (name) {
+
+        name.textContent =
+            product.name;
+
+    }
+
+
+    if (price) {
+
+        price.textContent =
+            `$${product.price.toLocaleString()}`;
+
+    }
+
+
+    const options =
+        getOptions(product);
+
+
+    const sizeOptions =
+        document.getElementById(
+            'size-options'
+        );
+
+
+    const sizeLabel =
+        document.querySelector(
+            '.size-label'
+        );
+
+
+    const sizeChartLink =
+        document.getElementById(
+            'size-chart-link'
+        );
+
+
+    if (sizeLabel) {
+
+        sizeLabel.textContent =
+            `${options.label}:`;
+
+    }
+
+
+    if (sizeOptions) {
+
+        sizeOptions.innerHTML =
+            options.values
+                .map(value => `
+                    <button
+                        type="button"
+                        class="size-option"
+                        data-size="${value}"
+                    >
+                        ${value}
+                    </button>
+                `)
+                .join('');
+
+    }
+
+
+    document
+        .querySelectorAll('.size-option')
+        .forEach(option => {
+
+            option.addEventListener(
+                'click',
+                () => selectSize(
+                    option.dataset.size
+                )
+            );
+
+        });
+
+
+    if (sizeChartLink) {
+
+        sizeChartLink.onclick =
+            function(event) {
+
+                event.preventDefault();
+
+
+                const guide =
+                    product.category === 'footwear'
+
+                    ?
+
+                    `SHOE SIZE GUIDE
+
+39 / 40 / 41 / 42 / 43 / 44 / 45
+
+Please choose your usual shoe size.`
+
+                    :
+
+                    (
+                        product.category === 'apparel' ||
+                        product.category === 'hoodies'
+                    )
+
+                    ?
+
+                    `SIZE GUIDE
+
+S — Small
+M — Medium
+L — Large
+XL — Extra Large
+XXL — Extra Extra Large
+
+Please choose your usual size.`
+
+                    :
+
+                    `SIZE GUIDE
+
+This product is available in ONE SIZE.`;
+
+
+                alert(guide);
+
+                return false;
+
+            };
+
+    }
+
+
+    closeAll();
+
+
+    if (sizeSheet) {
+
+        sizeSheet.classList.add('active');
+
+        sizeSheet.setAttribute(
+            'aria-hidden',
+            'false'
+        );
+
+    }
+
+
+    if (overlay) {
+
+        overlay.classList.add('active');
+
+    }
+
+
+    document.body.classList.add(
+        'no-scroll'
+    );
+
 }
+
+
+/* =========================================================
+   SIZE SELECTION
+========================================================= */
 
 function selectSize(size) {
-  selectedSize = size;
 
-  document.querySelectorAll('.size-option').forEach(option => {
-    option.classList.toggle('selected', option.dataset.size === size);
-  });
+    selectedSize = size;
+
+
+    document
+        .querySelectorAll('.size-option')
+        .forEach(option => {
+
+            option.classList.toggle(
+                'selected',
+                option.dataset.size === size
+            );
+
+        });
+
 }
+
+
+/* =========================================================
+   CONFIRM SIZE + ADD TO CART
+========================================================= */
 
 function confirmSizeAndAddToCart() {
-  if (!pendingProduct) return;
 
-  if (!selectedSize) {
-    alert('Please select a size first.');
-    return;
-  }
-
-  const cartKey = `${pendingProduct.id}-${selectedSize}`;
-  const existingItem = cart.find(item => item.cartKey === cartKey);
-
-  if (existingItem) {
-    existingItem.qty += 1;
-  } else {
-    cart.push({
-      ...pendingProduct,
-      size: selectedSize,
-      cartKey: cartKey,
-      qty: 1
-    });
-  }
-
-  saveCartToStorage();
-  updateCartUI();
-
-  pendingProduct = null;
-  selectedSize = null;
-
-  closeSizeSheet();
-  openCart();
-}
-
-function closeSizeSheet() {
-  const sheet = document.getElementById('size-sheet');
-
-  if (sheet) {
-    sheet.classList.remove('active');
-    sheet.setAttribute('aria-hidden', 'true');
-  }
-
-  pendingProduct = null;
-  selectedSize = null;
-
-  document.querySelectorAll('.size-option').forEach(option => {
-    option.classList.remove('selected');
-  });
-}
-
-function getCartItemKey(item) {
-  if (!item.size) item.size = 'M';
-  if (!item.cartKey) item.cartKey = `${item.id}-${item.size}`;
-  return item.cartKey;
-}
-
-function updateQuantity(cartKey, change) {
-  const item = cart.find(item => getCartItemKey(item) === cartKey);
-
-  if (item) {
-    item.qty += change;
-
-    if (item.qty <= 0) {
-      removeFromCart(cartKey);
-      return;
-    }
-  }
-
-  saveCartToStorage();
-  updateCartUI();
-}
-
-function removeFromCart(cartKey) {
-  cart = cart.filter(item => getCartItemKey(item) !== cartKey);
-  saveCartToStorage();
-  updateCartUI();
-}
-
-function updateCartUI() {
-  const cartContainer = document.getElementById('cart-items-container');
-  const cartCountBadge = document.getElementById('cart-count');
-  const subtotalEl = document.getElementById('cart-subtotal');
-
-  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-  cartCountBadge.textContent = totalItems;
-
-  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-  subtotalEl.textContent = `$${subtotal.toLocaleString()}`;
-
-  if (cart.length === 0) {
-    cartContainer.innerHTML = `<div class="empty-cart-msg">Your shopping bag is empty.</div>`;
-    return;
-  }
-
-  cartContainer.innerHTML = '';
-  cart.forEach(item => {
-    const itemHTML = `
-      <div class="cart-item">
-        <a href="${item.url}" target="_blank">
-          <img src="${item.image}" alt="${item.name}">
-        </a>
-        <div class="cart-item-details">
-          <div class="cart-item-title"><a href="${item.url}" target="_blank">${item.name}</a></div>
-          <div class="cart-item-price">$${item.price}</div>
-          <div style="font-size:11px; color:var(--text-muted); margin-top:4px; letter-spacing:1px;">
-            SIZE: ${item.size || 'M'}
-          </div>
-          <div class="cart-qty-controls">
-            <button class="qty-btn" onclick="updateQuantity('${getCartItemKey(item)}', -1)">-</button>
-            <span style="font-size:12px; font-weight:600;">${item.qty}</span>
-            <button class="qty-btn" onclick="updateQuantity('${getCartItemKey(item)}', 1)">+</button>
-          </div>
-        </div>
-        <i class="fas fa-trash cart-item-remove" onclick="removeFromCart('${getCartItemKey(item)}')"></i>
-      </div>
-    `;
-    cartContainer.insertAdjacentHTML('beforeend', itemHTML);
-  });
-}
-
-/* ===== 4. DRAWER & MODAL UI CONTROLS ===== */
-const overlay = document.getElementById('overlay');
-const navDrawer = document.getElementById('nav-drawer');
-const cartDrawer = document.getElementById('cart-drawer');
-const sizeSheet = document.getElementById('size-sheet');
-
-function openCart() {
-  closeAll();
-  cartDrawer.classList.add('active');
-  overlay.classList.add('active');
-  document.body.classList.add('no-scroll');
-  document.body.classList.add('cart-open');
-}
-
-function openDrawer() {
-  closeAll();
-  navDrawer.classList.add('active');
-  overlay.classList.add('active');
-  document.body.classList.add('no-scroll');
-}
-
-const underworldWrap = document.getElementById('underworld-wrap');
-const underworldToggle = document.getElementById('underworld-toggle');
-
-if (underworldWrap && underworldToggle) {
-  underworldToggle.addEventListener('click', () => {
-    const isOpen = underworldWrap.classList.toggle('open');
-    underworldToggle.setAttribute('aria-expanded', String(isOpen));
-  });
-}
-
-function closeAll() {
-  navDrawer.classList.remove('active');
-  cartDrawer.classList.remove('active');
-  closeSizeSheet();
-
-  if (underworldWrap && underworldToggle) {
-    underworldWrap.classList.remove('open');
-    underworldToggle.setAttribute('aria-expanded', 'false');
-  }
-
-  overlay.classList.remove('active');
-  document.body.classList.remove('no-scroll');
-  document.body.classList.remove('cart-open');
-}
-
-overlay.addEventListener('touchmove', function(e) {
-  e.preventDefault();
-}, { passive: false });
-
-document.getElementById('menu-btn').addEventListener('click', openDrawer);
-document.getElementById('close-drawer-btn').addEventListener('click', closeAll);
-document.getElementById('cart-icon-btn').addEventListener('click', openCart);
-
-// PROCEED TO CHECKOUT — only open cart.html when the cart has products
-const proceedCheckoutBtn = document.getElementById('proceed-checkout-btn');
-if (proceedCheckoutBtn) {
-  proceedCheckoutBtn.addEventListener('click', function () {
-    if (!cart || cart.length === 0) {
-      alert('Idiot your shopping bag is empty!');
-      return;
+    if (!pendingProduct) {
+        return;
     }
 
-    window.location.href = 'cart.html';
-  });
-}
 
-document.getElementById('close-cart-btn').addEventListener('click', closeAll);
+    if (!selectedSize) {
 
-document.getElementById('close-size-sheet').addEventListener('click', () => {
-  closeSizeSheet();
-  overlay.classList.remove('active');
-  document.body.classList.remove('no-scroll');
-});
+        alert(
+            'Please select a size first.'
+        );
 
-document.getElementById('confirm-size-btn').addEventListener('click', confirmSizeAndAddToCart);
+        return;
 
-overlay.addEventListener('click', closeAll);
-
-window.addEventListener("scroll", () => {
-  const header = document.getElementById("navbar");
-  if (window.scrollY > 50) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
-  }
-});
-
-/* ===== 5. EMAIL NEWSLETTER SUBSCRIPTION ===== */
-const NEWSLETTER_BACKEND_URL = "https://script.google.com/macros/s/AKfycbyHik2t4HnaeQsY9A992qOPdMHxjV0YeS-pcSnfisZYwJW5JJbH55RxhRHPHbGO2hztSA/exec";
-
-const newsletterForm = document.getElementById('newsletter-form');
-const newsletterEmail = document.getElementById('subscriber-email');
-const newsletterSubmit = document.getElementById('newsletter-submit-btn');
-const newsletterStatus = document.getElementById('newsletter-status');
-
-if (newsletterForm) {
-  newsletterForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const email = newsletterEmail.value.trim().toLowerCase();
-    if (!email) return;
-
-    newsletterSubmit.disabled = true;
-    newsletterSubmit.textContent = 'SAVING...';
-    newsletterStatus.textContent = '';
-    newsletterStatus.className = 'newsletter-status';
-
-    const payload = {
-      action: 'subscribe',
-      email: email,
-      source: 'Abdullah Psychotic Website',
-      subscribedAt: new Date().toISOString()
-    };
-
-    try {
-      await fetch(NEWSLETTER_BACKEND_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8'
-        },
-        body: JSON.stringify(payload)
-      });
-
-      newsletterStatus.textContent = 'YOU ARE NOW ON THE LIST.';
-      newsletterStatus.className = 'newsletter-status success';
-      newsletterForm.reset();
-    } catch (error) {
-      console.error('Newsletter subscription error:', error);
-      newsletterStatus.textContent = 'SOMETHING WENT WRONG. PLEASE TRY AGAIN.';
-      newsletterStatus.className = 'newsletter-status error';
-    } finally {
-      newsletterSubmit.disabled = false;
-      newsletterSubmit.textContent = 'SUBSCRIBE';
     }
-  });
-}
-renderProducts();
-updateCartUI();
 
-/* ===== Background Music Controller ===== */
 
-const bgMusic = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("music-btn");
-const musicIcon = musicBtn.querySelector("i");
+    const cartKey =
+        `${pendingProduct.id}-${selectedSize}`;
 
-// Set volume to 70%
-bgMusic.volume = 0.7;
 
-// Keep the music icon
-musicIcon.className = "fas fa-music";
+    const existingItem =
+        cart.find(
+            item =>
+                item.cartKey === cartKey
+        );
 
-// Restore previous state
-const savedState = localStorage.getItem("ap_music");
 
-if (savedState === "playing") {
-    document.addEventListener("click", function firstPlay() {
-      bgMusic.volume = 0.7;
-bgMusic.play().catch(() => {});
+    if (existingItem) {
 
-        musicBtn.classList.add("playing");
-        document.removeEventListener("click", firstPlay);
-    }, { once: true });
-}
-
-musicBtn.addEventListener("click", () => {
-
-    if (bgMusic.paused) {
-bgMusic.volume = 0.7;
-        bgMusic.play().catch(() => {});
-        musicBtn.classList.add("playing");
-        localStorage.setItem("ap_music", "playing");
+        existingItem.qty += 1;
 
     } else {
 
-        bgMusic.pause();
-        musicBtn.classList.remove("playing");
-        localStorage.setItem("ap_music", "paused");
+        cart.push({
+
+            ...pendingProduct,
+
+            size: selectedSize,
+
+            cartKey: cartKey,
+
+            qty: 1
+
+        });
 
     }
 
-    // Always keep the music icon
-    musicIcon.className = "fas fa-music";
 
-});
+    saveCartToStorage();
 
-document.addEventListener('DOMContentLoaded', () => {
+    updateCartUI();
 
-    const menuBtn = document.getElementById('menu-btn');
-    const navDrawer = document.getElementById('nav-drawer');
-    const closeDrawerBtn = document.getElementById('close-drawer-btn');
-    const overlay = document.getElementById('overlay');
 
-    function openMenu() {
-        navDrawer.classList.add('active');
-        overlay.classList.add('active');
-        document.body.classList.add('no-scroll');
+    pendingProduct = null;
+    selectedSize = null;
+
+
+    closeSizeSheet();
+
+    openCart();
+
+}
+
+
+/* =========================================================
+   CLOSE SIZE SHEET
+========================================================= */
+
+function closeSizeSheet() {
+
+    const sheet =
+        document.getElementById(
+            'size-sheet'
+        );
+
+
+    if (sheet) {
+
+        sheet.classList.remove(
+            'active'
+        );
+
+        sheet.setAttribute(
+            'aria-hidden',
+            'true'
+        );
+
     }
 
-    function closeMenu() {
-        navDrawer.classList.remove('active');
-        overlay.classList.remove('active');
-        document.body.classList.remove('no-scroll');
-        document.body.classList.remove('cart-open');
-        cartDrawer.classList.remove('active');
+
+    pendingProduct = null;
+
+    selectedSize = null;
+
+
+    document
+        .querySelectorAll('.size-option')
+        .forEach(option => {
+
+            option.classList.remove(
+                'selected'
+            );
+
+        });
+
+}
+
+
+/* =========================================================
+   CART KEY
+========================================================= */
+
+function getCartItemKey(item) {
+
+    if (!item.size) {
+        item.size = 'M';
     }
 
-    menuBtn.addEventListener('click', openMenu);
 
-    closeDrawerBtn.addEventListener('click', closeMenu);
+    if (!item.cartKey) {
 
-    overlay.addEventListener('click', closeMenu);
+        item.cartKey =
+            `${item.id}-${item.size}`;
 
-    window.closeAll = closeMenu;
+    }
 
-});
+
+    return item.cartKey;
+
+}
+
+
+/* =========================================================
+   UPDATE QUANTITY
+========================================================= */
+
+function updateQuantity(
+    cartKey,
+    change
+) {
+
+    const item =
+        cart.find(
+            item =>
+                getCartItemKey(item) === cartKey
+        );
+
+
+    if (item) {
+
+        item.qty += change;
+
+
+        if (item.qty <= 0) {
+
+            removeFromCart(cartKey);
+
+            return;
+
+        }
+
+    }
+
+
+    saveCartToStorage();
+
+    updateCartUI();
+
+}
+
+
+/* =========================================================
+   REMOVE CART ITEM
+========================================================= */
+
+function removeFromCart(cartKey) {
+
+    cart =
+        cart.filter(
+            item =>
+                getCartItemKey(item) !== cartKey
+        );
+
+
+    saveCartToStorage();
+
+    updateCartUI();
+
+}
+
+
+/* =========================================================
+   UPDATE CART UI
+========================================================= */
+
+function updateCartUI() {
+
+    const cartContainer =
+        document.getElementById(
+            'cart-items-container'
+        );
+
+
+    const cartCountBadge =
+        document.getElementById(
+            'cart-count'
+        );
+
+
+    const subtotalEl =
+        document.getElementById(
+            'cart-subtotal'
+        );
+
+
+    if (!cartContainer) {
+        return;
+    }
+
+
+    const totalItems =
+        cart.reduce(
+            (sum, item) =>
+                sum + item.qty,
+            0
+        );
+
+
+    if (cartCountBadge) {
+
+        cartCountBadge.textContent =
+            totalItems;
+
+    }
+
+
+    const subtotal =
+        cart.reduce(
+            (sum, item) =>
+                sum +
+                (item.price * item.qty),
+            0
+        );
+
+
+    if (subtotalEl) {
+
+        subtotalEl.textContent =
+            `$${subtotal.toLocaleString()}`;
+
+    }
+
+
+    if (cart.length === 0) {
+
+        cartContainer.innerHTML = `
+            <div class="empty-cart-msg">
+                Your shopping bag is empty.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    cartContainer.innerHTML = '';
+
+
+    cart.forEach(item => {
+
+        const key =
+            getCartItemKey(item);
+
+
+        const itemHTML = `
+
+            <div class="cart-item">
+
+                <a
+                    href="${item.url}"
+                    target="_blank"
+                >
+                    <img
+                        src="${item.image}"
+                        alt="${item.name}"
+                    >
+                </a>
+
+
+                <div class="cart-item-details">
+
+                    <div class="cart-item-title">
+
+                        <a
+                            href="${item.url}"
+                            target="_blank"
+                        >
+                            ${item.name}
+                        </a>
+
+                    </div>
+
+
+                    <div class="cart-item-price">
+                        $${item.price}
+                    </div>
+
+
+                    <div
+                        style="
+                            font-size:11px;
+                            color:var(--text-muted);
+                            margin-top:4px;
+                            letter-spacing:1px;
+                        "
+                    >
+                        SIZE: ${item.size || 'M'}
+                    </div>
+
+
+                    <div class="cart-qty-controls">
+
+                        <button
+                            class="qty-btn"
+                            onclick="updateQuantity('${key}', -1)"
+                        >
+                            -
+                        </button>
+
+
+                        <span
+                            style="
+                                font-size:12px;
+                                font-weight:600;
+                            "
+                        >
+                            ${item.qty}
+                        </span>
+
+
+                        <button
+                            class="qty-btn"
+                            onclick="updateQuantity('${key}', 1)"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <i
+                    class="fas fa-trash cart-item-remove"
+                    onclick="removeFromCart('${key}')"
+                ></i>
+
+            </div>
+
+        `;
+
+
+        cartContainer.insertAdjacentHTML(
+            'beforeend',
+            itemHTML
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   4. DRAWER / MODAL CONTROLS
+========================================================= */
+
+const overlay =
+    document.getElementById('overlay');
+
+const navDrawer =
+    document.getElementById('nav-drawer');
+
+const cartDrawer =
+    document.getElementById('cart-drawer');
+
+const sizeSheet =
+    document.getElementById('size-sheet');
+
+
+/* =========================================================
+   OPEN CART
+========================================================= */
+
+function openCart() {
+
+    closeAll();
+
+
+    if (cartDrawer) {
+
+        cartDrawer.classList.add(
+            'active'
+        );
+
+    }
+
+
+    if (overlay) {
+
+        overlay.classList.add(
+            'active'
+        );
+
+    }
+
+
+    document.body.classList.add(
+        'no-scroll'
+    );
+
+
+    document.body.classList.add(
+        'cart-open'
+    );
+
+}
+
+
+/* =========================================================
+   OPEN NAVIGATION DRAWER
+========================================================= */
+
+function openDrawer() {
+
+    closeAll();
+
+
+    if (navDrawer) {
+
+        navDrawer.classList.add(
+            'active'
+        );
+
+    }
+
+
+    if (overlay) {
+
+        overlay.classList.add(
+            'active'
+        );
+
+    }
+
+
+    document.body.classList.add(
+        'no-scroll'
+    );
+
+}
+
+
+/* =========================================================
+   UNDERWORLD MENU
+========================================================= */
+
+const underworldWrap =
+    document.getElementById(
+        'underworld-wrap'
+    );
+
+
+const underworldToggle =
+    document.getElementById(
+        'underworld-toggle'
+    );
+
+
+if (
+    underworldWrap &&
+    underworldToggle
+) {
+
+    underworldToggle.addEventListener(
+        'click',
+        () => {
+
+            const isOpen =
+                underworldWrap.classList.toggle(
+                    'open'
+                );
+
+
+            underworldToggle.setAttribute(
+                'aria-expanded',
+                String(isOpen)
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE EVERYTHING
+========================================================= */
+
+function closeAll() {
+
+    if (navDrawer) {
+
+        navDrawer.classList.remove(
+            'active'
+        );
+
+    }
+
+
+    if (cartDrawer) {
+
+        cartDrawer.classList.remove(
+            'active'
+        );
+
+    }
+
+
+    closeSizeSheet();
+
+
+    if (
+        underworldWrap &&
+        underworldToggle
+    ) {
+
+        underworldWrap.classList.remove(
+            'open'
+        );
+
+
+        underworldToggle.setAttribute(
+            'aria-expanded',
+            'false'
+        );
+
+    }
+
+
+    if (overlay) {
+
+        overlay.classList.remove(
+            'active'
+        );
+
+    }
+
+
+    document.body.classList.remove(
+        'no-scroll'
+    );
+
+
+    document.body.classList.remove(
+        'cart-open'
+    );
+
+}
+
+
+/* =========================================================
+   OVERLAY TOUCH CONTROL
+========================================================= */
+
+if (overlay) {
+
+    overlay.addEventListener(
+        'touchmove',
+        function(event) {
+
+            event.preventDefault();
+
+        },
+        { passive: false }
+    );
+
+}
+
+
+/* =========================================================
+   NAV / CART BUTTON EVENTS
+========================================================= */
+
+const menuBtn =
+    document.getElementById('menu-btn');
+
+const closeDrawerBtn =
+    document.getElementById(
+        'close-drawer-btn'
+    );
+
+const cartIconBtn =
+    document.getElementById(
+        'cart-icon-btn'
+    );
+
+const closeCartBtn =
+    document.getElementById(
+        'close-cart-btn'
+    );
+
+
+if (menuBtn) {
+
+    menuBtn.addEventListener(
+        'click',
+        openDrawer
+    );
+
+}
+
+
+if (closeDrawerBtn) {
+
+    closeDrawerBtn.addEventListener(
+        'click',
+        closeAll
+    );
+
+}
+
+
+if (cartIconBtn) {
+
+    cartIconBtn.addEventListener(
+        'click',
+        openCart
+    );
+
+}
+
+
+if (closeCartBtn) {
+
+    closeCartBtn.addEventListener(
+        'click',
+        closeAll
+    );
+
+}
+
+
+if (overlay) {
+
+    overlay.addEventListener(
+        'click',
+        closeAll
+    );
+
+}
+
+
+/* =========================================================
+   CHECKOUT BUTTON
+========================================================= */
+
+const proceedCheckoutBtn =
+    document.getElementById(
+        'proceed-checkout-btn'
+    );
+
+
+if (proceedCheckoutBtn) {
+
+    proceedCheckoutBtn.addEventListener(
+        'click',
+        function() {
+
+            if (
+                !cart ||
+                cart.length === 0
+            ) {
+
+                alert(
+                    'Your shopping bag is empty!'
+                );
+
+                return;
+
+            }
+
+
+            window.location.href =
+                'cart.html';
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SIZE SHEET BUTTONS
+========================================================= */
+
+const closeSizeSheetBtn =
+    document.getElementById(
+        'close-size-sheet'
+    );
+
+
+if (closeSizeSheetBtn) {
+
+    closeSizeSheetBtn.addEventListener(
+        'click',
+        () => {
+
+            closeSizeSheet();
+
+            if (overlay) {
+
+                overlay.classList.remove(
+                    'active'
+                );
+
+            }
+
+            document.body.classList.remove(
+                'no-scroll'
+            );
+
+        }
+    );
+
+}
+
+
+const confirmSizeBtn =
+    document.getElementById(
+        'confirm-size-btn'
+    );
+
+
+if (confirmSizeBtn) {
+
+    confirmSizeBtn.addEventListener(
+        'click',
+        confirmSizeAndAddToCart
+    );
+
+}
+
+
+/* =========================================================
+   HEADER SCROLL EFFECT
+========================================================= */
+
+window.addEventListener(
+    'scroll',
+    () => {
+
+        const header =
+            document.getElementById(
+                'navbar'
+            );
+
+
+        if (!header) {
+            return;
+        }
+
+
+        if (window.scrollY > 50) {
+
+            header.classList.add(
+                'scrolled'
+            );
+
+        } else {
+
+            header.classList.remove(
+                'scrolled'
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   5. NEWSLETTER SUBSCRIPTION SYSTEM
+   ---------------------------------------------------------
+   SUBSCRIBE:
+       ACTIVE
+
+   UNSUBSCRIBE:
+       UNSUBSCRIBED
+
+   Browser remembers subscription state using localStorage.
+========================================================= */
+
+
+/* =========================================================
+   GOOGLE APPS SCRIPT WEB APP URL
+========================================================= */
+
+const NEWSLETTER_BACKEND_URL =
+    'https://script.google.com/macros/s/AKfycbyHik2t4HnaeQsY9A992qOPdMHxjV0YeS-pcSnfisZYwJW5JJbH55RxhRHPHbGO2hztSA/exec';
+
+
+/* =========================================================
+   NEWSLETTER ELEMENTS
+========================================================= */
+
+const newsletterForm =
+    document.getElementById(
+        'newsletter-form'
+    );
+
+
+const newsletterEmail =
+    document.getElementById(
+        'subscriber-email'
+    );
+
+
+const newsletterSubmit =
+    document.getElementById(
+        'newsletter-submit-btn'
+    );
+
+
+const newsletterStatus =
+    document.getElementById(
+        'newsletter-status'
+    );
+
+
+/* =========================================================
+   LOCAL STORAGE KEYS
+========================================================= */
+
+const NEWSLETTER_EMAIL_KEY =
+    'ap_newsletter_email';
+
+
+const NEWSLETTER_STATUS_KEY =
+    'ap_newsletter_status';
+
+
+/* =========================================================
+   EMAIL VALIDATION
+========================================================= */
+
+function isNewsletterEmailValid(email) {
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        .test(email);
+
+}
+
+
+/* =========================================================
+   GET SAVED SUBSCRIBER
+========================================================= */
+
+function getSavedNewsletterEmail() {
+
+    return (
+        localStorage.getItem(
+            NEWSLETTER_EMAIL_KEY
+        ) || ''
+    );
+
+}
+
+
+function getNewsletterStatus() {
+
+    return (
+        localStorage.getItem(
+            NEWSLETTER_STATUS_KEY
+        ) || ''
+    );
+
+}
+
+
+/* =========================================================
+   SAVE SUBSCRIBER
+========================================================= */
+
+function saveNewsletterSubscriber(email) {
+
+    localStorage.setItem(
+        NEWSLETTER_EMAIL_KEY,
+        email
+    );
+
+
+    localStorage.setItem(
+        NEWSLETTER_STATUS_KEY,
+        'ACTIVE'
+    );
+
+}
+
+
+/* =========================================================
+   REMOVE LOCAL SUBSCRIBER STATE
+========================================================= */
+
+function clearNewsletterSubscriber() {
+
+    localStorage.removeItem(
+        NEWSLETTER_EMAIL_KEY
+    );
+
+
+    localStorage.removeItem(
+        NEWSLETTER_STATUS_KEY
+    );
+
+}
+
+
+/* =========================================================
+   UPDATE SUBSCRIBE BUTTON
+========================================================= */
+
+function updateNewsletterButton() {
+
+    if (!newsletterSubmit) {
+        return;
+    }
+
+
+    const status =
+        getNewsletterStatus();
+
+
+    if (status === 'ACTIVE') {
+
+        newsletterSubmit.textContent =
+            'UNSUBSCRIBE';
+
+
+        newsletterSubmit.classList.add(
+            'subscribed'
+        );
+
+
+        newsletterSubmit.setAttribute(
+            'aria-label',
+            'Unsubscribe from newsletter'
+        );
+
+
+        if (newsletterEmail) {
+
+            const savedEmail =
+                getSavedNewsletterEmail();
+
+
+            if (savedEmail) {
+
+                newsletterEmail.value =
+                    savedEmail;
+
+            }
+
+        }
+
+    } else {
+
+        newsletterSubmit.textContent =
+            'SUBSCRIBE';
+
+
+        newsletterSubmit.classList.remove(
+            'subscribed'
+        );
+
+
+        newsletterSubmit.setAttribute(
+            'aria-label',
+            'Subscribe to newsletter'
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SHOW NEWSLETTER STATUS
+========================================================= */
+
+function showNewsletterStatus(
+    message,
+    type = ''
+) {
+
+    if (!newsletterStatus) {
+        return;
+    }
+
+
+    newsletterStatus.textContent =
+        message;
+
+
+    newsletterStatus.className =
+        'newsletter-status';
+
+
+    if (type) {
+
+        newsletterStatus.classList.add(
+            type
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SEND NEWSLETTER REQUEST
+========================================================= */
+
+async function sendNewsletterRequest(
+    payload
+) {
+
+    /*
+       Google Apps Script accepts the request
+       through the Web App URL.
+
+       no-cors is used because the website
+       and Apps Script are different origins.
+    */
+
+    await fetch(
+        NEWSLETTER_BACKEND_URL,
+        {
+            method: 'POST',
+
+            mode: 'no-cors',
+
+            headers: {
+                'Content-Type':
+                    'text/plain;charset=utf-8'
+            },
+
+            body:
+                JSON.stringify(payload)
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SUBSCRIBE
+========================================================= */
+
+async function subscribeNewsletter(email) {
+
+    const payload = {
+
+        action: 'subscribe',
+
+        email: email,
+
+        source:
+            'Abdullah Psychotic Website',
+
+        subscribedAt:
+            new Date().toISOString()
+
+    };
+
+
+    await sendNewsletterRequest(
+        payload
+    );
+
+
+    /*
+       Save locally after successful
+       request submission.
+    */
+
+    saveNewsletterSubscriber(email);
+
+
+    updateNewsletterButton();
+
+
+    showNewsletterStatus(
+        'YOU ARE NOW ON THE LIST.',
+        'success'
+    );
+
+}
+
+
+/* =========================================================
+   UNSUBSCRIBE
+========================================================= */
+
+async function unsubscribeNewsletter(email) {
+
+    const payload = {
+
+        action: 'unsubscribe',
+
+        email: email,
+
+        source:
+            'Abdullah Psychotic Website',
+
+        unsubscribedAt:
+            new Date().toISOString()
+
+    };
+
+
+    await sendNewsletterRequest(
+        payload
+    );
+
+
+    /*
+       Remove local state after request
+       has been sent.
+    */
+
+    clearNewsletterSubscriber();
+
+
+    updateNewsletterButton();
+
+
+    showNewsletterStatus(
+        'YOU HAVE BEEN UNSUBSCRIBED.',
+        'success'
+    );
+
+}
+
+
+/* =========================================================
+   NEWSLETTER FORM
+========================================================= */
+
+if (newsletterForm) {
+
+    newsletterForm.addEventListener(
+        'submit',
+        async function(event) {
+
+            event.preventDefault();
+
+
+            /*
+               Determine current state.
+            */
+
+            const currentStatus =
+                getNewsletterStatus();
+
+
+            let email =
+                newsletterEmail
+                    ? newsletterEmail.value
+                        .trim()
+                        .toLowerCase()
+                    : '';
+
+
+            /*
+               If already subscribed,
+               use saved email if available.
+            */
+
+            if (
+                currentStatus === 'ACTIVE' &&
+                !email
+            ) {
+
+                email =
+                    getSavedNewsletterEmail();
+
+            }
+
+
+            /*
+               Validate email.
+            */
+
+            if (
+                !email ||
+                !isNewsletterEmailValid(email)
+            ) {
+
+                showNewsletterStatus(
+                    'PLEASE ENTER A VALID EMAIL ADDRESS.',
+                    'error'
+                );
+
+                return;
+
+            }
+
+
+            /*
+               Prevent double clicking.
+            */
+
+            if (newsletterSubmit) {
+
+                newsletterSubmit.disabled =
+                    true;
+
+            }
+
+
+            try {
+
+                /* =================================================
+                   UNSUBSCRIBE
+                ================================================= */
+
+                if (
+                    currentStatus === 'ACTIVE'
+                ) {
+
+                    if (newsletterSubmit) {
+
+                        newsletterSubmit.textContent =
+                            'REMOVING...';
+
+                    }
+
+
+                    await unsubscribeNewsletter(
+                        email
+                    );
+
+
+                    if (newsletterForm) {
+                        newsletterForm.reset();
+                    }
+
+
+                    return;
+
+                }
+
+
+                /* =================================================
+                   SUBSCRIBE
+                ================================================= */
+
+                if (newsletterSubmit) {
+
+                    newsletterSubmit.textContent =
+                        'SAVING...';
+
+                }
+
+
+                await subscribeNewsletter(
+                    email
+                );
+
+
+                /*
+                   Keep the email visible so the
+                   user knows which account/email
+                   is currently subscribed.
+                */
+
+                if (newsletterEmail) {
+
+                    newsletterEmail.value =
+                        email;
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    'Newsletter error:',
+                    error
+                );
+
+
+                showNewsletterStatus(
+                    'SOMETHING WENT WRONG. PLEASE TRY AGAIN.',
+                    'error'
+                );
+
+            } finally {
+
+                if (newsletterSubmit) {
+
+                    newsletterSubmit.disabled =
+                        false;
+
+                }
+
+
+                updateNewsletterButton();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RESTORE NEWSLETTER STATE ON PAGE LOAD
+========================================================= */
+
+updateNewsletterButton();
+
+
+/* =========================================================
+   6. INITIALIZE PRODUCTS + CART
+========================================================= */
+
+renderProducts();
+
+updateCartUI();
+
+
+/* =========================================================
+   7. BACKGROUND MUSIC CONTROLLER
+========================================================= */
+
+const bgMusic =
+    document.getElementById(
+        'bgMusic'
+    );
+
+
+const musicBtn =
+    document.getElementById(
+        'music-btn'
+    );
+
+
+const musicIcon =
+    musicBtn
+        ? musicBtn.querySelector('i')
+        : null;
+
+
+/* Stop here if music elements don't exist */
+
+if (
+    bgMusic &&
+    musicBtn &&
+    musicIcon
+) {
+
+    /* Volume */
+
+    bgMusic.volume = 0.7;
+
+
+    /* Keep music icon */
+
+    musicIcon.className =
+        'fas fa-music';
+
+
+    /* Restore previous music state */
+
+    const savedState =
+        localStorage.getItem(
+            'ap_music'
+        );
+
+
+    if (
+        savedState === 'playing'
+    ) {
+
+        document.addEventListener(
+            'click',
+            function firstPlay() {
+
+                bgMusic.volume = 0.7;
+
+                bgMusic
+                    .play()
+                    .catch(() => {});
+
+
+                musicBtn.classList.add(
+                    'playing'
+                );
+
+
+                document.removeEventListener(
+                    'click',
+                    firstPlay
+                );
+
+            },
+            { once: true }
+        );
+
+    }
+
+
+    /* Music button */
+
+    musicBtn.addEventListener(
+        'click',
+        () => {
+
+            if (bgMusic.paused) {
+
+                bgMusic.volume = 0.7;
+
+
+                bgMusic
+                    .play()
+                    .catch(() => {});
+
+
+                musicBtn.classList.add(
+                    'playing'
+                );
+
+
+                localStorage.setItem(
+                    'ap_music',
+                    'playing'
+                );
+
+            } else {
+
+                bgMusic.pause();
+
+
+                musicBtn.classList.remove(
+                    'playing'
+                );
+
+
+                localStorage.setItem(
+                    'ap_music',
+                    'paused'
+                );
+
+            }
+
+
+            /* Always keep music icon */
+
+            musicIcon.className =
+                'fas fa-music';
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   8. FINAL MENU SAFETY INITIALIZATION
+========================================================= */
+
+document.addEventListener(
+    'DOMContentLoaded',
+    () => {
+
+        const menuBtn =
+            document.getElementById(
+                'menu-btn'
+            );
+
+
+        const navDrawer =
+            document.getElementById(
+                'nav-drawer'
+            );
+
+
+        const closeDrawerBtn =
+            document.getElementById(
+                'close-drawer-btn'
+            );
+
+
+        const overlayElement =
+            document.getElementById(
+                'overlay'
+            );
+
+
+        /*
+           These elements may already have
+           listeners above. We only add
+           fallback listeners when required.
+        */
+
+
+        if (
+            menuBtn &&
+            navDrawer &&
+            overlayElement
+        ) {
+
+            /* Nothing else required here.
+               Main drawer system is already
+               initialized above. */
+
+        }
+
+
+        if (closeDrawerBtn) {
+
+            /*
+               Existing main listener handles
+               the close action.
+            */
+
+        }
+
+    }
+);
 
 </script>
 
