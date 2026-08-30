@@ -5645,7 +5645,12 @@ a{
   </div>
 </footer>
 
+
+
+
+
 <script>
+
 /* =========================================================
    ABDULLAH PSYCHOTIC — MAIN WEBSITE JAVASCRIPT
    ---------------------------------------------------------
@@ -5681,7 +5686,6 @@ window.addEventListener('DOMContentLoaded', () => {
     if (window.matchMedia('(min-width: 1024px)').matches) {
 
         welcomeScreen.remove();
-
         document.body.classList.remove('no-scroll');
 
         if (heroContent) {
@@ -5692,7 +5696,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     document.body.classList.add('no-scroll');
-
 
     /* Prevent scrolling while welcome screen is active */
 
@@ -5710,17 +5713,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
     });
 
-
     /* Check if welcome screen was already seen */
 
     const hasSeenWelcome =
         sessionStorage.getItem('hasSeenWelcome');
 
-
     if (hasSeenWelcome) {
 
         welcomeScreen.style.display = 'none';
-
         document.body.classList.remove('no-scroll');
 
         if (heroContent) {
@@ -5730,13 +5730,10 @@ window.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-
     /* Typing animation */
 
     const text = 'Abdullah Psychotic';
-
     let index = 0;
-
 
     /* Typing sound */
 
@@ -5745,7 +5742,6 @@ window.addEventListener('DOMContentLoaded', () => {
     typingSound.preload = 'auto';
     typingSound.loop = true;
     typingSound.volume = 1.0;
-
 
     function startTypingSound() {
 
@@ -5769,14 +5765,12 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
     function stopTypingSound() {
 
         typingSound.pause();
         typingSound.currentTime = 0;
 
     }
-
 
     function typeText() {
 
@@ -5787,7 +5781,6 @@ window.addEventListener('DOMContentLoaded', () => {
             }
 
             typingText.textContent += text.charAt(index);
-
             index++;
 
             setTimeout(typeText, 150);
@@ -5805,7 +5798,6 @@ window.addEventListener('DOMContentLoaded', () => {
                     'true'
                 );
 
-
                 setTimeout(() => {
 
                     welcomeScreen.style.display = 'none';
@@ -5813,7 +5805,6 @@ window.addEventListener('DOMContentLoaded', () => {
                     document.body.classList.remove(
                         'no-scroll'
                     );
-
 
                     setTimeout(() => {
 
@@ -5832,8 +5823,8 @@ window.addEventListener('DOMContentLoaded', () => {
             }, 1500);
 
         }
-    }
 
+    }
 
     typeText();
 
@@ -5843,7 +5834,6 @@ window.addEventListener('DOMContentLoaded', () => {
 /* =========================================================
    1. PRODUCT DATA & GLOBAL STATE
 ========================================================= */
-
 
 /* Load saved cart */
 
@@ -6288,14 +6278,12 @@ function createCardHTML(product) {
             ? 'card-badge luxury-badge'
             : 'card-badge';
 
-
     const badgeHTML =
         product.badge
             ? `<span class="${badgeClass}">
                     ${product.badge}
                </span>`
             : '';
-
 
     return `
         <div class="${cardClass}" data-id="${product.id}">
@@ -6305,6 +6293,7 @@ function createCardHTML(product) {
                 target="_blank"
                 class="card-img-wrapper"
             >
+
                 ${badgeHTML}
 
                 <img
@@ -6312,18 +6301,21 @@ function createCardHTML(product) {
                     alt="${product.name}"
                     loading="lazy"
                 >
+
             </a>
 
 
             <div class="card-content">
 
                 <h3>
+
                     <a
                         href="${product.url}"
                         target="_blank"
                     >
                         ${product.name}
                     </a>
+
                 </h3>
 
 
@@ -6367,6 +6359,7 @@ function createCardHTML(product) {
 
         </div>
     `;
+
 }
 
 
@@ -6452,7 +6445,9 @@ function getOptions(product) {
     ) {
 
         return {
+
             label: 'Size',
+
             values: [
                 'S',
                 'M',
@@ -6460,6 +6455,7 @@ function getOptions(product) {
                 'XL',
                 'XXL'
             ]
+
         };
 
     }
@@ -6468,7 +6464,9 @@ function getOptions(product) {
     if (product.category === 'footwear') {
 
         return {
+
             label: 'Size',
+
             values: [
                 '39',
                 '40',
@@ -6478,14 +6476,20 @@ function getOptions(product) {
                 '44',
                 '45'
             ]
+
         };
 
     }
 
 
     return {
+
         label: 'Size',
-        values: ['ONE SIZE']
+
+        values: [
+            'ONE SIZE'
+        ]
+
     };
 
 }
@@ -6603,6 +6607,7 @@ function addToCart(productId) {
         sizeOptions.innerHTML =
             options.values
                 .map(value => `
+
                     <button
                         type="button"
                         class="size-option"
@@ -6610,6 +6615,7 @@ function addToCart(productId) {
                     >
                         ${value}
                     </button>
+
                 `)
                 .join('');
 
@@ -6639,6 +6645,7 @@ function addToCart(productId) {
 
 
                 const guide =
+
                     product.category === 'footwear'
 
                     ?
@@ -6652,8 +6659,11 @@ Please choose your usual shoe size.`
                     :
 
                     (
+
                         product.category === 'apparel' ||
+
                         product.category === 'hoodies'
+
                     )
 
                     ?
@@ -6661,9 +6671,13 @@ Please choose your usual shoe size.`
                     `SIZE GUIDE
 
 S — Small
+
 M — Medium
+
 L — Large
+
 XL — Extra Large
+
 XXL — Extra Extra Large
 
 Please choose your usual size.`
@@ -6754,7 +6768,6 @@ function confirmSizeAndAddToCart() {
         );
 
         return;
-
     }
 
 
@@ -6791,7 +6804,6 @@ function confirmSizeAndAddToCart() {
 
 
     saveCartToStorage();
-
     updateCartUI();
 
 
@@ -6800,7 +6812,6 @@ function confirmSizeAndAddToCart() {
 
 
     closeSizeSheet();
-
     openCart();
 
 }
@@ -6833,7 +6844,6 @@ function closeSizeSheet() {
 
 
     pendingProduct = null;
-
     selectedSize = null;
 
 
@@ -6907,7 +6917,6 @@ function updateQuantity(
 
 
     saveCartToStorage();
-
     updateCartUI();
 
 }
@@ -6927,7 +6936,6 @@ function removeFromCart(cartKey) {
 
 
     saveCartToStorage();
-
     updateCartUI();
 
 }
@@ -6998,9 +7006,11 @@ function updateCartUI() {
     if (cart.length === 0) {
 
         cartContainer.innerHTML = `
+
             <div class="empty-cart-msg">
                 Your shopping bag is empty.
             </div>
+
         `;
 
         return;
@@ -7025,10 +7035,12 @@ function updateCartUI() {
                     href="${item.url}"
                     target="_blank"
                 >
+
                     <img
                         src="${item.image}"
                         alt="${item.name}"
                     >
+
                 </a>
 
 
@@ -7462,6 +7474,7 @@ if (closeSizeSheetBtn) {
 
             closeSizeSheet();
 
+
             if (overlay) {
 
                 overlay.classList.remove(
@@ -7469,6 +7482,7 @@ if (closeSizeSheetBtn) {
                 );
 
             }
+
 
             document.body.classList.remove(
                 'no-scroll'
@@ -7542,7 +7556,8 @@ window.addEventListener(
    UNSUBSCRIBE:
        UNSUBSCRIBED
 
-   Browser remembers subscription state using localStorage.
+   Browser remembers subscription state
+   using localStorage.
 ========================================================= */
 
 
@@ -7680,44 +7695,60 @@ function updateNewsletterButton() {
         return;
     }
 
+
     const status =
         getNewsletterStatus();
+
 
     if (status === 'ACTIVE') {
 
         newsletterSubmit.textContent =
             'UNSUBSCRIBE';
 
+
         newsletterSubmit.classList.add(
             'subscribed'
         );
+
 
         newsletterSubmit.setAttribute(
             'aria-label',
             'Unsubscribe from newsletter'
         );
 
+
         if (newsletterEmail) {
 
             const savedEmail =
                 getSavedNewsletterEmail();
 
+
             if (savedEmail) {
+
                 newsletterEmail.value =
                     savedEmail;
+
             }
+
 
             /*
                IMPORTANT:
+
                A subscribed email is locked.
+
                The visitor must unsubscribe first
                before the email field can be edited.
             */
+
             newsletterEmail.readOnly = true;
+
+
             newsletterEmail.setAttribute(
                 'aria-readonly',
                 'true'
             );
+
+
             newsletterEmail.setAttribute(
                 'title',
                 'Unsubscribe first to change your email'
@@ -7725,28 +7756,38 @@ function updateNewsletterButton() {
 
         }
 
+
     } else {
 
         newsletterSubmit.textContent =
             'SUBSCRIBE';
 
+
         newsletterSubmit.classList.remove(
             'subscribed'
         );
+
 
         newsletterSubmit.setAttribute(
             'aria-label',
             'Subscribe to newsletter'
         );
 
+
         if (newsletterEmail) {
+
             newsletterEmail.readOnly = false;
+
+
             newsletterEmail.removeAttribute(
                 'aria-readonly'
             );
+
+
             newsletterEmail.removeAttribute(
                 'title'
             );
+
         }
 
     }
@@ -7789,36 +7830,75 @@ function showNewsletterStatus(
 
 /* =========================================================
    SEND NEWSLETTER REQUEST
+   ---------------------------------------------------------
+   IMPORTANT GOOGLE APPS SCRIPT SETUP
+
+   We intentionally use:
+
+       mode: 'no-cors'
+
+   Google Apps Script Web Apps can receive this POST
+   through doPost(e).
+
+   We use:
+
+       Content-Type: text/plain;charset=utf-8
+
+   so the browser does not create a normal JSON
+   preflight request.
+
+   redirect: 'follow' is important because Apps Script
+   Web Apps commonly redirect the /exec request.
 ========================================================= */
 
-async function sendNewsletterRequest(
-    payload
-) {
+async function sendNewsletterRequest(payload) {
 
-    /*
-       Google Apps Script accepts the request
-       through the Web App URL.
+    const response = await fetch(
 
-       no-cors is used because the website
-       and Apps Script are different origins.
-    */
-
-    await fetch(
         NEWSLETTER_BACKEND_URL,
+
         {
+
             method: 'POST',
 
             mode: 'no-cors',
 
+            redirect: 'follow',
+
+            cache: 'no-cache',
+
             headers: {
+
                 'Content-Type':
                     'text/plain;charset=utf-8'
+
             },
 
             body:
                 JSON.stringify(payload)
+
         }
+
     );
+
+
+    /*
+       With no-cors the response is opaque.
+
+       We intentionally do NOT use:
+
+           response.json()
+
+       or:
+
+           response.text()
+
+       because the browser does not expose
+       the cross-origin response body.
+    */
+
+
+    return true;
 
 }
 
@@ -7850,8 +7930,10 @@ async function subscribeNewsletter(email) {
 
 
     /*
-       Save locally after successful
-       request submission.
+       Request has been submitted to Apps Script.
+
+       Store local state so the website remembers
+       the subscribed email.
     */
 
     saveNewsletterSubscriber(email);
@@ -7895,8 +7977,7 @@ async function unsubscribeNewsletter(email) {
 
 
     /*
-       Remove local state after request
-       has been sent.
+       Remove local subscription state.
     */
 
     clearNewsletterSubscriber();
@@ -7936,9 +8017,11 @@ if (newsletterForm) {
 
             let email =
                 newsletterEmail
+
                     ? newsletterEmail.value
                         .trim()
                         .toLowerCase()
+
                     : '';
 
 
@@ -7991,9 +8074,9 @@ if (newsletterForm) {
 
             try {
 
-                /* =================================================
+                /* ============================================
                    UNSUBSCRIBE
-                ================================================= */
+                ============================================ */
 
                 if (
                     currentStatus === 'ACTIVE'
@@ -8013,7 +8096,9 @@ if (newsletterForm) {
 
 
                     if (newsletterForm) {
+
                         newsletterForm.reset();
+
                     }
 
 
@@ -8022,9 +8107,9 @@ if (newsletterForm) {
                 }
 
 
-                /* =================================================
+                /* ============================================
                    SUBSCRIBE
-                ================================================= */
+                ============================================ */
 
                 if (newsletterSubmit) {
 
@@ -8040,9 +8125,7 @@ if (newsletterForm) {
 
 
                 /*
-                   Keep the email visible so the
-                   user knows which account/email
-                   is currently subscribed.
+                   Keep email visible.
                 */
 
                 if (newsletterEmail) {
@@ -8051,6 +8134,7 @@ if (newsletterForm) {
                         email;
 
                 }
+
 
             } catch (error) {
 
@@ -8064,6 +8148,7 @@ if (newsletterForm) {
                     'SOMETHING WENT WRONG. PLEASE TRY AGAIN.',
                     'error'
                 );
+
 
             } finally {
 
@@ -8087,10 +8172,6 @@ if (newsletterForm) {
 
 /* =========================================================
    LOCK SUBSCRIBED EMAIL FIELD
-   ---------------------------------------------------------
-   The email input is readonly while subscribed.
-   It becomes editable only after the unsubscribe
-   request clears the subscription state.
 ========================================================= */
 
 if (newsletterEmail) {
@@ -8098,68 +8179,113 @@ if (newsletterEmail) {
     newsletterEmail.addEventListener(
         'beforeinput',
         function(event) {
-            if (getNewsletterStatus() === 'ACTIVE') {
+
+            if (
+                getNewsletterStatus() === 'ACTIVE'
+            ) {
+
                 event.preventDefault();
+
+
                 showNewsletterStatus(
                     'UNSUBSCRIBE FIRST TO CHANGE YOUR EMAIL.',
                     'error'
                 );
+
             }
+
         }
     );
+
 
     newsletterEmail.addEventListener(
         'keydown',
         function(event) {
-            if (getNewsletterStatus() === 'ACTIVE') {
+
+            if (
+                getNewsletterStatus() === 'ACTIVE'
+            ) {
+
                 event.preventDefault();
+
+
                 showNewsletterStatus(
                     'UNSUBSCRIBE FIRST TO CHANGE YOUR EMAIL.',
                     'error'
                 );
+
             }
+
         }
     );
+
 
     newsletterEmail.addEventListener(
         'paste',
         function(event) {
-            if (getNewsletterStatus() === 'ACTIVE') {
+
+            if (
+                getNewsletterStatus() === 'ACTIVE'
+            ) {
+
                 event.preventDefault();
+
+
                 showNewsletterStatus(
                     'UNSUBSCRIBE FIRST TO CHANGE YOUR EMAIL.',
                     'error'
                 );
+
             }
+
         }
     );
+
 
     newsletterEmail.addEventListener(
         'drop',
         function(event) {
-            if (getNewsletterStatus() === 'ACTIVE') {
+
+            if (
+                getNewsletterStatus() === 'ACTIVE'
+            ) {
+
                 event.preventDefault();
+
+
                 showNewsletterStatus(
                     'UNSUBSCRIBE FIRST TO CHANGE YOUR EMAIL.',
                     'error'
                 );
+
             }
+
         }
     );
+
 
     newsletterEmail.addEventListener(
         'input',
         function() {
-            if (getNewsletterStatus() === 'ACTIVE') {
+
+            if (
+                getNewsletterStatus() === 'ACTIVE'
+            ) {
+
                 const savedEmail =
                     getSavedNewsletterEmail();
 
+
                 newsletterEmail.value =
                     savedEmail;
+
             }
+
         }
     );
+
 }
+
 
 /* =========================================================
    RESTORE NEWSLETTER STATE ON PAGE LOAD
@@ -8173,7 +8299,6 @@ updateNewsletterButton();
 ========================================================= */
 
 renderProducts();
-
 updateCartUI();
 
 
@@ -8284,6 +8409,7 @@ if (
                     'playing'
                 );
 
+
             } else {
 
                 bgMusic.pause();
@@ -8346,9 +8472,11 @@ document.addEventListener(
 
 
         /*
-           These elements may already have
-           listeners above. We only add
-           fallback listeners when required.
+           Main drawer system is already
+           initialized above.
+
+           These references simply ensure
+           the elements exist.
         */
 
 
@@ -8358,19 +8486,14 @@ document.addEventListener(
             overlayElement
         ) {
 
-            /* Nothing else required here.
-               Main drawer system is already
-               initialized above. */
+            /* Main drawer system already active. */
 
         }
 
 
         if (closeDrawerBtn) {
 
-            /*
-               Existing main listener handles
-               the close action.
-            */
+            /* Main close listener already active. */
 
         }
 
