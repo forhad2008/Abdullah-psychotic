@@ -6698,7 +6698,25 @@ This product is available in ONE SIZE.`;
     }
 
 
-    closeAll();
+    /* Close only the existing drawers.
+       IMPORTANT: Do not call closeAll() here.
+       closeAll() calls closeSizeSheet(), which clears
+       pendingProduct and selectedSize before the option
+       window can confirm the product. */
+
+    if (navDrawer) {
+        navDrawer.classList.remove('active');
+    }
+
+    if (cartDrawer) {
+        cartDrawer.classList.remove('active');
+    }
+
+    if (overlay) {
+        overlay.classList.remove('active');
+    }
+
+    document.body.classList.remove('cart-open');
 
 
     if (sizeSheet) {
