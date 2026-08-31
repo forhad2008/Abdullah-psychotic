@@ -1261,51 +1261,93 @@ header{
 
 /* =========================================================
    DESKTOP / LAPTOP / LARGE DEVICES
-   Mobile styles below remain unchanged.
+   TRUE DESKTOP DESIGN — MOBILE HAS ITS OWN DESIGN
 ========================================================= */
 
-@media(min-width:769px){
+@media (min-width:769px){
 
   body{
     background:
-      radial-gradient(circle at 50% -15%, rgba(255,255,255,.055), transparent 34%),
+      radial-gradient(circle at 50% -30%,rgba(255,255,255,.055),transparent 38%),
       #050505;
   }
 
   /* HEADER */
-
   header{
-    height:92px;
-    grid-template-columns:100px 1fr 100px;
-    padding:0 34px;
+    height:96px;
+    padding:0 48px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 190px minmax(0,1fr);
+    align-items:center;
     background:rgba(5,5,5,.94);
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
-    border-bottom:1px solid rgba(255,255,255,.12);
+    border-bottom:1px solid rgba(255,255,255,.10);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
   }
 
-  .menu-btn,
-  .cart-btn{
-    width:48px;
-    height:48px;
+  .menu-btn{
+    display:none !important;
   }
 
-  .menu-btn svg{
-    width:28px;
-    height:21px;
+  .desktop-nav{
+    grid-column:1;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:30px;
   }
 
-  .cart-btn svg{
-    width:27px;
-    height:27px;
+  .desktop-nav a{
+    position:relative;
+    color:#a0a0a0;
+    font-family:var(--subheading);
+    font-size:9px;
+    font-weight:500;
+    letter-spacing:1.9px;
+    white-space:nowrap;
+    transition:color .25s ease;
+  }
+
+  .desktop-nav a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-10px;
+    width:0;
+    height:1px;
+    background:#fff;
+    transition:width .28s ease;
+  }
+
+  .desktop-nav a:hover{
+    color:#fff;
+  }
+
+  .desktop-nav a:hover::after{
+    width:100%;
   }
 
   .logo{
+    grid-column:2;
+    justify-self:center;
     width:190px;
   }
 
   .logo img{
-    width:155px;
+    width:150px;
+  }
+
+  .cart-btn{
+    grid-column:3;
+    justify-self:end;
+    width:46px;
+    height:46px;
+    margin:0;
+  }
+
+  .cart-btn svg{
+    width:26px;
+    height:26px;
   }
 
   .cart-count{
@@ -1316,233 +1358,241 @@ header{
     font-size:9px;
   }
 
-  /* MENU DRAWER */
-
+  #menu-overlay,
   .menu-drawer{
-    width:390px;
-    padding:34px;
+    display:none !important;
   }
 
-  .menu-links{
-    gap:8px;
-    padding-top:30px;
-  }
 
-  .menu-links a{
-    padding:17px 16px;
-    font-size:13px;
-    letter-spacing:2px;
-  }
-
-  /* PRODUCTS AREA */
-
+  /* EDITORIAL DESKTOP SHOP AREA */
   .products-page{
-    max-width:1540px;
-    padding:48px 38px 100px;
+    position:relative;
+    width:100%;
+    max-width:1920px;
+    margin:0 auto;
+    padding:0 42px 110px;
   }
 
+  .products-page::before{
+    content:"THE COLLECTION";
+    display:block;
+    padding:52px 0 9px;
+    font-family:var(--subheading);
+    font-size:9px;
+    letter-spacing:4px;
+    color:#777;
+  }
+
+  .products-page::after{
+    content:"ABDULLAH PSYCHOTIC  /  CURATED ESSENTIALS";
+    display:block;
+    padding-bottom:25px;
+    font-family:var(--body);
+    font-size:7px;
+    letter-spacing:2.4px;
+    color:#404040;
+  }
+
+
+  /*
+    PRODUCT SIZE LOCK
+    Desktop cards remain the same compact size as the 768px
+    reference: 364px card / 175px image / 105px info.
+  */
   .product-list{
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:24px;
+    display:grid;
+    grid-template-columns:repeat(3,364px);
+    justify-content:center;
+    align-items:start;
+    column-gap:28px;
+    row-gap:42px;
   }
-
-  /* PRODUCT CARD */
 
   .product-card{
-    background:
-      linear-gradient(145deg,#101010,#090909);
-    border:1px solid rgba(255,255,255,.095);
-    border-radius:2px;
-    box-shadow:0 10px 35px rgba(0,0,0,.28);
+    position:relative;
+    width:364px;
+    min-width:364px;
+    background:#0a0a0a;
+    border:1px solid rgba(255,255,255,.075);
+    overflow:hidden;
+    box-shadow:0 16px 45px rgba(0,0,0,.30);
+    transition:
+      transform .4s cubic-bezier(.2,.7,.2,1),
+      border-color .3s ease,
+      box-shadow .4s ease;
   }
 
   .product-card:hover{
-    transform:translateY(-7px);
-    border-color:rgba(255,255,255,.28);
+    transform:translateY(-9px);
+    border-color:rgba(255,255,255,.23);
     box-shadow:
-      0 22px 55px rgba(0,0,0,.62),
-      0 0 0 1px rgba(255,255,255,.035);
+      0 28px 65px rgba(0,0,0,.60),
+      0 0 0 1px rgba(255,255,255,.025);
   }
 
   .product-image{
-    height:330px;
+    height:175px;
     background:
-      radial-gradient(circle at 50% 42%, rgba(255,255,255,.045), transparent 58%),
+      radial-gradient(circle at 50% 42%,rgba(255,255,255,.045),transparent 63%),
       #080808;
+    border-bottom:1px solid rgba(255,255,255,.07);
   }
 
   .product-image img{
-    padding:12px;
+    padding:4px;
     transition:
       transform .55s cubic-bezier(.2,.7,.2,1),
       filter .35s ease;
   }
 
   .product-card:hover .product-image img{
-    transform:scale(1.065);
-    filter:
-      drop-shadow(0 18px 28px rgba(0,0,0,.78));
+    transform:scale(1.045);
+    filter:drop-shadow(0 16px 26px rgba(0,0,0,.78));
   }
-
-  /* PLUS BUTTON */
 
   .product-plus{
-    right:18px;
-    bottom:18px;
-    width:52px;
-    height:52px;
-    font-size:42px;
+    right:10px;
+    bottom:10px;
+    width:30px;
+    height:30px;
+    font-size:28px;
+    box-shadow:0 7px 20px rgba(0,0,0,.50);
   }
-
-  .product-plus:hover{
-    transform:scale(1.08);
-  }
-
-  /* PRODUCT INFORMATION */
 
   .product-info{
-    min-height:136px;
-    padding:19px 19px 20px;
+    min-height:105px;
+    padding:12px 12px 13px;
     background:#0b0b0b;
   }
 
   .product-badge{
-    font-size:8px;
-    letter-spacing:2.4px;
-    margin-bottom:9px;
-    color:#aaa;
+    font-size:6.5px;
+    letter-spacing:1.5px;
+    margin-bottom:6px;
   }
 
   .product-name{
-    font-size:15px;
-    line-height:1.45;
-    min-height:44px;
+    font-size:11px;
+    line-height:1.35;
+    min-height:30px;
+    padding-right:34px;
   }
 
   .product-price{
-    font-size:15px;
-    margin-top:13px;
-    letter-spacing:.3px;
+    font-size:14px;
+    margin-top:8px;
   }
 
-  /* CART DRAWER */
 
+  /* DESKTOP CART */
   .cart-drawer{
-    width:460px;
-    box-shadow:-25px 0 70px rgba(0,0,0,.72);
+    width:440px;
+    box-shadow:-30px 0 80px rgba(0,0,0,.78);
   }
 
   .cart-header{
-    min-height:86px;
-    padding:0 28px;
-  }
-
-  .cart-header h2{
-    font-size:16px;
-    letter-spacing:3px;
+    min-height:82px;
+    padding:0 26px;
   }
 
   .cart-items{
-    padding:22px 28px;
+    padding:20px 26px;
   }
 
   .cart-footer{
-    padding:22px 28px 28px;
+    padding:20px 26px 26px;
   }
 
   .checkout{
-    height:56px;
+    height:55px;
   }
 
-  /* OPTIONS MODAL */
 
+  /* DESKTOP OPTIONS MODAL */
   .options-window{
-    bottom:50%;
-    transform:translate(-50%,50%);
+    left:50%;
+    top:50%;
+    bottom:auto;
+    transform:translate(-50%,-46%) scale(.96);
     width:760px;
     max-height:86vh;
-    border-radius:20px;
-    box-shadow:0 30px 100px rgba(0,0,0,.75);
+    border-radius:18px;
+    box-shadow:0 40px 120px rgba(0,0,0,.82);
+    transition:transform .35s cubic-bezier(.2,.7,.2,1);
   }
 
-  .options-overlay.active
-  .options-window{
-    transform:translate(-50%,50%);
+  .options-overlay.active .options-window{
+    transform:translate(-50%,-50%) scale(1);
   }
 
   .options-header{
-    height:84px;
-    padding:0 34px;
-  }
-
-  .options-header h2{
-    font-size:19px;
-    letter-spacing:3.5px;
+    height:82px;
+    padding:0 32px;
   }
 
   .options-body{
-    padding:28px 34px 34px;
+    padding:28px 32px 32px;
   }
 
   .option-product{
-    grid-template-columns:220px 1fr;
+    grid-template-columns:200px 1fr;
     gap:30px;
-    margin-bottom:30px;
+    margin-bottom:28px;
   }
 
   .option-image{
-    width:220px;
-    height:245px;
+    width:200px;
+    height:225px;
   }
 
   .option-product-info h3{
-    font-size:24px;
-  }
-
-  .option-price{
-    font-size:16px;
-    margin-bottom:20px;
-  }
-
-  .option-label span:first-child{
-    font-size:15px;
-  }
-
-  .size-options{
-    gap:10px;
-  }
-
-  .size-btn{
-    min-width:62px;
-    height:48px;
-    font-size:13px;
+    font-size:23px;
   }
 
   .confirm-add{
-    height:56px;
+    height:55px;
   }
 }
 
 
-/* =========================================================
-   EXTRA LARGE DESKTOP
-========================================================= */
+/* DESKTOP WIDTHS — CARD SIZE NEVER CHANGES */
 
-@media(min-width:1400px){
+@media (min-width:1200px) and (max-width:1499px){
 
-  .products-page{
-    max-width:1700px;
-    padding-left:50px;
-    padding-right:50px;
+  header{
+    padding-left:34px;
+    padding-right:34px;
+  }
+
+  .desktop-nav{
+    gap:24px;
   }
 
   .product-list{
-    grid-template-columns:repeat(5,minmax(0,1fr));
-    gap:26px;
+    grid-template-columns:repeat(3,364px);
+    column-gap:24px;
+  }
+}
+
+@media (min-width:1500px){
+
+  .product-list{
+    grid-template-columns:repeat(4,364px);
+    column-gap:30px;
+    row-gap:44px;
+  }
+}
+
+@media (min-width:1900px){
+
+  header{
+    padding-left:62px;
+    padding-right:62px;
   }
 
-  .product-image{
-    height:350px;
+  .product-list{
+    grid-template-columns:repeat(5,364px);
+    column-gap:30px;
   }
 }
 
@@ -1553,7 +1603,12 @@ header{
 
 @media(max-width:768px){
 
-  header{
+  
+  .desktop-nav{
+    display:none !important;
+  }
+
+header{
     height:80px;
 
     grid-template-columns:50px 1fr 50px;
@@ -1846,6 +1901,14 @@ header{
 
 <header>
 
+  
+  <nav class="desktop-nav" aria-label="Main navigation">
+    <a href="index.html">HOME</a>
+    <a href="shop.html">SHOP</a>
+    <a href="index.html#about">ABOUT</a>
+    <a href="index.html#contact">CONTACT</a>
+  </nav>
+
   <button
     class="menu-btn"
     aria-label="Open menu"
@@ -1861,7 +1924,6 @@ header{
     </svg>
 
   </button>
-
 
   <a
     href="index.html"
