@@ -1260,24 +1260,289 @@ header{
 
 
 /* =========================================================
-   DESKTOP MODAL
+   DESKTOP / LAPTOP / LARGE DEVICES
+   Mobile styles below remain unchanged.
 ========================================================= */
 
 @media(min-width:769px){
 
+  body{
+    background:
+      radial-gradient(circle at 50% -15%, rgba(255,255,255,.055), transparent 34%),
+      #050505;
+  }
+
+  /* HEADER */
+
+  header{
+    height:92px;
+    grid-template-columns:100px 1fr 100px;
+    padding:0 34px;
+    background:rgba(5,5,5,.94);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(255,255,255,.12);
+  }
+
+  .menu-btn,
+  .cart-btn{
+    width:48px;
+    height:48px;
+  }
+
+  .menu-btn svg{
+    width:28px;
+    height:21px;
+  }
+
+  .cart-btn svg{
+    width:27px;
+    height:27px;
+  }
+
+  .logo{
+    width:190px;
+  }
+
+  .logo img{
+    width:155px;
+  }
+
+  .cart-count{
+    top:-1px;
+    right:-2px;
+    width:19px;
+    height:19px;
+    font-size:9px;
+  }
+
+  /* MENU DRAWER */
+
+  .menu-drawer{
+    width:390px;
+    padding:34px;
+  }
+
+  .menu-links{
+    gap:8px;
+    padding-top:30px;
+  }
+
+  .menu-links a{
+    padding:17px 16px;
+    font-size:13px;
+    letter-spacing:2px;
+  }
+
+  /* PRODUCTS AREA */
+
+  .products-page{
+    max-width:1540px;
+    padding:48px 38px 100px;
+  }
+
+  .product-list{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:24px;
+  }
+
+  /* PRODUCT CARD */
+
+  .product-card{
+    background:
+      linear-gradient(145deg,#101010,#090909);
+    border:1px solid rgba(255,255,255,.095);
+    border-radius:2px;
+    box-shadow:0 10px 35px rgba(0,0,0,.28);
+  }
+
+  .product-card:hover{
+    transform:translateY(-7px);
+    border-color:rgba(255,255,255,.28);
+    box-shadow:
+      0 22px 55px rgba(0,0,0,.62),
+      0 0 0 1px rgba(255,255,255,.035);
+  }
+
+  .product-image{
+    height:330px;
+    background:
+      radial-gradient(circle at 50% 42%, rgba(255,255,255,.045), transparent 58%),
+      #080808;
+  }
+
+  .product-image img{
+    padding:12px;
+    transition:
+      transform .55s cubic-bezier(.2,.7,.2,1),
+      filter .35s ease;
+  }
+
+  .product-card:hover .product-image img{
+    transform:scale(1.065);
+    filter:
+      drop-shadow(0 18px 28px rgba(0,0,0,.78));
+  }
+
+  /* PLUS BUTTON */
+
+  .product-plus{
+    right:18px;
+    bottom:18px;
+    width:52px;
+    height:52px;
+    font-size:42px;
+  }
+
+  .product-plus:hover{
+    transform:scale(1.08);
+  }
+
+  /* PRODUCT INFORMATION */
+
+  .product-info{
+    min-height:136px;
+    padding:19px 19px 20px;
+    background:#0b0b0b;
+  }
+
+  .product-badge{
+    font-size:8px;
+    letter-spacing:2.4px;
+    margin-bottom:9px;
+    color:#aaa;
+  }
+
+  .product-name{
+    font-size:15px;
+    line-height:1.45;
+    min-height:44px;
+  }
+
+  .product-price{
+    font-size:15px;
+    margin-top:13px;
+    letter-spacing:.3px;
+  }
+
+  /* CART DRAWER */
+
+  .cart-drawer{
+    width:460px;
+    box-shadow:-25px 0 70px rgba(0,0,0,.72);
+  }
+
+  .cart-header{
+    min-height:86px;
+    padding:0 28px;
+  }
+
+  .cart-header h2{
+    font-size:16px;
+    letter-spacing:3px;
+  }
+
+  .cart-items{
+    padding:22px 28px;
+  }
+
+  .cart-footer{
+    padding:22px 28px 28px;
+  }
+
+  .checkout{
+    height:56px;
+  }
+
+  /* OPTIONS MODAL */
+
   .options-window{
     bottom:50%;
-
     transform:translate(-50%,50%);
-
-    width:650px;
-
-    border-radius:18px;
+    width:760px;
+    max-height:86vh;
+    border-radius:20px;
+    box-shadow:0 30px 100px rgba(0,0,0,.75);
   }
 
   .options-overlay.active
   .options-window{
     transform:translate(-50%,50%);
+  }
+
+  .options-header{
+    height:84px;
+    padding:0 34px;
+  }
+
+  .options-header h2{
+    font-size:19px;
+    letter-spacing:3.5px;
+  }
+
+  .options-body{
+    padding:28px 34px 34px;
+  }
+
+  .option-product{
+    grid-template-columns:220px 1fr;
+    gap:30px;
+    margin-bottom:30px;
+  }
+
+  .option-image{
+    width:220px;
+    height:245px;
+  }
+
+  .option-product-info h3{
+    font-size:24px;
+  }
+
+  .option-price{
+    font-size:16px;
+    margin-bottom:20px;
+  }
+
+  .option-label span:first-child{
+    font-size:15px;
+  }
+
+  .size-options{
+    gap:10px;
+  }
+
+  .size-btn{
+    min-width:62px;
+    height:48px;
+    font-size:13px;
+  }
+
+  .confirm-add{
+    height:56px;
+  }
+}
+
+
+/* =========================================================
+   EXTRA LARGE DESKTOP
+========================================================= */
+
+@media(min-width:1400px){
+
+  .products-page{
+    max-width:1700px;
+    padding-left:50px;
+    padding-right:50px;
+  }
+
+  .product-list{
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:26px;
+  }
+
+  .product-image{
+    height:350px;
   }
 }
 
