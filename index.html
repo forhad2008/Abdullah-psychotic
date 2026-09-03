@@ -9641,6 +9641,47 @@ function confirmSizeAndAddToCart() {
     }
 
 
+    /*
+       SHOPPING ACCESS CHECK
+
+       The visitor must be signed in before the
+       selected product is actually added to the bag.
+
+       IMPORTANT:
+       pendingProduct and selectedSize are intentionally
+       kept while the sign-in window is open, so the
+       selected product/size is not lost.
+    */
+
+    if (!hasUnderworldAccess()) {
+
+        /*
+           Every Add to Cart confirmation made while the
+           visitor is signed out must open Sign In.
+        */
+
+        openUnderworldAccess();
+
+        return;
+    }
+
+
+    completePendingAddToCart();
+
+}
+
+
+/* =========================================================
+   COMPLETE PENDING ADD TO CART
+========================================================= */
+
+function completePendingAddToCart() {
+
+    if (!pendingProduct || !selectedSize) {
+        return;
+    }
+
+
     const cartKey =
         `${pendingProduct.id}-${selectedSize}`;
 
@@ -11945,6 +11986,43 @@ if (underworldForm) {
         );
 
         markUnderworldUnlocked();
+
+
+        /*
+           If sign-in was requested by Add to Cart,
+           finish that exact product and size.
+        */
+
+        const pendingCartAdd =
+          pendingProduct &&
+          selectedSize;
+
+
+        if (pendingCartAdd) {
+
+          /*
+             Do NOT require another sign-in immediately.
+             This sign-in is the authorization for this
+             Add to Cart action.
+          */
+
+          closeUnderworldAccess();
+
+          showUnderworldStatus(
+            'ACCESS GRANTED.',
+            'success'
+          );
+
+
+          setTimeout(() => {
+
+            completePendingAddToCart();
+
+          }, 800);
+
+          return;
+
+        }
 
 
         showUnderworldStatus(
