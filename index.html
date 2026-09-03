@@ -7993,7 +7993,7 @@ body.underworld-unlocked
     id="underworld-floating-btn" 
     type="button" 
     aria-label="Open Underworld Access"
-    title="Underworld Access">
+    title="Sign in to Underworld">
 
     <img src="iconn.png" alt="">
 </button>
@@ -11182,12 +11182,12 @@ function updateUnderworldFloatingButton() {
 
     underworldFloatingBtn.setAttribute(
       'title',
-      'Underworld Access Active'
+      'Signed in — Click to Sign Out'
     );
 
     underworldFloatingBtn.setAttribute(
       'aria-label',
-      'Underworld Access Active'
+      'Sign out from Underworld'
     );
 
   } else {
@@ -11671,22 +11671,38 @@ if (underworldFloatingBtn) {
     function() {
 
       /*
-         Already signed in:
-         do not ask for sign-in again.
-         Stay on the current page.
+         SIGN OUT SYSTEM
+         If already signed in, clicking the icon signs out.
       */
 
       if (hasUnderworldAccess()) {
 
-        markUnderworldUnlocked();
-        updateUnderworldFloatingButton();
+        const shouldSignOut = confirm(
+          'Are you sure you want to sign out from Underworld access?'
+        );
+
+        if (!shouldSignOut) {
+          return;
+        }
+
+        removeUnderworldAccess();
+
+        if (underworldForm) {
+          underworldForm.reset();
+        }
+
+        closeUnderworldAccess();
+
+        alert(
+          'You have been signed out successfully.'
+        );
 
         return;
       }
 
       /*
-         First-time visitor:
-         open the same Underworld sign-in window.
+         Not signed in:
+         open the sign-in window.
       */
 
       openUnderworldAccess();
