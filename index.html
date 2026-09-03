@@ -12203,18 +12203,30 @@ document.addEventListener(
     updateUnderworldFloatingButton();
 
     /* Auto-open Sign in 3 seconds after page load when signed out. */
+
     setTimeout(() => {
 
-      if (
+    const loginAlreadyShown =
+        sessionStorage.getItem('ap_loginShown') === 'true';
+
+    if (
         !hasUnderworldAccess() &&
+        !loginAlreadyShown &&
         underworldAccess &&
         !underworldAccess.classList.contains('active') &&
-        !(apLogoutModal && apLogoutModal.classList.contains('active'))
-      ) {
-        openUnderworldAccess();
-      }
+        !(apLogoutModal &&
+          apLogoutModal.classList.contains('active'))
+    ) {
 
-    }, 5000);
+        openUnderworldAccess();
+
+        sessionStorage.setItem(
+            'ap_loginShown',
+            'true'
+        );
+    }
+
+}, 4000);
 
   }
 );
