@@ -5466,300 +5466,2188 @@ a{
         animation: none !important;
       }
     }
+
+
+ 
+
+/* =========================================================
+   UNDERWORLD ACCESS — PROFESSIONAL RESPONSIVE DESIGN
+   ABDULLAH PSYCHOTIC
+========================================================= */
+
+.underworld-access {
+    position: fixed;
+    inset: 0;
+    z-index: 10050;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+
+    transition:
+        opacity .35s ease,
+        visibility 0s linear .35s;
+}
+
+.underworld-access.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+
+    transition:
+        opacity .35s ease,
+        visibility 0s linear 0s;
+}
+
+
+/* =========================================================
+   BACKDROP
+========================================================= */
+
+.underworld-access-backdrop {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, .84);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.underworld-access-panel {
+    position: relative;
+
+    width: min(88vw, 570px);
+
+    /*
+       Important:
+       Card scales with viewport height so everything
+       remains visible without scrolling.
+    */
+    height: min(82vh, 620px);
+
+    min-height: 470px;
+
+    overflow: hidden;
+
+    background: #dedbdd;
+
+    border-radius: 58px;
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.65);
+
+    transform: translateY(25px) scale(.97);
+
+    transition:
+        transform .45s cubic-bezier(.77,0,.175,1);
+}
+
+.underworld-access.active .underworld-access-panel {
+    transform: translateY(0) scale(1);
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.underworld-access-content {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    padding:
+        48px
+        55px
+        38px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.underworld-access-logo {
+    position: absolute;
+
+    top: 42px;
+    left: 48px;
+
+    width: 86px;
+    height: 86px;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.underworld-access-close {
+    position: absolute;
+
+    top: 35px;
+    right: 38px;
+
+    width: 42px;
+    height: 42px;
+
+    border: 0;
+    background: transparent;
+
+    color: #280000;
+
+    font-family: Arial, sans-serif;
+    font-size: 34px;
+    font-weight: 400;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        opacity .25s ease;
+}
+
+.underworld-access-close:hover {
+    transform: rotate(90deg);
+    opacity: .65;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.underworld-access-eyebrow {
+    display: none;
+}
+
+.underworld-access-content h2 {
+
+    margin: 0;
+
+    /*
+       Professional display font
+       NOT Francy Tiguan
+    */
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: clamp(38px, 5vw, 58px);
+
+    font-weight: 500;
+
+    letter-spacing: 3px;
+
+    line-height: 1;
+
+    color: #280000;
+
+    text-align: center;
+
+    padding-top: 18px;
+}
+
+
+/* =========================================================
+   DECORATIVE LINE
+========================================================= */
+
+.underworld-access-line {
+    width: 48px;
+    height: 1px;
+
+    margin: 18px auto 22px;
+
+    background: #280000;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.underworld-access-description {
+
+    margin: 0 auto 22px;
+
+    max-width: 390px;
+
+    color: #5f5555;
+
+    /*
+       Professional UI font
+    */
+    font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 400;
+
+    line-height: 1.6;
+
+    letter-spacing: .4px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+#underworld-access-form {
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.underworld-field {
+    margin-bottom: 14px;
+}
+
+.underworld-field label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #3c3030;
+
+    /*
+       IMPORTANT:
+       No Francy Tiguan here.
+    */
+    font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.underworld-field input {
+
+    display: block;
+
+    width: 100%;
+
+    height: 58px;
+
+    padding: 0 22px;
+
+    border: 0;
+
+    border-radius: 28px;
+
+    outline: none;
+
+    background: #260000;
+
+    color: #ffffff;
+
+    /*
+       Professional font
+    */
+    font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    letter-spacing: .3px;
+
+    box-sizing: border-box;
+
+    transition:
+        box-shadow .25s ease,
+        transform .2s ease;
+}
+
+.underworld-field input::placeholder {
+    color: rgba(255,255,255,.88);
+
+    font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    letter-spacing: .4px;
+
+    text-transform: uppercase;
+}
+
+.underworld-field input:focus {
+
+    box-shadow:
+        0 0 0 2px rgba(80,0,0,.18);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   CONSENT
+========================================================= */
+
+.underworld-consent {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 8px;
+
+    margin: 10px 4px 15px;
+
+    color: #655b5b;
+
+    font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+    font-size: 8px;
+
+    line-height: 1.45;
+
+    cursor: pointer;
+}
+
+.underworld-consent input {
+
+    flex-shrink: 0;
+
+    width: 13px;
+    height: 13px;
+
+    margin: 1px 0 0;
+
+    accent-color: #280000;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   SIGN IN BUTTON
+========================================================= */
+
+.underworld-submit {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    height: 52px;
+
+    border: 0;
+
+    border-radius: 26px;
+
+    background: #260000;
+
+    color: #ffffff;
+
+    font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        background .25s ease,
+        transform .2s ease;
+}
+
+.underworld-submit:hover {
+    background: #430000;
+}
+
+.underworld-submit:active {
+    transform: scale(.985);
+}
+
+.underworld-submit:disabled {
+    opacity: .65;
+    cursor: wait;
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.underworld-submit-loader {
+
+    display: none;
+
+    width: 14px;
+    height: 14px;
+
+    margin-left: 9px;
+
+    border: 1px solid rgba(255,255,255,.35);
+
+    border-top-color: #fff;
+
+    border-radius: 50%;
+
+    animation:
+        underworldSpin .7s linear infinite;
+}
+
+.underworld-submit.loading .underworld-submit-loader {
+    display: inline-block;
+}
+
+@keyframes underworldSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.underworld-status {
+
+    min-height: 17px;
+
+    margin-top: 8px;
+
+    text-align: center;
+
+    font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+    font-size: 8px;
+
+    line-height: 1.4;
+
+    letter-spacing: .3px;
+}
+
+.underworld-status.success {
+    color: #327044;
+}
+
+.underworld-status.error {
+    color: #a32222;
+}
+
+.underworld-status.info {
+    color: #665e5e;
+}
+
+
+/* =========================================================
+   SECURITY NOTE
+========================================================= */
+
+.underworld-security-note {
+
+    margin-top: auto;
+
+    padding-top: 15px;
+
+    border-top:
+        1px solid rgba(40,0,0,.12);
+
+    color: #817777;
+
+    font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+    font-size: 7px;
+
+    font-weight: 500;
+
+    letter-spacing: 2px;
+
+    text-align: center;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   UNLOCKED
+========================================================= */
+
+body.underworld-unlocked
+.underworld-protected-link::after {
+
+    content: '✓';
+
+    margin-left: auto;
+
+    color: var(--primary-color);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .underworld-access {
+        padding: 14px;
+    }
+
+    .underworld-access-panel {
+
+        width: min(88vw, 500px);
+
+        height: min(78vh, 570px);
+
+        min-height: 450px;
+
+        border-radius: 48px;
+    }
+
+    .underworld-access-content {
+
+        padding:
+            42px
+            42px
+            30px;
+    }
+
+    .underworld-access-logo {
+
+        top: 32px;
+        left: 36px;
+
+        width: 72px;
+        height: 72px;
+    }
+
+    .underworld-access-close {
+
+        top: 27px;
+        right: 28px;
+
+        font-size: 30px;
+    }
+
+    .underworld-access-content h2 {
+        font-size: 46px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .underworld-access {
+        padding: 10px;
+    }
+
+    .underworld-access-panel {
+
+        width: 90vw;
+
+        height: min(72vh, 500px);
+
+        min-height: 390px;
+
+        border-radius: 42px;
+    }
+
+    .underworld-access-content {
+
+        padding:
+            30px
+            28px
+            24px;
+    }
+
+    .underworld-access-logo {
+
+        top: 25px;
+        left: 27px;
+
+        width: 62px;
+        height: 62px;
+    }
+
+    .underworld-access-close {
+
+        top: 23px;
+        right: 23px;
+
+        width: 34px;
+        height: 34px;
+
+        font-size: 27px;
+    }
+
+    .underworld-access-content h2 {
+
+        padding-top: 20px;
+
+        font-size: 36px;
+
+        letter-spacing: 2px;
+    }
+
+    .underworld-access-line {
+
+        margin: 12px auto 16px;
+    }
+
+    .underworld-access-description {
+
+        font-size: 9px;
+
+        margin-bottom: 16px;
+    }
+
+    .underworld-field {
+
+        margin-bottom: 11px;
+    }
+
+    .underworld-field label {
+
+        margin-bottom: 5px;
+
+        font-size: 8px;
+    }
+
+    .underworld-field input {
+
+        height: 47px;
+
+        padding: 0 18px;
+
+        font-size: 11px;
+    }
+
+    .underworld-field input::placeholder {
+        font-size: 10px;
+    }
+
+    .underworld-consent {
+
+        margin:
+            7px 2px 11px;
+
+        font-size: 7px;
+    }
+
+    .underworld-submit {
+
+        height: 46px;
+
+        font-size: 9px;
+
+        letter-spacing: 1.7px;
+    }
+
+    .underworld-security-note {
+
+        padding-top: 10px;
+
+        font-size: 6px;
+
+        letter-spacing: 1.5px;
+    }
+}
+
+
+/* =========================================================
+   VERY SHORT DEVICES
+   Example: 667px / 640px height
+========================================================= */
+
+@media (max-height: 700px) {
+
+    .underworld-access-panel {
+
+        height: 90vh;
+
+        min-height: 0;
+
+        border-radius: 42px;
+    }
+
+    .underworld-access-content {
+
+        padding-top: 28px;
+        padding-bottom: 20px;
+    }
+
+    .underworld-access-logo {
+
+        top: 22px;
+
+        width: 58px;
+        height: 58px;
+    }
+
+    .underworld-access-close {
+
+        top: 20px;
+    }
+
+    .underworld-access-content h2 {
+
+        padding-top: 10px;
+
+        font-size: 34px;
+    }
+
+    .underworld-access-line {
+
+        margin: 9px auto 12px;
+    }
+
+    .underworld-access-description {
+
+        margin-bottom: 12px;
+
+        font-size: 8px;
+    }
+
+    .underworld-field input {
+
+        height: 43px;
+    }
+
+    .underworld-field {
+
+        margin-bottom: 8px;
+    }
+
+    .underworld-consent {
+
+        margin-top: 5px;
+        margin-bottom: 8px;
+    }
+
+    .underworld-submit {
+
+        height: 43px;
+    }
+
+    .underworld-security-note {
+
+        padding-top: 8px;
+    }
+}
+
   </style>
 </head>
 
 <body>
 
+<!-- =========================================================
+     WELCOME SCREEN
+========================================================= -->
+
 <div id="welcome-screen">
-  <div class="welcome-typing">
-    <span id="typing-text"></span><span class="typing-cursor">|</span>
-  </div>
+    <div class="welcome-typing">
+        <span id="typing-text"></span>
+        <span class="typing-cursor">|</span>
+    </div>
 </div>
+
+<!-- =========================================================
+     HEADER / NAVBAR
+========================================================= -->
 
 <header id="navbar">
 
-  <div class="logo-container">
+```
+<div class="logo-container">
     <a href="index.html">
-      <img src="logo0.webp" alt="Abdullah Psychotic" class="logo-img">
+        <img
+            src="logo0.webp"
+            alt="Abdullah Psychotic"
+            class="logo-img">
     </a>
-  </div>
+</div>
 
-  <nav class="desktop-nav">
-    <a href="#home">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="#shop">Shop</a>
-    <a href="#newsletter">Subscribe</a>
-    <a href="https://forhad2008.github.io/Captain-Abdullah/">Underworld</a>
-  </nav>
 
-  <button class="menu-toggle" id="menu-btn" aria-label="Open menu">
-    <svg viewBox="0 0 32 24" aria-hidden="true">
-      <path d="M1 2h30M1 12h30M1 22h30"/>
+<nav class="desktop-nav">
+
+    <a href="#home">
+        Home
+    </a>
+
+    <a href="about.html">
+        About
+    </a>
+
+    <a href="contact.html">
+        Contact
+    </a>
+
+    <a href="#shop">
+        Shop
+    </a>
+
+    <a href="#newsletter">
+        Subscribe
+    </a>
+
+
+    <!-- =================================================
+         PROTECTED UNDERWORLD LINK
+    ================================================== -->
+
+    <a
+        href="https://forhad2008.github.io/Captain-Abdullah/"
+        class="underworld-protected-link"
+        data-underworld-url="https://forhad2008.github.io/Captain-Abdullah/">
+
+        Underworld
+
+    </a>
+
+</nav>
+
+
+<!-- MOBILE MENU BUTTON -->
+
+<button
+    class="menu-toggle"
+    id="menu-btn"
+    type="button"
+    aria-label="Open menu">
+
+    <svg
+        viewBox="0 0 32 24"
+        aria-hidden="true">
+
+        <path d="M1 2h30M1 12h30M1 22h30"/>
+
     </svg>
-  </button>
 
-  <div class="nav-right">
-    <button class="cart-icon-wrapper" id="cart-icon-btn" aria-label="Shopping cart">
-      <svg viewBox="0 0 32 32" aria-hidden="true">
-        <path d="M4 6h4l3.1 14.2a2 2 0 0 0 2 1.6h10.8a2 2 0 0 0 1.9-1.4L29 11H9"/>
-        <circle cx="13" cy="27" r="1.8"/>
-        <circle cx="25" cy="27" r="1.8"/>
-      </svg>
+</button>
 
-      <span class="cart-badge" id="cart-count">0</span>
+
+<!-- CART -->
+
+<div class="nav-right">
+
+    <button
+        class="cart-icon-wrapper"
+        id="cart-icon-btn"
+        type="button"
+        aria-label="Shopping cart">
+
+        <svg
+            viewBox="0 0 32 32"
+            aria-hidden="true">
+
+            <path d="M4 6h4l3.1 14.2a2 2 0 0 0 2 1.6h10.8a2 2 0 0 0 1.9-1.4L29 11H9"/>
+
+            <circle
+                cx="13"
+                cy="27"
+                r="1.8"/>
+
+            <circle
+                cx="25"
+                cy="27"
+                r="1.8"/>
+
+        </svg>
+
+        <span
+            class="cart-badge"
+            id="cart-count">
+            0
+        </span>
+
     </button>
-  </div>
+
+</div>
+
 
 </header>
 
-<div class="overlay" id="overlay"></div>
+<!-- =========================================================
+     NAVIGATION OVERLAY
+========================================================= -->
 
-<div class="nav-drawer" id="nav-drawer">
-  <div class="close-drawer" id="close-drawer-btn"><i class="fas fa-times"></i></div>
-
-  <nav class="drawer-links">
-    <a href="about.html" onclick="closeAll()">About Me</a>
-    <a href="https://forhad2008.github.io/Abdullah-psychotic-collections/" onclick="closeAll()">interested</a>
-    <a href="#newsletter" onclick="closeAll()">Subscribe</a>
-    <a href="contact.html" onclick="closeAll()">Contact</a>
-
-    <div class="underworld-wrap" id="underworld-wrap">
-      <button type="button" class="underworld-toggle" id="underworld-toggle" aria-expanded="false" aria-controls="underworld-submenu">
-        <span>Underworld</span>
-        <span class="underworld-arrow">›</span>
-      </button>
-
-      <div class="underworld-submenu" id="underworld-submenu">
-        <a href="https://forhad2008.github.io/Captain-Abdullah/" onclick="closeAll()">Abdullah Sparrow</a>
-        <a href="https://github.com/" target="_blank" rel="noopener" onclick="closeAll()">Creative Archive</a>
-        <a href="https://www.instagram.com/" target="_blank" rel="noopener" onclick="closeAll()">Visual Journal</a>
-        <a href="https://www.youtube.com/" target="_blank" rel="noopener" onclick="closeAll()">Media House</a>
-      </div>
-    </div>
-  </nav>
+<div
+    class="overlay"
+    id="overlay">
 </div>
 
-<div class="cart-drawer" id="cart-drawer">
-  <div class="cart-header">
-    <h3>YOUR CART</h3>
-    <i class="fas fa-times close-cart" id="close-cart-btn"></i>
-  </div>
+<!-- =========================================================
+     MOBILE NAVIGATION DRAWER
+========================================================= -->
 
-  <div class="cart-items" id="cart-items-container"></div>
+<div
+    class="nav-drawer"
+    id="nav-drawer">
 
-  <div class="cart-footer">
+```
+<div
+    class="close-drawer"
+    id="close-drawer-btn">
+
+    <i class="fas fa-times"></i>
+
+</div>
+
+
+<nav class="drawer-links">
+
+    <a
+        href="about.html"
+        onclick="closeAll()">
+
+        About Me
+
+    </a>
+
+
+    <a
+        href="https://forhad2008.github.io/Abdullah-psychotic-collections/"
+        onclick="closeAll()">
+
+        Interested
+
+    </a>
+
+
+    <a
+        href="#newsletter"
+        onclick="closeAll()">
+
+        Subscribe
+
+    </a>
+
+
+    <a
+        href="contact.html"
+        onclick="closeAll()">
+
+        Contact
+
+    </a>
+
+
+    <!-- =================================================
+         UNDERWORLD MOBILE MENU
+    ================================================== -->
+
+    <div
+        class="underworld-wrap"
+        id="underworld-wrap">
+
+
+        <button
+            type="button"
+            class="underworld-toggle"
+            id="underworld-toggle"
+            aria-expanded="false"
+            aria-controls="underworld-submenu">
+
+            <span>
+                Underworld
+            </span>
+
+            <span class="underworld-arrow">
+                ›
+            </span>
+
+        </button>
+
+
+        <!-- UNDERWORLD SUBMENU -->
+
+        <div
+            class="underworld-submenu"
+            id="underworld-submenu">
+
+
+            <a
+                href="https://forhad2008.github.io/Captain-Abdullah/"
+                class="underworld-protected-link"
+                data-underworld-url="https://forhad2008.github.io/Captain-Abdullah/">
+
+                Abdullah Sparrow
+
+                <span class="arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                href="https://github.com/"
+                class="underworld-protected-link"
+                data-underworld-url="https://github.com/"
+                target="_blank"
+                rel="noopener">
+
+                Creative Archive
+
+                <span class="arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                href="https://www.instagram.com/"
+                class="underworld-protected-link"
+                data-underworld-url="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener">
+
+                Visual Journal
+
+                <span class="arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                href="https://www.youtube.com/"
+                class="underworld-protected-link"
+                data-underworld-url="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener">
+
+                Media House
+
+                <span class="arrow">
+                    →
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+```
+
+</div>
+
+<!-- =========================================================
+     CART DRAWER
+========================================================= -->
+
+<div
+    class="cart-drawer"
+    id="cart-drawer">
+
+```
+<div class="cart-header">
+
+    <h3>
+        YOUR CART
+    </h3>
+
+
+    <i
+        class="fas fa-times close-cart"
+        id="close-cart-btn">
+    </i>
+
+</div>
+
+
+<div
+    class="cart-items"
+    id="cart-items-container">
+</div>
+
+
+<div class="cart-footer">
+
     <div class="cart-total-row">
-      <span>Subtotal:</span>
-      <span id="cart-subtotal">$0</span>
+
+        <span>
+            Subtotal:
+        </span>
+
+        <span id="cart-subtotal">
+            $0
+        </span>
+
     </div>
-    <button type="button" id="proceed-checkout-btn" class="checkout-btn">PROCEED TO CHECKOUT</button>
-  </div>
+
+
+    <button
+        type="button"
+        id="proceed-checkout-btn"
+        class="checkout-btn">
+
+        PROCEED TO CHECKOUT
+
+    </button>
+
+</div>
+```
+
 </div>
 
-<!-- SIZE SELECTION BOTTOM SHEET -->
-<div class="size-sheet" id="size-sheet" aria-hidden="true">
-  <div class="size-sheet-header">
-    <h3>CHOOSE OPTIONS</h3>
-    <button type="button" class="close-size-sheet" id="close-size-sheet" aria-label="Close">&times;</button>
-  </div>
+<!-- =========================================================
+     UNDERWORLD ACCESS MODAL
+     EMAIL + PHONE ACCESS REQUEST
+========================================================= -->
 
-  <div class="size-sheet-content">
-    <img id="size-product-image" class="size-product-image" src="" alt="">
-    <div id="size-product-brand" class="size-product-brand">CAPTAIN ABDULLAH</div>
-    <div id="size-product-name" class="size-product-name"></div>
-    <div id="size-product-price" class="size-product-price"></div>
+<div
+    class="underworld-access"
+    id="underworld-access"
+    aria-hidden="true">
+
+```
+<!-- BACKDROP -->
+
+<div
+    class="underworld-access-backdrop"
+    id="underworld-access-backdrop">
+</div>
+
+
+<!-- MAIN PANEL -->
+
+<section
+    class="underworld-access-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="underworld-access-title">
+
+
+    <!-- LOGO -->
+
+    <img
+        src="icon.png"
+        alt="Abdullah Psychotic"
+        class="underworld-access-logo">
+
+
+    <!-- CLOSE -->
+
+    <button
+        type="button"
+        class="underworld-access-close"
+        id="underworld-access-close"
+        aria-label="Close Underworld access">
+
+        &times;
+
+    </button>
+
+
+    <!-- CONTENT -->
+
+    <div class="underworld-access-content">
+
+
+        <!-- EYEBROW -->
+
+        <div class="underworld-access-eyebrow">
+            PRIVATE ACCESS
+        </div>
+
+
+        <!-- TITLE -->
+
+        <h2 id="underworld-access-title">
+            UNDERWORLD
+        </h2>
+
+
+        <!-- DECORATIVE LINE -->
+
+        <div class="underworld-access-line">
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <p class="underworld-access-description">
+
+            This area is restricted.
+            Enter your email and phone number
+            to request access.
+
+        </p>
+
+
+        <!-- =================================================
+             ACCESS FORM
+        ================================================== -->
+
+        <form
+            id="underworld-access-form"
+            novalidate>
+
+
+            <!-- EMAIL -->
+
+            <div class="underworld-field">
+
+                <label for="underworld-email">
+                    EMAIL ADDRESS
+                </label>
+
+                <input
+                    type="email"
+                    id="underworld-email"
+                    name="email"
+                    autocomplete="email"
+                    placeholder="ENTER YOUR EMAIL"
+                    maxlength="120"
+                    required>
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="underworld-field">
+
+                <label for="underworld-phone">
+                    PHONE NUMBER
+                </label>
+
+                <input
+                    type="tel"
+                    id="underworld-phone"
+                    name="phone"
+                    autocomplete="tel"
+                    inputmode="tel"
+                    placeholder="+880 1XXXXXXXXX"
+                    maxlength="20"
+                    required>
+
+            </div>
+
+
+            <!-- =================================================
+                 CONSENT
+            ================================================== -->
+
+            <label
+                class="underworld-consent"
+                for="underworld-consent">
+
+
+                <input
+                    type="checkbox"
+                    id="underworld-consent"
+                    name="consent"
+                    required>
+
+
+                <span>
+
+                    I understand that my email and phone number
+                    will be used to manage Underworld access.
+
+                </span>
+
+            </label>
+
+
+            <!-- =================================================
+                 SUBMIT BUTTON
+            ================================================== -->
+
+            <button
+                type="submit"
+                class="underworld-submit"
+                id="underworld-submit">
+
+
+                <span id="underworld-submit-text">
+                    ENTER UNDERWORLD
+                </span>
+
+
+                <span
+                    class="underworld-submit-loader"
+                    id="underworld-submit-loader"
+                    aria-hidden="true">
+                </span>
+
+            </button>
+
+
+            <!-- =================================================
+                 STATUS MESSAGE
+            ================================================== -->
+
+            <div
+                class="underworld-status"
+                id="underworld-status"
+                role="status"
+                aria-live="polite">
+            </div>
+
+        </form>
+
+
+        <!-- SECURITY NOTE -->
+
+        <div class="underworld-security-note">
+
+            ACCESS REQUEST • ABDULLAH PSYCHOTIC
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</div>
+
+<!-- =========================================================
+     SIZE SELECTION BOTTOM SHEET
+========================================================= -->
+
+<div
+    class="size-sheet"
+    id="size-sheet"
+    aria-hidden="true">
+
+
+<div class="size-sheet-header">
+
+    <h3>
+        CHOOSE OPTIONS
+    </h3>
+
+
+    <button
+        type="button"
+        class="close-size-sheet"
+        id="close-size-sheet"
+        aria-label="Close">
+
+        &times;
+
+    </button>
+
+</div>
+
+
+<div class="size-sheet-content">
+
+
+    <img
+        id="size-product-image"
+        class="size-product-image"
+        src=""
+        alt="">
+
+
+    <div
+        id="size-product-brand"
+        class="size-product-brand">
+
+        CAPTAIN ABDULLAH
+
+    </div>
+
+
+    <div
+        id="size-product-name"
+        class="size-product-name">
+    </div>
+
+
+    <div
+        id="size-product-price"
+        class="size-product-price">
+    </div>
+
 
     <div class="size-select-row">
-      <span class="size-label">Size:</span>
-      <a href="#" class="size-chart-link" id="size-chart-link" onclick="return false;">Size chart</a>
-    </div>
 
-    <div class="size-options" id="size-options">
-      <button type="button" class="size-option" data-size="S">S</button>
-      <button type="button" class="size-option" data-size="M">M</button>
-      <button type="button" class="size-option" data-size="L">L</button>
-      <button type="button" class="size-option" data-size="XL">XL</button>
-      <button type="button" class="size-option" data-size="XXL">XXL</button>
-    </div>
-
-    <button type="button" class="size-confirm-btn" id="confirm-size-btn">ADD TO CART</button>
-  </div>
-</div>
-
-<section id="home" class="hero">
-  <div class="hero-content">
-    <h1>Abdullah <span>Psychotic</span>Fashion</h1>
-    <p>Built for the fearless. Curated for distinction. Wear your identity.</p>
-    <a class="btn" href="shop.html">SHOP NOW</a>
-  </div>
-</section>
-
-<section id="shop" class="products">
-  <h2 class="section-title">Exclusive Collections</h2>
-  <p class="section-subtitle">Curated drops crafted for distinction, comfort, and creative expression.</p>
-
-  <div class="category-section">
-    <h3 class="category-title"><i class="fas fa-tshirt"></i> Apparel & Streetwear</h3>
-    <div class="horizontal-scroll-container" id="grid-apparel"></div>
-  </div>
-
-  <div class="category-section">
-    <h3 class="category-title"><i class="fas fa-shoe-prints"></i> Footwear Collection</h3>
-    <div class="horizontal-scroll-container" id="grid-footwear"></div>
-  </div>
-
-  <div class="category-section luxury-highlight">
-    <h3 class="category-title luxury-title"><i class="fas fa-clock"></i> Luxury Horology & Timepieces</h3>
-    <div class="horizontal-scroll-container" id="grid-watches"></div>
-  </div>
-
-  <div class="category-section">
-    <h3 class="category-title"><i class="fas fa-bed"></i> Lifestyle & Living</h3>
-    <div class="horizontal-scroll-container" id="grid-lifestyle"></div>
-  </div>
-
-  <div class="category-section">
-    <h3 class="category-title"><i class="fas fa-lightbulb"></i> Creative Objects & Goods</h3>
-    <div class="horizontal-scroll-container" id="grid-creative"></div>
-  </div>
-
-  <div class="category-section">
-    <h3 class="category-title"><i class="fas fa-tshirt"></i> Hoodies</h3>
-    <div class="horizontal-scroll-container" id="grid-hoodies"></div>
-  </div>
-
-  <div class="category-section">
-    <h3 class="category-title"><i class="fas fa-hat-cowboy"></i> Caps</h3>
-    <div class="horizontal-scroll-container" id="grid-caps"></div>
-  </div>
-
-  <div class="category-section">
-    <h3 class="category-title">
-      <i class="fas fa-shopping-bag"></i> Branded Bags
-    </h3>
-    <div class="horizontal-scroll-container" id="grid-bags"></div>
-  </div>
-
-  <div class="category-section">
-    <h3 class="category-title">
-      <i class="fas fa-spray-can"></i> Branded Perfumes
-    </h3>
-    <div class="horizontal-scroll-container" id="grid-perfume"></div>
-  </div>
-</section>
-
-<section id="newsletter" class="newsletter-section">
-  <div class="newsletter-container">
-    <h2 class="section-title">JOIN THE PSYCHOTIC FAMILY</h2>
-    <p class="section-subtitle">Get exclusive drops, early access &amp; special offers.</p>
-
-    <form class="newsletter-form" id="newsletter-form">
-      <input
-        type="email"
-        id="subscriber-email"
-        name="email"
-        placeholder="ENTER YOUR EMAIL"
-        autocomplete="email"
-        required
-      >
-      <button type="submit" id="newsletter-submit-btn">SUBSCRIBE</button>
-    </form>
-
-    <div class="newsletter-status" id="newsletter-status" aria-live="polite"></div>
-    <div class="newsletter-lock-note" id="newsletter-lock-note">
-      Once subscribed, your email is locked until you unsubscribe.
-    </div>
-  </div>
-</section>
-
-<!-- New Mission Section -->
-<section id="mission" class="mission-section">
-  <h1 class="mission-w">ABDULLAH'S MISSION</h1>
-  <p class="mission-text">
-    "To curate a lifestyle for the bold and the distinct. We deliver exclusive streetwear and high-end goods that embody a fearless mindset—eccentric by mind, legendary by choice. We don't follow paths; we make them."
-  </p>
-</section>
-
-  <!-- Sound Experience Section -->
-<section class="sound-banner">
-
-    <div class="sound-overlay">
+        <span class="size-label">
+            Size:
+        </span>
 
         <a
-    href="https://www.udio.com/creators/Abdullah%20Psycho"
-    target="_blank"
-    class="sound-button"
->
-    <i class="fas fa-music"></i>
-    <span>SOUNDS</span>
-</a>
+            href="#"
+            class="size-chart-link"
+            id="size-chart-link"
+            onclick="return false;">
+
+            Size chart
+
+        </a>
 
     </div>
+
+
+    <div
+        class="size-options"
+        id="size-options">
+
+
+        <button
+            type="button"
+            class="size-option"
+            data-size="S">
+            S
+        </button>
+
+
+        <button
+            type="button"
+            class="size-option"
+            data-size="M">
+            M
+        </button>
+
+
+        <button
+            type="button"
+            class="size-option"
+            data-size="L">
+            L
+        </button>
+
+
+        <button
+            type="button"
+            class="size-option"
+            data-size="XL">
+            XL
+        </button>
+
+
+        <button
+            type="button"
+            class="size-option"
+            data-size="XXL">
+            XXL
+        </button>
+
+    </div>
+
+
+    <button
+        type="button"
+        class="size-confirm-btn"
+        id="confirm-size-btn">
+
+        ADD TO CART
+
+    </button>
+
+</div>
+```
+
+</div>
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section
+    id="home"
+    class="hero">
+
+```
+<div class="hero-content">
+
+    <h1>
+
+        Abdullah
+        <span>Psychotic</span>
+        Fashion
+
+    </h1>
+
+
+    <p>
+
+        Built for the fearless.
+        Curated for distinction.
+        Wear your identity.
+
+    </p>
+
+
+    <a
+        class="btn"
+        href="shop.html">
+
+        SHOP NOW
+
+    </a>
+
+</div>
+```
 
 </section>
 
-  <!-- Background Music -->
-<audio id="bgMusic" loop preload="auto">
-    <source src="1musicbg.wav" type="audio/wav">
+<!-- =========================================================
+     SHOP
+========================================================= -->
+
+<section
+    id="shop"
+    class="products">
+
+```
+<h2 class="section-title">
+    Exclusive Collections
+</h2>
+
+
+<p class="section-subtitle">
+
+    Curated drops crafted for distinction,
+    comfort, and creative expression.
+
+</p>
+
+
+<!-- APPAREL -->
+
+<div class="category-section">
+
+    <h3 class="category-title">
+
+        <i class="fas fa-tshirt"></i>
+
+        Apparel & Streetwear
+
+    </h3>
+
+
+    <div
+        class="horizontal-scroll-container"
+        id="grid-apparel">
+    </div>
+
+</div>
+
+
+<!-- FOOTWEAR -->
+
+<div class="category-section">
+
+    <h3 class="category-title">
+
+        <i class="fas fa-shoe-prints"></i>
+
+        Footwear Collection
+
+    </h3>
+
+
+    <div
+        class="horizontal-scroll-container"
+        id="grid-footwear">
+    </div>
+
+</div>
+
+
+<!-- WATCHES -->
+
+<div class="category-section luxury-highlight">
+
+    <h3 class="category-title luxury-title">
+
+        <i class="fas fa-clock"></i>
+
+        Luxury Horology & Timepieces
+
+    </h3>
+
+
+    <div
+        class="horizontal-scroll-container"
+        id="grid-watches">
+    </div>
+
+</div>
+
+
+<!-- LIFESTYLE -->
+
+<div class="category-section">
+
+    <h3 class="category-title">
+
+        <i class="fas fa-bed"></i>
+
+        Lifestyle & Living
+
+    </h3>
+
+
+    <div
+        class="horizontal-scroll-container"
+        id="grid-lifestyle">
+    </div>
+
+</div>
+
+
+<!-- CREATIVE -->
+
+<div class="category-section">
+
+    <h3 class="category-title">
+
+        <i class="fas fa-lightbulb"></i>
+
+        Creative Objects & Goods
+
+    </h3>
+
+
+    <div
+        class="horizontal-scroll-container"
+        id="grid-creative">
+    </div>
+
+</div>
+
+
+<!-- HOODIES -->
+
+<div class="category-section">
+
+    <h3 class="category-title">
+
+        <i class="fas fa-tshirt"></i>
+
+        Hoodies
+
+    </h3>
+
+
+    <div
+        class="horizontal-scroll-container"
+        id="grid-hoodies">
+    </div>
+
+</div>
+
+
+<!-- CAPS -->
+
+<div class="category-section">
+
+    <h3 class="category-title">
+
+        <i class="fas fa-hat-cowboy"></i>
+
+        Caps
+
+    </h3>
+
+
+    <div
+        class="horizontal-scroll-container"
+        id="grid-caps">
+    </div>
+
+</div>
+
+
+<!-- BAGS -->
+
+<div class="category-section">
+
+    <h3 class="category-title">
+
+        <i class="fas fa-shopping-bag"></i>
+
+        Branded Bags
+
+    </h3>
+
+
+    <div
+        class="horizontal-scroll-container"
+        id="grid-bags">
+    </div>
+
+</div>
+
+
+<!-- PERFUMES -->
+
+<div class="category-section">
+
+    <h3 class="category-title">
+
+        <i class="fas fa-spray-can"></i>
+
+        Branded Perfumes
+
+    </h3>
+
+
+    <div
+        class="horizontal-scroll-container"
+        id="grid-perfume">
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- =========================================================
+     NEWSLETTER
+========================================================= -->
+
+<section
+    id="newsletter"
+    class="newsletter-section">
+
+```
+<div class="newsletter-container">
+
+    <h2 class="section-title">
+
+        JOIN THE PSYCHOTIC FAMILY
+
+    </h2>
+
+
+    <p class="section-subtitle">
+
+        Get exclusive drops, early access &amp; special offers.
+
+    </p>
+
+
+    <form
+        class="newsletter-form"
+        id="newsletter-form">
+
+
+        <input
+            type="email"
+            id="subscriber-email"
+            name="email"
+            placeholder="ENTER YOUR EMAIL"
+            autocomplete="email"
+            required>
+
+
+        <button
+            type="submit"
+            id="newsletter-submit-btn">
+
+            SUBSCRIBE
+
+        </button>
+
+    </form>
+
+
+    <div
+        class="newsletter-status"
+        id="newsletter-status"
+        aria-live="polite">
+    </div>
+
+
+    <div
+        class="newsletter-lock-note"
+        id="newsletter-lock-note">
+
+        Once subscribed,
+        your email is locked until you unsubscribe.
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- =========================================================
+     MISSION
+========================================================= -->
+
+<section
+    id="mission"
+    class="mission-section">
+
+```
+<h1 class="mission-w">
+    ABDULLAH'S MISSION
+</h1>
+
+
+<p class="mission-text">
+
+    "To curate a lifestyle for the bold and the distinct.
+    We deliver exclusive streetwear and high-end goods
+    that embody a fearless mindset—eccentric by mind,
+    legendary by choice.
+    We don't follow paths; we make them."
+
+</p>
+```
+
+</section>
+
+<!-- =========================================================
+     SOUND EXPERIENCE
+========================================================= -->
+
+<section class="sound-banner">
+
+<div class="sound-overlay">
+
+    <a
+        href="https://www.udio.com/creators/Abdullah%20Psycho"
+        target="_blank"
+        rel="noopener"
+        class="sound-button">
+
+        <i class="fas fa-music"></i>
+
+        <span>
+            SOUNDS
+        </span>
+
+    </a>
+
+</div>
+```
+
+</section>
+
+<!-- =========================================================
+     BACKGROUND MUSIC
+========================================================= -->
+
+<audio
+ id="bgMusic"
+ loop
+ preload="auto">
+
+```
+<source
+    src="1musicbg.wav"
+    type="audio/wav">
+```
+
 </audio>
 
-<button id="music-btn">
-  <i class="fas fa-music"></i>
+<button
+ id="music-btn"
+ type="button"
+ aria-label="Toggle background music">
+
+```
+<i class="fas fa-music"></i>
+```
+
 </button>
 
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
 <footer>
-  <div style="padding: 0 7%;">
+
+```
+<div style="padding: 0 7%;">
+
     <div class="footer-top">
-      <div class="footer-brand">
-        <img src="logo0.webp" alt="Abdullah Psychotic" style="height:100px; margin-left:-25px">
-        <p>Defining contemporary street style with luxurious craftsmanship, bold cuts, and uncompromising quality.</p>
-        <div class="social-links">
-          <a href="https://www.facebook.com/profile.php?id=61580779565120" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/abdullah.thelegend2008?igsh=YWd3a3dqdmc4cXo2" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://x.com/abdullahtheLeg" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
-          <a href="https://www.youtube.com/@abdullahforhadthelegend" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+            <img
+                src="logo0.webp"
+                alt="Abdullah Psychotic"
+                style="height:100px; margin-left:-25px">
+
+
+            <p>
+
+                Defining contemporary street style
+                with luxurious craftsmanship,
+                bold cuts, and uncompromising quality.
+
+            </p>
+
+
+            <div class="social-links">
+
+
+                <a
+                    href="https://www.facebook.com/profile.php?id=61580779565120"
+                    aria-label="Facebook">
+
+                    <i class="fab fa-facebook-f"></i>
+
+                </a>
+
+
+                <a
+                    href="https://www.instagram.com/abdullah.thelegend2008?igsh=YWd3a3dqdmc4cXo2"
+                    aria-label="Instagram">
+
+                    <i class="fab fa-instagram"></i>
+
+                </a>
+
+
+                <a
+                    href="https://x.com/abdullahtheLeg"
+                    aria-label="Twitter">
+
+                    <i class="fab fa-x-twitter"></i>
+
+                </a>
+
+
+                <a
+                    href="https://www.youtube.com/@abdullahforhadthelegend"
+                    aria-label="YouTube">
+
+                    <i class="fab fa-youtube"></i>
+
+                </a>
+
+            </div>
+
         </div>
-      </div>
 
-      <div class="footer-links">
-        <h4>SHOP</h4>
-        <ul>
-          <li><a href="#shop">New Arrivals</a></li>
-          <li><a href="#shop">Footwear Collection</a></li>
-          <li><a href="#shop">Streetwear Essentials</a></li>
-          <li><a href="#shop">Accessories & Watches</a></li>
-        </ul>
-      </div>
 
-      <div class="footer-links">
-        <h4>SUPPORT</h4>
-        <ul>
-          <li><a href="order.html">Order Tracking</a></li>
-          <li><a href="refunds.html">Shipping & Returns</a></li>
-          <li><a href="size.html">Size Guide</a></li>
-          <li><a href="faq.html">FAQs</a></li>
-        </ul>
-      </div>
+        <!-- SHOP LINKS -->
 
-      <div class="footer-links">
-        <h4>LEGAL</h4>
-        <ul>
-          <li><a href="privacy.html">Privacy Policy</a></li>
-          <li><a href="service.html">Terms of Service</a></li>
-          <li><a href="refunds.html">Refund Policy</a></li>
-        </ul>
-      </div>
+        <div class="footer-links">
+
+            <h4>
+                SHOP
+            </h4>
+
+
+            <ul>
+
+                <li>
+                    <a href="#shop">
+                        New Arrivals
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="#shop">
+                        Footwear Collection
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="#shop">
+                        Streetwear Essentials
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="#shop">
+                        Accessories & Watches
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- SUPPORT -->
+
+        <div class="footer-links">
+
+            <h4>
+                SUPPORT
+            </h4>
+
+
+            <ul>
+
+                <li>
+                    <a href="order.html">
+                        Order Tracking
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="refunds.html">
+                        Shipping & Returns
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="size.html">
+                        Size Guide
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="faq.html">
+                        FAQs
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- LEGAL -->
+
+        <div class="footer-links">
+
+            <h4>
+                LEGAL
+            </h4>
+
+
+            <ul>
+
+                <li>
+                    <a href="privacy.html">
+                        Privacy Policy
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="service.html">
+                        Terms of Service
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="refunds.html">
+                        Refund Policy
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
     </div>
+
+
+    <!-- FOOTER BOTTOM -->
 
     <div class="footer-bottom">
-      &copy; 2026 Abdullah Psychotic — Luxury Lifestyle. All rights reserved.
+
+        &copy; 2026 Abdullah Psychotic —
+        Luxury Lifestyle.
+        All rights reserved.
+
     </div>
-  </div>
+
+</div>
+
 </footer>
-
-
 
 
 
@@ -8632,6 +10520,662 @@ document.addEventListener(
     }
 );
 
+
+
+/* =========================================================
+   UNDERWORLD ACCESS SYSTEM
+========================================================= */
+
+/*
+   IMPORTANT:
+   Replace this URL with your deployed Google Apps Script
+   Web App /exec URL.
+*/
+
+const UNDERWORLD_BACKEND_URL =
+  'https://script.google.com/macros/s/AKfycbyHik2t4HnaeQsY9A992qOPdMHxjV0YeS-pcSnfisZYwJW5JJbH55RxhRHPHbGO2hztSA/exec';
+
+
+/* ---------------------------------------------------------
+   STORAGE
+--------------------------------------------------------- */
+
+const UNDERWORLD_ACCESS_KEY =
+  'ap_underworld_access';
+
+const UNDERWORLD_EMAIL_KEY =
+  'ap_underworld_email';
+
+const UNDERWORLD_PHONE_KEY =
+  'ap_underworld_phone';
+
+
+/* ---------------------------------------------------------
+   ELEMENTS
+--------------------------------------------------------- */
+
+const underworldAccess =
+  document.getElementById('underworld-access');
+
+const underworldBackdrop =
+  document.getElementById('underworld-access-backdrop');
+
+const underworldClose =
+  document.getElementById('underworld-access-close');
+
+const underworldForm =
+  document.getElementById('underworld-access-form');
+
+const underworldEmail =
+  document.getElementById('underworld-email');
+
+const underworldPhone =
+  document.getElementById('underworld-phone');
+
+const underworldConsent =
+  document.getElementById('underworld-consent');
+
+const underworldSubmit =
+  document.getElementById('underworld-submit');
+
+const underworldSubmitText =
+  document.getElementById('underworld-submit-text');
+
+const underworldStatus =
+  document.getElementById('underworld-status');
+
+
+/* ---------------------------------------------------------
+   CHECK LOCAL ACCESS
+--------------------------------------------------------- */
+
+function hasUnderworldAccess() {
+
+  return (
+    localStorage.getItem(
+      UNDERWORLD_ACCESS_KEY
+    ) === 'ACTIVE'
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   SAVE ACCESS
+--------------------------------------------------------- */
+
+function saveUnderworldAccess(
+  email,
+  phone
+) {
+
+  localStorage.setItem(
+    UNDERWORLD_ACCESS_KEY,
+    'ACTIVE'
+  );
+
+  localStorage.setItem(
+    UNDERWORLD_EMAIL_KEY,
+    email
+  );
+
+  localStorage.setItem(
+    UNDERWORLD_PHONE_KEY,
+    phone
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   REMOVE ACCESS
+--------------------------------------------------------- */
+
+function removeUnderworldAccess() {
+
+  localStorage.removeItem(
+    UNDERWORLD_ACCESS_KEY
+  );
+
+  localStorage.removeItem(
+    UNDERWORLD_EMAIL_KEY
+  );
+
+  localStorage.removeItem(
+    UNDERWORLD_PHONE_KEY
+  );
+
+  document.body.classList.remove(
+    'underworld-unlocked'
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   MARK UNLOCKED
+--------------------------------------------------------- */
+
+function markUnderworldUnlocked() {
+
+  document.body.classList.add(
+    'underworld-unlocked'
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   OPEN ACCESS WINDOW
+--------------------------------------------------------- */
+
+function openUnderworldAccess() {
+
+  if (!underworldAccess) {
+    return;
+  }
+
+  underworldAccess.classList.add(
+    'active'
+  );
+
+  underworldAccess.setAttribute(
+    'aria-hidden',
+    'false'
+  );
+
+  document.body.classList.add(
+    'no-scroll'
+  );
+
+  setTimeout(() => {
+
+    if (underworldEmail) {
+      underworldEmail.focus();
+    }
+
+  }, 250);
+
+}
+
+
+/* ---------------------------------------------------------
+   CLOSE ACCESS WINDOW
+--------------------------------------------------------- */
+
+function closeUnderworldAccess() {
+
+  if (!underworldAccess) {
+    return;
+  }
+
+  underworldAccess.classList.remove(
+    'active'
+  );
+
+  underworldAccess.setAttribute(
+    'aria-hidden',
+    'true'
+  );
+
+  document.body.classList.remove(
+    'no-scroll'
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   STATUS
+--------------------------------------------------------- */
+
+function showUnderworldStatus(
+  message,
+  type = ''
+) {
+
+  if (!underworldStatus) {
+    return;
+  }
+
+  underworldStatus.textContent =
+    message;
+
+  underworldStatus.className =
+    'underworld-status';
+
+  if (type) {
+
+    underworldStatus.classList.add(
+      type
+    );
+
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   EMAIL VALIDATION
+--------------------------------------------------------- */
+
+function isValidUnderworldEmail(
+  email
+) {
+
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    .test(email);
+
+}
+
+
+/* ---------------------------------------------------------
+   PHONE VALIDATION
+--------------------------------------------------------- */
+
+function isValidUnderworldPhone(
+  phone
+) {
+
+  /*
+     Allows international numbers,
+     spaces, +, -, parentheses.
+  */
+
+  const cleaned =
+    phone.replace(
+      /[\s\-().]/g,
+      ''
+    );
+
+  return /^\+?\d{8,15}$/
+    .test(cleaned);
+
+}
+
+
+/* ---------------------------------------------------------
+   NORMALIZE PHONE
+--------------------------------------------------------- */
+
+function normalizeUnderworldPhone(
+  phone
+) {
+
+  return phone
+    .replace(
+      /[\s\-().]/g,
+      ''
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   SEND ACCESS REQUEST
+--------------------------------------------------------- */
+
+async function sendUnderworldRequest(
+  email,
+  phone
+) {
+
+  const payload = {
+
+    action:
+      'underworld_access',
+
+    email:
+      email,
+
+    phone:
+      phone,
+
+    source:
+      'Abdullah Psychotic Website',
+
+    userAgent:
+      navigator.userAgent,
+
+    requestedAt:
+      new Date().toISOString()
+
+  };
+
+
+  /*
+     Same no-cors approach already used
+     by your newsletter system.
+  */
+
+  await fetch(
+    UNDERWORLD_BACKEND_URL,
+    {
+      method: 'POST',
+
+      mode: 'no-cors',
+
+      redirect: 'follow',
+
+      cache: 'no-cache',
+
+      headers: {
+        'Content-Type':
+          'text/plain;charset=utf-8'
+      },
+
+      body:
+        JSON.stringify(payload)
+    }
+  );
+
+  return true;
+
+}
+
+
+/* ---------------------------------------------------------
+   SUBMIT
+--------------------------------------------------------- */
+
+if (underworldForm) {
+
+  underworldForm.addEventListener(
+    'submit',
+    async function(event) {
+
+      event.preventDefault();
+
+
+      const email =
+        underworldEmail.value
+          .trim()
+          .toLowerCase();
+
+
+      const phone =
+        normalizeUnderworldPhone(
+          underworldPhone.value.trim()
+        );
+
+
+      /* EMAIL */
+
+      if (!isValidUnderworldEmail(email)) {
+
+        showUnderworldStatus(
+          'PLEASE ENTER A VALID EMAIL ADDRESS.',
+          'error'
+        );
+
+        underworldEmail.focus();
+
+        return;
+      }
+
+
+      /* PHONE */
+
+      if (!isValidUnderworldPhone(phone)) {
+
+        showUnderworldStatus(
+          'PLEASE ENTER A VALID PHONE NUMBER.',
+          'error'
+        );
+
+        underworldPhone.focus();
+
+        return;
+      }
+
+
+      /* CONSENT */
+
+      if (
+        !underworldConsent ||
+        !underworldConsent.checked
+      ) {
+
+        showUnderworldStatus(
+          'PLEASE CONFIRM THE ACCESS NOTICE.',
+          'error'
+        );
+
+        return;
+      }
+
+
+      /* LOADING */
+
+      underworldSubmit.disabled =
+        true;
+
+      underworldSubmit.classList.add(
+        'loading'
+      );
+
+      showUnderworldStatus(
+        'VERIFYING ACCESS...',
+        'info'
+      );
+
+
+      try {
+
+        await sendUnderworldRequest(
+          email,
+          phone
+        );
+
+
+        /*
+           Save local access state.
+        */
+
+        saveUnderworldAccess(
+          email,
+          phone
+        );
+
+        markUnderworldUnlocked();
+
+
+        showUnderworldStatus(
+          'ACCESS GRANTED.',
+          'success'
+        );
+
+
+        setTimeout(() => {
+
+          closeUnderworldAccess();
+
+          /*
+             Find the first protected link.
+          */
+
+          const firstLink =
+            document.querySelector(
+              '.underworld-protected-link'
+            );
+
+          if (firstLink) {
+
+            window.location.href =
+              firstLink.dataset.underworldUrl;
+
+          }
+
+        }, 800);
+
+
+      } catch (error) {
+
+        console.error(
+          'Underworld access error:',
+          error
+        );
+
+        showUnderworldStatus(
+          'ACCESS REQUEST FAILED. PLEASE TRY AGAIN.',
+          'error'
+        );
+
+      } finally {
+
+        underworldSubmit.disabled =
+          false;
+
+        underworldSubmit.classList.remove(
+          'loading'
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   PROTECTED LINKS
+--------------------------------------------------------- */
+
+document
+  .querySelectorAll(
+    '.underworld-protected-link'
+  )
+  .forEach(link => {
+
+    link.addEventListener(
+      'click',
+      function(event) {
+
+        const target =
+          this.dataset.underworldUrl;
+
+
+        if (!target) {
+          return;
+        }
+
+
+        /*
+           Already unlocked
+        */
+
+        if (hasUnderworldAccess()) {
+
+          markUnderworldUnlocked();
+
+          /*
+             Let the browser follow normally.
+          */
+
+          return;
+
+        }
+
+
+        /*
+           Not unlocked:
+           stop navigation.
+        */
+
+        event.preventDefault();
+
+
+        /*
+           Close navigation drawer first.
+        */
+
+        if (
+          typeof closeAll ===
+          'function'
+        ) {
+
+          closeAll();
+
+        }
+
+
+        /*
+           Open access panel.
+        */
+
+        openUnderworldAccess();
+
+      }
+    );
+
+  });
+
+
+/* ---------------------------------------------------------
+   CLOSE EVENTS
+--------------------------------------------------------- */
+
+if (underworldClose) {
+
+  underworldClose.addEventListener(
+    'click',
+    closeUnderworldAccess
+  );
+
+}
+
+
+if (underworldBackdrop) {
+
+  underworldBackdrop.addEventListener(
+    'click',
+    closeUnderworldAccess
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   ESC KEY
+--------------------------------------------------------- */
+
+document.addEventListener(
+  'keydown',
+  function(event) {
+
+    if (
+      event.key === 'Escape' &&
+      underworldAccess &&
+      underworldAccess.classList.contains(
+        'active'
+      )
+    ) {
+
+      closeUnderworldAccess();
+
+    }
+
+  }
+);
+
+
+/* ---------------------------------------------------------
+   RESTORE EXISTING ACCESS
+--------------------------------------------------------- */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  function() {
+
+    if (hasUnderworldAccess()) {
+
+      markUnderworldUnlocked();
+
+    }
+
+  }
+);
 </script>
 
 </body>
