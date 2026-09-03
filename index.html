@@ -5583,7 +5583,7 @@ a{
 .underworld-access {
     position: fixed;
     inset: 0;
-    z-index: 10050;
+    z-index: 100500;
 
     display: flex;
     align-items: center;
@@ -6278,6 +6278,195 @@ body.underworld-unlocked
 
 
 /* =========================================================
+   ABDULLAH PSYCHOTIC — LOGOUT WINDOW
+   Same visual language as the sign-in window.
+========================================================= */
+
+.ap-logout-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-sizing: border-box;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s ease, visibility 0s linear .35s;
+}
+
+.ap-logout-modal.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity .35s ease, visibility 0s linear 0s;
+}
+
+.ap-logout-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .84);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.ap-logout-panel {
+    position: relative;
+    width: min(88vw, 600px);
+    height: min(88vh, 430px);
+    min-height: 0;
+    overflow: hidden;
+    background: #dedbdd;
+    border-radius: 25px;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, .65);
+    box-sizing: border-box;
+    transform: translateY(25px) scale(.97);
+    transition: transform .45s cubic-bezier(.77, 0, .175, 1);
+}
+
+.ap-logout-modal.active .ap-logout-panel {
+    transform: translateY(0) scale(1);
+}
+
+.ap-logout-logo {
+    position: absolute;
+    top: 32px;
+    left: 38px;
+    width: 82px;
+    height: 82px;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.ap-logout-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 82px 62px 34px;
+}
+
+.ap-logout-content h2 {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Francy Tiguan", serif;
+    font-size: clamp(42px, 5vw, 62px);
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    line-height: 1;
+    color: #280000;
+    text-align: center;
+}
+
+.ap-logout-line {
+    width: 52px;
+    height: 1px;
+    margin: 16px auto 24px;
+    background: #280000;
+}
+
+.ap-logout-btn {
+    width: min(440px, 100%);
+padding: 12px 0px;    
+border: 0;
+    border-radius: 0px;
+    background: #280000;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Montserrat", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: background .25s ease, transform .2s ease, box-shadow .25s ease;
+}
+
+.ap-logout-btn:hover {
+    background: #430000;
+    box-shadow: 0 8px 25px rgba(40,0,0,.22);
+}
+
+.ap-logout-btn:active {
+    transform: scale(.985);
+}
+
+@media (max-width: 768px) {
+    .ap-logout-panel {
+        width: min(91vw, 510px);
+        height: min(60vh, 390px);
+    }
+
+    .ap-logout-logo {
+        top: 26px;
+        left: 31px;
+        width: 64px;
+        height: 64px;
+    }
+
+    .ap-logout-content {
+        padding: 70px 40px 28px;
+    }
+
+    .ap-logout-content h2 {
+        font-size: 45px;
+    }
+
+    .ap-logout-btn {
+        height: 45px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ap-logout-modal {
+        padding: 7px;
+    }
+
+    .ap-logout-panel {
+        width: 91vw;
+        height: min(52vh, 320px);
+    }
+
+    .ap-logout-logo {
+        top: 20px;
+        left: 22px;
+        width: 54px;
+        height: 54px;
+    }
+
+    .ap-logout-content {
+        padding: 63px 23px 19px;
+    }
+
+    .ap-logout-content h2 {
+        font-size: 31px;
+        letter-spacing: 1.6px;
+    }
+
+    .ap-logout-line {
+        width: 38px;
+        margin: 10px auto 20px;
+    }
+
+    .ap-logout-btn {
+        height: 41px;
+        border-radius: 20.5px;
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+}
+
+/* =========================================================
    TABLET
 ========================================================= */
 
@@ -6876,6 +7065,15 @@ body.underworld-unlocked
 }
 
 
+
+/* Authentication windows stay above the mobile welcome screen. */
+body:has(.underworld-access.active) #welcome-screen,
+body:has(.ap-logout-modal.active) #welcome-screen {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
 </style>
 </head>
 
@@ -7447,6 +7645,52 @@ body.underworld-unlocked
 
 </section>
 
+
+</div>
+
+<!-- =========================================================
+     ABDULLAH PSYCHOTIC — LOGOUT WINDOW
+========================================================= -->
+
+<div
+    class="ap-logout-modal"
+    id="ap-logout-modal"
+    aria-hidden="true">
+
+    <div
+        class="ap-logout-backdrop"
+        id="ap-logout-backdrop">
+    </div>
+
+    <section
+        class="ap-logout-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="ap-logout-title">
+
+        <img
+            src="icon.png"
+            alt="Abdullah Psychotic"
+            class="ap-logout-logo">
+
+        <div class="ap-logout-content">
+
+            <h2 id="ap-logout-title">
+                Abdullah Psychotic
+            </h2>
+
+            <div class="ap-logout-line"></div>
+
+            <button
+                type="button"
+                class="ap-logout-btn"
+                id="ap-logout-btn">
+                Log out
+            </button>
+
+        </div>
+
+    </section>
 
 </div>
 
@@ -8255,6 +8499,23 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if (!welcomeScreen || !typingText) return;
 
+    /*
+       One-time welcome screen:
+       once completed, localStorage keeps it permanently skipped
+       after refresh in this browser/site.
+    */
+    if (localStorage.getItem('ap_hasSeenWelcome') === 'true') {
+
+        welcomeScreen.remove();
+        document.body.classList.remove('no-scroll');
+
+        if (heroContent) {
+            heroContent.classList.add('animate-hero');
+        }
+
+        return;
+    }
+
     /* Desktop / laptop:
        Skip welcome animation completely. */
 
@@ -8291,7 +8552,7 @@ window.addEventListener('DOMContentLoaded', () => {
     /* Check if welcome screen was already seen */
 
     const hasSeenWelcome =
-        sessionStorage.getItem('hasSeenWelcome');
+        localStorage.getItem('ap_hasSeenWelcome');
 
     if (hasSeenWelcome) {
 
@@ -8368,8 +8629,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 welcomeScreen.classList.add('fade-out');
 
-                sessionStorage.setItem(
-                    'hasSeenWelcome',
+                localStorage.setItem(
+                    'ap_hasSeenWelcome',
                     'true'
                 );
 
@@ -11165,6 +11426,66 @@ const underworldFloatingBtn =
 
 
 /* ---------------------------------------------------------
+   LOGOUT WINDOW
+--------------------------------------------------------- */
+
+const apLogoutModal =
+  document.getElementById(
+    'ap-logout-modal'
+  );
+
+const apLogoutBackdrop =
+  document.getElementById(
+    'ap-logout-backdrop'
+  );
+
+const apLogoutBtn =
+  document.getElementById(
+    'ap-logout-btn'
+  );
+
+
+function openApLogoutWindow() {
+
+  if (!apLogoutModal) {
+    return;
+  }
+
+  apLogoutModal.classList.add('active');
+
+  apLogoutModal.setAttribute(
+    'aria-hidden',
+    'false'
+  );
+
+  document.body.classList.add(
+    'no-scroll'
+  );
+
+}
+
+
+function closeApLogoutWindow() {
+
+  if (!apLogoutModal) {
+    return;
+  }
+
+  apLogoutModal.classList.remove('active');
+
+  apLogoutModal.setAttribute(
+    'aria-hidden',
+    'true'
+  );
+
+  document.body.classList.remove(
+    'no-scroll'
+  );
+
+}
+
+
+/* ---------------------------------------------------------
    FLOATING BUTTON STATE
 --------------------------------------------------------- */
 
@@ -11677,25 +11998,8 @@ if (underworldFloatingBtn) {
 
       if (hasUnderworldAccess()) {
 
-        const shouldSignOut = confirm(
-          'Are you sure you want to sign out from Underworld access?'
-        );
-
-        if (!shouldSignOut) {
-          return;
-        }
-
-        removeUnderworldAccess();
-
-        if (underworldForm) {
-          underworldForm.reset();
-        }
-
         closeUnderworldAccess();
-
-        alert(
-          'You have been signed out successfully.'
-        );
+        openApLogoutWindow();
 
         return;
       }
@@ -11706,6 +12010,40 @@ if (underworldFloatingBtn) {
       */
 
       openUnderworldAccess();
+
+    }
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   LOGOUT WINDOW EVENTS
+--------------------------------------------------------- */
+
+if (apLogoutBackdrop) {
+
+  apLogoutBackdrop.addEventListener(
+    'click',
+    closeApLogoutWindow
+  );
+
+}
+
+if (apLogoutBtn) {
+
+  apLogoutBtn.addEventListener(
+    'click',
+    function() {
+
+      removeUnderworldAccess();
+
+      if (underworldForm) {
+        underworldForm.reset();
+      }
+
+      closeApLogoutWindow();
+      updateUnderworldFloatingButton();
 
     }
   );
@@ -11819,8 +12157,21 @@ document.addEventListener(
   'keydown',
   function(event) {
 
+    if (event.key !== 'Escape') {
+      return;
+    }
+
     if (
-      event.key === 'Escape' &&
+      apLogoutModal &&
+      apLogoutModal.classList.contains(
+        'active'
+      )
+    ) {
+      closeApLogoutWindow();
+      return;
+    }
+
+    if (
       underworldAccess &&
       underworldAccess.classList.contains(
         'active'
@@ -11850,6 +12201,20 @@ document.addEventListener(
     }
 
     updateUnderworldFloatingButton();
+
+    /* Auto-open Sign in 3 seconds after page load when signed out. */
+    setTimeout(() => {
+
+      if (
+        !hasUnderworldAccess() &&
+        underworldAccess &&
+        !underworldAccess.classList.contains('active') &&
+        !(apLogoutModal && apLogoutModal.classList.contains('active'))
+      ) {
+        openUnderworldAccess();
+      }
+
+    }, 5000);
 
   }
 );
