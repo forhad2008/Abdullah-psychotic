@@ -2563,8 +2563,6 @@ section {
   color: #c1121f;
 }
 
-
-
 @media (max-width: 600px) {
   .newsletter-section {
     padding: 16px 26px 17px;
@@ -4571,6 +4569,7 @@ header.scrolled .logo-img{
 
   align-self: center;
 }
+
 
 /* ---------- Section headers ---------- */
 .products{
@@ -9648,106 +9647,55 @@ function selectSize(size) {
    CONFIRM SIZE + ADD TO CART
 ========================================================= */
 
-function confirmSizeAndAddToCart() {
-
-    if (!pendingProduct) {
-        return;
-    }
-
-
-    if (!selectedSize) {
-
-        alert(
-            'Please select a size first.'
-        );
-
-        return;
-    }
-
-
-    /*
-       SHOPPING ACCESS CHECK
-
-       The visitor must be signed in before the
-       selected product is actually added to the bag.
-
-       IMPORTANT:
-       pendingProduct and selectedSize are intentionally
-       kept while the sign-in window is open, so the
-       selected product/size is not lost.
-    */
-
-    if (!hasUnderworldAccess()) {
-
-        /*
-           Every Add to Cart confirmation made while the
-           visitor is signed out must open Sign In.
-        */
-
-        openUnderworldAccess();
-
-        return;
-    }
-
-
-    completePendingAddToCart();
-
-}
-
-
-/* =========================================================
-   COMPLETE PENDING ADD TO CART
-========================================================= */
-
 function completePendingAddToCart() {
 
     if (!pendingProduct || !selectedSize) {
         return;
     }
 
-
-    const cartKey =
-        `${pendingProduct.id}-${selectedSize}`;
-
-
-    const existingItem =
-        cart.find(
-            item =>
-                item.cartKey === cartKey
-        );
-
+    const cartKey = `${pendingProduct.id}-${selectedSize}`;
+    const existingItem = cart.find(item => item.cartKey === cartKey);
 
     if (existingItem) {
-
         existingItem.qty += 1;
-
     } else {
-
         cart.push({
-
             ...pendingProduct,
-
             size: selectedSize,
-
             cartKey: cartKey,
-
             qty: 1
-
         });
-
     }
-
 
     saveCartToStorage();
     updateCartUI();
 
-
     pendingProduct = null;
     selectedSize = null;
 
-
     closeSizeSheet();
     openCart();
+}
+
+function confirmSizeAndAddToCart() {
+
+    if (!pendingProduct) {
+        return;
+    }
+
+    if (!selectedSize) {
+        alert('Please select a size first.');
+        return;
+    }
+
+    // Signed out: open sign-in immediately and keep the
+    // selected product + size waiting for completion.
+    if (!hasUnderworldAccess()) {
+        openUnderworldAccess();
+        return;
+    }
+
+    completePendingAddToCart();
 
 }
 
@@ -11707,26 +11655,14 @@ function openUnderworldAccess() {
     return;
   }
 
-  underworldAccess.classList.add(
-    'active'
-  );
+  underworldAccess.classList.add('active');
+  underworldAccess.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('no-scroll');
 
-  underworldAccess.setAttribute(
-    'aria-hidden',
-    'false'
-  );
-
-  document.body.classList.add(
-    'no-scroll'
-  );
-
-  setTimeout(() => {
-
-    if (underworldEmail) {
-      underworldEmail.focus();
-    }
-
-  }, 250);
+  // Focus immediately — no artificial 250ms delay.
+  if (underworldEmail) {
+    requestAnimationFrame(() => underworldEmail.focus());
+  }
 
 }
 
@@ -11994,81 +11930,28 @@ if (underworldForm) {
 
       try {
 
-        await sendUnderworldRequest(
-          email,
-          phone
-        );
+        // The backend uses no-cors, so the browser cannot inspect
+        // the response anyway. Start the request, then immediately
+        // activate the local access state instead of waiting for an
+        // artificial success-screen delay.
+        sendUnderworldRequest(email, phone).catch(error => {
+          console.error('Underworld access request error:', error);
+        });
 
-
-        /*
-           Save local access state.
-        */
-
-        saveUnderworldAccess(
-          email,
-          phone
-        );
-
+        saveUnderworldAccess(email, phone);
         markUnderworldUnlocked();
 
-
-        /*
-           If sign-in was requested by Add to Cart,
-           finish that exact product and size.
-        */
-
-        const pendingCartAdd =
-          pendingProduct &&
-          selectedSize;
-
-
-        if (pendingCartAdd) {
-
-          /*
-             Do NOT require another sign-in immediately.
-             This sign-in is the authorization for this
-             Add to Cart action.
-          */
-
+        // Complete the pending Add-to-Cart action immediately.
+        if (pendingProduct && selectedSize) {
           closeUnderworldAccess();
-
-          showUnderworldStatus(
-            'ACCESS GRANTED.',
-            'success'
-          );
-
-
-          setTimeout(() => {
-
-            completePendingAddToCart();
-
-          }, 800);
-
+          updateUnderworldFloatingButton();
+          completePendingAddToCart();
           return;
-
         }
 
-
-        showUnderworldStatus(
-          'ACCESS GRANTED.',
-          'success'
-        );
-
-
-        setTimeout(() => {
-
-          closeUnderworldAccess();
-
-          /*
-             OPTION 2:
-             Stay on the current page.
-             Access is saved locally and no link opens.
-          */
-
-          updateUnderworldFloatingButton();
-
-        }, 800);
-
+        showUnderworldStatus('ACCESS GRANTED.', 'success');
+        closeUnderworldAccess();
+        updateUnderworldFloatingButton();
 
       } catch (error) {
 
@@ -12320,31 +12203,9 @@ document.addEventListener(
 
     updateUnderworldFloatingButton();
 
-    /* Auto-open Sign in 3 seconds after page load when signed out. */
-
-    setTimeout(() => {
-
-    const loginAlreadyShown =
-        sessionStorage.getItem('ap_loginShown') === 'true';
-
-    if (
-        !hasUnderworldAccess() &&
-        !loginAlreadyShown &&
-        underworldAccess &&
-        !underworldAccess.classList.contains('active') &&
-        !(apLogoutModal &&
-          apLogoutModal.classList.contains('active'))
-    ) {
-
-        openUnderworldAccess();
-
-        sessionStorage.setItem(
-            'ap_loginShown',
-            'true'
-        );
-    }
-
-}, 4000);
+    // Sign-in is now action-based only.
+    // It opens instantly when the user needs access,
+    // instead of interrupting the page after a timer.
 
   }
 );
