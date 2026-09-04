@@ -5577,6 +5577,157 @@ a{
  
 
 
+
+/* =========================================================
+   ABDULLAH'S INSIDER — LOGIN SUCCESS WINDOW
+========================================================= */
+.abdullah-insider-success {
+    position: fixed;
+    inset: 0;
+    z-index: 101000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(0,0,0,.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s ease, visibility 0s linear .35s;
+}
+
+.abdullah-insider-success.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity .35s ease, visibility 0s linear 0s;
+}
+
+.abdullah-insider-success-panel {
+    position: relative;
+    width: min(88vw, 520px);
+    min-height: 300px;
+    padding: 58px 42px 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    background: linear-gradient(145deg,#17110d 0%,#100c09 55%,#080706 100%);
+    border: 1px solid rgba(112,76,48,.55);
+    border-radius: 22px;
+    box-shadow: 0 30px 90px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.04);
+    transform: translateY(22px) scale(.97);
+    transition: transform .45s cubic-bezier(.77,0,.175,1);
+}
+
+.abdullah-insider-success.active .abdullah-insider-success-panel {
+    transform: translateY(0) scale(1);
+}
+
+.abdullah-insider-success-title {
+    margin: 0;
+    color: #f3eee8;
+    font-family: "Francy Tiguan","Playfair Display",serif;
+    font-size: clamp(38px,7vw,58px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 2px;
+}
+
+.abdullah-insider-success-line {
+    width: 58px;
+    height: 1px;
+    margin: 19px auto 22px;
+    background: #6f4b31;
+}
+
+.abdullah-insider-success-message {
+    margin: 0 0 32px;
+    max-width: 380px;
+    color: #c9c0b8;
+    font-family: "Montserrat",Arial,sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.7;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+}
+
+.abdullah-insider-success-message strong {
+    display: block;
+    margin-top: 5px;
+    color: #f5eee7;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+}
+
+.abdullah-insider-success-btn {
+    width: min(100%,270px);
+    height: 52px;
+    padding: 0 24px;
+    border: 1px solid #765039;
+    border-radius: 4px;
+    background: #4b2f1e;
+    color: #fff;
+    font-family: "Montserrat",Arial,sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .25s ease,border-color .25s ease,transform .2s ease;
+}
+
+.abdullah-insider-success-btn:hover {
+    background: #63412b;
+    border-color: #916546;
+}
+
+.abdullah-insider-success-btn:active {
+    transform: scale(.98);
+}
+
+@media (max-width:480px) {
+    .abdullah-insider-success {
+        padding: 16px;
+    }
+
+    .abdullah-insider-success-panel {
+        width: 100%;
+        min-height: 270px;
+        padding: 48px 24px 30px;
+        border-radius: 18px;
+    }
+
+    .abdullah-insider-success-title {
+        font-size: 40px;
+        letter-spacing: 1.5px;
+    }
+
+    .abdullah-insider-success-line {
+        margin: 16px auto 18px;
+    }
+
+    .abdullah-insider-success-message {
+        margin-bottom: 27px;
+        font-size: 11px;
+        line-height: 1.65;
+        letter-spacing: 1px;
+    }
+
+    .abdullah-insider-success-btn {
+        width: 100%;
+        height: 50px;
+        font-size: 9px;
+        letter-spacing: 2.4px;
+    }
+}
+
 /* =========================================================
    ABDULLAH PSYCHOTIC
    UNDERWORLD ACCESS — FINAL
@@ -7723,6 +7874,39 @@ body:has(.ap-logout-modal.active) #welcome-screen {
 </section>
 
 
+</div>
+
+<!-- =========================================================
+     ABDULLAH PSYCHOTIC — INSIDER LOGIN SUCCESS WINDOW
+========================================================= -->
+<div class="abdullah-insider-success"
+     id="abdullah-insider-success"
+     aria-hidden="true">
+
+    <div class="abdullah-insider-success-panel"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="abdullah-insider-success-title">
+
+        <h2 class="abdullah-insider-success-title"
+            id="abdullah-insider-success-title">
+            Welcome
+        </h2>
+
+        <div class="abdullah-insider-success-line"></div>
+
+        <p class="abdullah-insider-success-message">
+            You are now
+            <strong>Abdullah's Insider.</strong>
+        </p>
+
+        <button type="button"
+                class="abdullah-insider-success-btn"
+                id="abdullah-insider-success-btn">
+            ENTER INSIDER
+        </button>
+
+    </div>
 </div>
 
 <!-- =========================================================
@@ -11994,6 +12178,59 @@ async function requestUnderworldCode() {
 
 
 /* =========================================================
+   ABDULLAH'S INSIDER — SUCCESS WINDOW CONTROL
+========================================================= */
+
+function openAbdullahInsiderSuccess() {
+    const successWindow = document.getElementById('abdullah-insider-success');
+
+    if (!successWindow) {
+        return;
+    }
+
+    successWindow.classList.add('active');
+    successWindow.setAttribute('aria-hidden','false');
+    document.body.classList.add('no-scroll');
+}
+
+function closeAbdullahInsiderSuccess() {
+    const successWindow = document.getElementById('abdullah-insider-success');
+
+    if (!successWindow) {
+        return;
+    }
+
+    successWindow.classList.remove('active');
+    successWindow.setAttribute('aria-hidden','true');
+    document.body.classList.remove('no-scroll');
+}
+
+const insiderSuccessBtn =
+    document.getElementById('abdullah-insider-success-btn');
+
+if (insiderSuccessBtn) {
+    insiderSuccessBtn.addEventListener(
+        'click',
+        closeAbdullahInsiderSuccess
+    );
+}
+
+const insiderSuccessWindow =
+    document.getElementById('abdullah-insider-success');
+
+if (insiderSuccessWindow) {
+    insiderSuccessWindow.addEventListener(
+        'click',
+        function (event) {
+            if (event.target === insiderSuccessWindow) {
+                closeAbdullahInsiderSuccess();
+            }
+        }
+    );
+}
+
+
+/* =========================================================
    27. VERIFY CODE
 ========================================================= */
 
@@ -12200,10 +12437,17 @@ async function verifyUnderworldCode() {
            Very short success delay.
         */
 
+        
         setTimeout(
             () => {
 
                 closeUnderworldModal();
+
+                /*
+                 * Show the Insider window automatically
+                 * only after backend authentication succeeds.
+                 */
+                openAbdullahInsiderSuccess();
 
                 if (
                     typeof pendingUnderworldAction ===
@@ -12217,11 +12461,10 @@ async function verifyUnderworldCode() {
                         null;
 
                     action();
-
                 }
 
             },
-            250
+            350
         );
 
     } catch (error) {
