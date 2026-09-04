@@ -8599,6 +8599,12 @@ const UNDERWORLD_CODE_TIME_KEY =
 const UNDERWORLD_CODE_TTL_MS =
     3 * 60 * 1000;
 
+const UNDERWORLD_AUTO_OPEN_TAB_KEY =
+    'ap_underworld_auto_open_tab_once';
+
+const UNDERWORLD_AUTO_OPEN_TAB_DELAY_MS =
+    350;
+
 
 /* =========================================================
    1. GLOBAL STATE
@@ -12676,6 +12682,40 @@ window.UnderworldAuth = {
         }
 
 };
+
+
+function shouldAutoOpenUnderworldOncePerTab() {
+    try {
+        if (sessionStorage.getItem(UNDERWORLD_AUTO_OPEN_TAB_KEY) === '1') {
+            return false;
+        }
+
+        sessionStorage.setItem(UNDERWORLD_AUTO_OPEN_TAB_KEY, '1');
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+function autoOpenUnderworldForUnsignedUser() {
+    if (typeof isUnderworldLoggedIn === 'function' && isUnderworldLoggedIn()) {
+        return;
+    }
+
+    if (!shouldAutoOpenUnderworldOncePerTab()) {
+        return;
+    }
+
+    setTimeout(() => {
+        if (typeof isUnderworldLoggedIn === 'function' && isUnderworldLoggedIn()) {
+            return;
+        }
+
+        if (underworldModal && !underworldModal.classList.contains('active')) {
+            openUnderworldModal();
+        }
+    }, UNDERWORLD_AUTO_OPEN_TAB_DELAY_MS);
+}
 
 
 /* =========================================================
