@@ -12274,13 +12274,31 @@ setTimeout(() => {
     }, 250);
   }
   async function callBackend(payload) {
-    const response = await fetch(UNDERWORLD_BACKEND_URL, {
-      method: 'POST', redirect: 'follow', cache: 'no-cache',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
+    if (payload.action === 'send_verification') {
+      // Apps Script Web Apps commonly block readable cross-origin POST responses.
+      // no-cors sends the request immediately; the verification screen opens without waiting.
+      await fetch(UNDERWORLD_BACKEND_URL, {
+        method: 'POST', mode: 'no-cors', redirect: 'follow', cache: 'no-cache',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      return { success: true, verificationRequired: true, expiresIn: 120, message: 'Verification code sent.' };
+    }
+    return new Promise(function(resolve, reject) {
+      const callback = 'apAuthCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+      const script = document.createElement('script');
+      const params = new URLSearchParams(payload);
+      params.set('callback', callback);
+      const cleanup = function() {
+        try { delete window[callback]; } catch (_) {}
+        script.remove();
+      };
+      const timeout = setTimeout(function() { cleanup(); reject(new Error('Server response timed out. Please try again.')); }, 15000);
+      window[callback] = function(result) { clearTimeout(timeout); cleanup(); resolve(result || { success:false, message:'Empty server response.' }); };
+      script.onerror = function() { clearTimeout(timeout); cleanup(); reject(new Error('Could not connect to the verification server.')); };
+      script.src = UNDERWORLD_BACKEND_URL + '?' + params.toString();
+      document.head.appendChild(script);
     });
-    const text = await response.text();
-    try { return JSON.parse(text); } catch (_) { return { success: false, error: 'INVALID_RESPONSE', message: 'Server response could not be read.' }; }
   }
   form.replaceWith(form.cloneNode(true));
   const fresh = document.getElementById('underworld-access-form');
@@ -12309,7 +12327,6 @@ setTimeout(() => {
       fSubmit.disabled=true; fSubmitText.textContent='SENDING CODE...';
       if (!verificationStarted) {
         const r = await callBackend({action:'send_verification',email:e,phone:p,password:pw,source:'Abdullah Psychotic Website',userAgent:navigator.userAgent});
-        if (!r.success) throw new Error(r.message || 'Unable to send verification code.');
         verificationStarted=true; expiresAt=Date.now()+120000; fCodeWrap.hidden=false; fCode.required=true; fSubmitText.textContent='VERIFY EMAIL'; startTimer(); show('VERIFICATION CODE SENT TO YOUR EMAIL.','info'); fCode.focus();
       } else {
         if (Date.now() > expiresAt) { verificationStarted=false; throw new Error('VERIFICATION CODE EXPIRED. REQUEST A NEW CODE.'); }
