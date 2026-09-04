@@ -12686,6 +12686,94 @@ document.addEventListener(
     }
 );
 
+/* =========================================================
+   FINAL SIGN-IN WINDOW CONTROL
+   ========================================================= */
+
+(function () {
+
+    let signInOpenedThisTap = false;
+
+    const floatingBtn =
+        document.getElementById('underworld-floating-btn');
+
+    const signInWindow =
+        document.getElementById('underworld-access');
+
+    if (!floatingBtn || !signInWindow) {
+        return;
+    }
+
+    function isSignInOpen() {
+        return (
+            signInWindow.classList.contains('active') ||
+            signInWindow.getAttribute('aria-hidden') === 'false'
+        );
+    }
+
+    function openSignInOnce() {
+
+        /* Already open = DO NOTHING */
+        if (isSignInOpen()) {
+            return false;
+        }
+
+        /* Already opened during this tap/event = DO NOTHING */
+        if (signInOpenedThisTap) {
+            return false;
+        }
+
+        signInOpenedThisTap = true;
+
+        /* Open the existing Sign In window */
+        if (typeof openUnderworldModal === 'function') {
+            openUnderworldModal();
+        } else {
+            signInWindow.classList.add('active');
+            signInWindow.setAttribute(
+                'aria-hidden',
+                'false'
+            );
+        }
+
+        /* Allow another tap after the current event finishes */
+        setTimeout(function () {
+            signInOpenedThisTap = false;
+        }, 0);
+
+        return true;
+    }
+
+    /*
+     * CONTROL FLOATING SIGN-IN BUTTON
+     */
+    floatingBtn.addEventListener(
+        'click',
+        function (event) {
+
+            /*
+             * If already logged in,
+             * do not open Sign In.
+             */
+            if (
+                typeof isUnderworldLocallyLoggedIn === 'function' &&
+                isUnderworldLocallyLoggedIn()
+            ) {
+                return;
+            }
+
+            /*
+             * Logged out:
+             * open Sign In only once for this tap.
+             */
+            openSignInOnce();
+
+        },
+        true
+    );
+
+})();
+
 </script>
 
 </body>
