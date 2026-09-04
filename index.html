@@ -11383,19 +11383,30 @@ document.addEventListener(
 
 /* =========================================================
    ABDULLAH PSYCHOTIC — UNDERWORLD EMAIL VERIFICATION
-   Passwordless: Email + Phone + Email Code
-   FIXED VERSION
+   Passwordless: Email + Email Code
+   PHONE IS NOT USED FOR AUTHENTICATION
 ========================================================= */
 
 const UNDERWORLD_BACKEND_URL =
   'https://script.google.com/macros/s/AKfycbyHik2t4HnaeQsY9A992qOPdMHxjV0YeS-pcSnfisZYwJW5JJbH55RxhRHPHbGO2hztSA/exec';
 
-const UNDERWORLD_ACCESS_KEY = 'ap_underworld_access';
-const UNDERWORLD_EMAIL_KEY = 'ap_underworld_email';
-const UNDERWORLD_PHONE_KEY = 'ap_underworld_phone';
-const UNDERWORLD_TOKEN_KEY = 'ap_underworld_access_token';
+const UNDERWORLD_ACCESS_KEY =
+  'ap_underworld_access';
 
-const UNDERWORLD_CODE_TTL_MS = 2 * 60 * 1000;
+const UNDERWORLD_EMAIL_KEY =
+  'ap_underworld_email';
+
+const UNDERWORLD_PHONE_KEY =
+  'ap_underworld_phone';
+
+const UNDERWORLD_TOKEN_KEY =
+  'ap_underworld_access_token';
+
+const UNDERWORLD_ACCESS_ID_KEY =
+  'ap_underworld_access_id';
+
+const UNDERWORLD_CODE_TTL_MS =
+  2 * 60 * 1000;
 
 
 /* =========================================================
@@ -11403,73 +11414,106 @@ const UNDERWORLD_CODE_TTL_MS = 2 * 60 * 1000;
 ========================================================= */
 
 const underworldAccess =
-  document.getElementById('underworld-access');
+  document.getElementById(
+    'underworld-access'
+  );
 
 const underworldBackdrop =
-  document.getElementById('underworld-access-backdrop');
+  document.getElementById(
+    'underworld-access-backdrop'
+  );
 
 const underworldClose =
-  document.getElementById('underworld-access-close');
+  document.getElementById(
+    'underworld-access-close'
+  );
 
 const underworldForm =
-  document.getElementById('underworld-access-form');
+  document.getElementById(
+    'underworld-access-form'
+  );
 
 const underworldEmail =
-  document.getElementById('underworld-email');
+  document.getElementById(
+    'underworld-email'
+  );
 
 const underworldPhone =
-  document.getElementById('underworld-phone');
+  document.getElementById(
+    'underworld-phone'
+  );
 
 const underworldConsent =
-  document.getElementById('underworld-consent');
+  document.getElementById(
+    'underworld-consent'
+  );
 
 const underworldSubmit =
-  document.getElementById('underworld-submit');
+  document.getElementById(
+    'underworld-submit'
+  );
 
 const underworldSubmitText =
-  document.getElementById('underworld-submit-text');
+  document.getElementById(
+    'underworld-submit-text'
+  );
 
 const underworldStatus =
-  document.getElementById('underworld-status');
+  document.getElementById(
+    'underworld-status'
+  );
 
 const underworldCodeWrap =
-  document.getElementById('underworld-code-wrap');
+  document.getElementById(
+    'underworld-code-wrap'
+  );
 
 const underworldCode =
-  document.getElementById('underworld-code');
+  document.getElementById(
+    'underworld-code'
+  );
 
 const underworldTimer =
-  document.getElementById('underworld-timer');
+  document.getElementById(
+    'underworld-timer'
+  );
 
 const underworldFloatingBtn =
-  document.getElementById('underworld-floating-btn');
+  document.getElementById(
+    'underworld-floating-btn'
+  );
 
 const apLogoutModal =
-  document.getElementById('ap-logout-modal');
+  document.getElementById(
+    'ap-logout-modal'
+  );
 
 const apLogoutBackdrop =
-  document.getElementById('ap-logout-backdrop');
+  document.getElementById(
+    'ap-logout-backdrop'
+  );
 
 const apLogoutBtn =
-  document.getElementById('ap-logout-btn');
+  document.getElementById(
+    'ap-logout-btn'
+  );
 
 
 /* =========================================================
    UNDERWORLD STATE
 ========================================================= */
 
-let underworldVerificationStarted = false;
-let underworldExpiresAt = 0;
-let underworldTimerId = null;
+let underworldVerificationStarted =
+  false;
 
-/*
- * IMPORTANT FIX:
- * The backend creates a unique Request ID when it
- * sends the verification code.
- *
- * We store that ID here and send it back when verifying.
- */
-let underworldRequestId = '';
+let underworldExpiresAt =
+  0;
+
+let underworldTimerId =
+  null;
+
+let underworldRequestId =
+  '';
 
 
 /* =========================================================
@@ -11477,13 +11521,17 @@ let underworldRequestId = '';
 ========================================================= */
 
 function underworldConfigured() {
+
   return (
     UNDERWORLD_BACKEND_URL &&
-    UNDERWORLD_BACKEND_URL.indexOf('PASTE_YOUR_') !== 0 &&
+    UNDERWORLD_BACKEND_URL.indexOf(
+      'PASTE_YOUR_'
+    ) !== 0 &&
     /^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/i.test(
       UNDERWORLD_BACKEND_URL
     )
   );
+
 }
 
 
@@ -11491,40 +11539,74 @@ function underworldConfigured() {
    STATUS
 ========================================================= */
 
-function showUnderworldStatus(message, type = '') {
-  if (!underworldStatus) return;
+function showUnderworldStatus(
+  message,
+  type = ''
+) {
 
-  underworldStatus.textContent = message;
-  underworldStatus.className = 'underworld-status';
+  if (!underworldStatus) {
+    return;
+  }
+
+  underworldStatus.textContent =
+    message;
+
+  underworldStatus.className =
+    'underworld-status';
 
   if (type) {
-    underworldStatus.classList.add(type);
+
+    underworldStatus.classList.add(
+      type
+    );
+
   }
+
 }
 
 
 /* =========================================================
-   NORMALIZATION
+   EMAIL NORMALIZATION
 ========================================================= */
 
-function normalizeUnderworldEmail(value) {
+function normalizeUnderworldEmail(
+  value
+) {
+
   return String(value || '')
     .trim()
     .toLowerCase();
+
 }
 
-function normalizeUnderworldPhone(value) {
+
+function isValidUnderworldEmail(
+  email
+) {
+
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    .test(email);
+
+}
+
+
+/* =========================================================
+   PHONE LEGACY SUPPORT
+   ---------------------------------------------------------
+   Phone is NO LONGER used for authentication.
+
+   We keep the old localStorage key so existing
+   installations do not break.
+========================================================= */
+
+function normalizeUnderworldPhone(
+  value
+) {
+
   return String(value || '')
     .replace(/[\s\-().]/g, '')
     .trim();
-}
 
-function isValidUnderworldEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function isValidUnderworldPhone(phone) {
-  return /^\+?\d{8,15}$/.test(phone);
 }
 
 
@@ -11533,11 +11615,28 @@ function isValidUnderworldPhone(phone) {
 ========================================================= */
 
 function hasUnderworldAccess() {
+
   return (
-    localStorage.getItem(UNDERWORLD_ACCESS_KEY) === 'ACTIVE' &&
-    !!localStorage.getItem(UNDERWORLD_TOKEN_KEY)
+    localStorage.getItem(
+      UNDERWORLD_ACCESS_KEY
+    ) === 'ACTIVE' &&
+    !!localStorage.getItem(
+      UNDERWORLD_TOKEN_KEY
+    )
   );
+
 }
+
+
+/* =========================================================
+   SAVE ACCESS
+   ---------------------------------------------------------
+   Authentication is based on:
+
+       EMAIL + ACCESS TOKEN
+
+   Phone is stored only as legacy information.
+========================================================= */
 
 function saveUnderworldAccess(
   email,
@@ -11545,6 +11644,7 @@ function saveUnderworldAccess(
   token,
   accessId
 ) {
+
   localStorage.setItem(
     UNDERWORLD_ACCESS_KEY,
     'ACTIVE'
@@ -11555,29 +11655,49 @@ function saveUnderworldAccess(
     email
   );
 
-  localStorage.setItem(
-    UNDERWORLD_PHONE_KEY,
-    phone
-  );
+  /*
+   * Keep phone storage for backward compatibility.
+   * It is NOT used to authenticate.
+   */
+
+  if (phone) {
+
+    localStorage.setItem(
+      UNDERWORLD_PHONE_KEY,
+      phone
+    );
+
+  }
 
   if (token) {
+
     localStorage.setItem(
       UNDERWORLD_TOKEN_KEY,
       token
     );
+
   }
 
   if (accessId) {
+
     localStorage.setItem(
-      'ap_underworld_access_id',
+      UNDERWORLD_ACCESS_ID_KEY,
       accessId
     );
+
   }
 
   updateUnderworldFloatingButton();
+
 }
 
+
+/* =========================================================
+   REMOVE ACCESS
+========================================================= */
+
 function removeUnderworldAccess() {
+
   localStorage.removeItem(
     UNDERWORLD_ACCESS_KEY
   );
@@ -11595,7 +11715,7 @@ function removeUnderworldAccess() {
   );
 
   localStorage.removeItem(
-    'ap_underworld_access_id'
+    UNDERWORLD_ACCESS_ID_KEY
   );
 
   document.body.classList.remove(
@@ -11603,12 +11723,20 @@ function removeUnderworldAccess() {
   );
 
   updateUnderworldFloatingButton();
+
 }
 
+
+/* =========================================================
+   MARK UNLOCKED
+========================================================= */
+
 function markUnderworldUnlocked() {
+
   document.body.classList.add(
     'underworld-unlocked'
   );
+
 }
 
 
@@ -11617,7 +11745,10 @@ function markUnderworldUnlocked() {
 ========================================================= */
 
 function updateUnderworldFloatingButton() {
-  if (!underworldFloatingBtn) return;
+
+  if (!underworldFloatingBtn) {
+    return;
+  }
 
   if (hasUnderworldAccess()) {
 
@@ -11650,18 +11781,25 @@ function updateUnderworldFloatingButton() {
       'aria-label',
       'Open Underworld Access'
     );
+
   }
+
 }
 
 
 /* =========================================================
-   OPEN / CLOSE UNDERWORLD
+   OPEN UNDERWORLD
 ========================================================= */
 
 function openUnderworldAccess() {
-  if (!underworldAccess) return;
 
-  underworldAccess.classList.add('active');
+  if (!underworldAccess) {
+    return;
+  }
+
+  underworldAccess.classList.add(
+    'active'
+  );
 
   underworldAccess.setAttribute(
     'aria-hidden',
@@ -11684,12 +11822,23 @@ function openUnderworldAccess() {
     } else if (underworldEmail) {
 
       underworldEmail.focus();
+
     }
+
   });
+
 }
 
+
+/* =========================================================
+   CLOSE UNDERWORLD
+========================================================= */
+
 function closeUnderworldAccess() {
-  if (!underworldAccess) return;
+
+  if (!underworldAccess) {
+    return;
+  }
 
   underworldAccess.classList.remove(
     'active'
@@ -11703,6 +11852,7 @@ function closeUnderworldAccess() {
   document.body.classList.remove(
     'no-scroll'
   );
+
 }
 
 
@@ -11711,7 +11861,10 @@ function closeUnderworldAccess() {
 ========================================================= */
 
 function openApLogoutWindow() {
-  if (!apLogoutModal) return;
+
+  if (!apLogoutModal) {
+    return;
+  }
 
   apLogoutModal.classList.add(
     'active'
@@ -11725,10 +11878,15 @@ function openApLogoutWindow() {
   document.body.classList.add(
     'no-scroll'
   );
+
 }
 
+
 function closeApLogoutWindow() {
-  if (!apLogoutModal) return;
+
+  if (!apLogoutModal) {
+    return;
+  }
 
   apLogoutModal.classList.remove(
     'active'
@@ -11742,6 +11900,7 @@ function closeApLogoutWindow() {
   document.body.classList.remove(
     'no-scroll'
   );
+
 }
 
 
@@ -11753,6 +11912,7 @@ function setUnderworldBusy(
   busy,
   label
 ) {
+
   if (underworldSubmit) {
 
     underworldSubmit.disabled =
@@ -11762,6 +11922,7 @@ function setUnderworldBusy(
       'loading',
       busy
     );
+
   }
 
   if (underworldSubmitText) {
@@ -11777,7 +11938,9 @@ function setUnderworldBusy(
                 : 'SEND CODE'
             )
       );
+
   }
+
 }
 
 
@@ -11816,6 +11979,7 @@ function startUnderworldTimer() {
               ' SECONDS'
 
             : 'CODE EXPIRED — REQUEST A NEW CODE';
+
       }
 
 
@@ -11831,10 +11995,8 @@ function startUnderworldTimer() {
         underworldVerificationStarted =
           false;
 
-        /*
-         * Verification request is no longer usable.
-         */
-        underworldRequestId = '';
+        underworldRequestId =
+          '';
 
 
         if (underworldCode) {
@@ -11844,13 +12006,15 @@ function startUnderworldTimer() {
 
           underworldCode.value =
             '';
+
         }
 
-
         setUnderworldBusy(false);
+
       }
 
     }, 250);
+
 }
 
 
@@ -11866,10 +12030,6 @@ function resetUnderworldVerification() {
   underworldExpiresAt =
     0;
 
-  /*
-   * IMPORTANT:
-   * Clear old request ID.
-   */
   underworldRequestId =
     '';
 
@@ -11886,6 +12046,7 @@ function resetUnderworldVerification() {
 
     underworldCodeWrap.hidden =
       true;
+
   }
 
 
@@ -11896,6 +12057,7 @@ function resetUnderworldVerification() {
 
     underworldCode.value =
       '';
+
   }
 
 
@@ -11903,10 +12065,12 @@ function resetUnderworldVerification() {
 
     underworldTimer.textContent =
       'CODE EXPIRES IN 2 MINUTES';
+
   }
 
 
   setUnderworldBusy(false);
+
 }
 
 
@@ -11914,7 +12078,9 @@ function resetUnderworldVerification() {
    BACKEND CALL
 ========================================================= */
 
-function callUnderworldBackend(payload) {
+function callUnderworldBackend(
+  payload
+) {
 
   return new Promise(
     (resolve, reject) => {
@@ -11928,6 +12094,7 @@ function callUnderworldBackend(payload) {
         );
 
         return;
+
       }
 
 
@@ -11944,6 +12111,7 @@ function callUnderworldBackend(payload) {
         document.createElement(
           'script'
         );
+
 
       const params =
         new URLSearchParams();
@@ -11964,7 +12132,9 @@ function callUnderworldBackend(payload) {
               key,
               String(value)
             );
+
           }
+
         }
       );
 
@@ -11983,7 +12153,9 @@ function callUnderworldBackend(payload) {
 
       const cleanup = () => {
 
-        if (finished) return;
+        if (finished) {
+          return;
+        }
 
         finished =
           true;
@@ -12007,6 +12179,7 @@ function callUnderworldBackend(payload) {
           script.remove();
 
         } catch (_) {}
+
       };
 
 
@@ -12036,6 +12209,7 @@ function callUnderworldBackend(payload) {
                 'EMPTY SERVER RESPONSE.'
             }
           );
+
         };
 
 
@@ -12049,6 +12223,7 @@ function callUnderworldBackend(payload) {
               'COULD NOT CONNECT TO THE VERIFICATION SERVER.'
             )
           );
+
         };
 
 
@@ -12061,25 +12236,30 @@ function callUnderworldBackend(payload) {
       document.head.appendChild(
         script
       );
+
     }
   );
+
 }
 
 
 /* =========================================================
-   VALIDATE SAVED UNDERWORLD ACCESS
+   VALIDATE SAVED ACCESS
+   ---------------------------------------------------------
+   IMPORTANT:
+
+   Only EMAIL + ACCESS TOKEN are required.
+
+   Phone is completely ignored.
 ========================================================= */
 
 async function validateSavedUnderworldAccess() {
 
   const email =
-    localStorage.getItem(
-      UNDERWORLD_EMAIL_KEY
-    );
-
-  const phone =
-    localStorage.getItem(
-      UNDERWORLD_PHONE_KEY
+    normalizeUnderworldEmail(
+      localStorage.getItem(
+        UNDERWORLD_EMAIL_KEY
+      )
     );
 
   const accessToken =
@@ -12090,7 +12270,6 @@ async function validateSavedUnderworldAccess() {
 
   if (
     !email ||
-    !phone ||
     !accessToken ||
     !underworldConfigured()
   ) {
@@ -12098,21 +12277,12 @@ async function validateSavedUnderworldAccess() {
     removeUnderworldAccess();
 
     return false;
+
   }
 
 
   try {
 
-    /*
-     * IMPORTANT FIX:
-     *
-     * Backend expects:
-     * email
-     * phone
-     * accessToken
-     *
-     * NOT "token".
-     */
     const result =
       await callUnderworldBackend({
 
@@ -12122,11 +12292,9 @@ async function validateSavedUnderworldAccess() {
         email:
           email,
 
-        phone:
-          phone,
-
         accessToken:
           accessToken
+
       });
 
 
@@ -12141,6 +12309,7 @@ async function validateSavedUnderworldAccess() {
       updateUnderworldFloatingButton();
 
       return true;
+
     }
 
 
@@ -12150,12 +12319,14 @@ async function validateSavedUnderworldAccess() {
       'Underworld access validation failed:',
       error
     );
+
   }
 
 
   removeUnderworldAccess();
 
   return false;
+
 }
 
 
@@ -12172,6 +12343,10 @@ if (underworldForm) {
       event.preventDefault();
 
 
+      /* ===================================================
+         EMAIL
+      =================================================== */
+
       const email =
         normalizeUnderworldEmail(
           underworldEmail
@@ -12180,6 +12355,14 @@ if (underworldForm) {
         );
 
 
+      /* ===================================================
+         PHONE
+         ---------------------------------------------------
+         Optional legacy value only.
+         NEVER validated.
+         NEVER used for authentication.
+      =================================================== */
+
       const phone =
         normalizeUnderworldPhone(
           underworldPhone
@@ -12187,6 +12370,10 @@ if (underworldForm) {
             : ''
         );
 
+
+      /* ===================================================
+         CODE
+      =================================================== */
 
       const code =
         underworldCode
@@ -12216,30 +12403,17 @@ if (underworldForm) {
         }
 
         return;
+
       }
 
 
       /* ===================================================
-         PHONE VALIDATION
+         NO PHONE VALIDATION
+         ---------------------------------------------------
+         IMPORTANT:
+
+         There is intentionally NO phone validation here.
       =================================================== */
-
-      if (
-        !isValidUnderworldPhone(
-          phone
-        )
-      ) {
-
-        showUnderworldStatus(
-          'PLEASE ENTER A VALID PHONE NUMBER.',
-          'error'
-        );
-
-        if (underworldPhone) {
-          underworldPhone.focus();
-        }
-
-        return;
-      }
 
 
       /* ===================================================
@@ -12257,6 +12431,7 @@ if (underworldForm) {
         );
 
         return;
+
       }
 
 
@@ -12282,13 +12457,18 @@ if (underworldForm) {
           );
 
 
-          /*
-           * Clear any old request ID before sending
-           * a completely new verification request.
-           */
           underworldRequestId =
             '';
 
+
+          /*
+           * IMPORTANT:
+
+           * Backend authentication now uses EMAIL ONLY.
+           *
+           * Phone is sent only for legacy/database
+           * compatibility and is NOT used for matching.
+           */
 
           const result =
             await callUnderworldBackend({
@@ -12307,6 +12487,7 @@ if (underworldForm) {
 
               userAgent:
                 navigator.userAgent
+
             });
 
 
@@ -12323,12 +12504,9 @@ if (underworldForm) {
 
                 : 'COULD NOT SEND VERIFICATION CODE.'
             );
+
           }
 
-
-          /* =============================================
-             CRITICAL FIX
-          ============================================= */
 
           underworldRequestId =
             String(
@@ -12336,10 +12514,6 @@ if (underworldForm) {
             ).trim();
 
 
-          /*
-           * If backend did not return requestId,
-           * do NOT continue to verification.
-           */
           if (
             !underworldRequestId
           ) {
@@ -12347,12 +12521,9 @@ if (underworldForm) {
             throw new Error(
               'VERIFICATION REQUEST ID WAS NOT RETURNED BY SERVER.'
             );
+
           }
 
-
-          /* =============================================
-             START VERIFICATION
-          ============================================= */
 
           underworldVerificationStarted =
             true;
@@ -12373,6 +12544,7 @@ if (underworldForm) {
 
             underworldCodeWrap.hidden =
               false;
+
           }
 
 
@@ -12383,6 +12555,7 @@ if (underworldForm) {
 
             underworldCode.value =
               '';
+
           }
 
 
@@ -12397,6 +12570,7 @@ if (underworldForm) {
                 ) / 1000
               ) +
               ' SECONDS';
+
           }
 
 
@@ -12439,7 +12613,9 @@ if (underworldForm) {
 
 
           return;
+
         }
+
       }
 
 
@@ -12463,6 +12639,7 @@ if (underworldForm) {
 
 
         return;
+
       }
 
 
@@ -12484,6 +12661,7 @@ if (underworldForm) {
 
 
         return;
+
       }
 
 
@@ -12507,11 +12685,20 @@ if (underworldForm) {
 
 
         return;
+
       }
 
 
       /* ===================================================
          VERIFY CODE
+         ---------------------------------------------------
+         ONLY:
+
+             EMAIL
+             CODE
+             REQUEST ID
+
+         Phone is NOT sent.
       =================================================== */
 
       try {
@@ -12537,19 +12724,9 @@ if (underworldForm) {
             email:
               email,
 
-            phone:
-              phone,
-
             code:
               code,
 
-            /*
-             * ==========================================
-             * CRITICAL FIX:
-             * Send the SAME requestId returned by
-             * send_verification.
-             * ==========================================
-             */
             requestId:
               underworldRequestId,
 
@@ -12558,6 +12735,7 @@ if (underworldForm) {
 
             userAgent:
               navigator.userAgent
+
           });
 
 
@@ -12575,6 +12753,7 @@ if (underworldForm) {
 
               : 'VERIFICATION FAILED.'
           );
+
         }
 
 
@@ -12619,6 +12798,7 @@ if (underworldForm) {
          * Complete existing pending Add-to-Cart flow
          * if present.
          */
+
         if (
           typeof pendingProduct !==
             'undefined' &&
@@ -12638,6 +12818,7 @@ if (underworldForm) {
           completePendingAddToCart();
 
           return;
+
         }
 
 
@@ -12666,9 +12847,12 @@ if (underworldForm) {
       } finally {
 
         setUnderworldBusy(false);
+
       }
+
     }
   );
+
 }
 
 
@@ -12691,12 +12875,15 @@ if (underworldFloatingBtn) {
         openApLogoutWindow();
 
         return;
+
       }
 
 
       openUnderworldAccess();
+
     }
   );
+
 }
 
 
@@ -12710,11 +12897,14 @@ if (apLogoutBackdrop) {
     'click',
     closeApLogoutWindow
   );
+
 }
 
 
 /* =========================================================
    LOGOUT
+   ---------------------------------------------------------
+   ONLY EMAIL + ACCESS TOKEN
 ========================================================= */
 
 if (apLogoutBtn) {
@@ -12724,14 +12914,12 @@ if (apLogoutBtn) {
     async () => {
 
       const email =
-        localStorage.getItem(
-          UNDERWORLD_EMAIL_KEY
+        normalizeUnderworldEmail(
+          localStorage.getItem(
+            UNDERWORLD_EMAIL_KEY
+          )
         );
 
-      const phone =
-        localStorage.getItem(
-          UNDERWORLD_PHONE_KEY
-        );
 
       const accessToken =
         localStorage.getItem(
@@ -12743,21 +12931,10 @@ if (apLogoutBtn) {
 
         if (
           email &&
-          phone &&
           accessToken &&
           underworldConfigured()
         ) {
 
-          /*
-           * IMPORTANT FIX:
-           *
-           * Backend expects:
-           * email
-           * phone
-           * accessToken
-           *
-           * NOT "token".
-           */
           await callUnderworldBackend({
 
             action:
@@ -12766,12 +12943,11 @@ if (apLogoutBtn) {
             email:
               email,
 
-            phone:
-              phone,
-
             accessToken:
               accessToken
+
           });
+
         }
 
 
@@ -12781,6 +12957,7 @@ if (apLogoutBtn) {
           'Underworld logout request failed:',
           error
         );
+
       }
 
 
@@ -12797,8 +12974,10 @@ if (apLogoutBtn) {
       closeApLogoutWindow();
 
       updateUnderworldFloatingButton();
+
     }
   );
+
 }
 
 
@@ -12820,7 +12999,9 @@ document
           link.dataset.underworldUrl;
 
 
-        if (!target) return;
+        if (!target) {
+          return;
+        }
 
 
         if (
@@ -12830,6 +13011,7 @@ document
           markUnderworldUnlocked();
 
           return;
+
         }
 
 
@@ -12842,12 +13024,15 @@ document
         ) {
 
           closeAll();
+
         }
 
 
         openUnderworldAccess();
+
       }
     );
+
   });
 
 
@@ -12861,6 +13046,7 @@ if (underworldClose) {
     'click',
     closeUnderworldAccess
   );
+
 }
 
 
@@ -12874,6 +13060,7 @@ if (underworldBackdrop) {
     'click',
     closeUnderworldAccess
   );
+
 }
 
 
@@ -12888,7 +13075,9 @@ document.addEventListener(
     if (
       event.key !== 'Escape'
     ) {
+
       return;
+
     }
 
 
@@ -12902,6 +13091,7 @@ document.addEventListener(
       closeApLogoutWindow();
 
       return;
+
     }
 
 
@@ -12913,7 +13103,9 @@ document.addEventListener(
     ) {
 
       closeUnderworldAccess();
+
     }
+
   }
 );
 
@@ -12924,6 +13116,7 @@ document.addEventListener(
 
 updateUnderworldFloatingButton();
 
+
 validateSavedUnderworldAccess()
   .catch(error => {
 
@@ -12931,46 +13124,73 @@ validateSavedUnderworldAccess()
       'Underworld startup validation error:',
       error
     );
+
   });
 
 
 document.addEventListener(
   'DOMContentLoaded',
   async () => {
+
     updateUnderworldFloatingButton();
 
+
+    /*
+     * Validate an existing saved session.
+     *
+     * Backend now checks:
+     *
+     *     EMAIL + ACCESS TOKEN
+     *
+     * Phone is not required.
+     */
+
     if (hasUnderworldAccess()) {
+
       await validateSavedUnderworldAccess();
+
     }
 
-    // Preserve the original site's first-visit behavior.
+
+    /*
+     * Preserve original first-visit behavior.
+     */
+
     setTimeout(() => {
+
       const loginAlreadyShown =
         sessionStorage.getItem(
           'ap_loginShown'
         ) === 'true';
 
+
       if (
         !hasUnderworldAccess() &&
         !loginAlreadyShown &&
         underworldAccess &&
-        !underworldAccess.classList.contains('active') &&
+        !underworldAccess.classList.contains(
+          'active'
+        ) &&
         !(
           apLogoutModal &&
-          apLogoutModal.classList.contains('active')
+          apLogoutModal.classList.contains(
+            'active'
+          )
         )
       ) {
+
         openUnderworldAccess();
 
         sessionStorage.setItem(
           'ap_loginShown',
           'true'
         );
+
       }
+
     }, 5000);
+
   }
 );
 </script>
 </body>
-
-  </html>
