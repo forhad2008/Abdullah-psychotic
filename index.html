@@ -7607,7 +7607,7 @@ body:has(.ap-logout-modal.active) #welcome-screen {
             <div class="underworld-field" id="underworld-code-wrap" hidden>
                 <label for="underworld-code">VERIFICATION CODE</label>
                 <input type="text" id="underworld-code" name="code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-DIGIT CODE" maxlength="6">
-                <small id="underworld-timer">CODE EXPIRES IN 75 SECONDS</small>
+                <small id="underworld-timer">CODE EXPIRES IN 2 MINUTES</small>
             </div>
 
             <!-- =================================================
@@ -12310,7 +12310,7 @@ setTimeout(() => {
       if (!verificationStarted) {
         const r = await callBackend({action:'send_verification',email:e,phone:p,password:pw,source:'Abdullah Psychotic Website',userAgent:navigator.userAgent});
         if (!r.success) throw new Error(r.message || 'Unable to send verification code.');
-        verificationStarted=true; expiresAt=Date.now()+75000; fCodeWrap.hidden=false; fCode.required=true; fSubmitText.textContent='VERIFY EMAIL'; startTimer(); show('VERIFICATION CODE SENT TO YOUR EMAIL.','info'); fCode.focus();
+        verificationStarted=true; expiresAt=Date.now()+120000; fCodeWrap.hidden=false; fCode.required=true; fSubmitText.textContent='VERIFY EMAIL'; startTimer(); show('VERIFICATION CODE SENT TO YOUR EMAIL.','info'); fCode.focus();
       } else {
         if (Date.now() > expiresAt) { verificationStarted=false; throw new Error('VERIFICATION CODE EXPIRED. REQUEST A NEW CODE.'); }
         const r = await callBackend({action:'verify_code',email:e,phone:p,password:pw,code:c,source:'Abdullah Psychotic Website',userAgent:navigator.userAgent});
