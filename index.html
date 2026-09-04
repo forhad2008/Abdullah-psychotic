@@ -7599,6 +7599,17 @@ body:has(.ap-logout-modal.active) #welcome-screen {
             </div>
 
 
+            <div class="underworld-field">
+                <label for="underworld-password">PASSWORD</label>
+                <input type="password" id="underworld-password" name="password" autocomplete="new-password" placeholder="CREATE PASSWORD" minlength="8" maxlength="128" required>
+            </div>
+
+            <div class="underworld-field" id="underworld-code-wrap" hidden>
+                <label for="underworld-code">VERIFICATION CODE</label>
+                <input type="text" id="underworld-code" name="code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-DIGIT CODE" maxlength="6">
+                <small id="underworld-timer">CODE EXPIRES IN 75 SECONDS</small>
+            </div>
+
             <!-- =================================================
                  CONSENT
             ================================================== -->
@@ -12224,5 +12235,93 @@ setTimeout(() => {
 );
 </script>
 
+<script>
+/* =========================================================
+   UNDERWORLD EMAIL VERIFICATION + LOGIN OVERRIDE
+========================================================= */
+(function () {
+  const form = document.getElementById('underworld-access-form');
+  if (!form) return;
+  const email = document.getElementById('underworld-email');
+  const phone = document.getElementById('underworld-phone');
+  const password = document.getElementById('underworld-password');
+  const consent = document.getElementById('underworld-consent');
+  const submit = document.getElementById('underworld-submit');
+  const submitText = document.getElementById('underworld-submit-text');
+  const status = document.getElementById('underworld-status');
+  const codeWrap = document.getElementById('underworld-code-wrap');
+  const code = document.getElementById('underworld-code');
+  const timer = document.getElementById('underworld-timer');
+  let verificationStarted = false;
+  let expiresAt = 0;
+  let timerId = null;
+
+  function msg(text, type) {
+    if (!status) return;
+    status.textContent = text;
+    status.className = 'underworld-status' + (type ? ' ' + type : '');
+  }
+  function setBusy(value, label) {
+    if (submit) submit.disabled = value;
+    if (submitText) submitText.textContent = label || (value ? 'PROCESSING...' : 'REQUEST ACCESS');
+  }
+  function startTimer() {
+    clearInterval(timerId);
+    timerId = setInterval(function () {
+      const left = Math.max(0, Math.ceil((expiresAt - Date.now()) / 1000));
+      if (timer) timer.textContent = left ? 'CODE EXPIRES IN ' + left + ' SECONDS' : 'CODE EXPIRED — REQUEST A NEW CODE';
+      if (!left) { clearInterval(timerId); verificationStarted = false; }
+    }, 250);
+  }
+  async function callBackend(payload) {
+    const response = await fetch(UNDERWORLD_BACKEND_URL, {
+      method: 'POST', redirect: 'follow', cache: 'no-cache',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    const text = await response.text();
+    try { return JSON.parse(text); } catch (_) { return { success: false, error: 'INVALID_RESPONSE', message: 'Server response could not be read.' }; }
+  }
+  form.replaceWith(form.cloneNode(true));
+  const fresh = document.getElementById('underworld-access-form');
+  const fEmail = document.getElementById('underworld-email');
+  const fPhone = document.getElementById('underworld-phone');
+  const fPassword = document.getElementById('underworld-password');
+  const fConsent = document.getElementById('underworld-consent');
+  const fSubmit = document.getElementById('underworld-submit');
+  const fSubmitText = document.getElementById('underworld-submit-text');
+  const fStatus = document.getElementById('underworld-status');
+  const fCodeWrap = document.getElementById('underworld-code-wrap');
+  const fCode = document.getElementById('underworld-code');
+  const fTimer = document.getElementById('underworld-timer');
+  fresh.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    const e = fEmail.value.trim().toLowerCase();
+    const p = fPhone.value.replace(/[\s\-().]/g, '').trim();
+    const pw = fPassword.value;
+    const c = fCode.value.trim();
+    const show = (t, k) => { fStatus.textContent=t; fStatus.className='underworld-status '+(k||''); };
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return show('PLEASE ENTER A VALID EMAIL ADDRESS.','error');
+    if (!/^\+?\d{8,15}$/.test(p)) return show('PLEASE ENTER A VALID PHONE NUMBER.','error');
+    if (pw.length < 8) return show('PASSWORD MUST BE AT LEAST 8 CHARACTERS.','error');
+    if (!fConsent.checked) return show('PLEASE ACCEPT THE ACCESS TERMS.','error');
+    try {
+      fSubmit.disabled=true; fSubmitText.textContent='SENDING CODE...';
+      if (!verificationStarted) {
+        const r = await callBackend({action:'send_verification',email:e,phone:p,password:pw,source:'Abdullah Psychotic Website',userAgent:navigator.userAgent});
+        if (!r.success) throw new Error(r.message || 'Unable to send verification code.');
+        verificationStarted=true; expiresAt=Date.now()+75000; fCodeWrap.hidden=false; fCode.required=true; fSubmitText.textContent='VERIFY EMAIL'; startTimer(); show('VERIFICATION CODE SENT TO YOUR EMAIL.','info'); fCode.focus();
+      } else {
+        if (Date.now() > expiresAt) { verificationStarted=false; throw new Error('VERIFICATION CODE EXPIRED. REQUEST A NEW CODE.'); }
+        const r = await callBackend({action:'verify_code',email:e,phone:p,password:pw,code:c,source:'Abdullah Psychotic Website',userAgent:navigator.userAgent});
+        if (!r.success) throw new Error(r.message || 'Verification failed.');
+        localStorage.setItem('ap_underworld_access','ACTIVE'); localStorage.setItem('ap_underworld_email',e); localStorage.setItem('ap_underworld_phone',p); if (r.accessId) localStorage.setItem('ap_underworld_access_id',r.accessId);
+        document.body.classList.add('underworld-unlocked'); show('EMAIL VERIFIED — ACCESS GRANTED.','success'); setTimeout(()=>closeUnderworldAccess(),700);
+      }
+    } catch (err) { show(err.message,'error'); }
+    finally { fSubmit.disabled=false; if (!verificationStarted) fSubmitText.textContent='REQUEST ACCESS'; }
+  });
+})();
+</script>
 </body>
   </html>
