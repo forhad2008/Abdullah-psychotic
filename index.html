@@ -6122,8 +6122,12 @@ a{
     color: #ffffff;
 
     font-family:
-        "Francy Tiguan",
-        serif;
+        "Montserrat",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-style: normal;
 
     font-size: 16px;
 
@@ -7131,7 +7135,11 @@ body:has(.ap-logout-modal.active) #welcome-screen {
 ========================================================= */
 
 #ap-logout-btn,
-#ap-logout-btn span {
+#ap-logout-btn span,
+#underworld-submit,
+#underworld-submit span,
+#underworld-dynamic-logout,
+#underworld-dynamic-logout span {
     font-family: "Montserrat", Arial, Helvetica, sans-serif !important;
     font-style: normal !important;
     font-weight: 600 !important;
@@ -7635,7 +7643,7 @@ body:has(.ap-logout-modal.active) #welcome-screen {
             <div class="underworld-field" id="underworld-code-wrap" hidden>
                 <label for="underworld-code">VERIFICATION CODE</label>
                 <input type="text" id="underworld-code" name="code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-DIGIT CODE" maxlength="6">
-                <small id="underworld-timer">CODE EXPIRES IN 2 MINUTES</small>
+                <small id="underworld-timer">CODE EXPIRES IN 3 MINUTES</small>
             </div>
 
             <!-- =================================================
@@ -8589,7 +8597,7 @@ const UNDERWORLD_CODE_TIME_KEY =
     'ap_underworld_code_time';
 
 const UNDERWORLD_CODE_TTL_MS =
-    2 * 60 * 1000;
+    3 * 60 * 1000;
 
 
 /* =========================================================
@@ -8618,6 +8626,77 @@ let underworldRequestId =
     localStorage.getItem(
         UNDERWORLD_REQUEST_KEY
     ) || '';
+
+let underworldCodeTimerInterval = null;
+
+function getUnderworldCodeIssuedAt() {
+    const raw = localStorage.getItem(UNDERWORLD_CODE_TIME_KEY);
+    const value = Number(raw);
+    return Number.isFinite(value) && value > 0 ? value : 0;
+}
+
+function stopUnderworldCodeTimer() {
+    if (underworldCodeTimerInterval) {
+        clearInterval(underworldCodeTimerInterval);
+        underworldCodeTimerInterval = null;
+    }
+}
+
+function updateUnderworldCodeTimer() {
+    const timer = document.getElementById('underworld-timer');
+    const issuedAt = getUnderworldCodeIssuedAt();
+
+    if (!timer || !issuedAt) {
+        return false;
+    }
+
+    const remaining = Math.max(
+        0,
+        UNDERWORLD_CODE_TTL_MS - (Date.now() - issuedAt)
+    );
+
+    if (remaining <= 0) {
+        timer.textContent = 'CODE EXPIRED — REQUEST A NEW CODE';
+        stopUnderworldCodeTimer();
+        localStorage.removeItem(UNDERWORLD_REQUEST_KEY);
+        localStorage.removeItem(UNDERWORLD_CODE_TIME_KEY);
+        underworldRequestId = '';
+
+        if (underworldCode) {
+            underworldCode.value = '';
+        }
+
+        return false;
+    }
+
+    const totalSeconds = Math.ceil(remaining / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    timer.textContent =
+        'CODE EXPIRES IN ' +
+        minutes + ':' +
+        String(seconds).padStart(2, '0');
+
+    return true;
+}
+
+function startUnderworldCodeTimer() {
+    stopUnderworldCodeTimer();
+    updateUnderworldCodeTimer();
+
+    if (getUnderworldCodeIssuedAt()) {
+        underworldCodeTimerInterval = setInterval(
+            updateUnderworldCodeTimer,
+            1000
+        );
+    }
+}
+
+function isUnderworldCodeExpired() {
+    const issuedAt = getUnderworldCodeIssuedAt();
+    return !issuedAt || Date.now() - issuedAt >= UNDERWORLD_CODE_TTL_MS;
+}
 
 
 /* =========================================================
@@ -11170,6 +11249,16 @@ function resetUnderworldLoginUI() {
 
     }
 
+    const timer = document.getElementById('underworld-timer');
+    if (timer) {
+        if (getUnderworldCodeIssuedAt() && !isUnderworldCodeExpired()) {
+            startUnderworldCodeTimer();
+        } else {
+            stopUnderworldCodeTimer();
+            timer.textContent = 'CODE EXPIRES IN 3 MINUTES';
+        }
+    }
+
     showUnderworldStatus(
         '',
         ''
@@ -11606,6 +11695,8 @@ function saveUnderworldAccess(
 
 function clearUnderworldAccess() {
 
+    stopUnderworldCodeTimer();
+
     [
         UNDERWORLD_ACCESS_KEY,
         UNDERWORLD_EMAIL_KEY,
@@ -11829,6 +11920,8 @@ async function requestUnderworldCode() {
             String(Date.now())
         );
 
+        startUnderworldCodeTimer();
+
         if (phone) {
 
             localStorage.setItem(
@@ -11976,6 +12069,27 @@ async function verifyUnderworldCode() {
 
     }
 
+    if (isUnderworldCodeExpired()) {
+
+        stopUnderworldCodeTimer();
+
+        localStorage.removeItem(UNDERWORLD_REQUEST_KEY);
+        localStorage.removeItem(UNDERWORLD_CODE_TIME_KEY);
+        underworldRequestId = '';
+
+        if (underworldCode) {
+            underworldCode.value = '';
+        }
+
+        showUnderworldStatus(
+            'VERIFICATION CODE EXPIRED. PLEASE REQUEST A NEW CODE.',
+            'error'
+        );
+
+        return;
+
+    }
+
     setUnderworldLoading(
         true,
         'VERIFYING...'
@@ -12051,6 +12165,8 @@ async function verifyUnderworldCode() {
             result.accessToken,
             result.accessId
         );
+
+        stopUnderworldCodeTimer();
 
         localStorage.removeItem(
             UNDERWORLD_REQUEST_KEY
@@ -12602,6 +12718,10 @@ document.addEventListener(
 
         }
 
+        if (getUnderworldCodeIssuedAt() && !isUnderworldCodeExpired()) {
+            startUnderworldCodeTimer();
+        }
+
         updateUnderworldIconState();
 
         /*
@@ -12751,7 +12871,10 @@ document.addEventListener(
         'click',
         function (event) {
 
-            /*
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            /* Duplicate listener guard: this handler is the single click owner. */            /*
              * If already logged in,
              * do not open Sign In.
              */
