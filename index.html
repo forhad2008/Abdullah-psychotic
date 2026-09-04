@@ -12275,14 +12275,18 @@ setTimeout(() => {
   }
   async function callBackend(payload) {
     if (payload.action === 'send_verification') {
-      // Apps Script Web Apps commonly block readable cross-origin POST responses.
-      // no-cors sends the request immediately; the verification screen opens without waiting.
-      await fetch(UNDERWORLD_BACKEND_URL, {
-        method: 'POST', mode: 'no-cors', redirect: 'follow', cache: 'no-cache',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload)
+      return new Promise(function(resolve, reject) {
+        const callback = 'apAuthCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+        const script = document.createElement('script');
+        const params = new URLSearchParams(payload);
+        params.set('callback', callback);
+        const cleanup = function() { try { delete window[callback]; } catch (_) {} script.remove(); };
+        const timeout = setTimeout(function() { cleanup(); reject(new Error('Verification server timed out.')); }, 20000);
+        window[callback] = function(result) { clearTimeout(timeout); cleanup(); resolve(result || {success:false,message:'Empty server response.'}); };
+        script.onerror = function() { clearTimeout(timeout); cleanup(); reject(new Error('Could not connect to Google Apps Script.')); };
+        script.src = UNDERWORLD_BACKEND_URL + '?' + params.toString();
+        document.head.appendChild(script);
       });
-      return { success: true, verificationRequired: true, expiresIn: 120, message: 'Verification code sent.' };
     }
     return new Promise(function(resolve, reject) {
       const callback = 'apAuthCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
