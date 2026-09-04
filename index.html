@@ -7601,7 +7601,10 @@ body:has(.ap-logout-modal.active) #welcome-screen {
 
             <div class="underworld-field">
                 <label for="underworld-password">PASSWORD</label>
-                <input type="password" id="underworld-password" name="password" autocomplete="new-password" placeholder="CREATE PASSWORD" minlength="8" maxlength="128" required>
+                <div class="password-control" style="position:relative;display:flex;align-items:center;gap:8px;">
+                    <input type="password" id="underworld-password" name="password" autocomplete="new-password" placeholder="CREATE PASSWORD" minlength="8" maxlength="128" required style="flex:1;padding-right:110px;">
+                    <button type="button" id="underworld-password-toggle" aria-label="Show password" style="position:absolute;right:14px;border:0;background:transparent;color:inherit;cursor:pointer;font-size:12px;letter-spacing:1px;font-weight:600;">SHOW</button>
+                </div>
             </div>
 
             <div class="underworld-field" id="underworld-code-wrap" hidden>
@@ -12281,7 +12284,7 @@ setTimeout(() => {
         const params = new URLSearchParams(payload);
         params.set('callback', callback);
         const cleanup = function() { try { delete window[callback]; } catch (_) {} script.remove(); };
-        const timeout = setTimeout(function() { cleanup(); reject(new Error('Verification server timed out.')); }, 20000);
+        const timeout = setTimeout(function() { cleanup(); reject(new Error('Verification server timed out. Check that the latest Apps Script deployment is active.')); }, 30000);
         window[callback] = function(result) { clearTimeout(timeout); cleanup(); resolve(result || {success:false,message:'Empty server response.'}); };
         script.onerror = function() { clearTimeout(timeout); cleanup(); reject(new Error('Could not connect to Google Apps Script.')); };
         script.src = UNDERWORLD_BACKEND_URL + '?' + params.toString();
@@ -12297,7 +12300,7 @@ setTimeout(() => {
         try { delete window[callback]; } catch (_) {}
         script.remove();
       };
-      const timeout = setTimeout(function() { cleanup(); reject(new Error('Server response timed out. Please try again.')); }, 15000);
+      const timeout = setTimeout(function() { cleanup(); reject(new Error('Server response timed out. Check the Apps Script deployment and permissions.')); }, 30000);
       window[callback] = function(result) { clearTimeout(timeout); cleanup(); resolve(result || { success:false, message:'Empty server response.' }); };
       script.onerror = function() { clearTimeout(timeout); cleanup(); reject(new Error('Could not connect to the verification server.')); };
       script.src = UNDERWORLD_BACKEND_URL + '?' + params.toString();
@@ -12316,6 +12319,15 @@ setTimeout(() => {
   const fCodeWrap = document.getElementById('underworld-code-wrap');
   const fCode = document.getElementById('underworld-code');
   const fTimer = document.getElementById('underworld-timer');
+  const fPasswordToggle = document.getElementById('underworld-password-toggle');
+  if (fPasswordToggle && fPassword) {
+    fPasswordToggle.addEventListener('click', function () {
+      const visible = fPassword.type === 'text';
+      fPassword.type = visible ? 'password' : 'text';
+      fPasswordToggle.textContent = visible ? 'SHOW' : 'HIDE';
+      fPasswordToggle.setAttribute('aria-label', visible ? 'Show password' : 'Hide password');
+    });
+  }
   fresh.addEventListener('submit', async function (event) {
     event.preventDefault();
     const e = fEmail.value.trim().toLowerCase();
