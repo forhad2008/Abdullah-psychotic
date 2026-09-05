@@ -7793,7 +7793,7 @@ body:has(.ap-logout-modal.active) #welcome-screen {
 
             <div class="underworld-field" id="underworld-code-wrap" hidden>
                 <label for="underworld-code">VERIFICATION CODE</label>
-                <input type="text" id="underworld-code" name="code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-DIGIT CODE" maxlength="6">
+                <input type="text" id="underworld-code" name="code" inputmode="numeric" autocomplete="one-time-code" placeholder="4-DIGIT CODE" maxlength="4">
                 <small id="underworld-timer">CODE EXPIRES IN 3 MINUTES</small>
             </div>
 
@@ -12250,7 +12250,7 @@ async function verifyUnderworldCode() {
                 : ''
         )
             .replace(/\D/g, '')
-            .slice(0, 6);
+            .slice(0, 4);
 
     /*
        AUTH:
@@ -12276,11 +12276,11 @@ async function verifyUnderworldCode() {
     }
 
     if (
-        !/^\d{6}$/.test(code)
+        !/^\d{4}$/.test(code)
     ) {
 
         showUnderworldStatus(
-            'PLEASE ENTER THE 6-DIGIT VERIFICATION CODE.',
+            'PLEASE ENTER THE 4-DIGIT VERIFICATION CODE.',
             'error'
         );
 
