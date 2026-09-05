@@ -8844,14 +8844,13 @@ body:has(.ap-logout-modal.active) #welcome-screen {
 'use strict';
 
 /* =========================================================
-   ABDULLAH PSYCHOTIC — INSTANT-SPEED SMART SCRIPT
+   ABDULLAH PSYCHOTIC — SECURE AUTH-LOCKED CART SCRIPT
+   - Mandatory Sign-In Required to Add Items to Cart
    - Instant Local Session Activation (Zero Lag Sign-In)
    - Asynchronous Backend Sync & Auto-Subscribe Integration
    - Permanent Lock Until Logout
    - Independent Newsletter Form for Unsigned Visitors
-   - Auto-focus & lightning-fast authentication flow
-   - Fixed Insider Window Auto-Close after 7s or tap/click
-   - Renders ALL Product Categories & Maintains Cart Sync
+   - Fully Functional Checkout Flow Redirecting to cart.html
 ========================================================= */
 
 const UNDERWORLD_BACKEND_URL =
@@ -9098,6 +9097,82 @@ document.getElementById('cart-icon-btn')?.addEventListener('click', () => { clos
 document.getElementById('close-cart-btn')?.addEventListener('click', closeAll);
 overlay?.addEventListener('click', closeAll);
 
+/* ADD TO CART & SIZE SELECTION SYSTEM (PROTECTED BY SIGN-IN) */
+function addToCart(productId) {
+    if (!window.UnderworldAuth || !window.UnderworldAuth.isLoggedIn()) {
+        window.UnderworldAuth.requireLogin(() => {
+            addToCart(productId);
+        });
+        return;
+    }
+
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    pendingProduct = product;
+    selectedSize = 'M'; // Default size
+
+    const imgEl = document.getElementById('size-product-image');
+    const nameEl = document.getElementById('size-product-name');
+    const priceEl = document.getElementById('size-product-price');
+    
+    if (imgEl) imgEl.src = product.image;
+    if (nameEl) nameEl.textContent = product.name;
+    if (priceEl) priceEl.textContent = `$${product.price}`;
+
+    document.querySelectorAll('.size-option').forEach(btn => {
+        btn.classList.toggle('selected', btn.dataset.size === selectedSize);
+    });
+
+    closeAll();
+    sizeSheet?.classList.add('active');
+    overlay?.classList.add('active');
+    document.body.classList.add('no-scroll');
+}
+
+document.querySelectorAll('.size-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.size-option').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedSize = btn.dataset.size;
+    });
+});
+
+document.getElementById('close-size-sheet')?.addEventListener('click', closeAll);
+
+document.getElementById('confirm-size-btn')?.addEventListener('click', () => {
+    if (!window.UnderworldAuth || !window.UnderworldAuth.isLoggedIn()) {
+        window.UnderworldAuth.requireLogin();
+        return;
+    }
+
+    if (!pendingProduct) return;
+    const size = selectedSize || 'M';
+    const cartKey = `${pendingProduct.id}-${size}`;
+
+    const existing = cart.find(i => i.cartKey === cartKey);
+    if (existing) {
+        existing.qty += 1;
+    } else {
+        cart.push({
+            ...pendingProduct,
+            size: size,
+            cartKey: cartKey,
+            qty: 1
+        });
+    }
+
+    saveCartToStorage();
+    updateCartUI();
+    closeAll();
+
+    setTimeout(() => {
+        cartDrawer?.classList.add('active');
+        overlay?.classList.add('active');
+        document.body.classList.add('no-scroll', 'cart-open');
+    }, 200);
+});
+
 function updateCartUI() {
     const cartContainer = document.getElementById('cart-items-container');
     const badge = document.getElementById('cart-count');
@@ -9119,11 +9194,68 @@ function updateCartUI() {
             <div class="cart-item-details">
                 <div class="cart-item-title">${item.name}</div>
                 <div class="cart-item-price">$${item.price} (Size: ${item.size})</div>
+                <div class="cart-qty-controls">
+                    <button class="qty-btn" onclick="updateQty(${idx}, -1)">-</button>
+                    <span>${item.qty}</span>
+                    <button class="qty-btn" onclick="updateQty(${idx}, 1)">+</button>
+                </div>
             </div>
             <i class="fas fa-trash cart-item-remove" onclick="cart.splice(${idx},1);saveCartToStorage();updateCartUI();"></i>
         </div>
     `).join('');
 }
+
+function updateQty(index, change) {
+    if (!window.UnderworldAuth || !window.UnderworldAuth.isLoggedIn()) {
+        window.UnderworldAuth.requireLogin();
+        return;
+    }
+
+    if (cart[index]) {
+        cart[index].qty += change;
+        if (cart[index].qty <= 0) {
+            cart.splice(index, 1);
+        }
+        saveCartToStorage();
+        updateCartUI();
+    }
+}
+
+/* =========================================================
+   CHECKOUT BUTTON REDIRECT (PROTECTED BY SIGN-IN)
+========================================================= */
+document.getElementById('proceed-checkout-btn')?.addEventListener('click', () => {
+    if (!window.UnderworldAuth || !window.UnderworldAuth.isLoggedIn()) {
+        window.UnderworldAuth.requireLogin();
+        return;
+    }
+
+    if (cart.length === 0) {
+        alert('Your shopping bag is empty. Add items before proceeding to checkout.');
+        return;
+    }
+    
+    // Redirects the page to cart.html
+    window.location.href = 'cart.html';
+});
+
+/* =========================================================
+   PROTECTED UNDERWORLD LINK INTERCEPTION
+========================================================= */
+document.addEventListener('click', e => {
+    const link = e.target.closest('.underworld-protected-link');
+    if (!link) return;
+    e.preventDefault();
+    const targetUrl = link.getAttribute('data-underworld-url') || link.href;
+
+    if (window.UnderworldAuth && window.UnderworldAuth.isLoggedIn()) {
+        window.open(targetUrl, '_blank', 'noopener');
+    } else {
+        window.UnderworldAuth.requireLogin(() => {
+            window.open(targetUrl, '_blank', 'noopener');
+        });
+    }
+});
 
 /* =========================================================
    INSTANT-SPEED AUTH SYSTEM
@@ -9265,12 +9397,10 @@ function showInsiderSuccessWindow() {
 
 /* OPTIMIZED INSTANT SIGN-IN (Zero Wait Time + Auto-Subscribe & Lock) */
 async function quickRegisterAndSignIn(email, fullPhone) {
-    // 1. Immediately save credentials locally to unlock the UI instantly
     localStorage.setItem(UNDERWORLD_ACCESS_KEY, 'true');
     localStorage.setItem(UNDERWORLD_EMAIL_KEY, email);
     localStorage.setItem(UNDERWORLD_PHONE_KEY, fullPhone);
 
-    // Lock the newsletter input & form so they cannot unsubscribe until logout
     const subEmailInput = document.getElementById('subscriber-email');
     if (subEmailInput) {
         subEmailInput.value = email;
@@ -9296,7 +9426,6 @@ async function quickRegisterAndSignIn(email, fullPhone) {
         pendingUnderworldAction = null;
     }
 
-    // 2. Sync with backend asynchronously & auto-subscribe the user
     callUnderworldBackend({
         action: 'quick_register',
         email: email,
@@ -9339,11 +9468,9 @@ async function verifyUnderworldCode() {
         return;
     }
     
-    // Instant Login UI Transition
     localStorage.setItem(UNDERWORLD_ACCESS_KEY, 'true');
     localStorage.setItem(UNDERWORLD_EMAIL_KEY, email);
 
-    // Lock the newsletter input & form so they cannot unsubscribe until logout
     const subEmailInput = document.getElementById('subscriber-email');
     if (subEmailInput) {
         subEmailInput.value = email;
@@ -9369,7 +9496,6 @@ async function verifyUnderworldCode() {
         pendingUnderworldAction = null;
     }
 
-    // Background verify & auto-subscribe call
     callUnderworldBackend({
         action: 'verify_code',
         email: email,
@@ -9417,7 +9543,6 @@ const newsletterSubmitBtn = document.getElementById('newsletter-submit-btn');
 newsletterForm?.addEventListener('submit', e => {
     e.preventDefault();
 
-    // If user is already signed in via Underworld, block manual un-sub or changes here
     if (window.UnderworldAuth && window.UnderworldAuth.isLoggedIn()) {
         if (newsletterStatus) {
             newsletterStatus.textContent = 'You are signed into Underworld. Your subscription is locked until log out.';
@@ -9441,7 +9566,6 @@ newsletterForm?.addEventListener('submit', e => {
         newsletterStatus.className = 'newsletter-status info';
     }
 
-    // Send normal subscription payload separately
     callUnderworldBackend({
         action: 'subscribe',
         email: email,
@@ -9471,7 +9595,6 @@ async function logoutUnderworld() {
     localStorage.removeItem(UNDERWORLD_TOKEN_KEY);
     updateUnderworldIconState();
 
-    // Unlock newsletter form on logout so normal visitors can use it independently again
     const subEmailInput = document.getElementById('subscriber-email');
     if (subEmailInput) {
         subEmailInput.value = '';
@@ -9571,7 +9694,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     updateUnderworldIconState();
 
-    // Check if user is already signed in on load and lock newsletter box
     if (window.UnderworldAuth && window.UnderworldAuth.isLoggedIn()) {
         const savedEmail = localStorage.getItem(UNDERWORLD_EMAIL_KEY);
         const subEmailInput = document.getElementById('subscriber-email');
