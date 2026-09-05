@@ -9326,21 +9326,29 @@ function setAuthMode(login) {
         if (phoneGroup) phoneGroup.style.display = 'none';
         if (underworldCodeWrap) underworldCodeWrap.style.display = 'none';
         if (underworldSubmitText) underworldSubmitText.textContent = 'SEND CODE';
-        if (authToggleBox) authToggleBox.innerHTML = `Don't have an account? <button type="button" class="auth-toggle-link" id="auth-toggle-btn" style="color: #8b0000; font-weight: 700; cursor: pointer; text-decoration: underline; background: none; border: 0;">Sign In</button>`;
+        if (authToggleBox) {
+            authToggleBox.innerHTML = `Don't have an account? <button type="button" class="auth-toggle-link" id="auth-toggle-btn" style="color: #8b0000; font-weight: 700; cursor: pointer; text-decoration: underline; background: none; border: 0;">Sign In</button>`;
+        }
     } else {
         if (authTitle) authTitle.textContent = 'Quick Sign In';
         if (authDescription) authDescription.textContent = 'Enter your email and phone number for immediate profile creation.';
         if (phoneGroup) phoneGroup.style.display = 'block';
         if (underworldCodeWrap) underworldCodeWrap.style.display = 'none';
         if (underworldSubmitText) underworldSubmitText.textContent = 'INSTANT SIGN IN';
-        if (authToggleBox) authToggleBox.innerHTML = `Already have an account? <button type="button" class="auth-toggle-link" id="auth-toggle-btn" style="color: #8b0000; font-weight: 700; cursor: pointer; text-decoration: underline; background: none; border: 0;">Log In</button>`;
+        if (authToggleBox) {
+            authToggleBox.innerHTML = `Already have an account? <button type="button" class="auth-toggle-link" id="auth-toggle-btn" style="color: #8b0000; font-weight: 700; cursor: pointer; text-decoration: underline; background: none; border: 0;">Log In</button>`;
+        }
     }
-    document.getElementById('auth-toggle-btn')?.addEventListener('click', () => setAuthMode(!isLoginMode));
+
+    // ডাইনামিকালি তৈরি হওয়া বাটনে সঠিকভাবে ইভেন্ট বাইন্ড করার জন্য ইভেন্ট ডেলিগেশন ব্যবহার করা হয়েছে
     setTimeout(() => underworldEmail?.focus(), 100);
 }
 
+// গ্লোবাল ইভেন্ট ডেলিগেশন যা লগইন এবং সাইন-ইন উভয় মোডেই টগল বাটনকে সচল রাখবে
 document.addEventListener('click', e => {
-    if (e.target && e.target.id === 'auth-toggle-btn') {
+    const toggleLinkBtn = e.target.closest('#auth-toggle-btn');
+    if (toggleLinkBtn) {
+        e.preventDefault();
         setAuthMode(!isLoginMode);
     }
 });
