@@ -7684,81 +7684,52 @@ body:has(.ap-logout-modal.active) #welcome-screen {
     aria-modal="true"
     aria-labelledby="underworld-access-title">
 
-
     <!-- LOGO -->
-
     <img
         src="icon.png"
         alt="Abdullah Psychotic"
         class="underworld-access-logo">
 
-
     <!-- CLOSE -->
-
     <button
         type="button"
         class="underworld-access-close"
         id="underworld-access-close"
         aria-label="Close Underworld access">
-
         &times;
-
     </button>
 
-
     <!-- CONTENT -->
-
     <div class="underworld-access-content">
 
-
         <!-- EYEBROW -->
-
         <div class="underworld-access-eyebrow">
             PRIVATE ACCESS
         </div>
 
-
         <!-- TITLE -->
-
         <h2 id="underworld-access-title">
             Sign in
         </h2>
 
-
         <!-- DECORATIVE LINE -->
-
-        <div class="underworld-access-line">
-        </div>
-
+        <div class="underworld-access-line"></div>
 
         <!-- DESCRIPTION -->
-
-        <p class="underworld-access-description">
-
-            This area is restricted.
-            Enter your email and phone number.
-            We will send a verification code to your email.
-
+        <p class="underworld-access-description" id="underworld-access-description">
+            Quick Sign-in: Enter your email and phone number to get instant access.
         </p>
 
-
-        <!-- =================================================
-             ACCESS FORM
-        ================================================== -->
-
+        <!-- ACCESS FORM -->
         <form
             id="underworld-access-form"
             novalidate>
 
-
             <!-- EMAIL -->
-
             <div class="underworld-field">
-
                 <label for="underworld-email">
                     EMAIL ADDRESS
                 </label>
-
                 <input
                     type="email"
                     id="underworld-email"
@@ -7767,90 +7738,162 @@ body:has(.ap-logout-modal.active) #welcome-screen {
                     placeholder="ENTER YOUR EMAIL"
                     maxlength="120"
                     required>
-
             </div>
 
-
-            <!-- PHONE -->
-
-            <div class="underworld-field">
-
+            <!-- PHONE WITH COMPACT COUNTRY CODE SELECTOR -->
+            <div class="underworld-field" id="underworld-phone-group">
                 <label for="underworld-phone">
                     PHONE NUMBER
                 </label>
+                <div class="phone-input-row" style="display: flex; gap: 8px; width: 100%; align-items: center;">
+                    <!-- COMPACT SELECTOR: FIXED AT 85px -->
+                    <select 
+                        id="underworld-country-code" 
+                        aria-label="Country Calling Code"
+                        style="flex: 0 0 85px; width: 85px; height: 54px; border-radius: 27px; background: #111111; color: #ffffff; border: 1px solid #222222; outline: none; padding: 0 8px; cursor: pointer; font-size: 11px; text-align: center;">
+                        
+                        <!-- NORTH AMERICA -->
+                        <optgroup label="North America">
+                            <option value="+1" selected>🇺🇸 +1</option>
+                            <option value="+1-CA">🇨🇦 +1</option>
+                            <option value="+52">🇲🇽 +52</option>
+                        </optgroup>
 
-                <input
-                    type="tel"
-                    id="underworld-phone"
-                    name="phone"
-                    autocomplete="tel"
-                    inputmode="tel"
-                    placeholder="+880 1XXXXXXXXX"
-                    maxlength="20"
-                    required>
+                        <!-- ASIA-PACIFIC -->
+                        <optgroup label="Asia-Pacific">
+                            <option value="+880">🇧🇩 +880</option>
+                            <option value="+86">🇨🇳 +86</option>
+                            <option value="+91">🇮🇳 +91</option>
+                            <option value="+81">🇯🇵 +81</option>
+                            <option value="+82">🇰🇷 +82</option>
+                            <option value="+65">🇸🇬 +65</option>
+                            <option value="+852">🇭🇰 +852</option>
+                            <option value="+886">🇹🇼 +886</option>
+                            <option value="+61">🇦🇺 +61</option>
+                            <option value="+64">🇳🇿 +64</option>
+                            <option value="+60">🇲🇾 +60</option>
+                            <option value="+62">🇮🇩 +62</option>
+                            <option value="+66">🇹🇭 +66</option>
+                            <option value="+84">🇻🇳 +84</option>
+                            <option value="+63">🇵🇭 +63</option>
+                        </optgroup>
 
+                        <!-- EUROPE -->
+                        <optgroup label="Europe">
+                            <option value="+44">🇬🇧 +44</option>
+                            <option value="+49">🇩🇪 +49</option>
+                            <option value="+33">🇫🇷 +33</option>
+                            <option value="+39">🇮🇹 +39</option>
+                            <option value="+34">🇪🇸 +34</option>
+                            <option value="+31">🇳🇱 +31</option>
+                            <option value="+41">🇨🇭 +41</option>
+                            <option value="+46">🇸🇪 +46</option>
+                            <option value="+47">🇳🇴 +47</option>
+                            <option value="+45">🇩🇰 +45</option>
+                            <option value="+358">🇫🇮 +358</option>
+                            <option value="+32">🇧🇪 +32</option>
+                            <option value="+43">🇦🇹 +43</option>
+                            <option value="+353">🇮🇪 +353</option>
+                            <option value="+351">🇵🇹 +351</option>
+                            <option value="+48">🇵🇱 +48</option>
+                            <option value="+420">🇨🇿 +420</option>
+                            <option value="+90">🇹🇷 +90</option>
+                        </optgroup>
+
+                        <!-- MIDDLE EAST -->
+                        <optgroup label="Middle East">
+                            <option value="+971">🇦🇪 +971</option>
+                            <option value="+966">🇸🇦 +966</option>
+                            <option value="+974">🇶🇦 +974</option>
+                            <option value="+973">🇧🇭 +973</option>
+                            <option value="+968">🇴🇲 +968</option>
+                            <option value="+965">🇰🇼 +965</option>
+                            <option value="+972">🇮🇱 +972</option>
+                        </optgroup>
+
+                        <!-- LATIN AMERICA & AFRICA -->
+                        <optgroup label="Americas & Africa">
+                            <option value="+55">🇧🇷 +55</option>
+                            <option value="+54">🇦🇷 +54</option>
+                            <option value="+56">🇨🇱 +56</option>
+                            <option value="+57">🇨🇴 +57</option>
+                            <option value="+27">🇿🇦 +27</option>
+                            <option value="+234">🇳🇬 +234</option>
+                            <option value="+254">🇰🇪 +254</option>
+                            <option value="+20">🇪🇬 +20</option>
+                        </optgroup>
+                    </select>
+
+                    <!-- EXPANDED PHONE INPUT WITH PATTERN VALIDATION -->
+                    <input
+                        type="tel"
+                        id="underworld-phone"
+                        name="phone"
+                        autocomplete="tel-national"
+                        inputmode="numeric"
+                        placeholder="Enter phone number"
+                        pattern="^[0-9\s\-]{6,15}$"
+                        title="Please enter a valid phone number (6 to 15 digits)"
+                        maxlength="17"
+                        required
+                        style="flex: 1 1 auto; height: 54px; border-radius: 27px; background: #111111; color: #ffffff; border: 1px solid #222222; padding: 0 18px; outline: none; font-size: 13px;">
+                </div>
             </div>
 
-            <div class="underworld-field" id="underworld-code-wrap" hidden>
+            <!-- VERIFICATION CODE (LOG-IN ONLY) -->
+            <div class="underworld-field" id="underworld-code-wrap" style="display: none;">
                 <label for="underworld-code">VERIFICATION CODE</label>
-                <input type="text" id="underworld-code" name="code" inputmode="numeric" autocomplete="one-time-code" placeholder="4-DIGIT CODE" maxlength="4">
-                <small id="underworld-timer">CODE EXPIRES IN 3 MINUTES</small>
+                <input
+                    type="text"
+                    id="underworld-code"
+                    name="code"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                    placeholder="4-DIGIT CODE"
+                    pattern="^[0-9]{4}$"
+                    title="Please enter the 4-digit numeric verification code"
+                    maxlength="4">
+                <small id="underworld-timer" style="display: block; margin-top: 5px; font-size: 10px; color: #555;">CODE EXPIRES IN 3 MINUTES</small>
             </div>
 
-            <!-- =================================================
-                 CONSENT
-            ================================================== -->
-
+            <!-- CONSENT -->
             <label
                 class="underworld-consent"
+                id="underworld-consent-label"
                 for="underworld-consent">
-
-
                 <input
                     type="checkbox"
                     id="underworld-consent"
                     name="consent"
+                    checked
                     required>
-
-
                 <span>
-
                     I understand that my email and phone number
                     will be used to manage Underworld access.
-
                 </span>
-
             </label>
 
-
-            <!-- =================================================
-                 SUBMIT BUTTON
-            ================================================== -->
-
+            <!-- SUBMIT BUTTON -->
             <button
                 type="submit"
                 class="underworld-submit"
                 id="underworld-submit">
-
-
                 <span id="underworld-submit-text">
-                    
+                    SIGN IN
                 </span>
-
-
                 <span
                     class="underworld-submit-loader"
                     id="underworld-submit-loader"
                     aria-hidden="true">
                 </span>
-
             </button>
 
+            <!-- AUTH MODE TOGGLE -->
+            <div class="auth-toggle-box" id="auth-toggle-box" style="margin-top: 14px; font-size: 11px; color: #333; text-align: center;">
+                Already have an account? <button type="button" class="auth-toggle-link" id="auth-toggle-btn" style="color: #8b0000; font-weight: 700; cursor: pointer; text-decoration: underline; background: none; border: 0; padding: 0;">Log In</button>
+            </div>
 
-            <!-- =================================================
-                 STATUS MESSAGE
-            ================================================== -->
-
+            <!-- STATUS MESSAGE -->
             <div
                 class="underworld-status"
                 id="underworld-status"
@@ -7860,13 +7903,9 @@ body:has(.ap-logout-modal.active) #welcome-screen {
 
         </form>
 
-
         <!-- SECURITY NOTE -->
-
         <div class="underworld-security-note">
-
             ACCESS REQUEST • ABDULLAH PSYCHOTIC
-
         </div>
 
     </div>
@@ -8731,93 +8770,115 @@ body:has(.ap-logout-modal.active) #welcome-screen {
 
 
 <script>
+
+
 'use strict';
 
 /* =========================================================
-   ABDULLAH PSYCHOTIC — COMPLETE SINGLE SCRIPT
+   ABDULLAH PSYCHOTIC — COMPLETE SINGLE SCRIPT (40+ BUSINESS COUNTRIES)
    =========================================================
-   UNDERWORLD AUTH:
-   EMAIL + VERIFICATION CODE ONLY
-
-   PHONE:
-   OPTIONAL
-   SAVED ONLY
-   NEVER USED FOR AUTHENTICATION
-
-   SPEED:
-   - Modal opens immediately
-   - Backend validation happens in background
-   - Floating icon never waits for backend
-   - Saved login makes icon bright
+   SIGN-IN: QUICK 1-CLICK (EMAIL + COUNTRY PHONE)
+   LOG-IN: SECURE 4-DIGIT EMAIL VERIFICATION CODE
 ========================================================= */
-
 
 /* =========================================================
    0. UNDERWORLD CONFIG
 ========================================================= */
-
 const UNDERWORLD_BACKEND_URL =
     'https://script.google.com/macros/s/AKfycbzw5QOI-V1p5UafYixMfd5aNXklauRi6XwX1gil24cTu7bMZgpvZgQvNPBTlggAPnAh/exec';
 
-const UNDERWORLD_ACCESS_KEY =
-    'ap_underworld_access';
-
-const UNDERWORLD_EMAIL_KEY =
-    'ap_underworld_email';
-
-const UNDERWORLD_PHONE_KEY =
-    'ap_underworld_phone';
-
-const UNDERWORLD_TOKEN_KEY =
-    'ap_underworld_access_token';
-
-const UNDERWORLD_ACCESS_ID_KEY =
-    'ap_underworld_access_id';
-
-const UNDERWORLD_REQUEST_KEY =
-    'ap_underworld_request_id';
-
-const UNDERWORLD_CODE_TIME_KEY =
-    'ap_underworld_code_time';
-
-const UNDERWORLD_CODE_TTL_MS =
-    3 * 60 * 1000;
-
-const UNDERWORLD_AUTO_OPEN_TAB_KEY =
-    'ap_underworld_auto_open_tab_once';
-
-const UNDERWORLD_AUTO_OPEN_TAB_DELAY_MS =
-    350;
-
+const UNDERWORLD_ACCESS_KEY = 'ap_underworld_access';
+const UNDERWORLD_EMAIL_KEY = 'ap_underworld_email';
+const UNDERWORLD_PHONE_KEY = 'ap_underworld_phone';
+const UNDERWORLD_TOKEN_KEY = 'ap_underworld_access_token';
+const UNDERWORLD_ACCESS_ID_KEY = 'ap_underworld_access_id';
+const UNDERWORLD_REQUEST_KEY = 'ap_underworld_request_id';
+const UNDERWORLD_CODE_TIME_KEY = 'ap_underworld_code_time';
+const UNDERWORLD_CODE_TTL_MS = 3 * 60 * 1000;
+const UNDERWORLD_AUTO_OPEN_TAB_KEY = 'ap_underworld_auto_open_tab_once';
+const UNDERWORLD_AUTO_OPEN_TAB_DELAY_MS = 350;
 
 /* =========================================================
-   1. GLOBAL STATE
+   1. GLOBAL STATE & PHONE RULES (40+ COUNTRIES)
 ========================================================= */
+let isLoginMode = false; // false = Quick Sign-In, true = Log In with OTP
 
-let cart =
-    JSON.parse(
-        localStorage.getItem('ap_user_cart')
-    ) || [];
-
+let cart = JSON.parse(localStorage.getItem('ap_user_cart')) || [];
 cart = cart.map(item => ({
     ...item,
     size: item.size || 'M',
-    cartKey:
-        item.cartKey ||
-        `${item.id}-${item.size || 'M'}`
+    cartKey: item.cartKey || `${item.id}-${item.size || 'M'}`
 }));
 
 let pendingProduct = null;
 let selectedSize = null;
-
 let pendingUnderworldAction = null;
-
-let underworldRequestId =
-    localStorage.getItem(
-        UNDERWORLD_REQUEST_KEY
-    ) || '';
-
+let underworldRequestId = localStorage.getItem(UNDERWORLD_REQUEST_KEY) || '';
 let underworldCodeTimerInterval = null;
+
+// ৪০টির বেশি দেশের ফোন নম্বর ফরম্যাট এবং প্লেসহোল্ডার
+const PHONE_RULES = {
+    // North America
+    '+1':     { regex: /^\d{10}$/, placeholder: '2025550143' },
+    '+1-CA':  { regex: /^\d{10}$/, placeholder: '4165550192' },
+    '+52':    { regex: /^\d{10}$/, placeholder: '5512345678' },
+
+    // Asia-Pacific
+    '+880':   { regex: /^1[3-9]\d{8}$/, placeholder: '1XXXXXXXXX' },
+    '+86':    { regex: /^1[3-9]\d{9}$/, placeholder: '13800138000' },
+    '+91':    { regex: /^[6-9]\d{9}$/, placeholder: '9876543210' },
+    '+81':    { regex: /^[789]0\d{8}$/, placeholder: '9012345678' },
+    '+82':    { regex: /^1[0-9]\d{7,8}$/, placeholder: '1012345678' },
+    '+65':    { regex: /^[89]\d{7}$/, placeholder: '81234567' },
+    '+852':   { regex: /^[5689]\d{7}$/, placeholder: '91234567' },
+    '+886':   { regex: /^9\d{8}$/, placeholder: '912345678' },
+    '+61':    { regex: /^4\d{8}$/, placeholder: '412345678' },
+    '+64':    { regex: /^2\d{7,9}$/, placeholder: '211234567' },
+    '+60':    { regex: /^1\d{8,9}$/, placeholder: '123456789' },
+    '+62':    { regex: /^8\d{8,11}$/, placeholder: '8123456789' },
+    '+66':    { regex: /^[689]\d{8}$/, placeholder: '812345678' },
+    '+84':    { regex: /^[35789]\d{8}$/, placeholder: '912345678' },
+    '+63':    { regex: /^9\d{9}$/, placeholder: '9171234567' },
+
+    // Europe
+    '+44':    { regex: /^7\d{9}$/, placeholder: '7911123456' },
+    '+49':    { regex: /^1[5-7]\d{8,9}$/, placeholder: '15123456789' },
+    '+33':    { regex: /^[67]\d{8}$/, placeholder: '612345678' },
+    '+39':    { regex: /^3\d{8,9}$/, placeholder: '3123456789' },
+    '+34':    { regex: /^[67]\d{8}$/, placeholder: '612345678' },
+    '+31':    { regex: /^6\d{8}$/, placeholder: '612345678' },
+    '+41':    { regex: /^7[5-9]\d{7}$/, placeholder: '781234567' },
+    '+46':    { regex: /^7\d{8}$/, placeholder: '701234567' },
+    '+47':    { regex: /^[49]\d{7}$/, placeholder: '41234567' },
+    '+45':    { regex: /^[2-9]\d{7}$/, placeholder: '20123456' },
+    '+358':   { regex: /^[45]\d{6,8}$/, placeholder: '401234567' },
+    '+32':    { regex: /^4\d{8}$/, placeholder: '470123456' },
+    '+43':    { regex: /^6\d{8,12}$/, placeholder: '664123456' },
+    '+353':   { regex: /^8[3-9]\d{7}$/, placeholder: '851234567' },
+    '+351':   { regex: /^9\d{8}$/, placeholder: '912345678' },
+    '+48':    { regex: /^[4-8]\d{8}$/, placeholder: '512345678' },
+    '+420':   { regex: /^[67]\d{8}$/, placeholder: '601123456' },
+    '+90':    { regex: /^5\d{9}$/, placeholder: '5321234567' },
+
+    // Middle East
+    '+971':   { regex: /^5\d{8}$/, placeholder: '501234567' },
+    '+966':   { regex: /^5\d{8}$/, placeholder: '501234567' },
+    '+974':   { regex: /^[3567]\d{7}$/, placeholder: '33123456' },
+    '+973':   { regex: /^3\d{7}$/, placeholder: '36123456' },
+    '+968':   { regex: /^[79]\d{7}$/, placeholder: '91234567' },
+    '+965':   { regex: /^[569]\d{7}$/, placeholder: '51234567' },
+    '+972':   { regex: /^5\d{8}$/, placeholder: '501234567' },
+
+    // Americas & Africa
+    '+55':    { regex: /^[1-9]{2}9\d{8}$/, placeholder: '11987654321' },
+    '+54':    { regex: /^9\d{10}$/, placeholder: '91123456789' },
+    '+56':    { regex: /^9\d{8}$/, placeholder: '912345678' },
+    '+57':    { regex: /^3\d{9}$/, placeholder: '3001234567' },
+    '+27':    { regex: /^[6-8]\d{8}$/, placeholder: '711234567' },
+    '+234':   { regex: /^[789][01]\d{8}$/, placeholder: '8021234567' },
+    '+254':   { regex: /^[71]\d{8}$/, placeholder: '712345678' },
+    '+20':    { regex: /^1[0125]\d{8}$/, placeholder: '1001234567' }
+};
 
 function getUnderworldCodeIssuedAt() {
     const raw = localStorage.getItem(UNDERWORLD_CODE_TIME_KEY);
@@ -8836,14 +8897,9 @@ function updateUnderworldCodeTimer() {
     const timer = document.getElementById('underworld-timer');
     const issuedAt = getUnderworldCodeIssuedAt();
 
-    if (!timer || !issuedAt) {
-        return false;
-    }
+    if (!timer || !issuedAt) return false;
 
-    const remaining = Math.max(
-        0,
-        UNDERWORLD_CODE_TTL_MS - (Date.now() - issuedAt)
-    );
+    const remaining = Math.max(0, UNDERWORLD_CODE_TTL_MS - (Date.now() - issuedAt));
 
     if (remaining <= 0) {
         timer.textContent = 'CODE EXPIRED — REQUEST A NEW CODE';
@@ -8852,9 +8908,8 @@ function updateUnderworldCodeTimer() {
         localStorage.removeItem(UNDERWORLD_CODE_TIME_KEY);
         underworldRequestId = '';
 
-        if (underworldCode) {
-            underworldCode.value = '';
-        }
+        const codeInput = document.getElementById('underworld-code');
+        if (codeInput) codeInput.value = '';
 
         return false;
     }
@@ -8863,11 +8918,7 @@ function updateUnderworldCodeTimer() {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
 
-    timer.textContent =
-        'CODE EXPIRES IN ' +
-        minutes + ':' +
-        String(seconds).padStart(2, '0');
-
+    timer.textContent = 'CODE EXPIRES IN ' + minutes + ':' + String(seconds).padStart(2, '0');
     return true;
 }
 
@@ -8876,10 +8927,7 @@ function startUnderworldCodeTimer() {
     updateUnderworldCodeTimer();
 
     if (getUnderworldCodeIssuedAt()) {
-        underworldCodeTimerInterval = setInterval(
-            updateUnderworldCodeTimer,
-            1000
-        );
+        underworldCodeTimerInterval = setInterval(updateUnderworldCodeTimer, 1000);
     }
 }
 
@@ -8888,3003 +8936,930 @@ function isUnderworldCodeExpired() {
     return !issuedAt || Date.now() - issuedAt >= UNDERWORLD_CODE_TTL_MS;
 }
 
-
 /* =========================================================
    2. SAVE CART
 ========================================================= */
-
 function saveCartToStorage() {
-
-    localStorage.setItem(
-        'ap_user_cart',
-        JSON.stringify(cart)
-    );
-
+    localStorage.setItem('ap_user_cart', JSON.stringify(cart));
 }
-
 
 /* =========================================================
    3. WELCOME SCREEN
 ========================================================= */
+window.addEventListener('DOMContentLoaded', () => {
+    const welcomeScreen = document.getElementById('welcome-screen');
+    const heroContent = document.querySelector('.hero-content');
+    const typingText = document.getElementById('typing-text');
 
-window.addEventListener(
-    'DOMContentLoaded',
-    () => {
+    if (!welcomeScreen || !typingText) return;
 
-        const welcomeScreen =
-            document.getElementById(
-                'welcome-screen'
-            );
-
-        const heroContent =
-            document.querySelector(
-                '.hero-content'
-            );
-
-        const typingText =
-            document.getElementById(
-                'typing-text'
-            );
-
-        if (
-            !welcomeScreen ||
-            !typingText
-        ) {
-            return;
-        }
-
-        if (
-            localStorage.getItem(
-                'ap_hasSeenWelcome'
-            ) === 'true'
-        ) {
-
-            welcomeScreen.remove();
-
-            document.body.classList.remove(
-                'no-scroll'
-            );
-
-            if (heroContent) {
-                heroContent.classList.add(
-                    'animate-hero'
-                );
-            }
-
-            return;
-        }
-
-        if (
-            window.matchMedia(
-                '(min-width: 1024px)'
-            ).matches
-        ) {
-
-            welcomeScreen.remove();
-
-            document.body.classList.remove(
-                'no-scroll'
-            );
-
-            if (heroContent) {
-                heroContent.classList.add(
-                    'animate-hero'
-                );
-            }
-
-            return;
-        }
-
-        document.body.classList.add(
-            'no-scroll'
-        );
-
-        const blockScroll =
-            event => event.preventDefault();
-
-        [
-            'touchstart',
-            'touchmove',
-            'wheel'
-        ].forEach(eventName => {
-
-            welcomeScreen.addEventListener(
-                eventName,
-                blockScroll,
-                { passive: false }
-            );
-
-        });
-
-        const text =
-            'ABDULLAH PSYCHOTIC';
-
-        let index = 0;
-
-        const typingSound =
-            new Audio('typing.mp3');
-
-        typingSound.preload =
-            'auto';
-
-        typingSound.loop =
-            true;
-
-        typingSound.volume =
-            1.0;
-
-        function startTypingSound() {
-
-            typingSound.currentTime =
-                0;
-
-            typingSound
-                .play()
-                .catch(() => {});
-
-        }
-
-        function stopTypingSound() {
-
-            typingSound.pause();
-
-            typingSound.currentTime =
-                0;
-
-        }
-
-        function typeText() {
-
-            if (
-                index <
-                text.length
-            ) {
-
-                if (
-                    index === 0
-                ) {
-                    startTypingSound();
-                }
-
-                typingText.textContent +=
-                    text.charAt(index);
-
-                index++;
-
-                setTimeout(
-                    typeText,
-                    150
-                );
-
-            } else {
-
-                stopTypingSound();
-
-                setTimeout(() => {
-
-                    welcomeScreen.classList.add(
-                        'fade-out'
-                    );
-
-                    localStorage.setItem(
-                        'ap_hasSeenWelcome',
-                        'true'
-                    );
-
-                    setTimeout(() => {
-
-                        welcomeScreen.style.display =
-                            'none';
-
-                        document.body.classList.remove(
-                            'no-scroll'
-                        );
-
-                        setTimeout(() => {
-
-                            if (heroContent) {
-
-                                heroContent.classList.add(
-                                    'animate-hero'
-                                );
-
-                            }
-
-                        }, 300);
-
-                    }, 700);
-
-                }, 1500);
-
-            }
-
-        }
-
-        typeText();
-
+    if (localStorage.getItem('ap_hasSeenWelcome') === 'true' || window.matchMedia('(min-width: 1024px)').matches) {
+        welcomeScreen.remove();
+        document.body.classList.remove('no-scroll');
+        if (heroContent) heroContent.classList.add('animate-hero');
+        return;
     }
-);
 
+    document.body.classList.add('no-scroll');
+
+    const blockScroll = event => event.preventDefault();
+    ['touchstart', 'touchmove', 'wheel'].forEach(eventName => {
+        welcomeScreen.addEventListener(eventName, blockScroll, { passive: false });
+    });
+
+    const text = 'ABDULLAH PSYCHOTIC';
+    let index = 0;
+
+    const typingSound = new Audio('typing.mp3');
+    typingSound.preload = 'auto';
+    typingSound.loop = true;
+    typingSound.volume = 1.0;
+
+    function startTypingSound() {
+        typingSound.currentTime = 0;
+        typingSound.play().catch(() => {});
+    }
+
+    function stopTypingSound() {
+        typingSound.pause();
+        typingSound.currentTime = 0;
+    }
+
+    function typeText() {
+        if (index < text.length) {
+            if (index === 0) startTypingSound();
+            typingText.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeText, 150);
+        } else {
+            stopTypingSound();
+            setTimeout(() => {
+                welcomeScreen.classList.add('fade-out');
+                localStorage.setItem('ap_hasSeenWelcome', 'true');
+                setTimeout(() => {
+                    welcomeScreen.style.display = 'none';
+                    document.body.classList.remove('no-scroll');
+                    setTimeout(() => {
+                        if (heroContent) heroContent.classList.add('animate-hero');
+                    }, 300);
+                }, 700);
+            }, 1500);
+        }
+    }
+
+    typeText();
+});
 
 /* =========================================================
    4. PRODUCT DATABASE
 ========================================================= */
-
 const products = [
-
-    {
-        id: 1,
-        category: 'apparel',
-        name: 'Abdullah Psychotic Branded Logo T-Shirt',
-        image: 't1.webp',
-        url: 't1.webp',
-        price: 499,
-        badge: 'Graphic t-shirt'
-    },
-
-    {
-        id: 2,
-        category: 'apparel',
-        name: 'Abdullah Psychotic Branded Dragon Edition Logo Trouser',
-        image: 'pent.webp',
-        url: 'pent.webp',
-        price: 599,
-        badge: 'Premium Graphic Trouser'
-    },
-
-    {
-        id: 3,
-        category: 'apparel',
-        name: 'A.P Oversized Dragon edition premium t-shirt',
-        image: 't4.webp',
-        url: 't4.webp',
-        price: 459,
-        badge: 'Graphic t-shirt'
-    },
-
-    {
-        id: 4,
-        category: 'apparel',
-        name: 'A.P Oversized Tiger edition premium t-shirt',
-        image: 't3.webp',
-        url: 't3.webp',
-        price: 449,
-        badge: 'Graphic t-shirt'
-    },
-
-    {
-        id: 5,
-        category: 'apparel',
-        name: 'A.P Oversized Penguin edition premium t-shirt',
-        image: 't2.webp',
-        url: 'we5.webp',
-        price: 449,
-        badge: 'Graphic t-shirt'
-    },
-
-    {
-        id: 6,
-        category: 'apparel',
-        name: 'A.P Oversized logo design premium red & black t-shirt(chinese style)',
-        image: 't5.webp',
-        url: 'we6.webp',
-        price: 489,
-        badge: 'Premium Graphic t-shirt'
-    },
-
-    {
-        id: 7,
-        category: 'apparel',
-        name: 'A.P Oversized logo design premium t-shirt',
-        image: 't6.webp',
-        url: 't6.webp',
-        price: 489,
-        badge: 'Premium Graphic t-shirt'
-    },
-
-    {
-        id: 8,
-        category: 'apparel',
-        name: 'A.P Oversized logo design premium t-shirt',
-        image: 't7.webp',
-        url: 't7.webp',
-        price: 489,
-        badge: 'Premium Graphic t-shirt'
-    },
-
-    {
-        id: 10,
-        category: 'apparel',
-        name: 'A.P Oversized logo design premium t-shirt',
-        image: 't8.webp',
-        url: 't8.webp',
-        price: 489,
-        badge: 'Premium Graphic t-shirt'
-    },
-
-    {
-        id: 11,
-        category: 'apparel',
-        name: 'A.P Oversized logo design premium t-shirt',
-        image: 't9.webp',
-        url: 'we11.webp',
-        price: 489,
-        badge: 'Premium Graphic t-shirt'
-    },
-
-    {
-        id: 12,
-        category: 'footwear',
-        name: 'Premium A.P Logo Sneakers',
-        image: 's1.webp',
-        url: 's1.webp',
-        price: 499,
-        badge: 'Classic Sneakers'
-    },
-
-    {
-        id: 13,
-        category: 'footwear',
-        name: 'A.P bullet Edition Premium Shoes',
-        image: 's01.webp',
-        url: 's01.webp',
-        price: 799,
-        badge: 'Premium shoes'
-    },
-
-    {
-        id: 14,
-        category: 'watches',
-        name: 'A.P Ocean Whale Iconic Timepiece',
-        image: 'W1.webp',
-        url: 'W1.webp',
-        price: 7899,
-        badge: 'Luxury Wear'
-    },
-
-    {
-        id: 15,
-        category: 'watches',
-        name: 'A.P Logo Design Iconic Timepiece',
-        image: 'w2.webp',
-        url: 'w2.webp',
-        price: 9899,
-        badge: 'Luxury Wear'
-    },
-
-    {
-        id: 16,
-        category: 'lifestyle',
-        name: 'A.P Logo Design Black Bedsheet',
-        image: 'bed1.webp',
-        url: 'bed1.webp',
-        price: 1849,
-        badge: 'Modern bedsheets'
-    },
-
-    {
-        id: 17,
-        category: 'lifestyle',
-        name: 'A.P Logoed Royal Black Satin Bedsheet',
-        image: 'bed2.webp',
-        url: 'bed2.webp',
-        price: 1899,
-        badge: 'Modern bedsheets'
-    },
-
-    {
-        id: 18,
-        category: 'creative',
-        name: 'A.P Logo Design Iconic Black Creative Mug',
-        image: 'mug.webp',
-        url: 'mug.webp',
-        price: 79,
-        badge: 'Creative Object'
-    },
-
-    {
-        id: 19,
-        category: 'creative',
-        name: 'A.P Logo Design Iconic Golden-Black Mug',
-        image: 'mug2.webp',
-        url: 'mug2.webp',
-        price: 99,
-        badge: 'Creative Object'
-    },
-
-    {
-        id: 20,
-        category: 'hoodies',
-        name: 'A.P Logo Design Iconic Black Color Hoodie',
-        image: 'ho1.webp',
-        url: 'ho1.webp',
-        price: 769,
-        badge: 'Premium Winter Hoodie'
-    },
-
-    {
-        id: 21,
-        category: 'hoodies',
-        name: 'A.P Logo Design Iconic Red Color Hoodie',
-        image: 'ho2.webp',
-        url: 'ho2.webp',
-        price: 769,
-        badge: 'Premium Winter Hoodie'
-    },
-
-    {
-        id: 22,
-        category: 'hoodies',
-        name: 'A.P Logo Design white black Hoodie',
-        image: 'ho3.webp',
-        url: 'weh2.webp',
-        price: 749,
-        badge: 'Premium Winter Hoodie'
-    },
-
-    {
-        id: 23,
-        category: 'hoodies',
-        name: 'A.P Logo Arted Premium Red & Black Hoodie',
-        image: 'ho4.webp',
-        url: 'ho4.webp',
-        price: 789,
-        badge: 'Premium Winter Hoodie'
-    },
-
-    {
-        id: 24,
-        category: 'hoodies',
-        name: 'A.P Premium black & white stylish designed Hoodie',
-        image: 'ho5.webp',
-        url: 'ho5.webp',
-        price: 799,
-        badge: 'Premium Winter Hoodie'
-    },
-
-    {
-        id: 25,
-        category: 'caps',
-        name: 'A.P Logo Design Classic Black cap',
-        image: 'cap1.webp',
-        url: 'cap1.webp',
-        price: 239,
-        badge: 'Classic cap'
-    },
-
-    {
-        id: 26,
-        category: 'caps',
-        name: 'A.P Logo Design Classic red cap',
-        image: 'cap2.webp',
-        url: 'cap2.webp',
-        price: 229,
-        badge: 'Classic cap'
-    },
-
-    {
-        id: 27,
-        category: 'caps',
-        name: 'Abdullah Psychotic modern cap',
-        image: 'cap4.webp',
-        url: 'cap4.webp',
-        price: 249,
-        badge: 'Modern cap'
-    },
-
-    {
-        id: 28,
-        category: 'caps',
-        name: 'Abdullah Psychotic – Luxury cap',
-        image: 'cap5.webp',
-        url: 'cap5.webp',
-        price: 359,
-        badge: 'Luxury cap'
-    },
-
-    {
-        id: 29,
-        category: 'caps',
-        name: 'Abdullah Psychotic – Exclusive cap',
-        image: 'cap6.webp',
-        url: 'cap6.webp',
-        price: 399,
-        badge: 'Exclusive cap'
-    },
-
-    {
-        id: 30,
-        category: 'caps',
-        name: 'Abdullah Psychotic – classic logo hat',
-        image: 'hat2.webp',
-        url: 'hat2.webp',
-        price: 2999,
-        badge: 'Premium Classic Hat'
-    },
-
-    {
-        id: 31,
-        category: 'caps',
-        name: 'Abdullah Psychotic – Hell Rider stylish iconic hat',
-        image: 'cap3.webp',
-        url: 'cap3.webp',
-        price: 3299,
-        badge: 'Premium Iconic Hat'
-    },
-
-    {
-        id: 32,
-        category: 'caps',
-        name: 'Abdullah Psychotic – Luxury dragon edition hat',
-        image: 'hat3.webp',
-        url: 'hat3.webp',
-        price: 3499,
-        badge: 'Premium Exclusive Hat'
-    },
-
-    {
-        id: 33,
-        category: 'bags',
-        name: 'Abdullah Psychotic – Luxury school bag',
-        image: 'bag1.webp',
-        url: 'bag1.webp',
-        price: 549,
-        badge: 'Premium school bag'
-    },
-
-    {
-        id: 34,
-        category: 'bags',
-        name: 'Abdullah Psychotic – Luxury modern bag',
-        image: 'bag2.webp',
-        url: 'bag2.webp',
-        price: 2249,
-        badge: 'Premium fashion bag'
-    },
-
-    {
-        id: 35,
-        category: 'bags',
-        name: 'Abdullah Psychotic – Luxury bag(Upper class)',
-        image: 'bag3.webp',
-        url: 'bag3.webp',
-        price: 2349,
-        badge: 'Luxury fashion bag'
-    },
-
-    {
-        id: 36,
-        category: 'perfume',
-        name: 'Abdullah Psychotic – Luxury red designed perfume',
-        image: 'per1.webp',
-        url: 'per1.webp',
-        price: 2599,
-        badge: 'Luxury perfume'
-    },
-
-    {
-        id: 37,
-        category: 'perfume',
-        name: 'Abdullah Psychotic – Luxury black designed logo perfume (Upper class)',
-        image: 'per2.webp',
-        url: 'per2.webp',
-        price: 2700,
-        badge: 'Luxury perfume'
-    },
-
-    {
-        id: 38,
-        category: 'perfume',
-        name: 'Abdullah Psychotic – Luxury black designed logo perfume',
-        image: 'per3.webp',
-        url: 'per3.webp',
-        price: 2650,
-        badge: 'Luxury perfume'
-    }
-
+    { id: 1, category: 'apparel', name: 'Abdullah Psychotic Branded Logo T-Shirt', image: 't1.webp', url: 't1.webp', price: 499, badge: 'Graphic t-shirt' },
+    { id: 2, category: 'apparel', name: 'Abdullah Psychotic Branded Dragon Edition Logo Trouser', image: 'pent.webp', url: 'pent.webp', price: 599, badge: 'Premium Graphic Trouser' },
+    { id: 3, category: 'apparel', name: 'A.P Oversized Dragon edition premium t-shirt', image: 't4.webp', url: 't4.webp', price: 459, badge: 'Graphic t-shirt' },
+    { id: 4, category: 'apparel', name: 'A.P Oversized Tiger edition premium t-shirt', image: 't3.webp', url: 't3.webp', price: 449, badge: 'Graphic t-shirt' },
+    { id: 5, category: 'apparel', name: 'A.P Oversized Penguin edition premium t-shirt', image: 't2.webp', url: 'we5.webp', price: 449, badge: 'Graphic t-shirt' },
+    { id: 6, category: 'apparel', name: 'A.P Oversized logo design premium red & black t-shirt(chinese style)', image: 't5.webp', url: 'we6.webp', price: 489, badge: 'Premium Graphic t-shirt' },
+    { id: 7, category: 'apparel', name: 'A.P Oversized logo design premium t-shirt', image: 't6.webp', url: 't6.webp', price: 489, badge: 'Premium Graphic t-shirt' },
+    { id: 8, category: 'apparel', name: 'A.P Oversized logo design premium t-shirt', image: 't7.webp', url: 't7.webp', price: 489, badge: 'Premium Graphic t-shirt' },
+    { id: 10, category: 'apparel', name: 'A.P Oversized logo design premium t-shirt', image: 't8.webp', url: 't8.webp', price: 489, badge: 'Premium Graphic t-shirt' },
+    { id: 11, category: 'apparel', name: 'A.P Oversized logo design premium t-shirt', image: 't9.webp', url: 'we11.webp', price: 489, badge: 'Premium Graphic t-shirt' },
+    { id: 12, category: 'footwear', name: 'Premium A.P Logo Sneakers', image: 's1.webp', url: 's1.webp', price: 499, badge: 'Classic Sneakers' },
+    { id: 13, category: 'footwear', name: 'A.P bullet Edition Premium Shoes', image: 's01.webp', url: 's01.webp', price: 799, badge: 'Premium shoes' },
+    { id: 14, category: 'watches', name: 'A.P Ocean Whale Iconic Timepiece', image: 'W1.webp', url: 'W1.webp', price: 7899, badge: 'Luxury Wear' },
+    { id: 15, category: 'watches', name: 'A.P Logo Design Iconic Timepiece', image: 'w2.webp', url: 'w2.webp', price: 9899, badge: 'Luxury Wear' },
+    { id: 16, category: 'lifestyle', name: 'A.P Logo Design Black Bedsheet', image: 'bed1.webp', url: 'bed1.webp', price: 1849, badge: 'Modern bedsheets' },
+    { id: 17, category: 'lifestyle', name: 'A.P Logoed Royal Black Satin Bedsheet', image: 'bed2.webp', url: 'bed2.webp', price: 1899, badge: 'Modern bedsheets' },
+    { id: 18, category: 'creative', name: 'A.P Logo Design Iconic Black Creative Mug', image: 'mug.webp', url: 'mug.webp', price: 79, badge: 'Creative Object' },
+    { id: 19, category: 'creative', name: 'A.P Logo Design Iconic Golden-Black Mug', image: 'mug2.webp', url: 'mug2.webp', price: 99, badge: 'Creative Object' },
+    { id: 20, category: 'hoodies', name: 'A.P Logo Design Iconic Black Color Hoodie', image: 'ho1.webp', url: 'ho1.webp', price: 769, badge: 'Premium Winter Hoodie' },
+    { id: 21, category: 'hoodies', name: 'A.P Logo Design Iconic Red Color Hoodie', image: 'ho2.webp', url: 'ho2.webp', price: 769, badge: 'Premium Winter Hoodie' },
+    { id: 22, category: 'hoodies', name: 'A.P Logo Design white black Hoodie', image: 'ho3.webp', url: 'weh2.webp', price: 749, badge: 'Premium Winter Hoodie' },
+    { id: 23, category: 'hoodies', name: 'A.P Logo Arted Premium Red & Black Hoodie', image: 'ho4.webp', url: 'ho4.webp', price: 789, badge: 'Premium Winter Hoodie' },
+    { id: 24, category: 'hoodies', name: 'A.P Premium black & white stylish designed Hoodie', image: 'ho5.webp', url: 'ho5.webp', price: 799, badge: 'Premium Winter Hoodie' },
+    { id: 25, category: 'caps', name: 'A.P Logo Design Classic Black cap', image: 'cap1.webp', url: 'cap1.webp', price: 239, badge: 'Classic cap' },
+    { id: 26, category: 'caps', name: 'A.P Logo Design Classic red cap', image: 'cap2.webp', url: 'cap2.webp', price: 229, badge: 'Classic cap' },
+    { id: 27, category: 'caps', name: 'Abdullah Psychotic modern cap', image: 'cap4.webp', url: 'cap4.webp', price: 249, badge: 'Modern cap' },
+    { id: 28, category: 'caps', name: 'Abdullah Psychotic – Luxury cap', image: 'cap5.webp', url: 'cap5.webp', price: 359, badge: 'Luxury cap' },
+    { id: 29, category: 'caps', name: 'Abdullah Psychotic – Exclusive cap', image: 'cap6.webp', url: 'cap6.webp', price: 399, badge: 'Exclusive cap' },
+    { id: 30, category: 'caps', name: 'Abdullah Psychotic – classic logo hat', image: 'hat2.webp', url: 'hat2.webp', price: 2999, badge: 'Premium Classic Hat' },
+    { id: 31, category: 'caps', name: 'Abdullah Psychotic – Hell Rider stylish iconic hat', image: 'cap3.webp', url: 'cap3.webp', price: 3299, badge: 'Premium Iconic Hat' },
+    { id: 32, category: 'caps', name: 'Abdullah Psychotic – Luxury dragon edition hat', image: 'hat3.webp', url: 'hat3.webp', price: 3499, badge: 'Premium Exclusive Hat' },
+    { id: 33, category: 'bags', name: 'Abdullah Psychotic – Luxury school bag', image: 'bag1.webp', url: 'bag1.webp', price: 549, badge: 'Premium school bag' },
+    { id: 34, category: 'bags', name: 'Abdullah Psychotic – Luxury modern bag', image: 'bag2.webp', url: 'bag2.webp', price: 2249, badge: 'Premium fashion bag' },
+    { id: 35, category: 'bags', name: 'Abdullah Psychotic – Luxury bag(Upper class)', image: 'bag3.webp', url: 'bag3.webp', price: 2349, badge: 'Luxury fashion bag' },
+    { id: 36, category: 'perfume', name: 'Abdullah Psychotic – Luxury red designed perfume', image: 'per1.webp', url: 'per1.webp', price: 2599, badge: 'Luxury perfume' },
+    { id: 37, category: 'perfume', name: 'Abdullah Psychotic – Luxury black designed logo perfume (Upper class)', image: 'per2.webp', url: 'per2.webp', price: 2700, badge: 'Luxury perfume' },
+    { id: 38, category: 'perfume', name: 'Abdullah Psychotic – Luxury black designed logo perfume', image: 'per3.webp', url: 'per3.webp', price: 2650, badge: 'Luxury perfume' }
 ];
 
 const soldOut = [];
 
-
 /* =========================================================
    5. PRODUCT RENDERING
 ========================================================= */
-
 function createCardHTML(product) {
-
-    const isSoldOut =
-        soldOut.includes(product.id);
-
-    const isLuxury =
-        product.category === 'watches';
-
-    const cardClass =
-        isLuxury
-            ? 'card luxury-card'
-            : 'card';
-
-    const badgeClass =
-        isLuxury
-            ? 'card-badge luxury-badge'
-            : 'card-badge';
-
-    const badgeHTML =
-        product.badge
-            ? `<span class="${badgeClass}">${product.badge}</span>`
-            : '';
+    const isSoldOut = soldOut.includes(product.id);
+    const isLuxury = product.category === 'watches';
+    const cardClass = isLuxury ? 'card luxury-card' : 'card';
+    const badgeClass = isLuxury ? 'card-badge luxury-badge' : 'card-badge';
+    const badgeHTML = product.badge ? `<span class="${badgeClass}">${product.badge}</span>` : '';
 
     return `
         <div class="${cardClass}" data-id="${product.id}">
-
-            <a
-                href="${product.url}"
-                target="_blank"
-                class="card-img-wrapper"
-            >
+            <a href="${product.url}" target="_blank" class="card-img-wrapper">
                 ${badgeHTML}
-
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                    loading="lazy"
-                >
+                <img src="${product.image}" alt="${product.name}" loading="lazy">
             </a>
-
             <div class="card-content">
-
                 <h3>
-                    <a
-                        href="${product.url}"
-                        target="_blank"
-                    >
-                        ${product.name}
-                    </a>
+                    <a href="${product.url}" target="_blank">${product.name}</a>
                 </h3>
-
                 <div class="card-bottom">
-
-                    <div class="price">
-                        $${product.price}
-                    </div>
-
-                    ${
-                        isSoldOut
-                        ?
-                        `
-                        <button
-                            class="sold-out-btn"
-                            disabled
-                        >
-                            SOLD OUT
+                    <div class="price">$${product.price}</div>
+                    ${isSoldOut ? `
+                        <button class="sold-out-btn" disabled>SOLD OUT</button>
+                    ` : `
+                        <button class="add-cart-btn" onclick="addToCart(${product.id})">
+                            <i class="fas fa-plus"></i> Add
                         </button>
-                        `
-                        :
-                        `
-                        <button
-                            class="add-cart-btn"
-                            onclick="addToCart(${product.id})"
-                        >
-                            <i class="fas fa-plus"></i>
-                            Add
-                        </button>
-                        `
-                    }
-
+                    `}
                 </div>
-
             </div>
         </div>
     `;
 }
 
-
 function renderProducts() {
-
     const containers = {
-
-        apparel:
-            document.getElementById(
-                'grid-apparel'
-            ),
-
-        footwear:
-            document.getElementById(
-                'grid-footwear'
-            ),
-
-        watches:
-            document.getElementById(
-                'grid-watches'
-            ),
-
-        lifestyle:
-            document.getElementById(
-                'grid-lifestyle'
-            ),
-
-        creative:
-            document.getElementById(
-                'grid-creative'
-            ),
-
-        hoodies:
-            document.getElementById(
-                'grid-hoodies'
-            ),
-
-        caps:
-            document.getElementById(
-                'grid-caps'
-            ),
-
-        bags:
-            document.getElementById(
-                'grid-bags'
-            ),
-
-        perfume:
-            document.getElementById(
-                'grid-perfume'
-            )
-
+        apparel: document.getElementById('grid-apparel'),
+        footwear: document.getElementById('grid-footwear'),
+        watches: document.getElementById('grid-watches'),
+        lifestyle: document.getElementById('grid-lifestyle'),
+        creative: document.getElementById('grid-creative'),
+        hoodies: document.getElementById('grid-hoodies'),
+        caps: document.getElementById('grid-caps'),
+        bags: document.getElementById('grid-bags'),
+        perfume: document.getElementById('grid-perfume')
     };
 
-    Object.values(containers)
-        .forEach(container => {
-
-            if (container) {
-                container.innerHTML = '';
-            }
-
-        });
-
-    products.forEach(product => {
-
-        const target =
-            containers[product.category];
-
-        if (target) {
-
-            target.insertAdjacentHTML(
-                'beforeend',
-                createCardHTML(product)
-            );
-
-        }
-
+    Object.values(containers).forEach(container => {
+        if (container) container.innerHTML = '';
     });
 
+    products.forEach(product => {
+        const target = containers[product.category];
+        if (target) {
+            target.insertAdjacentHTML('beforeend', createCardHTML(product));
+        }
+    });
 }
-
 
 /* =========================================================
    6. DRAWER ELEMENTS
 ========================================================= */
-
-const overlay =
-    document.getElementById('overlay');
-
-const navDrawer =
-    document.getElementById('nav-drawer');
-
-const cartDrawer =
-    document.getElementById('cart-drawer');
-
-const sizeSheet =
-    document.getElementById('size-sheet');
-
+const overlay = document.getElementById('overlay');
+const navDrawer = document.getElementById('nav-drawer');
+const cartDrawer = document.getElementById('cart-drawer');
+const sizeSheet = document.getElementById('size-sheet');
 
 /* =========================================================
    7. SIZE SYSTEM
 ========================================================= */
-
 function getOptions(product) {
-
-    if (
-        product.category === 'apparel' ||
-        product.category === 'hoodies'
-    ) {
-
-        return {
-
-            label: 'Size',
-
-            values: [
-                'S',
-                'M',
-                'L',
-                'XL',
-                'XXL'
-            ]
-
-        };
-
+    if (product.category === 'apparel' || product.category === 'hoodies') {
+        return { label: 'Size', values: ['S', 'M', 'L', 'XL', 'XXL'] };
     }
-
-    if (
-        product.category === 'footwear'
-    ) {
-
-        return {
-
-            label: 'Size',
-
-            values: [
-                '39',
-                '40',
-                '41',
-                '42',
-                '43',
-                '44',
-                '45'
-            ]
-
-        };
-
+    if (product.category === 'footwear') {
+        return { label: 'Size', values: ['39', '40', '41', '42', '43', '44', '45'] };
     }
-
-    return {
-
-        label: 'Size',
-
-        values: [
-            'ONE SIZE'
-        ]
-
-    };
-
+    return { label: 'Size', values: ['ONE SIZE'] };
 }
-
 
 /* =========================================================
    8. ADD TO CART
 ========================================================= */
-
 function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product || soldOut.includes(productId)) return;
 
-    const product =
-        products.find(
-            p => p.id === productId
-        );
+    pendingProduct = product;
+    selectedSize = null;
 
-    if (
-        !product ||
-        soldOut.includes(productId)
-    ) {
-        return;
-    }
+    const image = document.getElementById('size-product-image');
+    const brand = document.getElementById('size-product-brand');
+    const name = document.getElementById('size-product-name');
+    const price = document.getElementById('size-product-price');
 
-    pendingProduct =
-        product;
+    if (image) { image.src = product.image; image.alt = product.name; }
+    if (brand) { brand.textContent = 'ABDULLAH PSYCHOTIC'; }
+    if (name) { name.textContent = product.name; }
+    if (price) { price.textContent = `$${product.price.toLocaleString()}`; }
 
-    selectedSize =
-        null;
+    const options = getOptions(product);
+    const sizeOptions = document.getElementById('size-options');
+    const sizeLabel = document.querySelector('.size-label');
+    const sizeChartLink = document.getElementById('size-chart-link');
 
-    const image =
-        document.getElementById(
-            'size-product-image'
-        );
-
-    const brand =
-        document.getElementById(
-            'size-product-brand'
-        );
-
-    const name =
-        document.getElementById(
-            'size-product-name'
-        );
-
-    const price =
-        document.getElementById(
-            'size-product-price'
-        );
-
-    if (image) {
-
-        image.src =
-            product.image;
-
-        image.alt =
-            product.name;
-
-    }
-
-    if (brand) {
-
-        brand.textContent =
-            'ABDULLAH PSYCHOTIC';
-
-    }
-
-    if (name) {
-
-        name.textContent =
-            product.name;
-
-    }
-
-    if (price) {
-
-        price.textContent =
-            `$${product.price.toLocaleString()}`;
-
-    }
-
-    const options =
-        getOptions(product);
-
-    const sizeOptions =
-        document.getElementById(
-            'size-options'
-        );
-
-    const sizeLabel =
-        document.querySelector(
-            '.size-label'
-        );
-
-    const sizeChartLink =
-        document.getElementById(
-            'size-chart-link'
-        );
-
-    if (sizeLabel) {
-
-        sizeLabel.textContent =
-            `${options.label}:`;
-
-    }
+    if (sizeLabel) sizeLabel.textContent = `${options.label}:`;
 
     if (sizeOptions) {
-
-        sizeOptions.innerHTML =
-            options.values
-                .map(value => `
-                    <button
-                        type="button"
-                        class="size-option"
-                        data-size="${value}"
-                    >
-                        ${value}
-                    </button>
-                `)
-                .join('');
-
+        sizeOptions.innerHTML = options.values.map(value => `
+            <button type="button" class="size-option" data-size="${value}">
+                ${value}
+            </button>
+        `).join('');
     }
 
-    document
-        .querySelectorAll('.size-option')
-        .forEach(option => {
-
-            option.addEventListener(
-                'click',
-                () =>
-                    selectSize(
-                        option.dataset.size
-                    )
-            );
-
-        });
+    document.querySelectorAll('.size-option').forEach(option => {
+        option.addEventListener('click', () => selectSize(option.dataset.size));
+    });
 
     if (sizeChartLink) {
-
-        sizeChartLink.onclick =
-            function(event) {
-
-                event.preventDefault();
-
-                const guide =
-
-                    product.category ===
-                    'footwear'
-
-                    ?
-
-                    `SHOE SIZE GUIDE
-
-39 / 40 / 41 / 42 / 43 / 44 / 45
-
-Please choose your usual shoe size.`
-
-                    :
-
-                    (
-                        product.category ===
-                        'apparel' ||
-
-                        product.category ===
-                        'hoodies'
-                    )
-
-                    ?
-
-                    `SIZE GUIDE
-
-S — Small
-
-M — Medium
-
-L — Large
-
-XL — Extra Large
-
-XXL — Extra Extra Large
-
-Please choose your usual size.`
-
-                    :
-
-                    `SIZE GUIDE
-
-This product is available in ONE SIZE.`;
-
-                alert(guide);
-
-                return false;
-
-            };
-
+        sizeChartLink.onclick = function(event) {
+            event.preventDefault();
+            const guide = product.category === 'footwear'
+                ? `SHOE SIZE GUIDE\n\n39 / 40 / 41 / 42 / 43 / 44 / 45\n\nPlease choose your usual shoe size.`
+                : (product.category === 'apparel' || product.category === 'hoodies')
+                ? `SIZE GUIDE\n\nS — Small\nM — Medium\nL — Large\nXL — Extra Large\nXXL — Extra Extra Large\n\nPlease choose your usual size.`
+                : `SIZE GUIDE\n\nThis product is available in ONE SIZE.`;
+            alert(guide);
+            return false;
+        };
     }
 
-    if (navDrawer) {
-        navDrawer.classList.remove('active');
-    }
-
-    if (cartDrawer) {
-        cartDrawer.classList.remove('active');
-    }
-
-    if (overlay) {
-        overlay.classList.remove('active');
-    }
-
-    document.body.classList.remove(
-        'cart-open'
-    );
+    if (navDrawer) navDrawer.classList.remove('active');
+    if (cartDrawer) cartDrawer.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+    document.body.classList.remove('cart-open');
 
     if (sizeSheet) {
-
-        sizeSheet.classList.add(
-            'active'
-        );
-
-        sizeSheet.setAttribute(
-            'aria-hidden',
-            'false'
-        );
-
+        sizeSheet.classList.add('active');
+        sizeSheet.setAttribute('aria-hidden', 'false');
     }
 
-    if (overlay) {
-
-        overlay.classList.add(
-            'active'
-        );
-
-    }
-
-    document.body.classList.add(
-        'no-scroll'
-    );
-
+    if (overlay) overlay.classList.add('active');
+    document.body.classList.add('no-scroll');
 }
-
 
 function selectSize(size) {
-
-    selectedSize =
-        size;
-
-    document
-        .querySelectorAll('.size-option')
-        .forEach(option => {
-
-            option.classList.toggle(
-                'selected',
-                option.dataset.size === size
-            );
-
-        });
-
+    selectedSize = size;
+    document.querySelectorAll('.size-option').forEach(option => {
+        option.classList.toggle('selected', option.dataset.size === size);
+    });
 }
-
 
 /* =========================================================
    9. COMPLETE CART ADD
 ========================================================= */
-
 function completePendingAddToCart() {
+    if (!pendingProduct || !selectedSize) return;
 
-    if (
-        !pendingProduct ||
-        !selectedSize
-    ) {
-        return;
-    }
-
-    const cartKey =
-        `${pendingProduct.id}-${selectedSize}`;
-
-    const existingItem =
-        cart.find(
-            item =>
-                item.cartKey === cartKey
-        );
+    const cartKey = `${pendingProduct.id}-${selectedSize}`;
+    const existingItem = cart.find(item => item.cartKey === cartKey);
 
     if (existingItem) {
-
         existingItem.qty += 1;
-
     } else {
-
-        cart.push({
-
-            ...pendingProduct,
-
-            size:
-                selectedSize,
-
-            cartKey:
-                cartKey,
-
-            qty:
-                1
-
-        });
-
+        cart.push({ ...pendingProduct, size: selectedSize, cartKey: cartKey, qty: 1 });
     }
 
     saveCartToStorage();
-
     updateCartUI();
-
-    pendingProduct =
-        null;
-
-    selectedSize =
-        null;
-
+    pendingProduct = null;
+    selectedSize = null;
     closeSizeSheet();
-
     openCart();
-
 }
 
-
 function confirmSizeAndAddToCart() {
-
-    if (!pendingProduct) {
-        return;
-    }
-
+    if (!pendingProduct) return;
     if (!selectedSize) {
-
-        alert(
-            'Please select a size first.'
-        );
-
+        alert('Please select a size first.');
         return;
-
     }
 
-    if (
-        !window.UnderworldAuth ||
-        !window.UnderworldAuth.isLoggedIn()
-    ) {
-
+    if (!window.UnderworldAuth || !window.UnderworldAuth.isLoggedIn()) {
         if (window.UnderworldAuth) {
-
-            window.UnderworldAuth.requireLogin(
-                completePendingAddToCart
-            );
-
+            window.UnderworldAuth.requireLogin(completePendingAddToCart);
         } else {
-
-            alert(
-                'Sign-in system is unavailable. Please refresh the page.'
-            );
-
+            alert('Sign-in system is unavailable. Please refresh the page.');
         }
-
         return;
-
     }
 
     completePendingAddToCart();
-
 }
-
 
 function closeSizeSheet() {
-
     if (sizeSheet) {
-
-        sizeSheet.classList.remove(
-            'active'
-        );
-
-        sizeSheet.setAttribute(
-            'aria-hidden',
-            'true'
-        );
-
+        sizeSheet.classList.remove('active');
+        sizeSheet.setAttribute('aria-hidden', 'true');
     }
 
-    pendingProduct =
-        null;
+    pendingProduct = null;
+    selectedSize = null;
 
-    selectedSize =
-        null;
-
-    document
-        .querySelectorAll('.size-option')
-        .forEach(option => {
-
-            option.classList.remove(
-                'selected'
-            );
-
-        });
-
+    document.querySelectorAll('.size-option').forEach(option => {
+        option.classList.remove('selected');
+    });
 }
-
 
 function getCartItemKey(item) {
-
-    if (!item.size) {
-        item.size = 'M';
-    }
-
-    if (!item.cartKey) {
-
-        item.cartKey =
-            `${item.id}-${item.size}`;
-
-    }
-
+    if (!item.size) item.size = 'M';
+    if (!item.cartKey) item.cartKey = `${item.id}-${item.size}`;
     return item.cartKey;
-
 }
 
-
-function updateQuantity(
-    cartKey,
-    change
-) {
-
-    const item =
-        cart.find(
-            item =>
-                getCartItemKey(item) ===
-                cartKey
-        );
-
+function updateQuantity(cartKey, change) {
+    const item = cart.find(item => getCartItemKey(item) === cartKey);
     if (item) {
-
-        item.qty +=
-            change;
-
+        item.qty += change;
         if (item.qty <= 0) {
-
-            removeFromCart(
-                cartKey
-            );
-
+            removeFromCart(cartKey);
             return;
-
         }
-
     }
-
     saveCartToStorage();
-
     updateCartUI();
-
 }
-
 
 function removeFromCart(cartKey) {
-
-    cart =
-        cart.filter(
-            item =>
-                getCartItemKey(item) !==
-                cartKey
-        );
-
+    cart = cart.filter(item => getCartItemKey(item) !== cartKey);
     saveCartToStorage();
-
     updateCartUI();
-
 }
-
 
 /* =========================================================
    10. CART UI
 ========================================================= */
-
 function updateCartUI() {
+    const cartContainer = document.getElementById('cart-items-container');
+    const cartCountBadge = document.getElementById('cart-count');
+    const subtotalEl = document.getElementById('cart-subtotal');
 
-    const cartContainer =
-        document.getElementById(
-            'cart-items-container'
-        );
+    if (!cartContainer) return;
 
-    const cartCountBadge =
-        document.getElementById(
-            'cart-count'
-        );
+    const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+    if (cartCountBadge) cartCountBadge.textContent = totalItems;
 
-    const subtotalEl =
-        document.getElementById(
-            'cart-subtotal'
-        );
-
-    if (!cartContainer) {
-        return;
-    }
-
-    const totalItems =
-        cart.reduce(
-            (sum, item) =>
-                sum + item.qty,
-            0
-        );
-
-    if (cartCountBadge) {
-
-        cartCountBadge.textContent =
-            totalItems;
-
-    }
-
-    const subtotal =
-        cart.reduce(
-            (sum, item) =>
-                sum +
-                (
-                    item.price *
-                    item.qty
-                ),
-            0
-        );
-
-    if (subtotalEl) {
-
-        subtotalEl.textContent =
-            `$${subtotal.toLocaleString()}`;
-
-    }
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    if (subtotalEl) subtotalEl.textContent = `$${subtotal.toLocaleString()}`;
 
     if (cart.length === 0) {
-
-        cartContainer.innerHTML = `
-            <div class="empty-cart-msg">
-                Your shopping bag is empty.
-            </div>
-        `;
-
+        cartContainer.innerHTML = `<div class="empty-cart-msg">Your shopping bag is empty.</div>`;
         return;
-
     }
 
-    cartContainer.innerHTML =
-        '';
-
+    cartContainer.innerHTML = '';
     cart.forEach(item => {
-
-        const key =
-            getCartItemKey(item);
-
-        cartContainer.insertAdjacentHTML(
-            'beforeend',
-            `
+        const key = getCartItemKey(item);
+        cartContainer.insertAdjacentHTML('beforeend', `
             <div class="cart-item">
-
-                <a
-                    href="${item.url}"
-                    target="_blank"
-                >
-                    <img
-                        src="${item.image}"
-                        alt="${item.name}"
-                    >
+                <a href="${item.url}" target="_blank">
+                    <img src="${item.image}" alt="${item.name}">
                 </a>
-
                 <div class="cart-item-details">
-
                     <div class="cart-item-title">
-
-                        <a
-                            href="${item.url}"
-                            target="_blank"
-                        >
-                            ${item.name}
-                        </a>
-
+                        <a href="${item.url}" target="_blank">${item.name}</a>
                     </div>
-
-                    <div class="cart-item-price">
-                        $${item.price}
-                    </div>
-
-                    <div
-                        style="
-                            font-size:11px;
-                            color:var(--text-muted);
-                            margin-top:4px;
-                            letter-spacing:1px;
-                        "
-                    >
+                    <div class="cart-item-price">$${item.price}</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-top:4px; letter-spacing:1px;">
                         SIZE: ${item.size || 'M'}
                     </div>
-
                     <div class="cart-qty-controls">
-
-                        <button
-                            class="qty-btn"
-                            onclick="updateQuantity('${key}', -1)"
-                        >
-                            -
-                        </button>
-
-                        <span
-                            style="
-                                font-size:12px;
-                                font-weight:600;
-                            "
-                        >
-                            ${item.qty}
-                        </span>
-
-                        <button
-                            class="qty-btn"
-                            onclick="updateQuantity('${key}', 1)"
-                        >
-                            +
-                        </button>
-
+                        <button class="qty-btn" onclick="updateQuantity('${key}', -1)">-</button>
+                        <span style="font-size:12px; font-weight:600;">${item.qty}</span>
+                        <button class="qty-btn" onclick="updateQuantity('${key}', 1)">+</button>
                     </div>
-
                 </div>
-
-                <i
-                    class="fas fa-trash cart-item-remove"
-                    onclick="removeFromCart('${key}')"
-                ></i>
-
+                <i class="fas fa-trash cart-item-remove" onclick="removeFromCart('${key}')"></i>
             </div>
-            `
-        );
-
+        `);
     });
-
 }
-
 
 /* =========================================================
    11. DRAWERS
 ========================================================= */
-
 function openCart() {
-
     closeAll();
-
-    if (cartDrawer) {
-        cartDrawer.classList.add('active');
-    }
-
-    if (overlay) {
-        overlay.classList.add('active');
-    }
-
-    document.body.classList.add(
-        'no-scroll'
-    );
-
-    document.body.classList.add(
-        'cart-open'
-    );
-
+    if (cartDrawer) cartDrawer.classList.add('active');
+    if (overlay) overlay.classList.add('active');
+    document.body.classList.add('no-scroll', 'cart-open');
 }
-
 
 function openDrawer() {
-
     closeAll();
-
-    if (navDrawer) {
-        navDrawer.classList.add('active');
-    }
-
-    if (overlay) {
-        overlay.classList.add('active');
-    }
-
-    document.body.classList.add(
-        'no-scroll'
-    );
-
+    if (navDrawer) navDrawer.classList.add('active');
+    if (overlay) overlay.classList.add('active');
+    document.body.classList.add('no-scroll');
 }
 
+const underworldWrap = document.getElementById('underworld-wrap');
+const underworldToggle = document.getElementById('underworld-toggle');
 
-const underworldWrap =
-    document.getElementById(
-        'underworld-wrap'
-    );
-
-const underworldToggle =
-    document.getElementById(
-        'underworld-toggle'
-    );
-
-
-if (
-    underworldWrap &&
-    underworldToggle
-) {
-
-    underworldToggle.addEventListener(
-        'click',
-        () => {
-
-            const isOpen =
-                underworldWrap.classList.toggle(
-                    'open'
-                );
-
-            underworldToggle.setAttribute(
-                'aria-expanded',
-                String(isOpen)
-            );
-
-        }
-    );
-
+if (underworldWrap && underworldToggle) {
+    underworldToggle.addEventListener('click', () => {
+        const isOpen = underworldWrap.classList.toggle('open');
+        underworldToggle.setAttribute('aria-expanded', String(isOpen));
+    });
 }
-
 
 function closeAll() {
-
-    if (navDrawer) {
-        navDrawer.classList.remove('active');
-    }
-
-    if (cartDrawer) {
-        cartDrawer.classList.remove('active');
-    }
-
+    if (navDrawer) navDrawer.classList.remove('active');
+    if (cartDrawer) cartDrawer.classList.remove('active');
     closeSizeSheet();
-
-    if (
-        underworldWrap &&
-        underworldToggle
-    ) {
-
-        underworldWrap.classList.remove(
-            'open'
-        );
-
-        underworldToggle.setAttribute(
-            'aria-expanded',
-            'false'
-        );
-
+    if (underworldWrap && underworldToggle) {
+        underworldWrap.classList.remove('open');
+        underworldToggle.setAttribute('aria-expanded', 'false');
     }
-
-    if (overlay) {
-        overlay.classList.remove('active');
-    }
-
-    document.body.classList.remove(
-        'no-scroll'
-    );
-
-    document.body.classList.remove(
-        'cart-open'
-    );
-
+    if (overlay) overlay.classList.remove('active');
+    document.body.classList.remove('no-scroll', 'cart-open');
 }
-
 
 /* =========================================================
-   12. NAV BUTTONS
+   12. NAV BUTTONS & CHECKOUT
 ========================================================= */
+const menuBtn = document.getElementById('menu-btn');
+const closeDrawerBtn = document.getElementById('close-drawer-btn');
+const cartIconBtn = document.getElementById('cart-icon-btn');
+const closeCartBtn = document.getElementById('close-cart-btn');
 
-const menuBtn =
-    document.getElementById(
-        'menu-btn'
-    );
-
-const closeDrawerBtn =
-    document.getElementById(
-        'close-drawer-btn'
-    );
-
-const cartIconBtn =
-    document.getElementById(
-        'cart-icon-btn'
-    );
-
-const closeCartBtn =
-    document.getElementById(
-        'close-cart-btn'
-    );
-
-
-if (menuBtn) {
-    menuBtn.addEventListener(
-        'click',
-        openDrawer
-    );
-}
-
-if (closeDrawerBtn) {
-    closeDrawerBtn.addEventListener(
-        'click',
-        closeAll
-    );
-}
-
-if (cartIconBtn) {
-    cartIconBtn.addEventListener(
-        'click',
-        openCart
-    );
-}
-
-if (closeCartBtn) {
-    closeCartBtn.addEventListener(
-        'click',
-        closeAll
-    );
-}
+if (menuBtn) menuBtn.addEventListener('click', openDrawer);
+if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeAll);
+if (cartIconBtn) cartIconBtn.addEventListener('click', openCart);
+if (closeCartBtn) closeCartBtn.addEventListener('click', closeAll);
 
 if (overlay) {
-
-    overlay.addEventListener(
-        'click',
-        closeAll
-    );
-
-    overlay.addEventListener(
-        'touchmove',
-        event => {
-
-            event.preventDefault();
-
-        },
-        { passive: false }
-    );
-
+    overlay.addEventListener('click', closeAll);
+    overlay.addEventListener('touchmove', event => event.preventDefault(), { passive: false });
 }
 
-
-/* =========================================================
-   13. CHECKOUT
-========================================================= */
-
-const proceedCheckoutBtn =
-    document.getElementById(
-        'proceed-checkout-btn'
-    );
-
+const proceedCheckoutBtn = document.getElementById('proceed-checkout-btn');
 if (proceedCheckoutBtn) {
-
-    proceedCheckoutBtn.addEventListener(
-        'click',
-        function() {
-
-            if (
-                !cart ||
-                cart.length === 0
-            ) {
-
-                alert(
-                    'Your shopping bag is empty!'
-                );
-
-                return;
-
-            }
-
-            window.location.href =
-                'cart.html';
-
+    proceedCheckoutBtn.addEventListener('click', function() {
+        if (!cart || cart.length === 0) {
+            alert('Your shopping bag is empty!');
+            return;
         }
-    );
-
+        window.location.href = 'cart.html';
+    });
 }
 
-
-/* =========================================================
-   14. SIZE BUTTONS
-========================================================= */
-
-const closeSizeSheetBtn =
-    document.getElementById(
-        'close-size-sheet'
-    );
-
+const closeSizeSheetBtn = document.getElementById('close-size-sheet');
 if (closeSizeSheetBtn) {
-
-    closeSizeSheetBtn.addEventListener(
-        'click',
-        () => {
-
-            closeSizeSheet();
-
-            if (overlay) {
-                overlay.classList.remove(
-                    'active'
-                );
-            }
-
-            document.body.classList.remove(
-                'no-scroll'
-            );
-
-        }
-    );
-
+    closeSizeSheetBtn.addEventListener('click', () => {
+        closeSizeSheet();
+        if (overlay) overlay.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+    });
 }
 
-const confirmSizeBtn =
-    document.getElementById(
-        'confirm-size-btn'
-    );
+const confirmSizeBtn = document.getElementById('confirm-size-btn');
+if (confirmSizeBtn) confirmSizeBtn.addEventListener('click', confirmSizeAndAddToCart);
 
-if (confirmSizeBtn) {
-
-    confirmSizeBtn.addEventListener(
-        'click',
-        confirmSizeAndAddToCart
-    );
-
-}
-
+window.addEventListener('scroll', () => {
+    const header = document.getElementById('navbar');
+    if (header) header.classList.toggle('scrolled', window.scrollY > 50);
+});
 
 /* =========================================================
-   15. HEADER SCROLL
+   13. NEWSLETTER
 ========================================================= */
+const NEWSLETTER_BACKEND_URL = UNDERWORLD_BACKEND_URL;
+const newsletterForm = document.getElementById('newsletter-form');
+const newsletterEmail = document.getElementById('subscriber-email');
+const newsletterSubmit = document.getElementById('newsletter-submit-btn');
+const newsletterStatus = document.getElementById('newsletter-status');
+const NEWSLETTER_EMAIL_KEY = 'ap_newsletter_email';
+const NEWSLETTER_STATUS_KEY = 'ap_newsletter_status';
 
-window.addEventListener(
-    'scroll',
-    () => {
+function isNewsletterEmailValid(email) {
+    return isValidUnderworldEmail(email);
+}
 
-        const header =
-            document.getElementById(
-                'navbar'
-            );
+function getSavedNewsletterEmail() {
+    return localStorage.getItem(NEWSLETTER_EMAIL_KEY) || '';
+}
 
-        if (!header) {
+function getNewsletterStatus() {
+    return localStorage.getItem(NEWSLETTER_STATUS_KEY) || '';
+}
+
+function saveNewsletterSubscriber(email) {
+    localStorage.setItem(NEWSLETTER_EMAIL_KEY, email);
+    localStorage.setItem(NEWSLETTER_STATUS_KEY, 'ACTIVE');
+}
+
+function clearNewsletterSubscriber() {
+    localStorage.removeItem(NEWSLETTER_EMAIL_KEY);
+    localStorage.removeItem(NEWSLETTER_STATUS_KEY);
+}
+
+function updateNewsletterButton() {
+    if (!newsletterSubmit) return;
+    const status = getNewsletterStatus();
+    if (status === 'ACTIVE') {
+        newsletterSubmit.textContent = 'UNSUBSCRIBE';
+        newsletterSubmit.classList.add('subscribed');
+        if (newsletterEmail) {
+            const saved = getSavedNewsletterEmail();
+            if (saved) newsletterEmail.value = saved;
+            newsletterEmail.readOnly = true;
+        }
+    } else {
+        newsletterSubmit.textContent = 'SUBSCRIBE';
+        newsletterSubmit.classList.remove('subscribed');
+        if (newsletterEmail) newsletterEmail.readOnly = false;
+    }
+}
+
+function showNewsletterStatus(message, type = '') {
+    if (!newsletterStatus) return;
+    newsletterStatus.textContent = message;
+    newsletterStatus.className = 'newsletter-status';
+    if (type) newsletterStatus.classList.add(type);
+}
+
+async function sendNewsletterRequest(payload) {
+    await fetch(NEWSLETTER_BACKEND_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        redirect: 'follow',
+        cache: 'no-cache',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+    });
+    return true;
+}
+
+async function subscribeNewsletter(email) {
+    await sendNewsletterRequest({
+        action: 'subscribe',
+        email: email,
+        source: 'Abdullah Psychotic Website',
+        subscribedAt: new Date().toISOString()
+    });
+    saveNewsletterSubscriber(email);
+    updateNewsletterButton();
+    showNewsletterStatus('YOU ARE NOW ON THE LIST.', 'success');
+}
+
+async function unsubscribeNewsletter(email) {
+    await sendNewsletterRequest({
+        action: 'unsubscribe',
+        email: email,
+        source: 'Abdullah Psychotic Website',
+        unsubscribedAt: new Date().toISOString()
+    });
+    clearNewsletterSubscriber();
+    updateNewsletterButton();
+    showNewsletterStatus('YOU HAVE BEEN UNSUBSCRIBED.', 'success');
+}
+
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', async event => {
+        event.preventDefault();
+        let email = newsletterEmail ? newsletterEmail.value.trim().toLowerCase() : '';
+        if (!email && getNewsletterStatus() === 'ACTIVE') {
+            email = getSavedNewsletterEmail();
+        }
+
+        if (!email || !isNewsletterEmailValid(email)) {
+            showNewsletterStatus('PLEASE ENTER A VALID EMAIL ADDRESS.', 'error');
             return;
         }
 
-        header.classList.toggle(
-            'scrolled',
-            window.scrollY > 50
-        );
-
-    }
-);
-
-
-/* =========================================================
-   16. NEWSLETTER
-========================================================= */
-
-const NEWSLETTER_BACKEND_URL =
-    UNDERWORLD_BACKEND_URL;
-
-const newsletterForm =
-    document.getElementById(
-        'newsletter-form'
-    );
-
-const newsletterEmail =
-    document.getElementById(
-        'subscriber-email'
-    );
-
-const newsletterSubmit =
-    document.getElementById(
-        'newsletter-submit-btn'
-    );
-
-const newsletterStatus =
-    document.getElementById(
-        'newsletter-status'
-    );
-
-const NEWSLETTER_EMAIL_KEY =
-    'ap_newsletter_email';
-
-const NEWSLETTER_STATUS_KEY =
-    'ap_newsletter_status';
-
-
-function isNewsletterEmailValid(email) {
-
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        .test(email);
-
-}
-
-
-function getSavedNewsletterEmail() {
-
-    return (
-        localStorage.getItem(
-            NEWSLETTER_EMAIL_KEY
-        ) || ''
-    );
-
-}
-
-
-function getNewsletterStatus() {
-
-    return (
-        localStorage.getItem(
-            NEWSLETTER_STATUS_KEY
-        ) || ''
-    );
-
-}
-
-
-function saveNewsletterSubscriber(email) {
-
-    localStorage.setItem(
-        NEWSLETTER_EMAIL_KEY,
-        email
-    );
-
-    localStorage.setItem(
-        NEWSLETTER_STATUS_KEY,
-        'ACTIVE'
-    );
-
-}
-
-
-function clearNewsletterSubscriber() {
-
-    localStorage.removeItem(
-        NEWSLETTER_EMAIL_KEY
-    );
-
-    localStorage.removeItem(
-        NEWSLETTER_STATUS_KEY
-    );
-
-}
-
-
-function updateNewsletterButton() {
-
-    if (!newsletterSubmit) {
-        return;
-    }
-
-    const status =
-        getNewsletterStatus();
-
-    if (
-        status === 'ACTIVE'
-    ) {
-
-        newsletterSubmit.textContent =
-            'UNSUBSCRIBE';
-
-        newsletterSubmit.classList.add(
-            'subscribed'
-        );
-
-        if (newsletterEmail) {
-
-            const saved =
-                getSavedNewsletterEmail();
-
-            if (saved) {
-                newsletterEmail.value =
-                    saved;
-            }
-
-            newsletterEmail.readOnly =
-                true;
-
-        }
-
-    } else {
-
-        newsletterSubmit.textContent =
-            'SUBSCRIBE';
-
-        newsletterSubmit.classList.remove(
-            'subscribed'
-        );
-
-        if (newsletterEmail) {
-            newsletterEmail.readOnly =
-                false;
-        }
-
-    }
-
-}
-
-
-function showNewsletterStatus(
-    message,
-    type = ''
-) {
-
-    if (!newsletterStatus) {
-        return;
-    }
-
-    newsletterStatus.textContent =
-        message;
-
-    newsletterStatus.className =
-        'newsletter-status';
-
-    if (type) {
-
-        newsletterStatus.classList.add(
-            type
-        );
-
-    }
-
-}
-
-
-async function sendNewsletterRequest(
-    payload
-) {
-
-    await fetch(
-        NEWSLETTER_BACKEND_URL,
-        {
-            method: 'POST',
-            mode: 'no-cors',
-            redirect: 'follow',
-            cache: 'no-cache',
-            headers: {
-                'Content-Type':
-                    'text/plain;charset=utf-8'
-            },
-            body:
-                JSON.stringify(payload)
-        }
-    );
-
-    return true;
-
-}
-
-
-async function subscribeNewsletter(email) {
-
-    await sendNewsletterRequest({
-
-        action:
-            'subscribe',
-
-        email:
-            email,
-
-        source:
-            'Abdullah Psychotic Website',
-
-        subscribedAt:
-            new Date().toISOString()
-
-    });
-
-    saveNewsletterSubscriber(email);
-
-    updateNewsletterButton();
-
-    showNewsletterStatus(
-        'YOU ARE NOW ON THE LIST.',
-        'success'
-    );
-
-}
-
-
-async function unsubscribeNewsletter(email) {
-
-    await sendNewsletterRequest({
-
-        action:
-            'unsubscribe',
-
-        email:
-            email,
-
-        source:
-            'Abdullah Psychotic Website',
-
-        unsubscribedAt:
-            new Date().toISOString()
-
-    });
-
-    clearNewsletterSubscriber();
-
-    updateNewsletterButton();
-
-    showNewsletterStatus(
-        'YOU HAVE BEEN UNSUBSCRIBED.',
-        'success'
-    );
-
-}
-
-
-if (newsletterForm) {
-
-    newsletterForm.addEventListener(
-        'submit',
-        async event => {
-
-            event.preventDefault();
-
-            let email =
-                newsletterEmail
-                    ? newsletterEmail.value
-                        .trim()
-                        .toLowerCase()
-                    : '';
-
-            if (
-                !email &&
-                getNewsletterStatus() ===
-                    'ACTIVE'
-            ) {
-
-                email =
-                    getSavedNewsletterEmail();
-
-            }
-
-            if (
-                !email ||
-                !isNewsletterEmailValid(email)
-            ) {
-
-                showNewsletterStatus(
-                    'PLEASE ENTER A VALID EMAIL ADDRESS.',
-                    'error'
-                );
-
+        if (newsletterSubmit) newsletterSubmit.disabled = true;
+
+        try {
+            if (getNewsletterStatus() === 'ACTIVE') {
+                if (newsletterSubmit) newsletterSubmit.textContent = 'REMOVING...';
+                await unsubscribeNewsletter(email);
+                newsletterForm.reset();
                 return;
-
             }
 
-            if (newsletterSubmit) {
-                newsletterSubmit.disabled =
-                    true;
-            }
-
-            try {
-
-                if (
-                    getNewsletterStatus() ===
-                    'ACTIVE'
-                ) {
-
-                    if (newsletterSubmit) {
-                        newsletterSubmit.textContent =
-                            'REMOVING...';
-                    }
-
-                    await unsubscribeNewsletter(
-                        email
-                    );
-
-                    newsletterForm.reset();
-
-                    return;
-
-                }
-
-                if (newsletterSubmit) {
-                    newsletterSubmit.textContent =
-                        'SAVING...';
-                }
-
-                await subscribeNewsletter(
-                    email
-                );
-
-                if (newsletterEmail) {
-                    newsletterEmail.value =
-                        email;
-                }
-
-            } catch (error) {
-
-                console.error(
-                    'Newsletter error:',
-                    error
-                );
-
-                showNewsletterStatus(
-                    'SOMETHING WENT WRONG. PLEASE TRY AGAIN.',
-                    'error'
-                );
-
-            } finally {
-
-                if (newsletterSubmit) {
-                    newsletterSubmit.disabled =
-                        false;
-                }
-
-                updateNewsletterButton();
-
-            }
-
+            if (newsletterSubmit) newsletterSubmit.textContent = 'SAVING...';
+            await subscribeNewsletter(email);
+            if (newsletterEmail) newsletterEmail.value = email;
+        } catch (error) {
+            showNewsletterStatus('SOMETHING WENT WRONG. PLEASE TRY AGAIN.', 'error');
+        } finally {
+            if (newsletterSubmit) newsletterSubmit.disabled = false;
+            updateNewsletterButton();
         }
-    );
-
-}
-
-
-if (newsletterEmail) {
-
-    newsletterEmail.addEventListener(
-        'input',
-        function() {
-
-            if (
-                getNewsletterStatus() ===
-                'ACTIVE'
-            ) {
-
-                newsletterEmail.value =
-                    getSavedNewsletterEmail();
-
-            }
-
-        }
-    );
-
+    });
 }
 
 updateNewsletterButton();
 
-
 /* =========================================================
-   17. BACKGROUND MUSIC
+   14. BACKGROUND MUSIC
 ========================================================= */
+const bgMusic = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('music-btn');
+const musicIcon = musicBtn ? musicBtn.querySelector('i') : null;
 
-const bgMusic =
-    document.getElementById(
-        'bgMusic'
-    );
+if (bgMusic && musicBtn && musicIcon) {
+    bgMusic.volume = 0.7;
+    musicIcon.className = 'fas fa-music';
 
-const musicBtn =
-    document.getElementById(
-        'music-btn'
-    );
-
-const musicIcon =
-    musicBtn
-        ? musicBtn.querySelector('i')
-        : null;
-
-
-if (
-    bgMusic &&
-    musicBtn &&
-    musicIcon
-) {
-
-    bgMusic.volume =
-        0.7;
-
-    musicIcon.className =
-        'fas fa-music';
-
-    const savedState =
-        localStorage.getItem(
-            'ap_music'
-        );
-
-    if (
-        savedState ===
-        'playing'
-    ) {
-
-        document.addEventListener(
-            'click',
-            function firstPlay() {
-
-                bgMusic.play()
-                    .catch(() => {});
-
-                musicBtn.classList.add(
-                    'playing'
-                );
-
-            },
-            { once: true }
-        );
-
+    const savedState = localStorage.getItem('ap_music');
+    if (savedState === 'playing') {
+        document.addEventListener('click', function firstPlay() {
+            bgMusic.play().catch(() => {});
+            musicBtn.classList.add('playing');
+        }, { once: true });
     }
 
-    musicBtn.addEventListener(
-        'click',
-        () => {
-
-            if (
-                bgMusic.paused
-            ) {
-
-                bgMusic.volume =
-                    0.7;
-
-                bgMusic.play()
-                    .catch(() => {});
-
-                musicBtn.classList.add(
-                    'playing'
-                );
-
-                localStorage.setItem(
-                    'ap_music',
-                    'playing'
-                );
-
-            } else {
-
-                bgMusic.pause();
-
-                musicBtn.classList.remove(
-                    'playing'
-                );
-
-                localStorage.setItem(
-                    'ap_music',
-                    'paused'
-                );
-
-            }
-
-            musicIcon.className =
-                'fas fa-music';
-
+    musicBtn.addEventListener('click', () => {
+        if (bgMusic.paused) {
+            bgMusic.volume = 0.7;
+            bgMusic.play().catch(() => {});
+            musicBtn.classList.add('playing');
+            localStorage.setItem('ap_music', 'playing');
+        } else {
+            bgMusic.pause();
+            musicBtn.classList.remove('playing');
+            localStorage.setItem('ap_music', 'paused');
         }
-    );
-
+        musicIcon.className = 'fas fa-music';
+    });
 }
 
+/* =========================================================
+   15. UNDERWORLD DOM ELEMENTS
+========================================================= */
+const underworldModal = document.getElementById('underworld-access');
+const underworldForm = document.getElementById('underworld-access-form');
+const underworldEmail = document.getElementById('underworld-email');
+const underworldPhone = document.getElementById('underworld-phone');
+const underworldCode = document.getElementById('underworld-code');
+const underworldCodeWrap = document.getElementById('underworld-code-wrap');
+const underworldStatus = document.getElementById('underworld-status');
+const underworldSubmit = document.getElementById('underworld-submit');
+const underworldSubmitText = document.getElementById('underworld-submit-text');
+const underworldSubmitLoader = document.getElementById('underworld-submit-loader');
+const underworldClose = document.getElementById('underworld-access-close');
+const underworldBackdrop = document.getElementById('underworld-access-backdrop');
+const underworldConsent = document.getElementById('underworld-consent');
+const underworldConsentLabel = document.getElementById('underworld-consent-label');
+const underworldFloatingBtn = document.getElementById('underworld-floating-btn');
+const underworldProtectedLinks = document.querySelectorAll('.underworld-protected-link');
+
+const authTitle = document.getElementById('underworld-access-title');
+const authDescription = document.getElementById('underworld-access-description');
+const phoneGroup = document.getElementById('underworld-phone-group');
+const countrySelect = document.getElementById('underworld-country-code');
+const authToggleBtn = document.getElementById('auth-toggle-btn');
+const authToggleBox = document.getElementById('auth-toggle-box');
 
 /* =========================================================
-   18. UNDERWORLD DOM ELEMENTS
+   16. UNDERWORLD HELPERS & VALIDATION
 ========================================================= */
-
-const underworldModal =
-    document.getElementById(
-        'underworld-access'
-    );
-
-const underworldForm =
-    document.getElementById(
-        'underworld-access-form'
-    );
-
-const underworldEmail =
-    document.getElementById(
-        'underworld-email'
-    );
-
-const underworldPhone =
-    document.getElementById(
-        'underworld-phone'
-    );
-
-const underworldCode =
-    document.getElementById(
-        'underworld-code'
-    );
-
-const underworldCodeWrap =
-    document.getElementById(
-        'underworld-code-wrap'
-    );
-
-const underworldStatus =
-    document.getElementById(
-        'underworld-status'
-    );
-
-const underworldSubmit =
-    document.getElementById(
-        'underworld-submit'
-    );
-
-const underworldSubmitText =
-    document.getElementById(
-        'underworld-submit-text'
-    );
-
-const underworldSubmitLoader =
-    document.getElementById(
-        'underworld-submit-loader'
-    );
-
-const underworldClose =
-    document.getElementById(
-        'underworld-access-close'
-    );
-
-const underworldBackdrop =
-    document.getElementById(
-        'underworld-access-backdrop'
-    );
-
-const underworldConsent =
-    document.getElementById(
-        'underworld-consent'
-    );
-
-const underworldFloatingBtn =
-    document.getElementById(
-        'underworld-floating-btn'
-    );
-
-const underworldProtectedLinks =
-    document.querySelectorAll(
-        '.underworld-protected-link'
-    );
-
-
-/* =========================================================
-   19. UNDERWORLD HELPERS
-========================================================= */
-
 function normalizeUnderworldEmail(value) {
-
-    return String(value || '')
-        .trim()
-        .toLowerCase();
-
+    return String(value || '').trim().toLowerCase();
 }
-
 
 function normalizeUnderworldPhone(value) {
-
-    /*
-       PHONE IS NOT VALIDATED.
-
-       Only formatting characters are removed.
-       The value is saved but never compared
-       during authentication.
-    */
-
-    return String(value || '')
-        .replace(/[\s\-().]/g, '')
-        .trim();
-
+    // স্পেস, ড্যাশ, ব্র্যাকেট এবং শুরুতে থাকা শূন্য (0) সরিয়ে ফেলা
+    return String(value || '').replace(/[\s\-().]/g, '').replace(/^0+/, '').trim();
 }
-
 
 function isValidUnderworldEmail(email) {
-
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        .test(email);
-
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-
-function showUnderworldStatus(
-    message,
-    type = ''
-) {
-
-    if (!underworldStatus) {
-        return;
+function isValidUnderworldPhone(code, phone) {
+    const cleanPhone = normalizeUnderworldPhone(phone);
+    const rule = PHONE_RULES[code];
+    if (!rule) {
+        // লিস্টে না থাকা দেশের ক্ষেত্রে সাধারণ দৈর্ঘ্য চেক (৭ থেকে ১৫ ডিজিট)
+        return cleanPhone.length >= 7 && cleanPhone.length <= 15;
     }
-
-    underworldStatus.textContent =
-        String(message || '');
-
-    underworldStatus.className =
-        'underworld-status';
-
-    if (type) {
-
-        underworldStatus.classList.add(
-            type
-        );
-
-    }
-
+    return rule.regex.test(cleanPhone);
 }
 
+// কান্ট্রি কোড পরিবর্তন হলে প্লেসহোল্ডার স্বয়ংক্রিয়ভাবে আপডেট হওয়া
+if (countrySelect && underworldPhone) {
+    countrySelect.addEventListener('change', () => {
+        const code = countrySelect.value;
+        if (PHONE_RULES[code]) {
+            underworldPhone.placeholder = PHONE_RULES[code].placeholder;
+        } else {
+            underworldPhone.placeholder = 'Enter phone number';
+        }
+    });
+}
 
-function setUnderworldLoading(
-    loading,
-    text
-) {
+function showUnderworldStatus(message, type = '') {
+    if (!underworldStatus) return;
+    underworldStatus.textContent = String(message || '');
+    underworldStatus.className = 'underworld-status';
+    if (type) underworldStatus.classList.add(type);
+}
 
-    if (underworldSubmit) {
-
-        underworldSubmit.disabled =
-            loading;
-
-    }
-
-    if (underworldSubmitText) {
-
-        underworldSubmitText.textContent =
-            text || '';
-
-    }
-
+function setUnderworldLoading(loading, text) {
+    if (underworldSubmit) underworldSubmit.disabled = loading;
+    if (underworldSubmitText) underworldSubmitText.textContent = text || '';
     if (underworldSubmitLoader) {
-
-        underworldSubmitLoader.style.display =
-            loading
-                ? 'inline-block'
-                : 'none';
-
+        underworldSubmitLoader.style.display = loading ? 'inline-block' : 'none';
     }
-
 }
-
-
-/* =========================================================
-   20. UNDERWORLD ICON STATE
-========================================================= */
 
 function updateUnderworldIconState() {
-
-    if (!underworldFloatingBtn) {
-        return;
-    }
-
-    const loggedIn =
-        localStorage.getItem(
-            UNDERWORLD_ACCESS_KEY
-        ) === 'true';
-
-    underworldFloatingBtn.classList.toggle(
-        'underworld-signed-in',
-        loggedIn
-    );
-
+    if (!underworldFloatingBtn) return;
+    const loggedIn = localStorage.getItem(UNDERWORLD_ACCESS_KEY) === 'true';
+    underworldFloatingBtn.classList.toggle('underworld-signed-in', loggedIn);
 }
 
-
 /* =========================================================
-   21. UNDERWORLD MODAL UI
+   17. AUTH MODE SWITCH (SIGN IN vs LOG IN)
 ========================================================= */
+function setAuthMode(login) {
+    isLoginMode = login;
+    showUnderworldStatus('', '');
+    stopUnderworldCodeTimer();
+
+    if (login) {
+        if (authTitle) authTitle.textContent = 'Log In';
+        if (authDescription) authDescription.textContent = 'Enter your email to receive a login verification code.';
+        if (phoneGroup) phoneGroup.style.display = 'none';
+        if (underworldCodeWrap) underworldCodeWrap.style.display = 'none';
+        if (underworldConsentLabel) underworldConsentLabel.style.display = 'none';
+        if (underworldSubmitText) underworldSubmitText.textContent = 'SEND CODE';
+        if (authToggleBox) {
+            authToggleBox.innerHTML = `Don't have an account? <button type="button" class="auth-toggle-link" id="auth-toggle-btn" style="color: #8b0000; font-weight: 700; cursor: pointer; text-decoration: underline; background: none; border: 0; padding: 0;">Sign In</button>`;
+        }
+    } else {
+        if (authTitle) authTitle.textContent = 'Sign In';
+        if (authDescription) authDescription.textContent = 'Quick Sign-in: Enter your email and valid mobile number to get instant access.';
+        if (phoneGroup) phoneGroup.style.display = 'block';
+        if (underworldCodeWrap) underworldCodeWrap.style.display = 'none';
+        if (underworldConsentLabel) underworldConsentLabel.style.display = 'flex';
+        if (underworldSubmitText) underworldSubmitText.textContent = 'SIGN IN';
+        if (authToggleBox) {
+            authToggleBox.innerHTML = `Already have an account? <button type="button" class="auth-toggle-link" id="auth-toggle-btn" style="color: #8b0000; font-weight: 700; cursor: pointer; text-decoration: underline; background: none; border: 0; padding: 0;">Log In</button>`;
+        }
+    }
+
+    const currentToggleBtn = document.getElementById('auth-toggle-btn');
+    if (currentToggleBtn) {
+        currentToggleBtn.addEventListener('click', () => setAuthMode(!isLoginMode));
+    }
+}
+
+if (authToggleBtn) {
+    authToggleBtn.addEventListener('click', () => setAuthMode(!isLoginMode));
+}
 
 function resetUnderworldLoginUI() {
-
-    if (underworldForm) {
-        underworldForm.style.display = '';
-    }
-
+    setAuthMode(false);
     if (underworldEmail) {
-
-        underworldEmail.readOnly =
-            false;
-
+        underworldEmail.value = '';
+        underworldEmail.readOnly = false;
     }
-
     if (underworldPhone) {
-
-        underworldPhone.readOnly =
-            false;
-
+        underworldPhone.value = '';
+        underworldPhone.readOnly = false;
     }
+    if (underworldCode) underworldCode.value = '';
 
-    if (underworldCode) {
+    const dynamicLogout = document.getElementById('underworld-dynamic-logout');
+    if (dynamicLogout) dynamicLogout.remove();
 
-        underworldCode.value =
-            '';
-
-    }
-
-    if (underworldCodeWrap) {
-
-        underworldCodeWrap.hidden =
-            true;
-
-    }
-
-    if (underworldSubmit) {
-
-        underworldSubmit.style.display =
-            '';
-
-    }
-
-    if (underworldConsent) {
-
-        const parent =
-            underworldConsent.parentElement;
-
-        if (parent) {
-            parent.style.display = '';
-        }
-
-    }
-
-    const dynamicLogout =
-        document.getElementById(
-            'underworld-dynamic-logout'
-        );
-
-    if (dynamicLogout) {
-        dynamicLogout.remove();
-    }
-
-    if (underworldSubmitText) {
-
-        underworldSubmitText.textContent =
-            'SIGN IN';
-
-    }
-
-    const timer = document.getElementById('underworld-timer');
-    if (timer) {
-        if (getUnderworldCodeIssuedAt() && !isUnderworldCodeExpired()) {
-            startUnderworldCodeTimer();
-        } else {
-            stopUnderworldCodeTimer();
-            timer.textContent = 'CODE EXPIRES IN 3 MINUTES';
-        }
-    }
-
-    showUnderworldStatus(
-        '',
-        ''
-    );
-
+    if (underworldSubmit) underworldSubmit.style.display = '';
 }
-
-
-function showUnderworldLoginState() {
-
-    resetUnderworldLoginUI();
-
-}
-
 
 function showUnderworldLoggedInState() {
+    if (!underworldForm) return;
 
-    if (!underworldForm) {
-        return;
-    }
-
-    const email =
-        localStorage.getItem(
-            UNDERWORLD_EMAIL_KEY
-        ) || '';
-
-    const phone =
-        localStorage.getItem(
-            UNDERWORLD_PHONE_KEY
-        ) || '';
+    const email = localStorage.getItem(UNDERWORLD_EMAIL_KEY) || '';
+    const phone = localStorage.getItem(UNDERWORLD_PHONE_KEY) || '';
 
     if (underworldEmail) {
-
-        underworldEmail.value =
-            email;
-
-        underworldEmail.readOnly =
-            true;
-
+        underworldEmail.value = email;
+        underworldEmail.readOnly = true;
     }
-
     if (underworldPhone) {
-
-        underworldPhone.value =
-            phone;
-
-        underworldPhone.readOnly =
-            true;
-
+        underworldPhone.value = phone;
+        underworldPhone.readOnly = true;
     }
 
-    if (underworldCodeWrap) {
+    if (phoneGroup) phoneGroup.style.display = 'none';
+    if (underworldCodeWrap) underworldCodeWrap.style.display = 'none';
+    if (underworldConsentLabel) underworldConsentLabel.style.display = 'none';
+    if (authToggleBox) authToggleBox.style.display = 'none';
 
-        underworldCodeWrap.hidden =
-            true;
+    if (underworldSubmit) underworldSubmit.style.display = 'none';
 
-    }
+    showUnderworldStatus('YOU ARE ALREADY SIGNED IN.', 'success');
 
-    if (underworldSubmit) {
-
-        underworldSubmit.style.display =
-            'none';
-
-    }
-
-    if (underworldConsent) {
-
-        const parent =
-            underworldConsent.parentElement;
-
-        if (parent) {
-            parent.style.display =
-                'none';
-        }
-
-    }
-
-    showUnderworldStatus(
-        'YOU ARE ALREADY SIGNED IN.',
-        'success'
-    );
-
-    let logoutButton =
-        document.getElementById(
-            'underworld-dynamic-logout'
-        );
-
+    let logoutButton = document.getElementById('underworld-dynamic-logout');
     if (!logoutButton) {
-
-        logoutButton =
-            document.createElement(
-                'button'
-            );
-
-        logoutButton.type =
-            'button';
-
-        logoutButton.id =
-            'underworld-dynamic-logout';
-
-        logoutButton.className =
-            'underworld-submit';
-
-        logoutButton.textContent =
-            'LOG OUT';
-
-        logoutButton.addEventListener(
-            'click',
-            logoutUnderworld
-        );
-
-        underworldForm.appendChild(
-            logoutButton
-        );
-
+        logoutButton = document.createElement('button');
+        logoutButton.type = 'button';
+        logoutButton.id = 'underworld-dynamic-logout';
+        logoutButton.className = 'underworld-submit';
+        logoutButton.textContent = 'LOG OUT';
+        logoutButton.addEventListener('click', logoutUnderworld);
+        underworldForm.appendChild(logoutButton);
     }
-
 }
-
-
-/* =========================================================
-   22. OPEN / CLOSE UNDERWORLD
-   IMPORTANT:
-   OPEN IS 100% INSTANT.
-   NO BACKEND WAIT HERE.
-========================================================= */
 
 function openUnderworldModal() {
+    if (!underworldModal) return;
 
-    if (!underworldModal) {
+    underworldModal.classList.add('active');
+    underworldModal.style.display = 'flex';
+    underworldModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('no-scroll');
 
-        console.error(
-            'Underworld modal not found.'
-        );
-
-        return;
-
-    }
-
-    underworldModal.classList.add(
-        'active'
-    );
-
-    underworldModal.style.display =
-        'flex';
-
-    underworldModal.setAttribute(
-        'aria-hidden',
-        'false'
-    );
-
-    document.body.classList.add(
-        'no-scroll'
-    );
-
-    /*
-       LocalStorage is instant.
-       Do NOT wait for backend.
-    */
-
-    if (
-        window.UnderworldAuth &&
-        window.UnderworldAuth.isLoggedIn()
-    ) {
-
+    if (window.UnderworldAuth && window.UnderworldAuth.isLoggedIn()) {
         showUnderworldLoggedInState();
-
     } else {
-
-        showUnderworldLoginState();
-
+        resetUnderworldLoginUI();
     }
-
 }
-
 
 function closeUnderworldModal() {
+    if (!underworldModal) return;
 
-    if (!underworldModal) {
-        return;
-    }
-
-    underworldModal.classList.remove(
-        'active'
-    );
-
-    underworldModal.style.display =
-        'none';
-
-    underworldModal.setAttribute(
-        'aria-hidden',
-        'true'
-    );
-
-    document.body.classList.remove(
-        'no-scroll'
-    );
-
+    underworldModal.classList.remove('active');
+    underworldModal.style.display = 'none';
+    underworldModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('no-scroll');
 }
 
-
 /* =========================================================
-   23. BACKEND JSONP
+   18. BACKEND JSONP
 ========================================================= */
+function callUnderworldBackend(payload) {
+    return new Promise((resolve, reject) => {
+        const callbackName = 'underworldCallback_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+        const script = document.createElement('script');
+        let finished = false;
 
-function callUnderworldBackend(
-    payload
-) {
+        const timeout = setTimeout(() => {
+            if (finished) return;
+            finished = true;
+            cleanup();
+            reject(new Error('Verification server timed out.'));
+        }, 15000);
 
-    return new Promise(
-        (resolve, reject) => {
-
-            const callbackName =
-                'underworldCallback_' +
-                Date.now() +
-                '_' +
-                Math.random()
-                    .toString(36)
-                    .slice(2);
-
-            const script =
-                document.createElement(
-                    'script'
-                );
-
-            let finished =
-                false;
-
-            /*
-               15 seconds instead of 30.
-               Modal itself NEVER waits for this.
-            */
-
-            const timeout =
-                setTimeout(
-                    () => {
-
-                        if (finished) {
-                            return;
-                        }
-
-                        finished =
-                            true;
-
-                        cleanup();
-
-                        reject(
-                            new Error(
-                                'Verification server timed out.'
-                            )
-                        );
-
-                    },
-                    15000
-                );
-
-
-            function cleanup() {
-
-                clearTimeout(
-                    timeout
-                );
-
-                try {
-
-                    delete window[
-                        callbackName
-                    ];
-
-                } catch (_) {
-
-                    window[
-                        callbackName
-                    ] = undefined;
-
-                }
-
-                if (
-                    script.parentNode
-                ) {
-
-                    script.parentNode.removeChild(
-                        script
-                    );
-
-                }
-
-            }
-
-
-            window[
-                callbackName
-            ] = result => {
-
-                if (finished) {
-                    return;
-                }
-
-                finished =
-                    true;
-
-                cleanup();
-
-                resolve(
-                    result
-                );
-
-            };
-
-
-            script.onerror =
-                () => {
-
-                    if (finished) {
-                        return;
-                    }
-
-                    finished =
-                        true;
-
-                    cleanup();
-
-                    reject(
-                        new Error(
-                            'Unable to connect to verification server.'
-                        )
-                    );
-
-                };
-
-
-            const params =
-                new URLSearchParams();
-
-            Object.keys(
-                payload || {}
-            ).forEach(key => {
-
-                const value =
-                    payload[key];
-
-                if (
-                    value === undefined ||
-                    value === null
-                ) {
-                    return;
-                }
-
-                params.set(
-                    key,
-                    String(value)
-                );
-
-            });
-
-            params.set(
-                'callback',
-                callbackName
-            );
-
-            script.src =
-                UNDERWORLD_BACKEND_URL +
-                '?' +
-                params.toString();
-
-            document.head.appendChild(
-                script
-            );
-
+        function cleanup() {
+            clearTimeout(timeout);
+            try { delete window[callbackName]; } catch (_) { window[callbackName] = undefined; }
+            if (script.parentNode) script.parentNode.removeChild(script);
         }
-    );
 
+        window[callbackName] = result => {
+            if (finished) return;
+            finished = true;
+            cleanup();
+            resolve(result);
+        };
+
+        script.onerror = () => {
+            if (finished) return;
+            finished = true;
+            cleanup();
+            reject(new Error('Unable to connect to verification server.'));
+        };
+
+        const params = new URLSearchParams();
+        Object.keys(payload || {}).forEach(key => {
+            const value = payload[key];
+            if (value !== undefined && value !== null) {
+                params.set(key, String(value));
+            }
+        });
+
+        params.set('callback', callbackName);
+        script.src = UNDERWORLD_BACKEND_URL + '?' + params.toString();
+        document.head.appendChild(script);
+    });
 }
 
-
-/* =========================================================
-   24. SAVE / CLEAR ACCESS
-========================================================= */
-
-function saveUnderworldAccess(
-    email,
-    phone,
-    token,
-    accessId
-) {
-
-    localStorage.setItem(
-        UNDERWORLD_ACCESS_KEY,
-        'true'
-    );
-
-    localStorage.setItem(
-        UNDERWORLD_EMAIL_KEY,
-        email
-    );
+function saveUnderworldAccess(email, phone, token, accessId) {
+    localStorage.setItem(UNDERWORLD_ACCESS_KEY, 'true');
+    localStorage.setItem(UNDERWORLD_EMAIL_KEY, email);
 
     if (phone) {
-
-        localStorage.setItem(
-            UNDERWORLD_PHONE_KEY,
-            phone
-        );
-
+        localStorage.setItem(UNDERWORLD_PHONE_KEY, phone);
     } else {
-
-        localStorage.removeItem(
-            UNDERWORLD_PHONE_KEY
-        );
-
+        localStorage.removeItem(UNDERWORLD_PHONE_KEY);
     }
 
-    if (token) {
-
-        localStorage.setItem(
-            UNDERWORLD_TOKEN_KEY,
-            token
-        );
-
-    }
-
-    if (accessId) {
-
-        localStorage.setItem(
-            UNDERWORLD_ACCESS_ID_KEY,
-            accessId
-        );
-
-    }
+    if (token) localStorage.setItem(UNDERWORLD_TOKEN_KEY, token);
+    if (accessId) localStorage.setItem(UNDERWORLD_ACCESS_ID_KEY, accessId);
 
     updateUnderworldIconState();
-
 }
 
-
 function clearUnderworldAccess() {
-
     stopUnderworldCodeTimer();
 
     [
@@ -11895,1290 +9870,463 @@ function clearUnderworldAccess() {
         UNDERWORLD_ACCESS_ID_KEY,
         UNDERWORLD_REQUEST_KEY,
         UNDERWORLD_CODE_TIME_KEY
-    ].forEach(key => {
+    ].forEach(key => localStorage.removeItem(key));
 
-        localStorage.removeItem(
-            key
-        );
-
-    });
-
-    underworldRequestId =
-        '';
-
+    underworldRequestId = '';
     updateUnderworldIconState();
-
 }
 
-
-/* =========================================================
-   25. BACKGROUND SESSION VALIDATION
-   IMPORTANT:
-   NEVER BLOCK MODAL OPENING.
-========================================================= */
-
 async function validateSavedUnderworldAccess() {
+    const access = localStorage.getItem(UNDERWORLD_ACCESS_KEY);
+    const email = normalizeUnderworldEmail(localStorage.getItem(UNDERWORLD_EMAIL_KEY));
+    const token = String(localStorage.getItem(UNDERWORLD_TOKEN_KEY) || '').trim();
 
-    const access =
-        localStorage.getItem(
-            UNDERWORLD_ACCESS_KEY
-        );
-
-    const email =
-        normalizeUnderworldEmail(
-            localStorage.getItem(
-                UNDERWORLD_EMAIL_KEY
-            )
-        );
-
-    const token =
-        String(
-            localStorage.getItem(
-                UNDERWORLD_TOKEN_KEY
-            ) || ''
-        ).trim();
-
-    if (
-        access !== 'true' ||
-        !email ||
-        !token
-    ) {
-
+    if (access !== 'true' || !email || !token) {
         updateUnderworldIconState();
-
         return false;
-
     }
 
     try {
+        const result = await callUnderworldBackend({
+            action: 'validate_access',
+            email: email,
+            accessToken: token
+        });
 
-        const result =
-            await callUnderworldBackend({
-
-                action:
-                    'validate_access',
-
-                email:
-                    email,
-
-                accessToken:
-                    token
-
-            });
-
-        if (
-            result &&
-            result.ok &&
-            result.authenticated
-        ) {
-
+        if (result && result.ok && result.authenticated) {
             updateUnderworldIconState();
-
             return true;
-
         }
 
         clearUnderworldAccess();
-
         return false;
-
     } catch (error) {
-
-        /*
-           Keep local session during a temporary
-           network/server problem.
-        */
-
-        console.warn(
-            'Underworld background validation failed:',
-            error
-        );
-
         updateUnderworldIconState();
-
         return true;
-
     }
-
 }
 
-
 /* =========================================================
-   26. SEND CODE
+   19. AUTH ACTIONS (QUICK SIGN IN & VERIFY LOG IN)
 ========================================================= */
-
-async function requestUnderworldCode() {
-
-    const email =
-        normalizeUnderworldEmail(
-            underworldEmail
-                ? underworldEmail.value
-                : ''
-        );
-
-    const phone =
-        normalizeUnderworldPhone(
-            underworldPhone
-                ? underworldPhone.value
-                : ''
-        );
-
-    /*
-       ONLY EMAIL IS REQUIRED.
-    */
-
-    if (
-        !isValidUnderworldEmail(
-            email
-        )
-    ) {
-
-        showUnderworldStatus(
-            'PLEASE ENTER A VALID EMAIL ADDRESS.',
-            'error'
-        );
-
-        if (underworldEmail) {
-            underworldEmail.focus();
-        }
-
-        return;
-
-    }
-
-    setUnderworldLoading(
-        true,
-        'SENDING CODE...'
-    );
-
-    showUnderworldStatus(
-        'SENDING VERIFICATION CODE...',
-        'loading'
-    );
+async function quickRegisterAndSignIn(email, fullPhone) {
+    setUnderworldLoading(true, 'SIGNING IN...');
+    showUnderworldStatus('SETTING UP YOUR PROFILE...', 'loading');
 
     try {
+        sendNewsletterRequest({
+            action: 'subscribe',
+            email: email,
+            phone: fullPhone,
+            source: 'Underworld Quick Sign-In',
+            subscribedAt: new Date().toISOString()
+        }).catch(() => {});
 
-        const result =
-            await callUnderworldBackend({
+        saveNewsletterSubscriber(email);
+        updateNewsletterButton();
 
-                action:
-                    'send_verification',
+        const dummyToken = 'quick_token_' + Date.now();
+        const dummyId = 'usr_' + Math.random().toString(36).substring(2, 10);
+        saveUnderworldAccess(email, fullPhone, dummyToken, dummyId);
 
-                email:
-                    email,
+        showUnderworldStatus('VERIFIED. WELCOME TO UNDERWORLD.', 'success');
+        updateUnderworldIconState();
 
-                phone:
-                    phone,
+        setTimeout(() => {
+            closeUnderworldModal();
+            openAbdullahInsiderSuccess();
 
-                source:
-                    'Abdullah Psychotic Website',
-
-                userAgent:
-                    navigator.userAgent
-
-            });
-
-        if (
-            !result ||
-            !result.ok
-        ) {
-
-            showUnderworldStatus(
-                result &&
-                result.message
-                    ? result.message
-                    : 'UNABLE TO SEND VERIFICATION CODE.',
-                'error'
-            );
-
-            return;
-
-        }
-
-        underworldRequestId =
-            String(
-                result.requestId || ''
-            ).trim();
-
-        localStorage.setItem(
-            UNDERWORLD_REQUEST_KEY,
-            underworldRequestId
-        );
-
-        localStorage.setItem(
-            UNDERWORLD_CODE_TIME_KEY,
-            String(Date.now())
-        );
-
-        startUnderworldCodeTimer();
-
-        if (phone) {
-
-            localStorage.setItem(
-                UNDERWORLD_PHONE_KEY,
-                phone
-            );
-
-        }
-
-        if (underworldCodeWrap) {
-
-            underworldCodeWrap.hidden =
-                false;
-
-        }
-
-        if (underworldCode) {
-
-            underworldCode.value =
-                '';
-
-            underworldCode.focus();
-
-        }
-
-        if (underworldSubmitText) {
-
-            underworldSubmitText.textContent =
-                'VERIFY CODE';
-
-        }
-
-        showUnderworldStatus(
-            'VERIFICATION CODE SENT TO YOUR EMAIL.',
-            'success'
-        );
-
-    } catch (error) {
-
-        console.error(
-            'Underworld send error:',
-            error
-        );
-
-        showUnderworldStatus(
-            error.message ||
-            'VERIFICATION SERVER ERROR.',
-            'error'
-        );
-
+            if (typeof pendingUnderworldAction === 'function') {
+                const action = pendingUnderworldAction;
+                pendingUnderworldAction = null;
+                action();
+            }
+        }, 500);
+    } catch (err) {
+        showUnderworldStatus('ERROR DURING SIGN IN. PLEASE RETRY.', 'error');
     } finally {
-
-        setUnderworldLoading(
-            false,
-            underworldCodeWrap &&
-            !underworldCodeWrap.hidden
-                ? 'VERIFY CODE'
-                : 'SEND CODE'
-        );
-
+        setUnderworldLoading(false, 'SIGN IN');
     }
-
 }
 
+async function requestUnderworldCode() {
+    const email = normalizeUnderworldEmail(underworldEmail ? underworldEmail.value : '');
 
-/* =========================================================
-   ABDULLAH'S INSIDER — SUCCESS WINDOW CONTROL
-========================================================= */
-
-function openAbdullahInsiderSuccess() {
-    const successWindow = document.getElementById('abdullah-insider-success');
-
-    if (!successWindow) {
+    if (!isValidUnderworldEmail(email)) {
+        showUnderworldStatus('PLEASE ENTER A VALID EMAIL ADDRESS.', 'error');
+        if (underworldEmail) underworldEmail.focus();
         return;
     }
 
+    setUnderworldLoading(true, 'SENDING CODE...');
+    showUnderworldStatus('SENDING VERIFICATION CODE...', 'loading');
+
+    try {
+        const result = await callUnderworldBackend({
+            action: 'send_verification',
+            email: email,
+            source: 'Abdullah Psychotic Website',
+            userAgent: navigator.userAgent
+        });
+
+        if (!result || !result.ok) {
+            showUnderworldStatus(result && result.message ? result.message : 'UNABLE TO SEND VERIFICATION CODE.', 'error');
+            return;
+        }
+
+        underworldRequestId = String(result.requestId || '').trim();
+        localStorage.setItem(UNDERWORLD_REQUEST_KEY, underworldRequestId);
+        localStorage.setItem(UNDERWORLD_CODE_TIME_KEY, String(Date.now()));
+        startUnderworldCodeTimer();
+
+        if (underworldCodeWrap) underworldCodeWrap.style.display = 'block';
+
+        if (underworldCode) {
+            underworldCode.value = '';
+            underworldCode.focus();
+        }
+
+        if (underworldSubmitText) underworldSubmitText.textContent = 'VERIFY & LOG IN';
+        showUnderworldStatus('VERIFICATION CODE SENT TO YOUR EMAIL.', 'success');
+    } catch (error) {
+        showUnderworldStatus(error.message || 'VERIFICATION SERVER ERROR.', 'error');
+    } finally {
+        setUnderworldLoading(
+            false,
+            underworldCodeWrap && underworldCodeWrap.style.display !== 'none' ? 'VERIFY & LOG IN' : 'SEND CODE'
+        );
+    }
+}
+
+async function verifyUnderworldCode() {
+    const email = normalizeUnderworldEmail(underworldEmail ? underworldEmail.value : '');
+    const code = String(underworldCode ? underworldCode.value : '').replace(/\D/g, '').slice(0, 4);
+
+    if (!isValidUnderworldEmail(email)) {
+        showUnderworldStatus('PLEASE ENTER A VALID EMAIL ADDRESS.', 'error');
+        return;
+    }
+
+    if (!/^\d{4}$/.test(code)) {
+        showUnderworldStatus('PLEASE ENTER THE 4-DIGIT VERIFICATION CODE.', 'error');
+        if (underworldCode) underworldCode.focus();
+        return;
+    }
+
+    if (!underworldRequestId) {
+        underworldRequestId = localStorage.getItem(UNDERWORLD_REQUEST_KEY) || '';
+    }
+
+    if (!underworldRequestId) {
+        showUnderworldStatus('PLEASE REQUEST A NEW VERIFICATION CODE.', 'error');
+        return;
+    }
+
+    if (isUnderworldCodeExpired()) {
+        stopUnderworldCodeTimer();
+        localStorage.removeItem(UNDERWORLD_REQUEST_KEY);
+        localStorage.removeItem(UNDERWORLD_CODE_TIME_KEY);
+        underworldRequestId = '';
+        if (underworldCode) underworldCode.value = '';
+        showUnderworldStatus('VERIFICATION CODE EXPIRED. PLEASE REQUEST A NEW CODE.', 'error');
+        return;
+    }
+
+    setUnderworldLoading(true, 'VERIFYING...');
+    showUnderworldStatus('VERIFYING...', 'loading');
+
+    try {
+        const result = await callUnderworldBackend({
+            action: 'verify_code',
+            email: email,
+            code: code,
+            requestId: underworldRequestId,
+            source: 'Abdullah Psychotic Website',
+            userAgent: navigator.userAgent
+        });
+
+        if (!result || !result.ok || !result.authenticated) {
+            showUnderworldStatus(result && result.message ? result.message : 'VERIFICATION FAILED.', 'error');
+            return;
+        }
+
+        saveUnderworldAccess(email, '', result.accessToken, result.accessId);
+        stopUnderworldCodeTimer();
+        localStorage.removeItem(UNDERWORLD_REQUEST_KEY);
+        localStorage.removeItem(UNDERWORLD_CODE_TIME_KEY);
+        underworldRequestId = '';
+
+        showUnderworldStatus('VERIFIED. YOU ARE NOW LOGGED IN.', 'success');
+        updateUnderworldIconState();
+
+        setTimeout(() => {
+            closeUnderworldModal();
+            openAbdullahInsiderSuccess();
+
+            if (typeof pendingUnderworldAction === 'function') {
+                const action = pendingUnderworldAction;
+                pendingUnderworldAction = null;
+                action();
+            }
+        }, 350);
+    } catch (error) {
+        showUnderworldStatus(error.message || 'VERIFICATION SERVER ERROR.', 'error');
+    } finally {
+        setUnderworldLoading(false, 'VERIFY & LOG IN');
+    }
+}
+
+async function logoutUnderworld() {
+    const email = normalizeUnderworldEmail(localStorage.getItem(UNDERWORLD_EMAIL_KEY));
+    const token = String(localStorage.getItem(UNDERWORLD_TOKEN_KEY) || '').trim();
+
+    clearUnderworldAccess();
+    resetUnderworldLoginUI();
+
+    showUnderworldStatus('LOGGED OUT.', 'success');
+
+    if (email && token) {
+        callUnderworldBackend({
+            action: 'logout',
+            email: email,
+            accessToken: token
+        }).catch(() => {});
+    }
+
+    const logoutModal = document.getElementById('ap-logout-modal');
+    if (logoutModal) logoutModal.classList.remove('active');
+
+    updateUnderworldIconState();
+}
+
+function requireUnderworldLogin(callback) {
+    if (window.UnderworldAuth && window.UnderworldAuth.isLoggedIn()) {
+        if (typeof callback === 'function') callback();
+        validateSavedUnderworldAccess().catch(() => {});
+        return true;
+    }
+
+    pendingUnderworldAction = typeof callback === 'function' ? callback : null;
+    openUnderworldModal();
+    return false;
+}
+
+/* =========================================================
+   20. FORM SUBMISSION ROUTING
+========================================================= */
+if (underworldForm) {
+    underworldForm.addEventListener('submit', async event => {
+        event.preventDefault();
+
+        // 1. QUICK SIGN-IN
+        if (!isLoginMode) {
+            const email = normalizeUnderworldEmail(underworldEmail ? underworldEmail.value : '');
+            const rawCountryCode = countrySelect ? countrySelect.value : '+880';
+            const phone = underworldPhone ? underworldPhone.value : '';
+
+            if (!isValidUnderworldEmail(email)) {
+                showUnderworldStatus('PLEASE ENTER A VALID EMAIL ADDRESS.', 'error');
+                if (underworldEmail) underworldEmail.focus();
+                return;
+            }
+
+            if (!isValidUnderworldPhone(rawCountryCode, phone)) {
+                showUnderworldStatus(`PLEASE ENTER A VALID PHONE NUMBER FOR ${rawCountryCode}.`, 'error');
+                if (underworldPhone) underworldPhone.focus();
+                return;
+            }
+
+            // কানাডা (+1-CA) হলে শুধু +1 রাখা এবং নম্বরের শুরুতে থাকা 0 মুছে ফেলা
+            const dialCode = rawCountryCode.split('-')[0];
+            const cleanPhone = normalizeUnderworldPhone(phone);
+            const fullPhone = dialCode + cleanPhone;
+
+            await quickRegisterAndSignIn(email, fullPhone);
+            return;
+        }
+
+        // 2. LOG IN WITH EMAIL CODE
+        if (underworldCodeWrap && underworldCodeWrap.style.display !== 'none') {
+            await verifyUnderworldCode();
+        } else {
+            await requestUnderworldCode();
+        }
+    });
+}
+
+if (underworldClose) underworldClose.addEventListener('click', closeUnderworldModal);
+if (underworldBackdrop) underworldBackdrop.addEventListener('click', closeUnderworldModal);
+
+document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && underworldModal && underworldModal.classList.contains('active')) {
+        closeUnderworldModal();
+    }
+});
+
+if (underworldCode) {
+    underworldCode.addEventListener('input', () => {
+        underworldCode.value = underworldCode.value.replace(/\D/g, '').slice(0, 4);
+    });
+}
+
+/* =========================================================
+   21. INSIDER SUCCESS & LOGOUT POPUP CONTROLS
+========================================================= */
+function openAbdullahInsiderSuccess() {
+    const successWindow = document.getElementById('abdullah-insider-success');
+    if (!successWindow) return;
     successWindow.classList.add('active');
-    successWindow.setAttribute('aria-hidden','false');
+    successWindow.setAttribute('aria-hidden', 'false');
     document.body.classList.add('no-scroll');
 }
 
 function closeAbdullahInsiderSuccess() {
     const successWindow = document.getElementById('abdullah-insider-success');
-
-    if (!successWindow) {
-        return;
-    }
-
+    if (!successWindow) return;
     successWindow.classList.remove('active');
-    successWindow.setAttribute('aria-hidden','true');
+    successWindow.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('no-scroll');
 }
 
-const insiderSuccessBtn =
-    document.getElementById('abdullah-insider-success-btn');
-
+const insiderSuccessBtn = document.getElementById('abdullah-insider-success-btn');
 if (insiderSuccessBtn) {
-    insiderSuccessBtn.addEventListener(
-        'click',
-        closeAbdullahInsiderSuccess
-    );
+    insiderSuccessBtn.addEventListener('click', closeAbdullahInsiderSuccess);
 }
 
-const insiderSuccessWindow =
-    document.getElementById('abdullah-insider-success');
-
+const insiderSuccessWindow = document.getElementById('abdullah-insider-success');
 if (insiderSuccessWindow) {
-    insiderSuccessWindow.addEventListener(
-        'click',
-        function (event) {
-            if (event.target === insiderSuccessWindow) {
-                closeAbdullahInsiderSuccess();
-            }
-        }
-    );
+    insiderSuccessWindow.addEventListener('click', event => {
+        if (event.target === insiderSuccessWindow) closeAbdullahInsiderSuccess();
+    });
 }
 
-
-/* =========================================================
-   27. VERIFY CODE
-========================================================= */
-
-async function verifyUnderworldCode() {
-
-    const email =
-        normalizeUnderworldEmail(
-            underworldEmail
-                ? underworldEmail.value
-                : ''
-        );
-
-    const code =
-        String(
-            underworldCode
-                ? underworldCode.value
-                : ''
-        )
-            .replace(/\D/g, '')
-            .slice(0, 4);
-
-    /*
-       AUTH:
-       EMAIL + CODE
-
-       PHONE:
-       NEVER CHECKED
-    */
-
-    if (
-        !isValidUnderworldEmail(
-            email
-        )
-    ) {
-
-        showUnderworldStatus(
-            'PLEASE ENTER A VALID EMAIL ADDRESS.',
-            'error'
-        );
-
-        return;
-
-    }
-
-    if (
-        !/^\d{4}$/.test(code)
-    ) {
-
-        showUnderworldStatus(
-            'PLEASE ENTER THE 4-DIGIT VERIFICATION CODE.',
-            'error'
-        );
-
-        if (underworldCode) {
-            underworldCode.focus();
-        }
-
-        return;
-
-    }
-
-    if (!underworldRequestId) {
-
-        underworldRequestId =
-            localStorage.getItem(
-                UNDERWORLD_REQUEST_KEY
-            ) || '';
-
-    }
-
-    if (!underworldRequestId) {
-
-        showUnderworldStatus(
-            'PLEASE REQUEST A NEW VERIFICATION CODE.',
-            'error'
-        );
-
-        return;
-
-    }
-
-    if (isUnderworldCodeExpired()) {
-
-        stopUnderworldCodeTimer();
-
-        localStorage.removeItem(UNDERWORLD_REQUEST_KEY);
-        localStorage.removeItem(UNDERWORLD_CODE_TIME_KEY);
-        underworldRequestId = '';
-
-        if (underworldCode) {
-            underworldCode.value = '';
-        }
-
-        showUnderworldStatus(
-            'VERIFICATION CODE EXPIRED. PLEASE REQUEST A NEW CODE.',
-            'error'
-        );
-
-        return;
-
-    }
-
-    setUnderworldLoading(
-        true,
-        'VERIFYING...'
-    );
-
-    showUnderworldStatus(
-        'VERIFYING...',
-        'loading'
-    );
-
-    try {
-
-        const result =
-            await callUnderworldBackend({
-
-                action:
-                    'verify_code',
-
-                email:
-                    email,
-
-                code:
-                    code,
-
-                requestId:
-                    underworldRequestId,
-
-                source:
-                    'Abdullah Psychotic Website',
-
-                userAgent:
-                    navigator.userAgent
-
-            });
-
-        if (
-            !result ||
-            !result.ok ||
-            !result.authenticated
-        ) {
-
-            showUnderworldStatus(
-                result &&
-                result.message
-                    ? result.message
-                    : 'VERIFICATION FAILED.',
-                'error'
-            );
-
-            return;
-
-        }
-
-        /*
-           Phone is ONLY saved.
-           It is NOT authentication data.
-        */
-
-        const phone =
-            normalizeUnderworldPhone(
-                underworldPhone
-                    ? underworldPhone.value
-                    : (
-                        localStorage.getItem(
-                            UNDERWORLD_PHONE_KEY
-                        ) || ''
-                    )
-            );
-
-        saveUnderworldAccess(
-            email,
-            phone,
-            result.accessToken,
-            result.accessId
-        );
-
-        stopUnderworldCodeTimer();
-
-        localStorage.removeItem(
-            UNDERWORLD_REQUEST_KEY
-        );
-
-        localStorage.removeItem(
-            UNDERWORLD_CODE_TIME_KEY
-        );
-
-        underworldRequestId =
-            '';
-
-        showUnderworldStatus(
-            'VERIFIED. YOU ARE NOW LOGGED IN.',
-            'success'
-        );
-
-        /*
-           Bright icon immediately.
-        */
-
-        updateUnderworldIconState();
-
-        /*
-           Very short success delay.
-        */
-
-        
-        setTimeout(
-            () => {
-
-                closeUnderworldModal();
-
-                /*
-                 * Show the Insider window automatically
-                 * only after backend authentication succeeds.
-                 */
-                openAbdullahInsiderSuccess();
-
-                if (
-                    typeof pendingUnderworldAction ===
-                    'function'
-                ) {
-
-                    const action =
-                        pendingUnderworldAction;
-
-                    pendingUnderworldAction =
-                        null;
-
-                    action();
-                }
-
-            },
-            350
-        );
-
-    } catch (error) {
-
-        console.error(
-            'Underworld verification error:',
-            error
-        );
-
-        showUnderworldStatus(
-            error.message ||
-            'VERIFICATION SERVER ERROR.',
-            'error'
-        );
-
-    } finally {
-
-        setUnderworldLoading(
-            false,
-            'VERIFY CODE'
-        );
-
-    }
-
+const logoutBtnModal = document.getElementById('ap-logout-btn');
+if (logoutBtnModal) logoutBtnModal.addEventListener('click', logoutUnderworld);
+
+const logoutBackdrop = document.getElementById('ap-logout-backdrop');
+if (logoutBackdrop) {
+    logoutBackdrop.addEventListener('click', () => {
+        const modal = document.getElementById('ap-logout-modal');
+        if (modal) modal.classList.remove('active');
+    });
 }
 
-
 /* =========================================================
-   28. LOGOUT
+   22. FLOATING BUTTON & PROTECTED LINKS
 ========================================================= */
-
-async function logoutUnderworld() {
-
-    const email =
-        normalizeUnderworldEmail(
-            localStorage.getItem(
-                UNDERWORLD_EMAIL_KEY
-            )
-        );
-
-    const token =
-        String(
-            localStorage.getItem(
-                UNDERWORLD_TOKEN_KEY
-            ) || ''
-        ).trim();
-
-    /*
-       Clear local login immediately.
-       Do not make user wait for backend.
-    */
-
-    clearUnderworldAccess();
-
-    resetUnderworldLoginUI();
-
-    if (underworldEmail) {
-        underworldEmail.value = '';
-    }
-
-    if (underworldPhone) {
-        underworldPhone.value = '';
-    }
-
-    showUnderworldStatus(
-        'LOGGED OUT.',
-        'success'
-    );
-
-    /*
-       Backend logout runs in background.
-    */
-
-    if (
-        email &&
-        token
-    ) {
-
-        callUnderworldBackend({
-
-            action:
-                'logout',
-
-            email:
-                email,
-
-            accessToken:
-                token
-
-        }).catch(error => {
-
-            console.warn(
-                'Background logout request failed:',
-                error
-            );
-
-        });
-
-    }
-
-    updateUnderworldIconState();
-
-}
-
-
-/* =========================================================
-   29. REQUIRE LOGIN
-   IMPORTANT:
-   OPEN MODAL FIRST.
-   BACKEND CHECK RUNS AFTER.
-========================================================= */
-
-function requireUnderworldLogin(
-    callback
-) {
-
-    /*
-       Local login is instant.
-    */
-
-    if (
-        window.UnderworldAuth &&
-        window.UnderworldAuth.isLoggedIn()
-    ) {
-
-        if (
-            typeof callback ===
-            'function'
-        ) {
-
-            callback();
-
-        }
-
-        /*
-           Validate silently in background.
-        */
-
-        validateSavedUnderworldAccess()
-            .catch(() => {});
-
-        return true;
-
-    }
-
-    pendingUnderworldAction =
-        typeof callback ===
-        'function'
-            ? callback
-            : null;
-
-    /*
-       OPEN NOW.
-    */
-
-    openUnderworldModal();
-
-    return false;
-
-}
-
-
-/* =========================================================
-   30. FORM SUBMIT
-========================================================= */
-
-if (underworldForm) {
-
-    underworldForm.addEventListener(
-        'submit',
-        async event => {
-
-            event.preventDefault();
-
-            const code =
-                String(
-                    underworldCode
-                        ? underworldCode.value
-                        : ''
-                )
-                    .replace(/\D/g, '')
-                    .trim();
-
-            if (
-                /^\d{4}$/.test(code)
-            ) {
-
-                await verifyUnderworldCode();
-
-            } else {
-
-                await requestUnderworldCode();
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   31. CLOSE BUTTONS
-========================================================= */
-
-if (underworldClose) {
-
-    underworldClose.addEventListener(
-        'click',
-        closeUnderworldModal
-    );
-
-}
-
-if (underworldBackdrop) {
-
-    underworldBackdrop.addEventListener(
-        'click',
-        closeUnderworldModal
-    );
-
-}
-
-
-/* =========================================================
-   32. ESC KEY
-========================================================= */
-
-document.addEventListener(
-    'keydown',
-    event => {
-
-        if (
-            event.key === 'Escape' &&
-            underworldModal &&
-            underworldModal.classList.contains(
-                'active'
-            )
-        ) {
-
-            closeUnderworldModal();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   33. CODE INPUT
-========================================================= */
-
-if (underworldCode) {
-
-    underworldCode.addEventListener(
-        'input',
-        () => {
-
-            underworldCode.value =
-                underworldCode.value
-                    .replace(/\D/g, '')
-                    .slice(0, 4);
-
-            if (
-                underworldCode.value.length ===
-                4
-            ) {
-
-                if (underworldSubmitText) {
-
-                    underworldSubmitText.textContent =
-                        'VERIFY CODE';
-
-                }
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   34. FLOATING BUTTON
-   IMPORTANT:
-   NO await.
-   NO backend wait.
-========================================================= */
-
 if (underworldFloatingBtn) {
+    underworldFloatingBtn.addEventListener('click', event => {
+        event.preventDefault();
 
-    underworldFloatingBtn.addEventListener(
-        'click',
-        event => {
-
-            event.preventDefault();
-
-            /*
-               OPEN IMMEDIATELY.
-            */
-
-            openUnderworldModal();
-
-            /*
-               Validate silently in background.
-            */
-
-            validateSavedUnderworldAccess()
-                .then(loggedIn => {
-
-                    /*
-                       If backend says logged out
-                       while modal is still open,
-                       update the UI.
-                    */
-
-                    if (
-                        underworldModal &&
-                        underworldModal.classList.contains(
-                            'active'
-                        )
-                    ) {
-
-                        if (loggedIn) {
-
-                            showUnderworldLoggedInState();
-
-                        } else {
-
-                            showUnderworldLoginState();
-
-                        }
-
-                    }
-
-                    updateUnderworldIconState();
-
-                })
-                .catch(() => {
-
-                    updateUnderworldIconState();
-
-                });
-
+        // লগ-ইন অবস্থায় ক্লিক করলে লগ-আউট মডাল খুলবে
+        if (window.UnderworldAuth && window.UnderworldAuth.isLoggedIn()) {
+            const logoutModal = document.getElementById('ap-logout-modal');
+            if (logoutModal) {
+                logoutModal.classList.add('active');
+                return;
+            }
         }
-    );
 
+        openUnderworldModal();
+
+        validateSavedUnderworldAccess().then(loggedIn => {
+            if (underworldModal && underworldModal.classList.contains('active')) {
+                if (loggedIn) {
+                    showUnderworldLoggedInState();
+                } else {
+                    resetUnderworldLoginUI();
+                }
+            }
+            updateUnderworldIconState();
+        }).catch(() => {
+            updateUnderworldIconState();
+        });
+    });
 }
 
+underworldProtectedLinks.forEach(link => {
+    link.addEventListener('click', event => {
+        event.preventDefault();
+        const targetUrl = link.dataset.underworldUrl || link.href;
 
-/* =========================================================
-   35. PROTECTED LINKS
-   OPEN MODAL IMMEDIATELY.
-========================================================= */
-
-underworldProtectedLinks.forEach(
-    link => {
-
-        link.addEventListener(
-            'click',
-            event => {
-
-                event.preventDefault();
-
-                const targetUrl =
-                    link.dataset.underworldUrl ||
-                    link.href;
-
-                /*
-                   Local check is instant.
-                */
-
-                if (
-                    window.UnderworldAuth &&
-                    window.UnderworldAuth.isLoggedIn()
-                ) {
-
-                    window.open(
-                        targetUrl,
-                        link.target === '_blank'
-                            ? '_blank'
-                            : '_self'
-                    );
-
-                    /*
-                       Background validation.
-                    */
-
-                    validateSavedUnderworldAccess()
-                        .catch(() => {});
-
-                    return;
-
-                }
-
-                pendingUnderworldAction =
-                    () => {
-
-                        window.open(
-                            targetUrl,
-                            link.target === '_blank'
-                                ? '_blank'
-                                : '_self'
-                        );
-
-                    };
-
-                /*
-                   OPEN IMMEDIATELY.
-                */
-
-                openUnderworldModal();
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================================================
-   36. PUBLIC API
-========================================================= */
-
-window.UnderworldAuth = {
-
-    open:
-        openUnderworldModal,
-
-    close:
-        closeUnderworldModal,
-
-    sendCode:
-        requestUnderworldCode,
-
-    verify:
-        verifyUnderworldCode,
-
-    logout:
-        logoutUnderworld,
-
-    validate:
-        validateSavedUnderworldAccess,
-
-    requireLogin:
-        requireUnderworldLogin,
-
-    isLoggedIn:
-        function() {
-
-            return (
-                localStorage.getItem(
-                    UNDERWORLD_ACCESS_KEY
-                ) === 'true'
-            );
-
+        if (window.UnderworldAuth && window.UnderworldAuth.isLoggedIn()) {
+            window.open(targetUrl, link.target === '_blank' ? '_blank' : '_self');
+            validateSavedUnderworldAccess().catch(() => {});
+            return;
         }
 
+        pendingUnderworldAction = () => {
+            window.open(targetUrl, link.target === '_blank' ? '_blank' : '_self');
+        };
+
+        openUnderworldModal();
+    });
+});
+
+/* =========================================================
+   23. PUBLIC API
+========================================================= */
+window.UnderworldAuth = {
+    open: openUnderworldModal,
+    close: closeUnderworldModal,
+    sendCode: requestUnderworldCode,
+    verify: verifyUnderworldCode,
+    logout: logoutUnderworld,
+    validate: validateSavedUnderworldAccess,
+    requireLogin: requireUnderworldLogin,
+    isLoggedIn: function() {
+        return localStorage.getItem(UNDERWORLD_ACCESS_KEY) === 'true';
+    }
 };
 
-
-function shouldAutoOpenUnderworldOncePerTab() {
-    try {
-        if (sessionStorage.getItem(UNDERWORLD_AUTO_OPEN_TAB_KEY) === '1') {
-            return false;
-        }
-
-        sessionStorage.setItem(UNDERWORLD_AUTO_OPEN_TAB_KEY, '1');
-        return true;
-    } catch (e) {
-        return false;
-    }
-}
-
 function autoOpenUnderworldForUnsignedUser() {
-    if (typeof isUnderworldLoggedIn === 'function' && isUnderworldLoggedIn()) {
-        return;
-    }
+    if (window.UnderworldAuth && window.UnderworldAuth.isLoggedIn()) return;
 
-    if (!shouldAutoOpenUnderworldOncePerTab()) {
+    try {
+        if (sessionStorage.getItem(UNDERWORLD_AUTO_OPEN_TAB_KEY) === '1') return;
+        sessionStorage.setItem(UNDERWORLD_AUTO_OPEN_TAB_KEY, '1');
+    } catch (e) {
         return;
     }
 
     setTimeout(() => {
-        if (typeof isUnderworldLoggedIn === 'function' && isUnderworldLoggedIn()) {
-            return;
-        }
-
+        if (window.UnderworldAuth && window.UnderworldAuth.isLoggedIn()) return;
         if (underworldModal && !underworldModal.classList.contains('active')) {
             openUnderworldModal();
         }
     }, UNDERWORLD_AUTO_OPEN_TAB_DELAY_MS);
 }
 
-
 /* =========================================================
-   37. INITIALIZE EVERYTHING
+   24. INITIALIZE EVERYTHING
 ========================================================= */
-
 renderProducts();
-
 updateCartUI();
-
 updateUnderworldIconState();
 
+document.addEventListener('DOMContentLoaded', () => {
+    resetUnderworldLoginUI();
 
-/*
-   ONE DOMContentLoaded ONLY FOR UNDERWORLD INIT.
-*/
+    if (getUnderworldCodeIssuedAt() && !isUnderworldCodeExpired()) {
+        startUnderworldCodeTimer();
+    }
 
-document.addEventListener(
-    'DOMContentLoaded',
-    () => {
+    updateUnderworldIconState();
 
-        if (underworldSubmitText) {
-
-            underworldSubmitText.textContent =
-                'SEND CODE';
-
-        }
-
-        if (underworldSubmitLoader) {
-
-            underworldSubmitLoader.style.display =
-                'none';
-
-        }
-
-        if (underworldCodeWrap) {
-
-            underworldCodeWrap.hidden =
-                true;
-
-        }
-
-        if (getUnderworldCodeIssuedAt() && !isUnderworldCodeExpired()) {
-            startUnderworldCodeTimer();
-        }
-
+    validateSavedUnderworldAccess().then(loggedIn => {
         updateUnderworldIconState();
-
-        /*
-           Background validation.
-           PAGE DOES NOT WAIT.
-        */
-
-        validateSavedUnderworldAccess()
-            .then(loggedIn => {
-
-                updateUnderworldIconState();
-
-                /*
-                   AUTO OPEN ONLY IF NOT LOGGED IN.
-                   Small delay so page can render first.
-                */
-
-                if (!loggedIn) {
-
-                    setTimeout(
-                        () => {
-
-                            /*
-                               Don't auto-open if another
-                               drawer/modal is already active.
-                            */
-
-                            if (
-                                underworldModal &&
-                                !underworldModal.classList.contains(
-                                    'active'
-                                )
-                            ) {
-
-                                autoOpenUnderworldForUnsignedUser();
-
-                            }
-
-                        },
-                        4200
-                    );
-
+        if (!loggedIn) {
+            setTimeout(() => {
+                if (underworldModal && !underworldModal.classList.contains('active')) {
+                    autoOpenUnderworldForUnsignedUser();
                 }
-
-            })
-            .catch(() => {
-
-                /*
-                   If backend is unavailable,
-                   use local login state.
-                */
-
-                updateUnderworldIconState();
-
-                if (
-                    window.UnderworldAuth &&
-                    !window.UnderworldAuth.isLoggedIn()
-                ) {
-
-                    setTimeout(
-                        () => {
-
-                            if (
-                                underworldModal &&
-                                !underworldModal.classList.contains(
-                                    'active'
-                                )
-                            ) {
-
-                                openUnderworldModal();
-
-                            }
-
-                        },
-                        750
-                    );
-
-                }
-
-            });
-
-    }
-);
-
-/* =========================================================
-   FINAL SIGN-IN WINDOW CONTROL
-   ========================================================= */
-
-(function () {
-
-    let signInOpenedThisTap = false;
-
-    const floatingBtn =
-        document.getElementById('underworld-floating-btn');
-
-    const signInWindow =
-        document.getElementById('underworld-access');
-
-    if (!floatingBtn || !signInWindow) {
-        return;
-    }
-
-    function isSignInOpen() {
-        return (
-            signInWindow.classList.contains('active') ||
-            signInWindow.getAttribute('aria-hidden') === 'false'
-        );
-    }
-
-    function openSignInOnce() {
-
-        /* Already open = DO NOTHING */
-        if (isSignInOpen()) {
-            return false;
+            }, 4200);
         }
+    }).catch(() => {
+        updateUnderworldIconState();
+    });
+});
 
-        /* Already opened during this tap/event = DO NOTHING */
-        if (signInOpenedThisTap) {
-            return false;
-        }
-
-        signInOpenedThisTap = true;
-
-        /* Open the existing Sign In window */
-        if (typeof openUnderworldModal === 'function') {
-            openUnderworldModal();
-        } else {
-            signInWindow.classList.add('active');
-            signInWindow.setAttribute(
-                'aria-hidden',
-                'false'
-            );
-        }
-
-        /* Allow another tap after the current event finishes */
-        setTimeout(function () {
-            signInOpenedThisTap = false;
-        }, 0);
-
-        return true;
-    }
-
-    /*
-     * CONTROL FLOATING SIGN-IN BUTTON
-     */
-    floatingBtn.addEventListener(
-        'click',
-        function (event) {
-
-            event.preventDefault();
-            event.stopImmediatePropagation();
-
-            /* Duplicate listener guard: this handler is the single click owner. */            /*
-             * If already logged in,
-             * do not open Sign In.
-             */
-            if (
-                typeof isUnderworldLocallyLoggedIn === 'function' &&
-                isUnderworldLocallyLoggedIn()
-            ) {
-                return;
-            }
-
-            /*
-             * Logged out:
-             * open Sign In only once for this tap.
-             */
-            openSignInOnce();
-
-        },
-        true
-    );
-
-})();
 
 </script>
 
