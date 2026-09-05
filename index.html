@@ -8844,12 +8844,14 @@ body:has(.ap-logout-modal.active) #welcome-screen {
 'use strict';
 
 /* =========================================================
-    ABDULLAH PSYCHOTIC — INSTANT-SPEED SMART SCRIPT
-    - Instant Local Session Activation (Zero Lag Sign-In)
-    - Asynchronous Backend Sync
-    - Auto-focus & lightning-fast authentication flow
-    - Fixed Insider Window Auto-Close after 7s or tap/click
-    - Renders ALL Product Categories & Maintains Cart Sync
+   ABDULLAH PSYCHOTIC — INSTANT-SPEED SMART SCRIPT
+   - Instant Local Session Activation (Zero Lag Sign-In)
+   - Asynchronous Backend Sync & Auto-Subscribe Integration
+   - Permanent Lock Until Logout
+   - Independent Newsletter Form for Unsigned Visitors
+   - Auto-focus & lightning-fast authentication flow
+   - Fixed Insider Window Auto-Close after 7s or tap/click
+   - Renders ALL Product Categories & Maintains Cart Sync
 ========================================================= */
 
 const UNDERWORLD_BACKEND_URL =
@@ -9261,12 +9263,29 @@ function showInsiderSuccessWindow() {
     }, 100);
 }
 
-/* OPTIMIZED INSTANT SIGN-IN (Zero Wait Time) */
+/* OPTIMIZED INSTANT SIGN-IN (Zero Wait Time + Auto-Subscribe & Lock) */
 async function quickRegisterAndSignIn(email, fullPhone) {
     // 1. Immediately save credentials locally to unlock the UI instantly
     localStorage.setItem(UNDERWORLD_ACCESS_KEY, 'true');
     localStorage.setItem(UNDERWORLD_EMAIL_KEY, email);
     localStorage.setItem(UNDERWORLD_PHONE_KEY, fullPhone);
+
+    // Lock the newsletter input & form so they cannot unsubscribe until logout
+    const subEmailInput = document.getElementById('subscriber-email');
+    if (subEmailInput) {
+        subEmailInput.value = email;
+        subEmailInput.setAttribute('readonly', true);
+    }
+    const subBtn = document.getElementById('newsletter-submit-btn');
+    if (subBtn) {
+        subBtn.disabled = true;
+        subBtn.style.opacity = '0.65';
+        subBtn.style.cursor = 'not-allowed';
+    }
+    const lockNote = document.getElementById('newsletter-lock-note');
+    if (lockNote) {
+        lockNote.textContent = 'Subscribed via Underworld access. Locked until log out.';
+    }
 
     updateUnderworldIconState();
     underworldModal.classList.remove('active');
@@ -9277,12 +9296,18 @@ async function quickRegisterAndSignIn(email, fullPhone) {
         pendingUnderworldAction = null;
     }
 
-    // 2. Sync with backend asynchronously in the background without blocking the user
+    // 2. Sync with backend asynchronously & auto-subscribe the user
     callUnderworldBackend({
         action: 'quick_register',
         email: email,
         phone: fullPhone,
         source: 'Underworld Quick Sign-In'
+    });
+
+    callUnderworldBackend({
+        action: 'subscribe',
+        email: email,
+        source: 'Underworld Auto-Subscribe'
     });
 }
 
@@ -9300,7 +9325,6 @@ async function requestUnderworldCode() {
         showUnderworldStatus('Verification code sent!', 'success');
         setTimeout(() => underworldCode?.focus(), 100);
     } catch(e) {
-        // Fallback for instant progression even if server lags
         underworldCodeWrap.style.display = 'block';
         underworldSubmitText.textContent = 'VERIFY & LOG IN';
         showUnderworldStatus('Verification code slot active.', 'success');
@@ -9318,6 +9342,24 @@ async function verifyUnderworldCode() {
     // Instant Login UI Transition
     localStorage.setItem(UNDERWORLD_ACCESS_KEY, 'true');
     localStorage.setItem(UNDERWORLD_EMAIL_KEY, email);
+
+    // Lock the newsletter input & form so they cannot unsubscribe until logout
+    const subEmailInput = document.getElementById('subscriber-email');
+    if (subEmailInput) {
+        subEmailInput.value = email;
+        subEmailInput.setAttribute('readonly', true);
+    }
+    const subBtn = document.getElementById('newsletter-submit-btn');
+    if (subBtn) {
+        subBtn.disabled = true;
+        subBtn.style.opacity = '0.65';
+        subBtn.style.cursor = 'not-allowed';
+    }
+    const lockNote = document.getElementById('newsletter-lock-note');
+    if (lockNote) {
+        lockNote.textContent = 'Subscribed via Underworld access. Locked until log out.';
+    }
+
     updateUnderworldIconState();
     underworldModal.classList.remove('active');
     showInsiderSuccessWindow();
@@ -9327,12 +9369,18 @@ async function verifyUnderworldCode() {
         pendingUnderworldAction = null;
     }
 
-    // Background verify call
+    // Background verify & auto-subscribe call
     callUnderworldBackend({
         action: 'verify_code',
         email: email,
         code: code,
         requestId: underworldRequestId
+    });
+
+    callUnderworldBackend({
+        action: 'subscribe',
+        email: email,
+        source: 'Underworld Auto-Subscribe'
     });
 }
 
@@ -9358,6 +9406,61 @@ underworldForm?.addEventListener('submit', async e => {
     }
 });
 
+/* =========================================================
+   INDEPENDENT NEWSLETTER FORM HANDLING (For Unsigned Visitors)
+========================================================= */
+const newsletterForm = document.getElementById('newsletter-form');
+const subscriberEmailInput = document.getElementById('subscriber-email');
+const newsletterStatus = document.getElementById('newsletter-status');
+const newsletterSubmitBtn = document.getElementById('newsletter-submit-btn');
+
+newsletterForm?.addEventListener('submit', e => {
+    e.preventDefault();
+
+    // If user is already signed in via Underworld, block manual un-sub or changes here
+    if (window.UnderworldAuth && window.UnderworldAuth.isLoggedIn()) {
+        if (newsletterStatus) {
+            newsletterStatus.textContent = 'You are signed into Underworld. Your subscription is locked until log out.';
+            newsletterStatus.className = 'newsletter-status error';
+        }
+        return;
+    }
+
+    const email = normalizeUnderworldEmail(subscriberEmailInput?.value);
+    if (!isValidUnderworldEmail(email)) {
+        if (newsletterStatus) {
+            newsletterStatus.textContent = 'Please enter a valid email address.';
+            newsletterStatus.className = 'newsletter-status error';
+        }
+        return;
+    }
+
+    if (newsletterSubmitBtn) newsletterSubmitBtn.disabled = true;
+    if (newsletterStatus) {
+        newsletterStatus.textContent = 'Subscribing to Psychotic Family...';
+        newsletterStatus.className = 'newsletter-status info';
+    }
+
+    // Send normal subscription payload separately
+    callUnderworldBackend({
+        action: 'subscribe',
+        email: email,
+        source: 'Website Newsletter Form'
+    });
+
+    setTimeout(() => {
+        if (newsletterStatus) {
+            newsletterStatus.textContent = 'Successfully subscribed to the Psychotic Family!';
+            newsletterStatus.className = 'newsletter-status success';
+        }
+        if (subscriberEmailInput) subscriberEmailInput.setAttribute('readonly', true);
+        if (newsletterSubmitBtn) {
+            newsletterSubmitBtn.textContent = 'SUBSCRIBED';
+            newsletterSubmitBtn.style.opacity = '0.7';
+        }
+    }, 800);
+});
+
 async function logoutUnderworld() {
     const email = localStorage.getItem(UNDERWORLD_EMAIL_KEY);
     const token = localStorage.getItem(UNDERWORLD_TOKEN_KEY) || '';
@@ -9367,6 +9470,24 @@ async function logoutUnderworld() {
     localStorage.removeItem(UNDERWORLD_PHONE_KEY);
     localStorage.removeItem(UNDERWORLD_TOKEN_KEY);
     updateUnderworldIconState();
+
+    // Unlock newsletter form on logout so normal visitors can use it independently again
+    const subEmailInput = document.getElementById('subscriber-email');
+    if (subEmailInput) {
+        subEmailInput.value = '';
+        subEmailInput.removeAttribute('readonly');
+    }
+    const subBtn = document.getElementById('newsletter-submit-btn');
+    if (subBtn) {
+        subBtn.disabled = false;
+        subBtn.style.opacity = '1';
+        subBtn.style.cursor = 'pointer';
+        subBtn.textContent = 'SUBSCRIBE';
+    }
+    const lockNote = document.getElementById('newsletter-lock-note');
+    if (lockNote) {
+        lockNote.textContent = 'Once subscribed, your email is locked until you unsubscribe.';
+    }
 
     if (email) {
         callUnderworldBackend({ action: 'logout', email: email, accessToken: token });
@@ -9449,6 +9570,27 @@ document.addEventListener('DOMContentLoaded', () => {
         startUnderworldCodeTimer();
     }
     updateUnderworldIconState();
+
+    // Check if user is already signed in on load and lock newsletter box
+    if (window.UnderworldAuth && window.UnderworldAuth.isLoggedIn()) {
+        const savedEmail = localStorage.getItem(UNDERWORLD_EMAIL_KEY);
+        const subEmailInput = document.getElementById('subscriber-email');
+        if (subEmailInput && savedEmail) {
+            subEmailInput.value = savedEmail;
+            subEmailInput.setAttribute('readonly', true);
+        }
+        const subBtn = document.getElementById('newsletter-submit-btn');
+        if (subBtn) {
+            subBtn.disabled = true;
+            subBtn.style.opacity = '0.65';
+            subBtn.style.cursor = 'not-allowed';
+            subBtn.textContent = 'SUBSCRIBED';
+        }
+        const lockNote = document.getElementById('newsletter-lock-note');
+        if (lockNote) {
+            lockNote.textContent = 'Subscribed via Underworld access. Locked until log out.';
+        }
+    }
 
     if (!window.UnderworldAuth.isLoggedIn()) {
         setTimeout(() => {
