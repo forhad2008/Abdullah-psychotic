@@ -12649,7 +12649,7 @@ if (underworldForm) {
                     .trim();
 
             if (
-                /^\d{6}$/.test(code)
+                /^\d{4}$/.test(code)
             ) {
 
                 await verifyUnderworldCode();
@@ -12726,11 +12726,11 @@ if (underworldCode) {
             underworldCode.value =
                 underworldCode.value
                     .replace(/\D/g, '')
-                    .slice(0, 6);
+                    .slice(0, 4);
 
             if (
                 underworldCode.value.length ===
-                6
+                4
             ) {
 
                 if (underworldSubmitText) {
